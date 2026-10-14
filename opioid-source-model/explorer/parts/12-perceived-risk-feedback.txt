@@ -1,0 +1,237 @@
+SOURCE model, view "Perceived risk feedback"
+Extracted from Vensim Files/OSM_Master_CURRENT.mdl. 32 equations.
+Variables can appear in several views; the .mdl file is the source of truth.
+==============================================================================
+
+Perceived risk strength initiating Rx misuse own Rx = 0.565856
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of Rx opioid misuse initiation to perceived risk of \
+		misuse of own prescription opioids.
+
+Perceived risk strength net quit Rx misuse = 0.559232
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of quitting Rx misuse to perceived risk of Rx opioid \
+		misuse.
+
+Perceived risk coeff initiating Rx misuse own Rx  = 
+        Perceived risk Rx use relative 
+             ^ - Perceived risk strength initiating Rx misuse own Rx
+	~	dmnl
+	~	The multiplier effect of the perceived risk of prescription opioid misuse \
+		(relative to model start (INITIAL TIME)) on initiating misuse of own \
+		prescription opioids.
+
+Perceived risk Rx use relative  = 
+        ACTIVE INITIAL( XIDZ ( Perceived risk Rx use current , 
+                  Perceived risk Rx use reference , 
+                  1) , 
+             1)
+	~	dmnl
+	~	The relative (compared to model start (INITIAL TIME)) perceived risk of \
+		using Rx opioids among those who have not yet initiated heroin. This is \
+		the variable that actually drives initiation (in combination with the \
+		strength of the effect).
+
+Perceived risk Rx use current  = 
+        SMOOTHI ( Perceived risk Rx use indicated , 
+             IF THEN ELSE ( Perceived risk Rx use current 
+                       < Perceived risk Rx use indicated , 
+                  Perceived risk increase time , 
+                  Perceived risk decrease time ) , 
+             Perceived risk Rx use reference )
+	~	people/year
+	~	The current ("right now") perceived risk of using Rx opioids among those \
+		who have not yet initiated, after accounting for perception delays (the \
+		time it takes perceived risk to rise and fall).
+
+Perceived risk Rx use reference  = 
+        INITIAL( Perceived risk Rx use indicated  )
+	~	people/year
+	~	The initial (model start (INITIAL TIME)) perceived risk of using Rx \
+		opioids (initial value of 'perceived risk rx use indicated') among those \
+		who have not yet initiated.
+
+Perceived risk decrease time  = 20
+	~	year [5,20]
+	~	[LIT, ASM] Amount of time it takes the population's perception of risk to \
+		change after a decrease in overdoses. Musto considers this largely \
+		generational, hence our decision to use 20 years. The model is insensitive \
+		to this parameter. [Source: Musto 1999]
+
+Perceived risk increase time  = 2
+	~	year [0.25,3,0.05]
+	~	[ASM, MCAL] Amount of time it takes the population's perception of risk to \
+		change after an increase in overdoses.Assumption is this happens much more \
+		quickly than the decrease.
+
+Perceived risk Rx use indicated  = 
+        Total overdose deaths Rx 
+             + Perceived risk weight NFOD 
+                  * Total nonfatal overdoses Rx
+	~	people/year
+	~	The perceived risk of using Rx opioids among those who have not already \
+		initiated, as driven by the total number of overdoses, with nonfatal \
+		overdoses potentially weighted less dependent on the assigned risk weight.
+
+Total nonfatal overdoses Rx  = 
+        Nonfatal ODs Rx OUD no H 
+             + Nonfatal ODs Rx misuse 
+             + Nonfatal ODs Rx OUD with H
+	~	people/year
+	~
+
+Perceived risk weight NFOD  = 0.1
+	~	dmnl
+	~	[ASM] The relative weight that nonfatal overdose events carry in terms of \
+		their influence on the perceived risks of drug use (compared to fatal \
+		overdose events). 0 --> only fatal overdoses matter, <1 --> fatal \
+		overdoses matter more, 1 --> fatal and nonfatal overdoses affect risk \
+		perception equally, >1 --> nonfatal overdoses matter more. Model is \
+		sensitive at values below
+
+Perceived risk coeff initiating Rx misuse diverted  = 
+        Perceived risk Rx use relative 
+             ^ - Perceived risk strength initiating Rx misuse diverted
+	~	dmnl
+	~	The multiplier effect of the perceived risk of prescription opioid misuse \
+		(relative to model start (INITIAL TIME)) on initiating misuse of diverted \
+		Rx opioids.
+
+Perceived risk strength initiating Rx misuse diverted = 0.555569
+	~	dmnl [0,2,0.1]
+	~	[ACAL] Sensitivity of Rx opioid misuse initiation to perceived risk of \
+		diverted prescription opioid misuse.
+
+Perceived risk coeff net quit Rx misuse  = 
+        Perceived risk Rx use relative 
+             ^ Perceived risk strength net quit Rx misuse
+	~	dmnl
+	~	The multiplier effect of the perceived risk of prescription opioid misuse \
+		(relative to model start (INITIAL TIME)) on quitting misuse.
+
+Perceived risk heroin use indicated  = 
+        Total overdose deaths heroin 
+             + Total nonfatal overdoses heroin 
+                  * Perceived risk weight NFOD
+	~	people/year
+	~	The perceived risk of using heroin among those who have not already \
+		initiated, as driven by the total number of overdoses, with nonfatal \
+		overdoses potentially weighted less dependent on the assigned risk weight.
+
+Perceived risk heroin use current  = 
+        SMOOTHI ( Perceived risk heroin use indicated , 
+             IF THEN ELSE ( Perceived risk heroin use current 
+                       < Perceived risk heroin use indicated , 
+                  Perceived risk increase time , 
+                  Perceived risk decrease time ) , 
+             Perceived risk heroin use reference )
+	~	people/year
+	~	The current ("right now") perceived risk of using heroin among those who \
+		have not yet initiated, after accounting for perception delays (the time \
+		it takes perceived risk to rise and fall).
+
+Perceived risk heroin use relative  = 
+        ACTIVE INITIAL( Perceived risk heroin use current 
+                  / Perceived risk heroin use reference , 
+             1)
+	~	dmnl
+	~	The relative (compared to model start (INITIAL TIME)) perceived risk of \
+		using heroin among those who have not yet initiated heroin. This is the \
+		variable that actually drives initiation (in combination with the strength \
+		of the effect).
+
+Perceived risk heroin use reference  = 
+        INITIAL( Perceived risk heroin use indicated  )
+	~	people/year
+	~	The initial (model start (INITIAL TIME)) perceived risk of using heroin \
+		(initial value of 'perceived risk heroin use indicated') among those who \
+		have not yet initiated.
+
+Total nonfatal overdoses heroin  = 
+        Nonfatal ODs HUD 
+             + Nonfatal ODs NDHU
+	~	people/year
+	~
+
+Perceived risk coeff initiating heroin with Rx OUD  = 
+        Perceived risk heroin use relative 
+             ^ - Perceived risk strength initiating heroin with Rx use
+	~	dmnl
+	~	The multiplier effect of the perceived risk of heroin use (relative to \
+		model start (INITIAL TIME)) on initiating heroin among people with Rx OUD.
+
+Perceived risk coeff initiating NDHU no Rx  = 
+        Perceived risk heroin use relative 
+             ^ - Perceived risk strength initiating NDHU no Rx
+	~	dmnl
+	~	The multiplier effect of the perceived risk of heroin use (relative to \
+		model start (INITIAL TIME)) on initiating heroin among people who do not \
+		misuse Rx opioids.
+
+Perceived risk coeff net quit NDHU  = 
+        Perceived risk heroin use relative 
+             ^ Perceived risk strength net quit NDHU
+	~	dmnl
+	~	The multiplier effect of the perceived risk of heroin use (relative to \
+		model start (INITIAL TIME)) on quitting heroin among people with NDHU.
+
+Perceived risk strength initiating heroin with Rx use = 0.92771
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of heroin initiation in individuals with Rx OUD or Rx \
+		misuse to perceived risk of heroin
+
+Perceived risk strength initiating NDHU no Rx = 0.271356
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of heroin initiation to perceived risk of heroin use in \
+		individuals with no Rx misuse.
+
+Perceived risk strength net quit NDHU = 1e-06
+	~	dmnl [0,0.3]
+	~	[ACAL] Sensitivity of quitting heroin to perceived risk of heroin use.
+
+Perceived risk coeff net quit NDHU with Rx  = 
+        Perceived risk heroin use relative 
+             ^ Perceived risk strength net quit NDHU with Rx
+	~	dmnl
+	~	The multiplier effect of the perceived risk of heroin use (relative to \
+		model start (INITIAL TIME)) on quitting heroin and returning to Rx misuse \
+		alone among people with NDHU.
+
+Perceived risk strength net quit NDHU with Rx = 1e-06
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of quitting heroin and returning to Rx misuse to \
+		perceived risk of heroin use.
+
+Perceived risk coeff net quit heroin with Rx OUD  = 
+        Perceived risk heroin use relative 
+             ^ Perceived risk strength net quit heroin with Rx OUD
+	~	dmnl
+	~	The multiplier effect of the perceived risk of heroin use (relative to \
+		model start (INITIAL TIME)) on quitting heroin among people with an Rx OUD.
+
+Perceived risk strength net quit heroin with Rx OUD = 1e-06
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of heroin quitting with Rx OUD to perceived risk of \
+		heroin use.
+
+Perceived risk coeff initiating NDHU with Rx  = 
+        Perceived risk heroin use relative 
+             ^ - Perceived risk strength initiating heroin with Rx use
+	~	dmnl
+	~	The multiplier effect of the perceived risk of heroin use (relative to \
+		model start (INITIAL TIME)) on initiating heroin among people who misuse \
+		Rx opioids.
+
+Total overdose deaths heroin  = 
+        Overdose death NDHU 
+             + Total overdose deaths HUD
+	~	person/Years
+	~
+
+Total overdose deaths Rx  = 
+        Overdose death MU 
+             + Overdose death Rx misuse 
+             + Total overdose deaths Rx OUD no H 
+             + Total overdose deaths Rx OUD with H
+	~	person/Years
+	~

@@ -1,0 +1,943 @@
+SOURCE model, view "Naloxone and ODs"
+Extracted from Vensim Files/OSM_Master_CURRENT.mdl. 121 equations.
+Variables can appear in several views; the .mdl file is the source of truth.
+==============================================================================
+
+Nonfatal ODs Rx OUD no H  = 
+        Total overdose deaths Rx OUD no H 
+             * Nonfatal OD ratio Rx OUD no H
+	~	people/year
+	~
+
+Nonfatal ODs HUD  = 
+        Total overdose deaths HUD 
+             * Nonfatal OD ratio HUD
+	~	people/year
+	~
+
+Nonfatal ODs Rx OUD with H  = 
+        Total overdose deaths Rx OUD with H 
+             * Nonfatal OD ratio Rx OUD with H
+	~	people/year
+	~
+
+Nonfatal ODs NDHU  = 
+        Overdose death NDHU 
+             * Nonfatal OD ratio NDHU
+	~	people/year
+	~
+
+Cumulative nonfatal overdoses  = 
+        INTEG( Total nonfatal overdoses , 
+             0)
+	~	people
+	~		~	:SUPPLEMENTARY
+
+Total nonfatal overdoses  = 
+        Nonfatal ODs Rx OUD no H 
+             + Nonfatal ODs HUD 
+             + Nonfatal ODs NDHU 
+             + Nonfatal ODs Rx OUD with H 
+             + Nonfatal ODs Rx misuse
+	~	people/year
+	~
+
+Nonfatal OD ratio total  = 
+        XIDZ ( Total nonfatal overdoses , 
+             Total overdose deaths , 
+             1)
+	~	dmnl
+	~		~	:SUPPLEMENTARY
+
+Nonfatal ODs Rx misuse  = 
+        Overdose death Rx misuse 
+             * Nonfatal OD ratio Rx misuse
+	~	people/year
+	~
+
+Total nonfatal overdoses heroin  = 
+        Nonfatal ODs HUD 
+             + Nonfatal ODs NDHU
+	~	people/year
+	~
+
+Total nonfatal overdoses Rx  = 
+        Nonfatal ODs Rx OUD no H 
+             + Nonfatal ODs Rx misuse 
+             + Nonfatal ODs Rx OUD with H
+	~	people/year
+	~
+
+Overdose death HUD  = 
+        HUD no MOUD 
+             * Overdose death rate HUD
+	~	people/year
+	~
+
+Overdose death Rx misuse  = 
+        Rx misuse no PY heroin 
+             * Overdose death rate Rx misuse
+	~	people/year
+	~
+
+Overdose death MU  = 
+        Patients with current month opioid Rx 
+             * Overdose death rate base MU
+	~	people/year
+	~
+
+Overdose death NDHU  = 
+        Nondisordered heroin use 
+             * Overdose death rate NDHU
+	~	people/year
+	~
+
+Overdose death Rx OUD no H  = 
+        Rx OUD no PY heroin no MOUD 
+             * Overdose death rate Rx OUD no H
+	~	people/year
+	~
+
+Overdose death Rx OUD with H  = 
+        Rx OUD with PY heroin no MOUD 
+             * Overdose death rate Rx OUD with H
+	~	people/year
+	~
+
+Cumulative overdose deaths  = 
+        INTEG( Total overdose deaths , 
+             0)
+	~	person
+	~		~	:SUPPLEMENTARY
+
+Total overdose deaths  = 
+        Overdose death Rx misuse 
+             + Overdose death NDHU 
+             + Overdose death MU 
+             + Total overdose deaths Rx OUD no H 
+             + Total overdose deaths Rx OUD with H 
+             + Total overdose deaths HUD
+	~	person/Years
+	~
+
+Fentanyl introduction time  = 2012.5
+	~	year [2000,2020,0.5]
+	~	[DATA, ASM] The estimated year in which fentanyl penetrated the heroin \
+		market sufficiently to begin having a measurable impact on overdoses and \
+		overdose deaths. [Source: NFLIS]
+
+Total overdose deaths synth heroin NVSS
+	~	people/year
+	~	[Source: NVSS]
+
+Total overdose deaths synth no H NVSS
+	~	people/year
+	~	[Source: NVSS]
+
+OD deaths synth baseline estimated=
+	IF THEN ELSE ( Time 
+	                  < Fentanyl introduction time, 
+	             Total overdose deaths synth no H NVSS , 
+	             :NA:)
+	~	people/year
+	~	Estimate of synthetic-involved overdose deaths attributable to baseline \
+		(pre-2013) penetration or use of synthetics, as opposed to the post-2013 \
+		increase in synthetic penetration.
+
+OD deaths synth excess estimated  = 
+        Max ( 0, 
+             Total overdose deaths synth heroin NVSS 
+                  + IF THEN ELSE ( Time 
+                            < Fentanyl introduction time , 
+                       :NA:, 
+                       IF THEN ELSE ( Time 
+                                 > Total overdose data last time , 
+                            :NA:, 
+                            Total overdose deaths synth no H NVSS 
+                                 - Total overdose deaths synth base ) ) )
+	~	people/year
+	~	The estimated number of overdose deaths occurring after 2013 that involved \
+		synthetic opioids that are in excess of those attributable to baseline \
+		(pre-2013) use of synthetics. This is an attempt to measure the effect of \
+		illicitly-manufactured fentanyl and its analogs on opioid overdose deaths.
+
+Total overdose deaths Rx OUD no H  = 
+        Overdose death Rx OUD no H 
+             + SUM ( Overdose death Rx OUD no H in Tx[TxT!] )
+	~	people/year
+	~
+
+Total overdose deaths Rx OUD with H  = 
+        Overdose death Rx OUD with H 
+             + SUM ( Overdose death Rx OUD with H in Tx[TxT!] )
+	~	people/year
+	~
+
+Total overdose deaths HUD  = 
+        Overdose death HUD 
+             + SUM ( Overdose death HUD in MOUD Tx[TxT!] )
+	~	people/year
+	~
+
+Total overdose deaths base Rx  = 
+        Overdose death MU 
+             + Overdose death Rx misuse 
+             + Total overdose deaths Rx OUD no H 
+                  * OD death fraction base Rx OUD no H 
+             + Total overdose deaths Rx OUD with H
+	~	people/year
+	~
+
+Overdose death Rx OUD no H in Tx[TxT]  = 
+        Rx OUD no heroin by MOUD[TxT] 
+             * OD death rate Rx OUD no H in Tx[TxT]
+	~	person/Years
+	~
+
+Overdose death Rx OUD with H in Tx[TxT]  = 
+        Rx OUD with heroin by MOUD[TxT] 
+             * OD death rate Rx OUD with H in Tx[TxT]
+	~	person/Years
+	~
+
+Overdose death HUD in MOUD Tx[TxT]  = 
+        HUD by MOUD[TxT] 
+             * OD death rate HUD in MOUD Tx[TxT]
+	~	person/Years
+	~
+
+Nonfatal OD ratio HUD  = 
+        Overdose rate net HUD 
+             / Overdose death rate HUD 
+             - 1
+	~	dmnl
+	~	Ratio of nonfatal to fatal overdoses (X : 1) for HUD
+
+Nonfatal OD ratio NDHU  = 
+        Overdose rate net NDHU 
+             / Overdose death rate NDHU 
+             - 1
+	~	dmnl
+	~	Ratio of nonfatal to fatal overdoses (X : 1) for NDHU
+
+Nonfatal OD ratio Rx misuse  = 
+        Overdose rate base Rx misuse 
+             / Overdose death rate Rx misuse 
+             - 1
+	~	dmnl
+	~	Ratio of nonfatal to fatal overdoses (X : 1) for Rx misuse
+
+Total overdose deaths synth base  = 
+        Total overdose deaths Rx OUD no H 
+             * OD death fraction synth baseline Rx OUD no H
+	~	people/year
+	~
+
+Total overdose deaths synth excess  = 
+        Overdose death NDHU 
+             * OD death fraction synth NDHU 
+             + Total overdose deaths HUD 
+                  * OD death fraction synth HUD
+	~	people/year
+	~	Total synthetic-involved overdose deaths among heroin users, including \
+		both those due to baseline levels of synthetic use / exposure and to \
+		heightened synthetic exposure post-2013.
+
+Probability OD witnessed=
+	0.764
+	~	dmnl [0.5,1]
+	~	[LIT] The percentage of overdoses that are witnessed by another person. \
+		[Source: Darke 1996, McGregor 1998, Strang 1999, Sergeey 2003, Tobin 2005, \
+		Bohnert 2012]
+
+Probability of calling emergency services net  = 
+        Probability of calling emergency services 
+             + RAMP ( IF THEN ELSE ( Policy change probability of calling emergency services\
+		 
+                            >= 0, 
+                       Policy change probability of calling emergency services 
+                            * ( 1
+                                 - Probability of calling emergency services ) , 
+                       Policy change probability of calling emergency services 
+                            * Probability of calling emergency services ) 
+                       / Policy rampup duration , 
+                  Policy activation time , 
+                  Policy activation time 
+                       + Policy rampup duration )
+	~	dmnl [0,1]
+	~	[LIT] The likelihood of calling emergency services in the event of a \
+		witnessed overdose, after accounting for policy changes. [Source: Best \
+		2009, Davidson 2002, Doe-Simkins 2014, Enteen 2010, Seal 2003, Tracy 2005, \
+		Walley 2013]
+
+Overdose rate base Rx OUD = 0.251252
+	~	1/year [0.025,0.25,0.001]
+	~	[ACAL] The baseline overdose rate for people with Rx OUD, whether or not \
+		they have used heroin in the past year, not accounting for effects of \
+		synthetics.
+
+Overdose rate base HUD = 0.16737
+	~	1/year [0.05,0.2,0.001]
+	~	[ACAL, LIT] The baseline overdose rate for people with HUD, not accounting \
+		for effects of synthetics. Literature is used to define bounds. [Source: \
+		Townsend 2020; Uyei 2017; Darke 1996]
+
+Overdose death rate HUD  = 
+        Overdose rate net HUD 
+             * ( 1
+                  - Base survival probability net H OD ) 
+             * Probability OD death not averted heroin user
+	~	1/year
+	~	Overall rate of overdose death for people with HUD, taking into account \
+		the effects of benzodiazepines and synthetics on overdose rates, overdose \
+		lethality, and probabilities of intervention.
+
+Overdose rate base NDHU  = 
+        INITIAL( Overdose rate base HUD 
+                  * Overdose rate NDHU relative to HUD  )
+	~	1/year
+	~	The baseline overdose rate for people with NDHU, not accounting for \
+		effects of benzodiazepines or synthetics.[Source: Darke et al 1996]
+
+Overdose death rate NDHU  = 
+        Overdose rate net NDHU 
+             * ( 1
+                  - Base survival probability net H OD ) 
+             * Probability OD death not averted heroin user
+	~	1/year
+	~	Overall rate of overdose death for people with NDHU, taking into account \
+		the effects of benzodiazepines and synthetics on overdose rates, overdose \
+		lethality, and probabilities of intervention.
+
+Overdose rate net NDHU=
+	Overdose rate base NDHU 
+	
+	             * ( 1
+	                  + Fentanyl penetration curve 
+	                       * ( Fentanyl effect on OD rate H max net
+	                            - 1) )
+	~	1/year
+	~	The overdose rate for people with NDHU, after accounting for effects of \
+		fentanyl.
+
+Overdose death rate Rx misuse  = 
+        Overdose rate base Rx misuse 
+             * ( 1
+                  - Base survival probability Rx OD ) 
+             * Probability OD death not averted Rx user
+	~	1/year
+	~	Overall rate of overdose death for people with Rx misuse, taking into \
+		account the effects of benzodiazepines on overdose rates, overdose \
+		lethality, and probabilities of intervention.
+
+Overdose rate base Rx misuse = 0.001
+	~	1/year [0.001,0.025,0.001]
+	~	[ACAL] The baseline overdose rate for people with Rx misuse, not \
+		accounting for effects of synthetics.
+
+Base survival probability Rx OD = 0.973391
+	~	dmnl [0.9,0.99,0.001]
+	~	[ACAL, LIT] The base probability of surviving an Rx opioid overdose \
+		without life-saving intervention. The only estimates we identified in the \
+		literature are also model-estimated and are for heroin, so they are \
+		referenced as a guide but not as a definitive value. [Source: Cipriano and \
+		Zaric 2018; Coffin and Sullivan 2013]
+
+Base survival probability fentanyl OD  = 
+        INITIAL( Base survival probability H OD 
+                  * Fentanyl effect on base survival max relative to H  )
+	~	dmnl
+	~	Conceptually, the base survival probability of a fentanyl overdose
+
+Overdose rate synth baseline = 0.00722299
+	~	1/year [?,?,0.0001]
+	~	[ACAL] The prescription synthetic (pre-2013) overdose rate for people with \
+		Rx OUD.
+
+Overdose death rate base Rx OUD  = 
+        Overdose rate base Rx OUD 
+             * ( 1
+                  - Base survival probability Rx OD ) 
+             * Probability OD death not averted Rx user
+	~	1/year
+	~	The rate of heroin overdose death for people with NDHU from \
+		non-synthetic-involved overdoses (i.e. heroin only), taking into account \
+		pre-2013 overdose lethality and probabilities of intervention.
+
+Overdose death rate synth baseline  = 
+        Overdose rate synth baseline 
+             * ( 1
+                  - Base survival probability fentanyl OD ) 
+             * Probability OD death not averted Rx user
+	~	1/year
+	~	The baseline (pre-2013) rate of prescription synthetic-involved overdose \
+		death for people with Rx OUD, taking into account pre-2013 overdose \
+		lethality and probabilities of intervention.
+
+Base survival probability net H OD  = 
+        Max ( 0, 
+             Base survival probability H OD 
+                  + ( Base survival probability fentanyl OD 
+                       - Base survival probability H OD ) 
+                       * Fentanyl penetration curve )
+	~	dmnl
+	~	Base survival probability for heroin-related overdoses, taking into \
+		account the increased average lethality of overdoses due to increasing \
+		exposure to synthetics post-2013.
+
+Overdose death rate base HUD=
+	Overdose rate base HUD 
+	
+	             * ( 1
+	                  - Base survival probability H OD ) 
+	             * Probability OD death not averted heroin user 
+	             * ( 1
+	                  - Fentanyl penetration curve )
+	~	1/year
+	~	The rate of heroin overdose death for people with HUD from \
+		non-synthetic-involved overdoses (i.e. heroin only), taking into account \
+		pre-2013 overdose lethality and probabilities of intervention.
+
+Overdose death rate base NDHU=
+	Overdose rate base NDHU 
+	
+	             * ( 1
+	                  - Base survival probability H OD ) 
+	             * Probability OD death not averted heroin user 
+	             * ( 1
+	                  - Fentanyl penetration curve )
+	~	1/year
+	~	The rate of heroin overdose death for people with NDHU from \
+		non-synthetic-involved overdoses (i.e. heroin only), taking into account \
+		pre-2013 overdose lethality and probabilities of intervention.
+
+Base survival probability H OD  = 
+        INITIAL( Base survival probability H OD relative to Rx 
+                  * Base survival probability Rx OD  )
+	~	dmnl
+	~	The base probability of surviving a heroin opioid overdose without \
+		intervention.
+
+Fentanyl penetration curve=
+	Projection output data[Fent] * (1 - Switch for no fentanyl)
+	~	dmnl
+	~	The proportion of opioid drugs positive for fentanyl or fentanyl analogues.
+
+Base survival probability H OD relative to Rx = 0.980638
+	~	dmnl [0.8,1]
+	~	[ACAL, ASM, LIT] The base probability of surviving a heroin overdose \
+		without life-saving intervention expressed as a fraction of the base \
+		probability of surviving an Rx Opioid overdose without life-saving \
+		intervention. We use other model-derived estimates for heroin ODs as a \
+		guide for the relative rate, and assume the base probability of surviving \
+		a heroin OD is no higher than that of an Rx OD, which is separately \
+		calibrated. [Source: Cipriano and Zaric 2018; Coffin and Sullivan 2013]
+
+Fentanyl effect on base survival max relative to H = 0.735793
+	~	dmnl [0.2,0.8]
+	~	[ACAL, ASM] The highest possible probability of surviving a fentanyl \
+		overdose compared to heroin overdose. We assume it is a lower probability \
+		than that of a heroin OD. Bounds in calibration are wide but could be \
+		changed with new literature.
+
+Overdose rate NDHU relative to HUD = 0.25
+	~	dmnl [0.25,1]
+	~	[ACAL, ASM] The baseline overdose rate for people with NDHU, not \
+		accounting for effects of synthetics. We assume that overdose rate for \
+		people NDHU is no greater than that for people with HUD.
+
+Probability OD death not averted Rx user=
+	1
+	             - Probability OD witnessed net 
+	                       * (1 - 
+	(1 - Probability Nx bystander Rx)  
+	             * ( 1 - Probability of calling emergency services net ))
+	~	dmnl
+	~	Probability death not averted is the joint probability of (not averted) by \
+		each possible means, i.e. Not Averted[Bystander] AND Not Averted[LEO] AND \
+		Not Averted[EMS]
+
+Overdose rate net HUD=
+	Overdose rate base HUD 
+	
+	             * ( 1
+	                  + Fentanyl penetration curve 
+	                       * ( Fentanyl effect on OD rate H max net
+	                            - 1) )
+	~	1/year
+	~	The overdose rate for people with HUD, accounting for effects of fentanyl.
+
+Nonfatal OD ratio heroin  = 
+        Total nonfatal overdoses heroin 
+             / Total overdose deaths heroin
+	~	dmnl
+	~	Ratio of nonfatal to fatal overdoses (X : 1) for heroin
+
+Nonfatal OD ratio Rx  = 
+        Total nonfatal overdoses Rx 
+             / Total overdose deaths Rx
+	~	dmnl
+	~
+
+Probability OD death not averted heroin user=
+	1
+	             - Probability OD witnessed net 
+	                       * (1 - 
+	(1 - Probability Nx bystander heroin )  
+	             * ( 1 - Probability of calling emergency services net ))
+	~	dmnl
+	~	Probability death not averted is the joint probability of (not averted) by \
+		each possible means, i.e. Not Averted[Bystander] AND Not Averted[LEO] AND \
+		Not Averted[EMS]
+
+Probability OD witnessed net  = 
+        Probability OD witnessed 
+             + RAMP ( IF THEN ELSE ( Policy change probability OD witnessed 
+                            >= 0, 
+                       Policy change probability OD witnessed 
+                            * ( 1
+                                 - Probability OD witnessed ) , 
+                       Policy change probability OD witnessed 
+                            * Probability OD witnessed ) 
+                       / Policy rampup duration , 
+                  Policy activation time , 
+                  Policy activation time 
+                       + Policy rampup duration )
+	~	dmnl
+	~	The percentage of overdoses that are witnessed by another person, after \
+		accounting for policy changes.
+
+Nonfatal OD ratio heroin prior=
+	IF THEN ELSE((Time < Fentanyl introduction time :AND: MODULO(Time, 1)=0), 30 , :NA:)
+	~	dmnl
+	~	[LIT] The ratio of nonfatal to fatal overdoses involving heroin at model \
+		initiation. [Source: Darke 2003, Neale 2003]
+
+Nonfatal OD ratio Rx prior=
+	IF THEN ELSE((Time < Fentanyl introduction time :AND: MODULO(Time, 1)=0), 35 , :NA:)
+	~	dmnl [30,50,1]
+	~	[ASM, LIT] Assumed larger than nonfatal OD ratio for heroin.[Source: Darke \
+		2003, Neale 2003]
+
+Total overdose data last time  = 
+        INITIAL( GET DATA LAST TIME ( Total overdose deaths synth no H NVSS )  )
+	~	year
+	~
+
+Probability of calling emergency services=
+	0.424
+	~	dmnl [0,1]
+	~	[LIT] The likelihood of calling emergency services in the event of a \
+		witnessed overdose, averaged across events reported by people who use \
+		drugs (most studies) and/or loved ones; many studies include events in \
+		which naloxone was also used. [Source: Davidson 2002, Seal 2003, Sergeey \
+		2003, Seal 2005, Bohnert 2012, Tracy 2005, Bohnert 2009, Tobin 2005, \
+		Pollini 2006, Sherman 2008, Galea 2006, Tobin 2009, Walley 2013, Enteen \
+		2010, Bennett 2011, Doe-Simkins 2009, Best 2009, Wagner 2010, Doe-Simkins \
+		2014, Lim 2019, Lankenau 2013, Rowe 2015, Dwyer 2015, Leece 2016, Levy \
+		2016, Wagner 2015, Schiavon 2018, Ataiants 2020, Schwartz 2020, Banjo \
+		2014, Lopez-Gaston 2008]
+
+Total overdose deaths base heroin  = 
+        Overdose death NDHU 
+             * OD death fraction base NDHU 
+             + Total overdose deaths HUD 
+                  * OD death fraction base HUD
+	~	people/year
+	~		~	:SUPPLEMENTARY
+
+Overdose death rate Rx OUD no H  = 
+        Overdose death rate base Rx OUD 
+             + Overdose death rate synth baseline
+	~	1/year
+	~	Overall rate of overdose death for people with Rx OUD who have not used \
+		heroin in the past year.
+
+Overdose death rate synth HUD  = 
+        Max ( 0, 
+             Overdose death rate HUD 
+                  - Overdose death rate base HUD )
+	~	1/year
+	~	The rate of synthetic-involved overdose death for people with HUD.
+
+Overdose death rate synth NDHU  = 
+        Max ( 0, 
+             Overdose death rate NDHU 
+                  - Overdose death rate base NDHU )
+	~	1/year
+	~	The rate of synthetic-involved overdose death for people with NDHU.
+
+OD death fraction base NDHU  = 
+        Overdose death rate base NDHU 
+             / Overdose death rate NDHU
+	~	dmnl
+	~	The fraction of all heroin, non-synthetic-involved overdoses that are \
+		fatal among people with NDHU.
+
+OD death fraction synth NDHU  = 
+        Overdose death rate synth NDHU 
+             / Overdose death rate NDHU
+	~	dmnl
+	~	The fraction of all illicitly-manufactured synthetics (i.e., post-2013) \
+		overdoses that are fatal among people with NDHU.
+
+OD death fraction base Rx OUD no H  = 
+        Overdose death rate base Rx OUD 
+             / Overdose death rate Rx OUD no H
+	~	dmnl
+	~	The fraction of all prescription opioid, non-synthetic-involved overdoses \
+		that are fatal among people who have Rx OUD and no past year heroin use.
+
+OD death fraction synth baseline Rx OUD no H  = 
+        Overdose death rate synth baseline 
+             / Overdose death rate Rx OUD no H
+	~	dmnl
+	~	The fraction of all prescription synthetic (i.e., pre-2013) overdoses that \
+		are fatal among people who have Rx OUD and no past year heroin use.
+
+OD death fraction base HUD  = 
+        Overdose death rate base HUD 
+             / Overdose death rate HUD
+	~	dmnl
+	~	The fraction of all heroin, non-synthetic-involved overdoses that are \
+		fatal among people with HUD.
+
+OD death fraction synth HUD  = 
+        Overdose death rate synth HUD 
+             / Overdose death rate HUD
+	~	dmnl
+	~	The fraction of all illicitly-manufactured synthetics (i.e., post-2013) \
+		overdoses that are fatal among people who have HUD.
+
+Total overdose deaths synth  = 
+        Total overdose deaths synth base 
+             + Total overdose deaths synth excess
+	~	people/year
+	~		~	:SUPPLEMENTARY
+
+Overdose rate total Rx OUD no H  = 
+        Overdose rate base Rx OUD 
+             + Overdose rate synth baseline
+	~	1/year
+	~	The overall overdose rate involving prescription opioids or synthetic \
+		prescription opioids for people with Rx OUD who have not used heroin in \
+		the past year.
+
+Nonfatal OD ratio Rx OUD no H  = 
+        Overdose rate total Rx OUD no H 
+             / Overdose death rate Rx OUD no H 
+             - 1
+	~	dmnl
+	~	Ratio of nonfatal to fatal overdoses (X : 1) for Rx OUD no H
+
+Nonfatal OD ratio Rx OUD with H  = 
+        Overdose rate base Rx OUD 
+             / Overdose death rate Rx OUD with H 
+             - 1
+	~	dmnl
+	~	Ratio of nonfatal to fatal overdoses (X : 1) for Rx OUD with H
+
+Total overdose deaths Rx  = 
+        Overdose death MU 
+             + Overdose death Rx misuse 
+             + Total overdose deaths Rx OUD no H 
+             + Total overdose deaths Rx OUD with H
+	~	person/Years
+	~
+
+Total overdose deaths heroin  = 
+        Overdose death NDHU 
+             + Total overdose deaths HUD
+	~	person/Years
+	~
+
+Total overdose deaths heroin and excess estimated=
+	IF THEN ELSE ( Time 
+	                                 > Total overdose data last time , 
+	                            :NA:, 
+	Total overdose deaths base heroin NVSS 
+	                                 + OD deaths synth excess estimated)
+	~	person/Years
+	~
+
+Total overdose deaths base heroin NVSS
+	~	people/year
+	~
+
+Overdose death rate Rx OUD with H  = 
+        Overdose death rate base Rx OUD
+	~	1/year
+	~	Overall rate of overdose death for people with Rx OUD who have used heroin \
+		in the past year.
+
+Total overdoses Rx  = 
+        Total nonfatal overdoses Rx 
+             + Total overdose deaths Rx
+	~	person/Years
+	~
+
+Total overdoses heroin  = 
+        Total nonfatal overdoses heroin 
+             + Total overdose deaths heroin
+	~	person/Years
+	~
+
+Nx utilization events H user=
+	Total overdoses heroin * Probability OD witnessed net * Probability Nx bystander heroin
+	~	people/year
+	~	The annual number of times naloxone is used to reverse a heroin overdose.
+
+Nx utilization events Rx user=
+	Total overdoses Rx * Probability OD witnessed net * Probability Nx bystander Rx
+	~	people/year
+	~	The annual number of times naloxone is used to reverse a prescription \
+		opioid overdose.
+
+Probability Nx bystander heroin=
+	1 - EXP(-Nx kit distribution efficiency net * Nx kits per 100k population H user)
+	~	dmnl
+	~	The likelihood that a bystander will administer naloxone in the event of a \
+		witnessed heroin overdose, after accounting for any policy changes. \
+		Estimated weighted average of 34% in 2017 (assumed for heroin overdoses). \
+		See 'Estimated Nx distribution efficiency based on Irvine...Green 2020'
+
+Probability Nx bystander Rx=
+	1 - EXP(-Nx kit distribution efficiency net * Nx kits per 100k population Rx user)
+	~	dmnl
+	~	The likelihood that a bystander will administer naloxone in the event of a \
+		witnessed prescription opioid overdose, after accounting for any policy \
+		changes.
+
+Total overdose deaths base Rx NVSS
+	~	people/year
+	~
+
+Nx kit utilization fraction H user=
+	Nx utilization events H user * Nx kits per utilization event
+	             / Nx kits distributed H user
+	~	dmnl
+	~	The value of this should match estimates from literature for fraction of \
+		kits utilized, which ranges from 5.7% (Wheeler 2015) to a weighted average \
+		of 12.9%. Note this is 6% when Wheeler 2015 is also used to calculate the \
+		weighted average. [Source: Galea 2006, Katzman 2020, Doe-Simkins 2009, \
+		Enteen 2010, Tobin 2009, Leece 2013, Tzemis 2014, Strang 2008, Yokell \
+		2011, Lopez-Gaston 2009, Wheeler 2015]
+	~	:SUPPLEMENTARY
+
+Nx kit utilization fraction Rx user=
+	Nx utilization events Rx user * Nx kits per utilization event
+	             / Nx kits distributed Rx user
+	~	dmnl
+	~	The value of this should match estimates from literature for fraction of \
+		kits utilized, which ranges from 5.7% (Wheeler 2015) to a weighted average \
+		of 12.9%. Note this is 6% when Wheeler 2015 is also used to calculate the \
+		weighted average. [Source: Galea 2006, Katzman 2020, Doe-Simkins 2009, \
+		Enteen 2010, Tobin 2009, Leece 2013, Tzemis 2014, Strang 2008, Yokell \
+		2011, Lopez-Gaston 2009, Wheeler 2015]
+	~	:SUPPLEMENTARY
+
+Population
+	~	people
+	~	Total population in US ages 12 and older, using NSDUH's population count. \
+		Population is used in the model to standardize the effect of social \
+		influence relative to the size of the current 'at risk' population. We \
+		limit to persons 12 and older because we assume children under 12 are not \
+		at great risk of initiating opioid misuse. [Source: NSDUH]
+
+Nx kits per 100k population H user=
+	Nx kits distributed H user / Population * 100000
+	~	kits/person
+	~	The number of naloxone kits (measured either in kits or in Rx, from IQVIA) \
+		per 100k population to people who are likely to reverse overdoses among \
+		heroin users (e.g. heroin users themselves, family and community members \
+		thereof, etc.).
+
+Nx kits per 100k population Rx user=
+	Nx kits distributed Rx user / Population * 100000
+	~	kits/person
+	~	The number of naloxone kits (measured either in kits or in Rx, from IQVIA) \
+		per 100k population to people who are likely to reverse overdoses among Rx \
+		opioid users (e.g. Rx opioid users themselves, family and community \
+		members thereof, etc.).
+
+Nx kit distribution efficiency net=
+	Nx kit distribution efficiency
+	             * ( 1
+	                  + RAMP ( Policy change Nx kit distribution efficiency
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	person/kit [0.0005,0.005]
+	~	The efficiency with which naloxone is distributed to the right people and \
+		places, after accounting for any policy changes.
+
+Nx kits per utilization event=
+	1
+	~	kits/(person/year)
+	~	NOTE: PLACEHOLDER VALUE - we do not have the data to disambiguate this \
+		from distribution efficiency effects. Naloxone kits used in the event of \
+		an overdose reversed through bystander naloxone administration.
+
+Nx kit distribution efficiency = 0.00034343
+	~	person/kit [0.0005,0.005]
+	~	[ACAL] The efficiency with which naloxone is distributed to the right \
+		people and places. The larger this value, the faster saturation is reached \
+		(i.e. probability of bystander naloxone availability --> 100%). An \
+		increase in this value means fewer kits are needed to reach a given \
+		probability of naloxone use per witnessed OD.
+
+Fentanyl effect on OD rate H max net=
+	((1-Switch for fentanyl effect on OD rate H max test) * Fentanyl effect on OD rate H max\
+		 + Switch for fentanyl effect on OD rate H max test * Fentanyl effect on OD rate H max test\
+		)
+	             * ( 1
+	                  + RAMP ( Policy change fentanyl effect on OD rate
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	dmnl
+	~	Maximum multiplier of OD rate due to fentanyl, after accounting for policy \
+		changes. Conceptually, how much more likely fentanyl is to cause an OD \
+		than heroin for any given incident of use
+
+Fentanyl effect on OD rate H max = 2
+	~	dmnl [2,7,0.1]
+	~	[LIT, ACAL] Maximum multiplier of OD rate due to fentanyl. conceptually, \
+		how much more likely fentanyl is to cause an OD than heroin for any given \
+		incident of use. Literature is used to define the bounds. [Source: Latimer \
+		et al. 2016, McGowan 2018]
+
+Nx utilization events total=
+	Nx utilization events H user + Nx utilization events Rx user
+	~	person/Years
+	~
+
+Nx utilization events H user fraction=
+	zidz(Nx utilization events H user, Nx utilization events total)
+	~	dmnl
+	~	Fraction of total overdose events where naloxone is utilized that are in \
+		heroin users (and not Rx opioid users)
+
+Nx utilization events H user fraction prior=
+	IF THEN ELSE(Time = 2013, 0.86, :NA:)
+	~	dmnl
+	~	[LIT] The fraction of all overdose reversals reported to harm reduction \
+		programs that were reported to be used for non-prescription opioid opioid \
+		(i.e., heroin) overdoses. Used as a prior to calibrate the estimated \
+		fraction of all kits distributed to heroin users. [Source: Wheeler 2015]
+
+Nx kits distributed Rx user=
+	Nx kits distributed net
+	             * ( 1
+	                  - Fraction Nx kits to H users )
+	~	kits
+	~	The estimated number of naloxone kits distributed by harm reduction \
+		programs and through mail and retail channels (IQVIA) to prescription \
+		opioid users.
+
+Nx kits distributed H user=
+	Nx kits distributed net * Fraction Nx kits to H users
+	~	kits
+	~	The estimated number of naloxone kits distributed by harm reduction \
+		programs and through mail and retail channels (IQVIA) to heroin users. \
+		[Source: IQVIA, Wheeler 2015]
+
+Fraction Nx kits to H users = 0.937116
+	~	dmnl
+	~	[ACAL, LIT] The fraction of naloxone kits distributed nationally that go \
+		to heroin users, using the fraction of overdose reversals reported that \
+		were for non-precription opioid, i.e., heroin overdoses in 2013, as a \
+		prior. [Source: Wheeler 2015]
+
+Nx kits distributed net=
+	Projection output data[NxKD] 
+	             * ( 1
+	                  + RAMP ( Policy change Nx kits distributed
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	kits
+	~
+
+Overdose death rate HUD no Nx counterfactual=
+	Overdose rate net HUD * (1 - Base survival probability net H OD) * ( 1
+	                  - Probability OD witnessed net 
+	                       * Probability of calling emergency services net )
+	~	1/year
+	~	Expected overdose death rate for individuals with HUD in counterfactual \
+		scenario with no naloxone
+	~	:SUPPLEMENTARY
+
+Cumulative overdose deaths synth excess= INTEG (
+	Total overdose deaths synth excess,
+		0)
+	~	people
+	~	Cumulative overdose deaths from illicit synthetics, from start of model \
+		run.
+	~	:SUPPLEMENTARY
+
+Nx utilization deaths averted Rx user=
+	Nx utilization events Rx user * (Total overdoses Rx synth baseline fraction * (1 - Base survival probability fentanyl OD\
+		) + (1 - Total overdoses Rx synth baseline fraction) * (1 - Base survival probability Rx OD\
+		)) * (1 -  Probability of calling emergency services net)
+	~	people/year
+	~	Deaths averted by use of naloxone in overdoses experienced by Rx opioid \
+		users
+
+Nx utilization deaths averted H user=
+	Nx utilization events H user * (1 - Base survival probability net H OD) * (1 - Probability of calling emergency services net\
+		)
+	~	people/year
+	~	Deaths averted by use of naloxone in overdoses experienced by heroin users
+
+Total overdoses synth baseline=
+	Overdose rate synth baseline * Rx OUD no PY heroin no MOUD
+	~	people/year
+	~	Total overdoses from presumptive prescription synthetics.
+
+Rx OUD no PY heroin no MOUD  = 
+        INTEG( Developing Rx OUD 
+                  + Net quitting heroin with Rx OUD 
+                  - Initiating heroin with Rx OUD 
+                  - Remitting Rx OUD no H no MOUD Tx 
+                  - NonOD death Rx OUD no H 
+                  - Overdose death Rx OUD no H 
+                  + Relapsing to Rx OUD no H 
+                  + SUM ( Tx exit with UD Rx OUD no H[TxT!] 
+                            - Tx engagement Rx OUD no H[TxT!] ) , 
+             Initial Rx OUD no H )
+	~	people [?,4e+06]
+	~
+
+Total overdoses Rx synth baseline fraction=
+	Total overdoses synth baseline / Total overdoses Rx
+	~	dmnl
+	~	Fraction of overdoses among Rx users involving presumptive prescription \
+		synthetics.
+
+Cumulative Nx utilization deaths averted= INTEG (
+	Nx utilization deaths averted H user + Nx utilization deaths averted Rx user,
+		0)
+	~	people
+	~	Cumulative deaths averted through naloxone use from start of model run.
+	~	:SUPPLEMENTARY
+
+Probability Nx bystander heroin prior=
+	IF THEN ELSE(Time = 2019, 0.2, :NA:)
+	~	dmnl
+	~	[DATA] Probability of naloxone distribution by a bystander [Source: Irvine \
+		et al 2020]
+
+Overdose death rate base HUD no synth counterfactual=
+	Overdose rate base HUD 
+	
+	             * ( 1
+	                  - Base survival probability H OD ) 
+	             * Probability OD death not averted heroin user
+	~	1/year
+	~	Expected overdose death rate for individuals with HUD in counterfactual \
+		scenario with no illicit synthetics
+	~	:SUPPLEMENTARY

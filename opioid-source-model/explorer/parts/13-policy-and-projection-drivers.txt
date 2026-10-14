@@ -1,0 +1,1118 @@
+SOURCE model, view "Policy and Projection drivers"
+Extracted from Vensim Files/OSM_Master_CURRENT.mdl. 162 equations.
+Variables can appear in several views; the .mdl file is the source of truth.
+==============================================================================
+
+Fentanyl penetration curve NFLIS
+	~	dmnl
+	~	The proportion of opioid drugs tested in forensic settings that were \
+		positive for fentanyl or fentanyl analogues. [Source: DEA National \
+		Forensic Laboratory Information System (NFLIS)]
+
+Fentanyl penetration curve=
+	Projection output data[Fent] * (1 - Switch for no fentanyl)
+	~	dmnl
+	~	The proportion of opioid drugs positive for fentanyl or fentanyl analogues.
+
+Heroin price index DATA:INTERPOLATE:
+	~	dmnl
+	~
+
+Heroin price index  = 
+        Projection output data[HPI]
+	~	dmnl
+	~	Price of heroin relative to model initiation, plus projections into future.
+
+Average MME per day  = 
+        Projection output data[MME] 
+             * ( 1
+                  + RAMP ( Policy change average MME per day 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	MME/person/day
+	~	The average strength (in MMEs) of opioid prescriptions, after accounting \
+		for policy changes.
+
+Policy change average MME per day  = 0
+	~	dmnl [-0.99,2,0.05]
+	~
+
+Projection input data[Fent]:INTERPOLATE::=
+	Fentanyl penetration curve NFLIS ~~
+
+Projection input data[HPI]:INTERPOLATE::=
+	Heroin price index DATA ~~
+
+Projection input data[MME]:INTERPOLATE::=
+	Average MME per day DATA ~~
+
+Projection input data[BMDCap]:INTERPOLATE::=
+	Bup providers DATA ~~
+
+Projection input data[MMTCap]:INTERPOLATE::=
+	MMT capacity estimated DATA ~~
+
+Projection input data[VivCap]:INTERPOLATE::=
+	Viv capacity estimated DATA ~~
+
+Projection input data[PtRx]:INTERPOLATE::=
+	Patients receiving opioid prescription annual IQVIA ~~
+
+Projection input data[NxKD]:INTERPOLATE::=
+	Nx kits distributed HR IQVIA ~~
+
+Projection input data[ADF]:INTERPOLATE::=
+	ADF fraction of prescribed Rx opioids base ~~
+
+Projection input data[RxPP]:INTERPOLATE::=
+	Prescriptions per person DATA ~~
+
+Projection input data[RxDur]:INTERPOLATE::=
+	Average days per prescription DATA
+	~	dmnl
+	~
+
+Projection start time[Proj]= INITIAL(
+	MIN(Projection last data time[Proj],MaxDataTime))
+	~	year
+	~	Note: MaxDataTime functions as override for projections data. Only \
+		exogenous data prior to MaxDataTime will be used in generating \
+		projections. If MaxDataTime is later than last available data point, then \
+		exogenous data up to the last available data point will be used and \
+		projection curves will be fitted to the last available data point.
+
+Projection last data value[Proj]  = 
+        INITIAL( GET DATA AT TIME ( Projection input data[Proj] , 
+                  Projection start time[Proj] )  )
+	~	
+	~
+
+Projection output data[Proj]  = 
+        IF THEN ELSE ( Time 
+                  <= Projection start time[Proj] , 
+             Projection input data[Proj] , 
+             Switch for constant projections[Proj] 
+                  * Projection input data[Proj] 
+                  + ( 1
+                       - Switch for constant projections[Proj] ) 
+                       * Logistic growth curve[Proj] )
+	~	
+	~	Trend projections to extend the input (exogenous) time series data used to \
+		drive the base model.
+
+Logistic growth curve[Proj]  = 
+        IF THEN ELSE ( Projection curve end value[Proj] 
+                  > Projection last data value[Proj] , 
+             MIN ( Projection curve end value[Proj] , 
+                  ( ( Projection curve end value[Proj] 
+                       - Projection last data value[Proj] ) 
+                       / 0.5) 
+                       / ( 1
+                            + EXP ( ( -5
+                                      / ( Projection curve end time[Proj] 
+                                           - Projection start time[Proj] ) ) 
+                                      * ( Time 
+                                           - Projection start time[Proj] ) ) ) 
+                       + ( Projection curve end value[Proj] 
+                            - ( Projection curve end value[Proj] 
+                                 - Projection last data value[Proj] ) 
+                                 / 0.5) ) , 
+             Max ( Projection curve end value[Proj] , 
+                  ( ( Projection curve end value[Proj] 
+                       - Projection last data value[Proj] ) 
+                       / 0.5) 
+                       / ( 1
+                            + EXP ( ( -5
+                                      / ( Projection curve end time[Proj] 
+                                           - Projection start time[Proj] ) ) 
+                                      * ( Time 
+                                           - Projection start time[Proj] ) ) ) 
+                       + ( Projection curve end value[Proj] 
+                            - ( Projection curve end value[Proj] 
+                                 - Projection last data value[Proj] ) 
+                                 / 0.5) ) )
+	~	
+	~
+
+Projection curve end time[Fent]= INITIAL(
+	 Projection curve end time fentanyl penetration) ~~
+
+Projection curve end time[HPI]= INITIAL(
+	 Projection curve end time heroin price index) ~~
+
+Projection curve end time[MME]= INITIAL(
+	 Projection curve end time average MME per day) ~~
+
+Projection curve end time[BMDCap]= INITIAL(
+	 Projection curve end time Bup providers) ~~
+
+Projection curve end time[MMTCap]= INITIAL(
+	 Projection curve end time MMT capacity) ~~
+
+Projection curve end time[VivCap]= INITIAL(
+	 Projection curve end time Viv capacity) ~~
+
+Projection curve end time[PtRx]= INITIAL(
+	 Projection curve end time patients with opioid prescription) ~~
+
+Projection curve end time[NxKD]= INITIAL(
+	 Projection curve end time Nx kits distributed) ~~
+
+Projection curve end time[ADF]= INITIAL(
+	 Projection curve end time ADF fraction of prescribed Rx opioids) ~~
+
+Projection curve end time[RxPP]= INITIAL(
+	Projection curve end time prescriptions per person) ~~
+
+Projection curve end time[RxDur]= INITIAL(
+	Projection curve end time days per prescription)
+	~	year
+	~	The time that we expect the projection end curve to reach a specified \
+		value.
+
+Projection curve end value[Fent]= INITIAL(
+	 Projection curve end value fentanyl penetration) ~~
+
+Projection curve end value[HPI]= INITIAL(
+	 Projection curve end value heroin price index) ~~
+
+Projection curve end value[MME]= INITIAL(
+	 Projection curve end value average MME per day) ~~
+
+Projection curve end value[BMDCap]= INITIAL(
+	 Projection curve end value Bup providers) ~~
+
+Projection curve end value[MMTCap]= INITIAL(
+	 Projection curve end value MMT capacity) ~~
+
+Projection curve end value[VivCap]= INITIAL(
+	 Projection curve end value Viv capacity) ~~
+
+Projection curve end value[PtRx]= INITIAL(
+	 Projection curve end value patients with opioid prescription) ~~
+
+Projection curve end value[NxKD]= INITIAL(
+	 Projection curve end value Nx kits distributed) ~~
+
+Projection curve end value[ADF]= INITIAL(
+	 Projection curve end value ADF fraction of prescribed Rx opioids) ~~
+
+Projection curve end value[RxPP]= INITIAL(
+	Projection curve end value prescriptions per person) ~~
+
+Projection curve end value[RxDur]= INITIAL(
+	Projection curve end value days per prescription)
+	~	
+	~	The value which we project an exogenous input will hit.
+
+Projection curve end time fentanyl penetration = 2032
+	~	year [2017,2030,1]
+	~	The time at which the user expects fentanyl penetration of the market to \
+		approach its limit.
+
+Projection curve end time heroin price index = 2032
+	~	year [2017,2030,1]
+	~	The time at which the user expects the heroin price index to approach its \
+		limit.
+
+Projection curve end time average MME per day = 2032
+	~	year [2017,2030,1]
+	~	The time at which the user expects avg MME per Rx to approach its limit.
+
+Projection curve end time Bup providers = 2032
+	~	year [2017,2030,1]
+	~	The time at which the user expects Bup total theoretical capacity to \
+		approach its limit.
+
+Projection curve end time MMT capacity = 2032
+	~	year [2017,2060,1]
+	~	The time at which the user expects MMT capacity to approach its limit.
+
+Projection curve end value fentanyl penetration = 0.81
+	~	dmnl [0,1,0.01]
+	~	The limit the user expects fentanyl penetration of the illicit opioid (not \
+		Rx opioids) market to approach. Calculated in Excel using years of data \
+		that best fit a logarithmic curve (2016-20), and applied the resulting \
+		logarithmic equation to years 2021-2031. Value for 2031 is used here.
+
+Projection curve end value average MME per day = 23.53
+	~	MME/person/day [200,1200,50]
+	~	The limit the user expects avg MME per Rx to approach. Calculated in Excel \
+		using the two input sources of data used in model - total number of opioid \
+		prescriptions, and total number of MMEs prescribed. For total Rx, data \
+		from 2017-20 fit a logarithmic curve. For total MME, data for 2017-20 best \
+		fit a logarithmic curve. The resulting logarithmic equations were both \
+		extended out to 2031, and the value for 2031 was then calculated \
+		(MME/prescriptions).
+
+Projection curve end value Bup providers = 179399
+	~	people [80000,300000,10000]
+	~	The limit the user expects the total number of buprenorphine-waivered \
+		providers to approach. Calculated in Excel using years of data that fit a \
+		logarithmic curve(2019-20), and applied the resulting logarithmic equation \
+		to years 2021-2031. Value for 2031 is used here.
+
+Projection curve end value MMT capacity = 649718
+	~	people [400000,800000]
+	~	The limit the user expects MMT capacity to approach. Calculated in Excel \
+		using a projected linear function with years 2011-19, as utilization has \
+		been rising linearly since at least 1999. The 2031 value was then divided \
+		by 86.6%, the utliization fraction used in the model to estimate capacity. \
+		The resultant value for 2060 entered was 750,000, which results in a value \
+		in 2031 of approximately 655k, close to the 644285 estimated in Excel.
+
+MMT capacity estimated DATA:INTERPOLATE::=
+	Tx point patients OTP MMT NSSATS 
+	             / MMT OTP capacity utilization NSSATS
+	~	people
+	~
+
+MMT capacity estimated  = 
+        Projection output data[MMTCap] 
+             * ( 1
+                  + RAMP ( Policy change MMT capacity 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	person
+	~	Estimated capacity in Methadone treatment, ie, max number of people that \
+		could theoretically be in Methadone treatment at a given time.
+
+Viv capacity estimated  = 
+        Projection output data[VivCap] 
+             * ( 1
+                  + RAMP ( Policy change Viv capacity 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	person
+	~
+
+Viv capacity estimated DATA := Tx point patients Viv IQVIA 
+             / Viv capacity utilization NSSATS
+	~	person
+	~	National Vivitrol treatment capacity.
+
+Projection curve end value Viv capacity = 46025
+	~	people [30000,100000]
+	~	The limit the user expects Vivitrol capacity to approach. Calculated in \
+		Excel using years of data that fit a logarithmic curve (2017-2019), and \
+		applied the resulting logarithmic equation to years 2020-2031. Divided by \
+		average capacity utilization of 88%, which is figure used to estimate \
+		capacity in base model. Resulting value for 2031 is used here.
+
+Projection curve end time Viv capacity = 2032
+	~	year [2017,2030,1]
+	~	The time at which the user expects Viv capacity to approach its limit.
+
+Patients receiving opioid prescription annual  = 
+        Projection output data[PtRx] 
+             * ( 1
+                  + RAMP ( Policy change patients with opioid prescription 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	people/year
+	~	Annual number of individuals who been prescribed an opioid as derived from \
+		IQVIA and Symphony Health, after accounting for policy effects.
+
+Projection curve end value patients with opioid prescription = 2.82513e+07
+	~	people [?,?,100000]
+	~	The limit the user expects the number of patients with opioid \
+		prescriptions to approach. Calculated in Excel using years of data for \
+		which logarithmic function fit the data's curve (2017-2019). Value for \
+		2031 is used here.
+
+Projection curve end time patients with opioid prescription = 2032
+	~	year [2017,2030,1]
+	~	The time at which the user expects patients with opioid prescriptions to \
+		approach its limit.
+
+Initiating heroin no Rx net  = 
+        Initiating heroin no Rx base 
+             * ( 1
+                  + RAMP ( Policy change initiating NDHU no Rx 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	people/year
+	~	Number of individuals initiating NDHU with no prior prescription opioid \
+		misuse or use disorder, as of model start, after accounting for policy \
+		changes starting in 2018. Conceptually, this figure represents the 'base \
+		rate' of initiation, similar to base fractional rates in other parts of \
+		the model, which is why policy changes for 2018 onwards directly affect it.
+
+Initiating heroin no Rx base = 119578
+	~	people/year [40000,100000]
+	~	[ACAL, DATA] Number of individuals initiating NDHU with no prior Rx Misuse \
+		at model initiation. Data is used to define bounds. [Source: NSDUH RDAS]
+
+Initiating Rx misuse diverted net  = 
+        Initiating Rx misuse diverted base 
+             * ( 1
+                  + RAMP ( Policy change initiating Rx misuse diverted 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	people/year
+	~	Number of individuals initiating Rx misuse with diverted opioids at model \
+		start, accounting for policy changes going forward after the MaxDataTime. \
+		Conceptually, this figure represents the 'base rate' of initiation, \
+		similar to base fractional rates.
+
+Initiating Rx misuse diverted base = 1.87984e+06
+	~	people/year [1.8e+06,2.4e+06]
+	~	[ACAL, DATA] Number of individuals initiating Rx misuse with diverted \
+		opioids at model start. Data is used to define bounds. [Source: NSDUH RDAS]
+
+Policy change initiating NDHU no Rx  = 0
+	~	dmnl [-1,2]
+	~
+
+Policy rampup duration=
+	3
+	~	year [?,10]
+	~
+
+Policy activation time=
+	2022
+	~	year [2000,2030]
+	~	Assumed start time for all policy changes
+
+Policy change initiating Rx misuse diverted  = 0
+	~	dmnl [-1,2]
+	~
+
+Initiation rate heroin with Rx misuse net  = 
+        Initiation rate heroin with Rx misuse 
+             * ( 1
+                  + RAMP ( Policy change initiation rate heroin with Rx misuse 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	1/year
+	~	The rate of heroin initiation among people who misuse Rx opioids, after \
+		accounting for policy changes.
+
+Initiation rate heroin with Rx misuse = 0.0133614
+	~	1/year [0.004,0.03,0.0001]
+	~	[ACAL, LIT] Rate of heroin initiation in individuals who misuse Rx \
+		opioids. Literature reporting this transition around 2012-13 is used to \
+		validate model calibrated value. [Source: Kelley-Quon 2019]
+
+Initiation rate Rx misuse own Rx net  = 
+        Initiation rate Rx misuse own Rx 
+             * ( 1
+                  + RAMP ( Policy change initiation rate Rx misuse own Rx 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	1/year
+	~
+
+Initiation rate Rx misuse own Rx = 0.0346416
+	~	1/year [0.001,0.1,0.001]
+	~	[ACAL, LIT] Rate of initiation of misuse of Rx by individuals who have \
+		their own opioid prescription. Literature is used to defined the lower \
+		bounds (.1%).  [Source: Edlund 2014]
+
+Policy change initiation rate Rx misuse own Rx  = 0
+	~	dmnl [-1,2]
+	~
+
+Policy change initiation rate heroin with Rx misuse  = 0
+	~	dmnl [-1,2]
+	~
+
+Policy change patients with opioid prescription  = 0
+	~	dmnl [-0.99,2,0.05]
+	~
+
+Policy change Tx average duration=
+	0
+	~	dmnl [-0.99,5,0.05]
+	~	Adjusts each Tx type (Bup, MMT, Viv) by the same amount. To adjust \
+		separately, create a subscript [TxT] and enter three values separated with \
+		commas; if a single value, will be applied to all types (however, a single \
+		value adjusted with lever will only adjust Bup avg duration).
+
+Tx average duration net[TxT]  = 
+        Tx average duration[TxT] 
+             * ( 1
+                  + RAMP ( Policy change Tx average duration 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	year
+	~	Average duration in years per episode for each type of MOUD treatment, \
+		after accounting for policy changes.
+
+Tx average duration[Bup]  = 
+        INITIAL( Tx average duration Bup  ) ~~
+
+Tx average duration[MMT]  = 
+        INITIAL( Tx average duration MMT  ) ~~
+
+Tx average duration[Viv]  = 
+        INITIAL( Tx average duration Viv  )
+	~	Years
+	~
+
+Policy change MMT capacity  = 0
+	~	dmnl [-1,2,0.05]
+	~
+
+Policy change Viv capacity  = 0
+	~	dmnl [-1,2,0.05]
+	~
+
+Policy change Rx street supply shocks  = 0
+	~	1/year [-1,1,0.05]
+	~
+
+Rx street supply impact policy=
+	PULSE(Policy activation time, Policy rampup duration) * Policy change Rx street supply shocks
+	~	1/year
+	~
+
+Projection curve end value Nx kits distributed = 3.61571e+06
+	~	dmnl
+	~	The limit the user expects the number of naloxone kits distributed to \
+		heroin users to approach. Calculated in Excel using years of data that fit \
+		a logarithmic curve (2017-2019), and applied the resulting logarithmic \
+		equation to years 2020-2031. Value for 2031 is used here.
+
+Projection curve end time Nx kits distributed = 2032
+	~	year [2017,2030,1]
+	~	The time at which the user expects the probability of Naloxone \
+		administration by a bystander to a heroin OD to approach its limit.
+
+Switch for constant projections[Proj]=
+	0
+	~	dmnl [0,1,1]
+	~	Switch values correspond to elements of [Proj] subscript, in order (see Subscripts > \
+		Proj - elements). 0 = best-guess projection, 1 = constant-value projection.
+		In order: Fent,NxKD,HPI,BMDCap,MMTCap,VivCap,PtRx,RxPP,RxDur,MME,ADF
+
+Tx seeking rate Rx OUD no H total net  = 
+        Tx seeking rate Rx OUD no H total 
+             * ( 1
+                  + RAMP ( Policy change Tx seeking rate Rx OUD no H total 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	1/year
+	~	The rate at which individuals with Rx opioid use disorder and no heroin \
+		use seek MOUD treatment, after accounting for policy changes.
+
+Tx seeking rate Rx OUD no H total = 0.493158
+	~	1/year [?,?,0.05]
+	~	[ACAL] The rate at which individuals with Rx opioid use disorder and no \
+		heroin use seek MOUD treatment.
+
+Policy change Tx seeking rate Rx OUD no H total=
+	0
+	~	dmnl [-1,5,0.05]
+	~	[DATA] Only 7.6% of people with HUD (after RAND adjustmnet) and 5.5% of \
+		people with Rx OUD perceived a need and didn't seek it, on average from \
+		NSDUH 2015-18. Therefore, this is a reasonable upper limit on increasing \
+		treatment-seeking.
+
+Probability OD witnessed net  = 
+        Probability OD witnessed 
+             + RAMP ( IF THEN ELSE ( Policy change probability OD witnessed 
+                            >= 0, 
+                       Policy change probability OD witnessed 
+                            * ( 1
+                                 - Probability OD witnessed ) , 
+                       Policy change probability OD witnessed 
+                            * Probability OD witnessed ) 
+                       / Policy rampup duration , 
+                  Policy activation time , 
+                  Policy activation time 
+                       + Policy rampup duration )
+	~	dmnl
+	~	The percentage of overdoses that are witnessed by another person, after \
+		accounting for policy changes.
+
+Policy change probability OD witnessed  = 0
+	~	dmnl [-1,1,0.05]
+	~
+
+Policy change Nx kits distributed  = 0
+	~	dmnl [-1,2,0.01]
+	~
+
+Relapse rate HUD net  = 
+        Relapse rate HUD 
+             * ( 1
+                  + RAMP ( Policy change relapse rate 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	1/year
+	~	Rate at which individuals with HUD or Rx OUD (+/- heroin use) relapse back \
+		to disorder, after accounting for policy changes.
+
+Policy change relapse rate  = 0
+	~	dmnl [-1,2]
+	~
+
+Relapse rate HUD = 0.583015
+	~	1/year [0.01,0.25,0.01]
+	~	[ACAL, LIT] Rate at which individuals with HUD relapse to disorder. \
+		Literature is used to define bounds and as a comparison to \
+		model-calibrated estimate. [Source: Wu 2011, Galai 2003]
+
+Rx supply relative net  = 
+        Rx supply relative 
+             * ( 1
+                  + RAMP ( Policy change Rx supply relative 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	dmnl
+	~	Supply of prescription opioids available for potential misuse, indexed to \
+		model initiation, after accounting for policy changes.
+
+Policy change Rx supply relative  = 0
+	~	dmnl [-0.5,2,0.05]
+	~
+
+Rx supply relative=
+	Average MME per day relative 
+	             ^ (4 * Sensitivity of Rx supply to MME per day / (Sensitivity of Rx supply to MME per day\
+		 + Sensitivity of Rx supply to patients receiving prescription
+	 + Sensitivity of Rx supply to Rx per person + Sensitivity of Rx supply to days per prescription\
+		))
+	             * Patients receiving opioid prescription annual relative 
+	                  ^ (4 * Sensitivity of Rx supply to patients receiving prescription\
+		/ (Sensitivity of Rx supply to MME per day
+	 + Sensitivity of Rx supply to patients receiving prescription + Sensitivity of Rx supply to Rx per person\
+		 + Sensitivity of Rx supply to MME per day)) * Prescriptions per person relative
+	 ^ (4 * Sensitivity of Rx supply to Rx per person / (Sensitivity of Rx supply to MME per day\
+		 + Sensitivity of Rx supply to patients receiving prescription
+	 + Sensitivity of Rx supply to Rx per person + Sensitivity of Rx supply to days per prescription\
+		)) 
+	* Average days per prescription relative
+	             ^ (4 * Sensitivity of Rx supply to MME per day / (Sensitivity of Rx supply to MME per day\
+		 + Sensitivity of Rx supply to patients receiving prescription
+	 + Sensitivity of Rx supply to Rx per person + Sensitivity of Rx supply to days per prescription\
+		))
+	~	dmnl
+	~	Supply of prescription opioids available for potential misuse, indexed to \
+		model start. Can be thought of as 'excess' pills not used as prescribed \
+		within the time period of the prescription, which therefore present \
+		potential opportunities for misuse.
+
+ADF fraction of prescribed Rx opioids=
+	Projection output data[ADF] 
+	             + RAMP ( IF THEN ELSE ( Policy change ADF fraction of prescribed Rx opioids\
+		 
+	                            >= 0, 
+	                       Policy change ADF fraction of prescribed Rx opioids 
+	                            * ( 1
+	                                 - Projection output data[ADF] ) , 
+	                       Policy change ADF fraction of prescribed Rx opioids 
+	                            * Projection output data[ADF] ) 
+	                       / (Policy rampup duration ), 
+	                  Policy activation time , 
+	                  Policy activation time 
+	                       + (Policy rampup duration) )
+	~	dmnl [-1,1]
+	~	The fraction of prescribed opioids that are FDA-approved abuse-deterrent \
+		formulations (ADF), after accounting for policy changes.
+
+ADF fraction of prescribed Rx opioids base
+	~	dmnl
+	~	The fraction of prescribed opioids that are FDA-approved abuse-deterrent \
+		formulations (ADF). [Source: IQVIA NPA]
+
+Policy change ADF fraction of prescribed Rx opioids  = 0
+	~	dmnl [?,1]
+	~
+
+Probability of calling emergency services=
+	0.424
+	~	dmnl [0,1]
+	~	[LIT] The likelihood of calling emergency services in the event of a \
+		witnessed overdose, averaged across events reported by people who use \
+		drugs (most studies) and/or loved ones; many studies include events in \
+		which naloxone was also used. [Source: Davidson 2002, Seal 2003, Sergeey \
+		2003, Seal 2005, Bohnert 2012, Tracy 2005, Bohnert 2009, Tobin 2005, \
+		Pollini 2006, Sherman 2008, Galea 2006, Tobin 2009, Walley 2013, Enteen \
+		2010, Bennett 2011, Doe-Simkins 2009, Best 2009, Wagner 2010, Doe-Simkins \
+		2014, Lim 2019, Lankenau 2013, Rowe 2015, Dwyer 2015, Leece 2016, Levy \
+		2016, Wagner 2015, Schiavon 2018, Ataiants 2020, Schwartz 2020, Banjo \
+		2014, Lopez-Gaston 2008]
+
+Probability of calling emergency services net  = 
+        Probability of calling emergency services 
+             + RAMP ( IF THEN ELSE ( Policy change probability of calling emergency services\
+		 
+                            >= 0, 
+                       Policy change probability of calling emergency services 
+                            * ( 1
+                                 - Probability of calling emergency services ) , 
+                       Policy change probability of calling emergency services 
+                            * Probability of calling emergency services ) 
+                       / Policy rampup duration , 
+                  Policy activation time , 
+                  Policy activation time 
+                       + Policy rampup duration )
+	~	dmnl [0,1]
+	~	[LIT] The likelihood of calling emergency services in the event of a \
+		witnessed overdose, after accounting for policy changes. [Source: Best \
+		2009, Davidson 2002, Doe-Simkins 2014, Enteen 2010, Seal 2003, Tracy 2005, \
+		Walley 2013]
+
+Policy change probability of calling emergency services  = 0
+	~	dmnl [-1,1]
+	~
+
+Projection curve end value ADF fraction of prescribed Rx opioids = 0.0311
+	~	dmnl [0,1,0.005]
+	~	The limit the user expects the ADF fraction of prescribed opioids to \
+		approach. Calculated in Excel using years of data that fit a logarithmic \
+		curve (2018-20), and applied the resulting logarithmic equation to years \
+		2021-2031. Value for 2031 is used here.
+
+Projection curve end time ADF fraction of prescribed Rx opioids = 2032
+	~	year
+	~	The time at which the user expects the ADF fraction of prescribed Rx \
+		opioids to approach its limit.
+
+Tx intake delay net[TxT]  = 
+        Tx intake delay 
+             * ( 1
+                  + RAMP ( Policy change Tx intake delay[TxT] 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	Years
+	~	Delay between contacting and entering treatment, after accounting for \
+		policy changes. WARNING: Check for integration error if reducing Tx intake \
+		delay!
+
+Tx intake delay=
+	0.083
+	~	year [0,?]
+	~	[LIT] Delay between contacting and entering treatment, among those who \
+		receive treatment. [Source: Flavin 2020, Beetham 2019, Lucas 2010, \
+		Kawasaki 2020, Madden 2018, Gryczynski 2009 for bup; Madden 2018, \
+		Gryczynski 2009, Lucas 2010 for MMT] Delay roughly same for all.
+
+Policy change Tx intake delay[TxT]  = 0
+	~	dmnl [-0.5,1]
+	~
+
+Probability OD witnessed=
+	0.764
+	~	dmnl [0.5,1]
+	~	[LIT] The percentage of overdoses that are witnessed by another person. \
+		[Source: Darke 1996, McGregor 1998, Strang 1999, Sergeey 2003, Tobin 2005, \
+		Bohnert 2012]
+
+Tx seeking affordability loss fraction=
+	0.1214
+	~	dmnl
+	~	[DATA] The fraction of all who sought treatment (and did or did not \
+		receive it) who reported ANY affordability barriers as reason for not \
+		receiving treatment.Adjusting this assumes that if they also experienced \
+		non-affordability barriers, those were no longer impediments to receipt of \
+		treatment. [Source: NSDUH 2015-19]
+
+Tx seeking nonaffordability loss fraction=
+	0.1616
+	~	dmnl [?,?,0.01]
+	~	[DATA] The fraction of all who sought treatment (and did or did not \
+		receive it)  who reported ANY non-affordability barriers but NO \
+		affordability barriers as reason for not receiving treatment.These \
+		barriers are either stigma or acceptability related (i.e., not ready to \
+		quit, didn't think treatment would help). [Source: NSDUH 2015-19]
+
+Tx seeking affordability loss fraction net=
+	Tx seeking affordability loss fraction
+	             + RAMP ( IF THEN ELSE ( Policy change Tx seeking affordability loss fraction
+	                            >= 0, 
+	                       Policy change Tx seeking affordability loss fraction
+	                            * ( 1
+	                                 - Tx seeking affordability loss fraction) , 
+	                     Policy change Tx seeking affordability loss fraction
+	                            * Tx seeking affordability loss fraction ) 
+	                       / Policy rampup duration , 
+	                  Policy activation time , 
+	                  Policy activation time 
+	                       + Policy rampup duration )
+	~	dmnl
+	~
+
+Tx seeking nonaffordability loss fraction net=
+	Tx seeking nonaffordability loss fraction
+	             + RAMP ( IF THEN ELSE ( Policy change Tx seeking nonaffordability loss fraction
+	                            >= 0, 
+	                       Policy change Tx seeking nonaffordability loss fraction
+	                            * ( 1
+	                                 - Tx seeking nonaffordability loss fraction) , 
+	                     Policy change Tx seeking nonaffordability loss fraction
+	                            * Tx seeking nonaffordability loss fraction ) 
+	                       / Policy rampup duration , 
+	                  Policy activation time , 
+	                  Policy activation time 
+	                       + Policy rampup duration )
+	~	dmnl
+	~
+
+Policy change Tx seeking affordability loss fraction=
+	0
+	~	dmnl [-1,1]
+	~
+
+Policy change Tx seeking nonaffordability loss fraction=
+	0
+	~	dmnl [-1,1]
+	~
+
+Bup providers=
+	Projection output data[BMDCap]              * ( 1
+	                  + RAMP ( Policy change Bup providers
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	people
+	~	Number of buprenorphine-waivered providers, after accounting for any \
+		policy changes.
+
+Bup providers DATA:INTERPOLATE:
+	~	people
+	~	[DATA, LIT] The total number of buprenorphine-waivered providers, as \
+		derived from published studies and SAMHSA website. [Source: Kissin 2006, \
+		Fiellin 2007, SAMHSA 2014, Knudsen 2015, Jones 2015,  Stein 2015, HHS \
+		2016, CRS 2018, SAMHSA 2020)
+
+Policy change Bup providers=
+	0
+	~	dmnl [-0.99,2]
+	~
+
+Bup effective capacity decay constant=
+	4.45e-05
+	~	1/person [1e-05,0.0003,1e-06]
+	~	[PMC, LIT, DATA] The rate of decay in the number of patients treated per \
+		marginal waivered provider as more providers become waivered and \
+		'theoretical capacity' grows. It is calibrated in a partial model to match \
+		the empirically observed average number of patients [IQVIA TPT] per \
+		provider as a function of total waivered providers [see sources], which \
+		can be closely approximated with an exponential function. It captures the \
+		idea of diminishing marginal returns to capacity. Each marginal unit of \
+		capacity added will on average be less utilized than existing capacity. \
+		[Source: IQVIA TPT, and see sources used for bup providers DATA]
+
+Policy change Bup effective capacity decay constant=
+	0
+	~	dmnl [-0.99,1,0.01]
+	~
+
+Bup effective capacity decay constant net=
+	Bup effective capacity decay constant
+	             * ( 1
+	                  + RAMP ( Policy change Bup effective capacity decay constant
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	1/person [1e-05,0.0003,1e-06]
+	~	The rate of decay in the number of patients treated per waivered provider \
+		as more providers become waivered, after accounting for any policy changes.
+
+Nx kit distribution efficiency net=
+	Nx kit distribution efficiency
+	             * ( 1
+	                  + RAMP ( Policy change Nx kit distribution efficiency
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	person/kit [0.0005,0.005]
+	~	The efficiency with which naloxone is distributed to the right people and \
+		places, after accounting for any policy changes.
+
+Nx kit distribution efficiency = 0.00034343
+	~	person/kit [0.0005,0.005]
+	~	[ACAL] The efficiency with which naloxone is distributed to the right \
+		people and places. The larger this value, the faster saturation is reached \
+		(i.e. probability of bystander naloxone availability --> 100%). An \
+		increase in this value means fewer kits are needed to reach a given \
+		probability of naloxone use per witnessed OD.
+
+Policy change Nx kit distribution efficiency=
+	0
+	~	dmnl [-0.5,1]
+	~
+
+Policy change fentanyl effect on OD rate=
+	0
+	~	dmnl [?,?,0.01]
+	~
+
+Fentanyl effect on OD rate H max = 2
+	~	dmnl [2,7,0.1]
+	~	[LIT, ACAL] Maximum multiplier of OD rate due to fentanyl. conceptually, \
+		how much more likely fentanyl is to cause an OD than heroin for any given \
+		incident of use. Literature is used to define the bounds. [Source: Latimer \
+		et al. 2016, McGowan 2018]
+
+Fentanyl effect on OD rate H max net=
+	((1-Switch for fentanyl effect on OD rate H max test) * Fentanyl effect on OD rate H max\
+		 + Switch for fentanyl effect on OD rate H max test * Fentanyl effect on OD rate H max test\
+		)
+	             * ( 1
+	                  + RAMP ( Policy change fentanyl effect on OD rate
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	dmnl
+	~	Maximum multiplier of OD rate due to fentanyl, after accounting for policy \
+		changes. Conceptually, how much more likely fentanyl is to cause an OD \
+		than heroin for any given incident of use
+
+Prescriptions per person=
+	Projection output data[RxPP]
+	             * ( 1
+	                  + RAMP ( Policy change prescriptions per person
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	Rx/person
+	~
+
+Prescriptions per person DATA:INTERPOLATE::=
+	Total prescription opioid Rx IQVIA 
+	             / Patients receiving opioid prescription annual IQVIA
+	~	Rx/person
+	~	[DATA] Average number of prescriptions dispensed per patient. [Source: \
+		IQVIA NPA & TPT]
+
+Policy change prescriptions per person=
+	0
+	~	dmnl [-0.99,2]
+	~
+
+Projection curve end value prescriptions per person = 3.31
+	~	Rx/person
+	~	The limit the user expects the number of prescriptions per person \
+		receiving an opioid prescription to approach. Calculated in Excel using \
+		the two input sources of data used in model - total number of opioid \
+		prescriptions, and total number of unique patients receiving an opioid \
+		prescription (per year). For patients receiving Rx, data from 2017-19 fit \
+		a logarithmic curve. For total Rx, data for 2017-20 best fit a logarithmic \
+		curve. The resulting logarithmic equations were both extended out to 2031, \
+		and the value for 2031 was then calculated (prescriptions/people).
+
+Projection curve end time prescriptions per person = 2032
+	~	year
+	~	The time at which the user expects prescriptions per person to approach \
+		its limit.
+
+Nx kits distributed HR IQVIA
+	~	kits
+	~	The estimated number of kits distributed by harm reduction programs and \
+		through mail and retail channels. [Source: IQVIA, Wheeler 2015]
+
+Nx kits distributed net=
+	Projection output data[NxKD] 
+	             * ( 1
+	                  + RAMP ( Policy change Nx kits distributed
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	kits
+	~
+
+Switch for no fentanyl=
+	0
+	~	dmnl [0,1,1]
+	~	Switch for turning off presence of illicit fentanyl historically. If set \
+		to 1, will yield counterfactual scenario with no illicit fentanyl.
+
+Social influence strength relapse net=
+	Social influence strength relapse
+	
+	                  + RAMP ( Policy change social influence strength relapse
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration )
+	~	dmnl
+	~	The multiplier effect of social influence on relapse rates, after \
+		accounting for any policy changes. Used only for policy testing - KEEP \
+		THIS AT ZERO by default
+
+Social influence strength relapse=
+	0
+	~	dmnl
+	~	The multiplier effect of social influence on relapse rates. Used only for \
+		policy testing - KEEP THIS AT ZERO by default
+
+Policy change social influence strength relapse=
+	0
+	~	dmnl [-2,2,0.01]
+	~	NOTE - functions as direct input to the SI strength rather than % change \
+		since SI strength is at zero by default! .19 achieves a 20% decrease in \
+		the relapse rate relative to baseline by 2024, commensurate with other \
+		policy changes at 20% in desired direction.
+
+Policy change Rx OUD development rate=
+	0
+	~	dmnl [-2,1]
+	~
+
+Policy change HUD with Rx OUD development rate=
+	0
+	~	dmnl [-2,1]
+	~
+
+Policy change HUD no Rx OUD development rate=
+	0
+	~	dmnl [-2,1]
+	~
+
+Developing HUD rate no Rx OUD net=
+	Developing HUD rate no Rx OUD
+	             * ( 1
+	                  + RAMP ( Policy change HUD no Rx OUD development rate
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	1/year
+	~	The rate of developing heroin use disorder among people who have \
+		nondisordered heroin use but without Rx OUD, after accounting for policy \
+		changes.
+
+Developing HUD rate with Rx OUD net=
+	Developing HUD rate with Rx OUD
+	             * ( 1
+	                  + RAMP ( Policy change HUD with Rx OUD development rate
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	1/year
+	~	The rate of developing heroin use disorder among people who have \
+		nondisordered heroin use as well as an existing Rx OUD, after accounting \
+		for policy changes.
+
+Developing Rx OUD rate net=
+	Developing Rx OUD rate
+	             * ( 1
+	                  + RAMP ( Policy change Rx OUD development rate
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	1/year
+	~	The rate of developing Rx OUD among people who misuse Rx opioids, after \
+		accounting for policy changes.
+
+Developing Rx OUD rate = 0.029716
+	~	1/year [0.01,0.3,0.001]
+	~	[ACAL, LIT] Rate at which individuals using Rx opioids develop an OUD. Literature \
+		does not directly estimate this transition, but is used to define lower \
+		bounds.
+		[Source: Wu 2011, Edlund 2014, Moe 2019]
+
+Developing HUD rate no Rx OUD = 0.05
+	~	1/year
+	~	[ACAL] Rate of HUD development in individuals without an Rx OUD, though \
+		they could have rx misuse with nondisordered heroin use.
+
+Developing HUD rate with Rx OUD = 0.534512
+	~	1/year
+	~	[ACAL] Rate of HUD development in individuals with an Rx OUD.
+
+Patients receiving opioid prescription annual IQVIA:INTERPOLATE:
+	~	people/year
+	~	Estimated total number of unique (non-duplicated) patients receiving \
+		opioid analgesic prescriptions dispensed from U.S. outpatient retail \
+		pharmacies each year [Source: IQVIA TPT]
+
+Projection curve end value heroin price index = 0.49
+	~	dmnl
+	~	The limit the user expects the heroin price (relative to model start time) \
+		to approach.
+
+Projection last data time[Proj]= INITIAL(
+	GET DATA LAST TIME ( Projection input data[Proj] ))
+	~	year
+	~
+
+MaxDataTime=
+	2020
+	~	year
+	~
+
+Average MME per day DATA:INTERPOLATE::=
+	Avg MME per opioid Rx IQVIA / Average days per prescription DATA
+	~	MME/person/day
+	~
+
+Average days per prescription DATA:INTERPOLATE::=
+	Average duration of medical opioid use DATA / Prescriptions per person DATA / OneDay
+	~	person*day/Rx
+	~	Average length of prescriptions, in days, based on average total duration \
+		of opioid use per person compared to number of prescriptions per person.
+
+Average days per prescription=
+	Projection output data[RxDur]
+	             * ( 1
+	                  + RAMP ( Policy change days per prescription
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	person*days/Rx
+	~	The average length (in days) of opioid prescriptions, after accounting for \
+		policy changes.
+
+Policy change days per prescription=
+	0
+	~	dmnl
+	~
+
+Projection curve end value days per prescription = 26.79
+	~	person*days/Rx
+	~
+
+Projection curve end time days per prescription = 2032
+	~	year
+	~
+
+Fentanyl effect on OD rate H max test=
+	7
+	~	dmnl
+	~	Override used to test fixed value for Fentanyl effect on OD rate H max
+
+Switch for fentanyl effect on OD rate H max test=
+	0
+	~	dmnl
+	~	Switch to control override for Fentanyl effect on OD rate H max. If set to \
+		1, will read in override value rather than calibrated parameter.

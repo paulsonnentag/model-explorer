@@ -1,0 +1,435 @@
+SOURCE model, view "Rx street market availability and price"
+Extracted from Vensim Files/OSM_Master_CURRENT.mdl. 49 equations.
+Variables can appear in several views; the .mdl file is the source of truth.
+==============================================================================
+
+Rx misuse no PY heroin  = 
+        INTEG( Initiating Rx misuse diverted 
+                  + Initiating Rx misuse own Rx 
+                  - Developing Rx OUD 
+                  - Initiating heroin with Rx misuse 
+                  - Net quitting Rx misuse 
+                  + Net quitting heroin with Rx misuse 
+                  - NonOD death misuse 
+                  - Overdose death Rx misuse , 
+             Initial Rx misuse no H )
+	~	people [?,1.1e+07]
+	~
+
+Rx OUD no PY heroin no MOUD  = 
+        INTEG( Developing Rx OUD 
+                  + Net quitting heroin with Rx OUD 
+                  - Initiating heroin with Rx OUD 
+                  - Remitting Rx OUD no H no MOUD Tx 
+                  - NonOD death Rx OUD no H 
+                  - Overdose death Rx OUD no H 
+                  + Relapsing to Rx OUD no H 
+                  + SUM ( Tx exit with UD Rx OUD no H[TxT!] 
+                            - Tx engagement Rx OUD no H[TxT!] ) , 
+             Initial Rx OUD no H )
+	~	people [?,4e+06]
+	~
+
+Rx OUD with PY heroin no MOUD  = 
+        INTEG( Initiating heroin with Rx OUD 
+                  - Developing HUD with Rx OUD 
+                  - Net quitting heroin with Rx OUD 
+                  - Remitting Rx OUD with H no MOUD Tx 
+                  - NonOD death Rx OUD with H 
+                  - Overdose death Rx OUD with H 
+                  + Relapsing to Rx OUD with H 
+                  + SUM ( Tx exit with UD Rx OUD with H[TxT!] 
+                            - Tx engagement Rx OUD with H[TxT!] ) , 
+             Initial Rx OUD with H )
+	~	people [?,200000]
+	~
+
+HUD no MOUD  = 
+        INTEG( Developing HUD no Rx OUD 
+                  + Developing HUD with Rx OUD 
+                  - Remitting HUD no MOUD Tx 
+                  - NonOD death HUD 
+                  - Overdose death HUD 
+                  + Relapsing to HUD 
+                  + SUM ( Tx exit with UD HUD[TxT!] 
+                            - Tx engagement HUD[TxT!] ) , 
+             Initial HUD )
+	~	people [?,800000]
+	~	Individuals with HUD not in MOUD treatment.
+
+Nondisordered heroin use  = 
+        INTEG( Initiating heroin no Rx 
+                  + Initiating heroin with Rx misuse 
+                  - Developing HUD no Rx OUD 
+                  - Net quitting heroin with Rx misuse 
+                  - Net quitting NDHU 
+                  - NonOD death NDHU 
+                  - Overdose death NDHU , 
+             Initial NDHU )
+	~	people [?,300000]
+	~	Individuals with Non-Disordered Heroin Use
+
+Rx demand for misuse  = 
+        ( Rx misuse no PY heroin 
+             * Rx demand Rx misuse ) 
+             + ( Nondisordered heroin use 
+                  * Fraction of NDHU with Rx avg 
+                  * Rx demand NDHU ) 
+             + ( Rx OUD no PY heroin no MOUD 
+                  * Rx demand Rx OUD no H ) 
+             + ( Rx OUD with PY heroin no MOUD 
+                  * Rx demand Rx OUD with H ) 
+             + ( HUD no MOUD 
+                  * Fraction of HUD with Rx OUD or misuse avg 
+                  * Rx demand HUD with Rx OUD or misuse ) 
+             + SUM ( ( Rx OUD no heroin by MOUD[TxT!] 
+                       * Rx demand Rx OUD no H 
+                       * Effect of MOUD Tx on Rx consumption[TxT!] ) 
+                       + ( Rx OUD with heroin by MOUD[TxT!] 
+                            * Rx demand Rx OUD with H 
+                            * Effect of MOUD Tx on Rx consumption[TxT!] ) 
+                       + ( HUD by MOUD[TxT!] 
+                            * Fraction of HUD with Rx OUD or misuse avg 
+                            * Rx demand HUD with Rx OUD or misuse 
+                            * Effect of MOUD Tx on Rx consumption[TxT!] ) )
+	~	MME/year
+	~	Total MMEs consumed annually by opioid users that is diverted from the \
+		medical supply. This includes those who misuse their own Rx and is reduced \
+		by the fraction of UDs in treatment.
+
+Fraction of NDHU with Rx avg=
+	GET DATA MEAN ( Fraction of NDHU who use Rx NSDUH , 
+	             INITIAL TIME, 
+	             MaxDataTime)
+	~	dmnl [0.3,0.85]
+	~	Fraction of NDHU users that also use Rx opioids. [Source: NSDUH]
+
+Rx demand Rx misuse  = 2000
+	~	MME/person/year [0,5000,500]
+	~	[DATA, ASM] Demand for Rx opioids by individuals with Rx misuse. We use \
+		frequency data from NSDUH  combined with assumed MMEs consumed per day of \
+		use. [Source: NSDUH 2010-18]
+
+Rx demand NDHU=
+	4000
+	~	MME/person/year
+	~	[DATA, ASM] Demand for Rx opioids by individuals with NDHU + Rx use. We \
+		use frequency data from NSDUH  combined with assumed MMEs consumed per day \
+		of use. [Source: NSDUH 2010-18]
+
+Rx demand Rx OUD no H=
+	11000
+	~	MME/person/year [0,20000,1000]
+	~	[DATA, ASM] Demand for Rx opioids by individuals with Rx OUD and no heroin \
+		use. We use frequency data from NSDUH combined with assumed MMEs consumed \
+		per day of use. [Source: NSDUH 2010-18]
+
+Rx demand Rx OUD with H=
+	18000
+	~	MME/person/year [0,30000,1000]
+	~	[DATA, ASM] Demand for Rx opioids by individuals with Rx OUD + heroin use. \
+		We use frequency data from NSDUH  combined with assumed MMEs consumed per \
+		day of use. [Source: NSDUH 2010-18]
+
+Rx demand HUD with Rx OUD or misuse=
+	12000
+	~	MME/person/year
+	~	[DATA, ASM] Demand for Rx opioids by individuals with HUD + Rx use. We use \
+		frequency data from NSDUH  combined with assumed MMEs consumed per day of \
+		use. [Source: NSDUH 2010-18]
+
+Fraction of HUD with Rx OUD or misuse avg=
+	GET DATA MEAN ( Fraction of HUD who use Rx NSDUH , 
+	             INITIAL TIME, 
+	             MaxDataTime)
+	~	dmnl [0,1,0.125]
+	~	Fraction of individuals with HUD that also use Rx opioids, whether misuse \
+		or UD. [Source: NSDUH]
+
+Rx availability for UD endogenous=
+	Rx availability for UD relative * ((1 - ADF fraction of Rx street supply net
+	) + ADF fraction of Rx street supply net * ADF relative desirability
+	)
+	~	dmnl
+	~	The availability of prescription opioids for people with Rx OUD, relative \
+		to model start (INITIAL TIME), reflecting the balance of supply and \
+		demand, theoretically accounting for potential desirability differences of \
+		ADFs (though presently inactive). Supply may include counterfeit supply, \
+		when data become available.
+
+HUD by MOUD[TxT]  = 
+        INTEG( Tx engagement HUD[TxT] 
+                  - Tx exit in remission HUD[TxT] 
+                  - Tx exit with UD HUD[TxT] 
+                  - NonOD death HUD in MOUD Tx[TxT] 
+                  - Overdose death HUD in MOUD Tx[TxT] , 
+             Initial HUD in MOUD Tx[TxT] )
+	~	people
+	~	Individuals with HUD in MOUD treatment.
+
+Rx OUD no heroin by MOUD[TxT]  = 
+        INTEG( Tx engagement Rx OUD no H[TxT] 
+                  - Tx exit in remission Rx OUD no H[TxT] 
+                  - Tx exit with UD Rx OUD no H[TxT] 
+                  - NonOD death Rx OUD no H in Tx[TxT] 
+                  - Overdose death Rx OUD no H in Tx[TxT] , 
+             Initial Rx OUD no H in Tx[TxT] )
+	~	people
+	~
+
+Rx OUD with heroin by MOUD[TxT]  = 
+        INTEG( Tx engagement Rx OUD with H[TxT] 
+                  - Tx exit in remission Rx OUD with H[TxT] 
+                  - Tx exit with UD Rx OUD with H[TxT] 
+                  - NonOD death Rx OUD with H in Tx[TxT] 
+                  - Overdose death Rx OUD with H in Tx[TxT] , 
+             Initial Rx OUD with H in Tx[TxT] )
+	~	people
+	~
+
+Effect of MOUD Tx on Rx consumption[TxT]=
+	0.7, 0.66, 0.3
+	~	dmnl [0,1,0.05]
+	~	[LIT, ASM] The change in opioid consumption that is attributed to receipt \
+		of MOUD. [Source: NIDA 2018, Degenhardt 2019, Mattick 2014, Hser 2016, \
+		Jackson 2015].
+
+ADF substitutability factor=
+	1
+	~	dmnl [1,3]
+	~	[ASM, DATA] Indicates degree of nonlinearity between ADF presence in the \
+		prescribed supply and in diversion - higher values indicate higher \
+		substitutability, such that ADF presence in diversion will be less than in \
+		the prescribed supply (up until 100% ADFs); values < 1 indicate ADF \
+		replacement of Rx that are hard to shift away from. The substitutability \
+		factor should not be adjusted without strong evidence, and if it is, it \
+		should not go below 1 as that indicates ADFs are disproportionately \
+		popular on the street relative to their prescribing fraction. StreetRx is \
+		a source insofar as the average price of ADFs is cheaper than the average \
+		price of non-ADFs, possibly indicating lower desirability/high \
+		substitutability.  [Source: StreetRx 2010-2018]
+
+ADF fraction of prescribed Rx opioids=
+	Projection output data[ADF] 
+	             + RAMP ( IF THEN ELSE ( Policy change ADF fraction of prescribed Rx opioids\
+		 
+	                            >= 0, 
+	                       Policy change ADF fraction of prescribed Rx opioids 
+	                            * ( 1
+	                                 - Projection output data[ADF] ) , 
+	                       Policy change ADF fraction of prescribed Rx opioids 
+	                            * Projection output data[ADF] ) 
+	                       / (Policy rampup duration ), 
+	                  Policy activation time , 
+	                  Policy activation time 
+	                       + (Policy rampup duration) )
+	~	dmnl [-1,1]
+	~	The fraction of prescribed opioids that are FDA-approved abuse-deterrent \
+		formulations (ADF), after accounting for policy changes.
+
+ADF fraction of Rx street supply base  = 
+        ADF fraction of prescribed Rx opioids 
+             ^ ADF substitutability factor
+	~	dmnl
+	~	The fraction of all prescription opioids sold on the street that are ADF, \
+		before accounting for fentanyl's penetration into the street supply. \
+		[Source: StreetRx 2010-2018]
+
+Rx street supply disruption  = 
+        INTEG( Rx street supply shocks 
+                  - Rx street supply readjustment , 
+             0)
+	~	dmnl
+	~	Abstract stock representing temporary disruptions to the street / diverted \
+		Rx supply, such as withdrawal of a preferred drug from the market. Street \
+		supply eventually readjusts to meet demand with whatever opioids are \
+		available, but temporary disruptions will have a short- to medium-term \
+		impact on street Rx prices.
+
+Rx street supply readjustment  = 
+        Rx street supply disruption 
+             / Time to readjust Rx street supply
+	~	1/year
+	~	Represents the process of gradual readjustment of street supply to \
+		prevailing conditions in response to disruptions
+
+Rx street supply shocks=
+	OxyContin withdrawal supply impact 
+	             + Rx street supply impact policy
+	~	1/year
+	~
+
+Time to readjust Rx street supply=
+	1.4
+	~	Years [?,?,0.01]
+	~	[MCAL] How quickly the street supply of Rx adapts to short-term \
+		disruptions.
+
+OxyContin withdrawal supply impact  = 
+        PULSE ( OxyContin withdrawal time , 
+             OxyContin withdrawal lag ) 
+             * OxyContin withdrawal magnitude 
+             / OxyContin withdrawal lag
+	~	1/year
+	~	Impact on the street supply of Rx opioids of OxyContin in its original, \
+		crushable form, being removed from the market.
+
+OxyContin withdrawal time  = 2010.75
+	~	year [2010,2011,0.25]
+	~	[DATA] The year and month when OxyContin was officially withdrawn from the \
+		market and replaced with an ADF formulation.
+
+OxyContin withdrawal lag=
+	0.25
+	~	year
+	~	[ASM] Amount of time for the withdrawal of Oxycontin to fully impact the \
+		street market for prescription opioids. The withdrawal was immediate, but \
+		some people who use and/or sell opioids at the time would have still had \
+		some leftover OxyContin for up to 3 months.
+
+OxyContin withdrawal magnitude=
+	0.45
+	~	dmnl [0,1]
+	~	[DATA, MCAL] The estimated supply shock effect that withdrawing the \
+		original formulation of OxyContin had on the street supply, based on the \
+		fraction of all transactionsin late 2010 that were OxyContin from \
+		StreetRx. [Source: StreetRx]
+
+Counterfeit supply relative  = 
+        Counterfeit penetration Rx supply 
+             / ( 1
+                  - Counterfeit penetration Rx supply ) 
+             * Rx supply relative net
+	~	dmnl
+	~	Prevalence of counterfeit relative to Rx supply, based on estimated \
+		fentanyl penetration % and current Rx supply
+
+Rx availability for misuse relative=
+	( Rx supply relative net 
+	             + Counterfeit supply relative 
+	                  * Counterfeit supply weight ) 
+	             / Rx demand for misuse relative
+	~	dmnl
+	~	The availability of prescription opioids for potential misuse, relative to \
+		model start (INITIAL TIME), reflecting the balance of supply and demand. \
+		(Supply may include counterfeit supply, when data become available.)
+
+Counterfeit supply weight  = 0.1
+	~	dmnl
+	~	[ASM] Relative weighting of counterfeits in effective Rx supply, \
+		considering that counterfeit presence in street supply is of necessity \
+		significantly higher than presence in the overall Rx supply
+
+Rx demand for misuse reference  = 
+        INITIAL( Rx demand for misuse  )
+	~	MME/year
+	~	Total MMEs consumed annually by opioid users that is diverted from the \
+		medical supply at model start (INITIAL TIME). This includes those who \
+		misuse their own Rx and is reduced by the fraction of UDs in treatment.
+
+Rx demand for misuse relative  = 
+        Rx demand for misuse 
+             / Rx demand for misuse reference
+	~	dmnl
+	~	Total MMEs consumed annually by opioid users that is diverted from the \
+		medical supply, relative to model initiation. This includes those who \
+		misuse their own Rx and is reduced by the fraction of UDs in treatment.
+
+ADF fraction of Rx street supply net  = 
+        ( 1
+             - Counterfeit penetration Rx supply ) 
+             * ADF fraction of Rx street supply base
+	~	dmnl
+	~	The fraction of all prescription opioids sold on the street that are ADF, \
+		after accounting for fentanyl's penetration into the street supply (i.e., \
+		the more fentanyl has penetrated, the larger the overall market and thus \
+		the lower the fraction of street opioids that are ADFs). This fraction \
+		only effects heroin initiation, and not price, because price increases are \
+		the result of a supply disruption, not ADFs per se.
+
+Policy rampup duration=
+	3
+	~	year [?,10]
+	~
+
+Policy activation time=
+	2022
+	~	year [2000,2030]
+	~	Assumed start time for all policy changes
+
+Policy change Rx street supply shocks  = 0
+	~	1/year [-1,1,0.05]
+	~
+
+Rx street supply impact policy=
+	PULSE(Policy activation time, Policy rampup duration) * Policy change Rx street supply shocks
+	~	1/year
+	~
+
+Rx supply relative net  = 
+        Rx supply relative 
+             * ( 1
+                  + RAMP ( Policy change Rx supply relative 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	dmnl
+	~	Supply of prescription opioids available for potential misuse, indexed to \
+		model initiation, after accounting for policy changes.
+
+ADF fraction of prescribed Rx opioids base
+	~	dmnl
+	~	The fraction of prescribed opioids that are FDA-approved abuse-deterrent \
+		formulations (ADF). [Source: IQVIA NPA]
+
+Fraction of HUD who use Rx NSDUH
+	~	dmnl
+	~	This exogenous data is used to estimate the total number of prescription \
+		opioid users as an output variable, which cannot be done directly in our \
+		model due to not differentiating Rx use among heroin users.
+
+Fraction of NDHU who use Rx NSDUH
+	~	dmnl
+	~	This exogenous data is used to estimate the total number of prescription \
+		opioid users as an output variable, which cannot be done directly in our \
+		model due to not differentiating Rx use among heroin users. [Source: IQVIA]
+
+Counterfeit penetration Rx supply  = 0
+	~	dmnl
+	~	NOTE: This is a placeholder variable; keep at 0 unless / until reliable \
+		data on counterfeit Rx are available.
+
+ADF relative desirability=
+	1
+	~	dmnl
+	~	[ASM] % price average ADFs vs. non-ADFs. This is a placeholder value that \
+		should be kept at 1 to deactivate until ADF impacts on availability are \
+		fully formulated.
+
+Rx availability for UD relative=
+	Rx availability for misuse relative * Max ( ( 1
+	                       - Rx street supply disruption ) , 
+	                  0.01)
+	~	dmnl
+	~	The availability of prescription opioids for people with Rx OUD, relative \
+		to model start (INITIAL TIME), reflecting the balance of supply and \
+		demand, not accounting for potential desirability differences of ADFs. \
+		(Supply may include counterfeit supply, when data become available.)
+
+INITIAL TIME  = 1999
+	~	year
+	~	The initial time for the simulation.
+
+MaxDataTime=
+	2020
+	~	year
+	~
+
+Rx vs H availability coeff developing HUD with Rx OUD=
+	Rx vs heroin availability index 
+	             ^ (- Rx vs H availability strength developing HUD with Rx OUD)
+	~	dmnl
+	~	The multiplier effect of the relative price of Rx opioids compared to \
+		heroin (relative to their respective prices at model initiation) on \
+		developing an HUD among people who have an Rx OUD.

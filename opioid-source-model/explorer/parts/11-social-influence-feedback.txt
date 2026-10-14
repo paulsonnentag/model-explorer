@@ -1,0 +1,317 @@
+SOURCE model, view "Social influence feedback"
+Extracted from Vensim Files/OSM_Master_CURRENT.mdl. 47 equations.
+Variables can appear in several views; the .mdl file is the source of truth.
+==============================================================================
+
+Social influence strength developing Rx OUD = 1e-06
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of Rx OUD development to Social Influence
+
+Social influence coeff developing Rx OUD  = 
+        SI on developing Rx OUD relative 
+             ^ Social influence strength developing Rx OUD
+	~	dmnl
+	~	The multiplier effect of social influence on developing Rx OUD.
+
+Population
+	~	people
+	~	Total population in US ages 12 and older, using NSDUH's population count. \
+		Population is used in the model to standardize the effect of social \
+		influence relative to the size of the current 'at risk' population. We \
+		limit to persons 12 and older because we assume children under 12 are not \
+		at great risk of initiating opioid misuse. [Source: NSDUH]
+
+Rx misuse no PY heroin  = 
+        INTEG( Initiating Rx misuse diverted 
+                  + Initiating Rx misuse own Rx 
+                  - Developing Rx OUD 
+                  - Initiating heroin with Rx misuse 
+                  - Net quitting Rx misuse 
+                  + Net quitting heroin with Rx misuse 
+                  - NonOD death misuse 
+                  - Overdose death Rx misuse , 
+             Initial Rx misuse no H )
+	~	people [?,1.1e+07]
+	~
+
+SI on developing Rx OUD current  = 
+        Effective SI users Rx OUD development 
+             / Population
+	~	dmnl
+	~	Current Social Influence impact on the development of Rx OUD.
+
+SI on developing Rx OUD reference  = 
+        INITIAL( SI on developing Rx OUD current  )
+	~	dmnl
+	~	Social Influence impact on the development of Rx OUD at model initiation \
+		(INITIAL TIME).
+
+Effective SI users Rx OUD development  = 
+        Rx OUD no PY heroin total 
+             + Rx OUD with PY heroin total
+	~	people
+	~	The total number of people with Rx OUD who have an influence on other \
+		people's escalation to Rx OUD.
+
+SI on developing Rx OUD relative  = 
+        XIDZ ( SI on developing Rx OUD current , 
+             SI on developing Rx OUD reference , 
+             1)
+	~	dmnl
+	~	Current Social Influence impact on the development of Rx OUD relative to \
+		model initiation (INITIAL TIME).
+
+Effective SI users heroin initiation  = 
+        HUD total 
+             + Nondisordered heroin use 
+             + Rx OUD with PY heroin total
+	~	people
+	~	The total number of people who use heroin who have an influence on other \
+		people's initiation of heroin.
+
+Nondisordered heroin use  = 
+        INTEG( Initiating heroin no Rx 
+                  + Initiating heroin with Rx misuse 
+                  - Developing HUD no Rx OUD 
+                  - Net quitting heroin with Rx misuse 
+                  - Net quitting NDHU 
+                  - NonOD death NDHU 
+                  - Overdose death NDHU , 
+             Initial NDHU )
+	~	people [?,300000]
+	~	Individuals with Non-Disordered Heroin Use
+
+SI on initiating heroin current  = 
+        Effective SI users heroin initiation 
+             / Population
+	~	dmnl
+	~	Current Social Influence impact on the initiation of heroin.
+
+SI on initiating heroin reference  = 
+        INITIAL( SI on initiating heroin current  )
+	~	dmnl
+	~	Social Influence impact on the initiation of heroin use at model \
+		initiation (INITIAL TIME).
+
+SI on initiating heroin relative  = 
+        SI on initiating heroin current 
+             / SI on initiating heroin reference
+	~	dmnl
+	~	Social Influence impact on the initiation of heroin use relative to model \
+		initiation (INITIAL TIME).
+
+Social influence coeff initiating NDHU with Rx  = 
+        SI on initiating heroin relative 
+             ^ Social influence strength initiating NDHU with Rx
+	~	dmnl
+	~	The multiplier effect of social influence on initiating heroin with Rx \
+		misuse.
+
+Social influence strength initiating NDHU with Rx = 1.78962
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of heroin initiation in individuals with misuse Rx to \
+		Social Influence
+
+Social influence coeff initiating heroin with Rx OUD  = 
+        SI on initiating heroin relative 
+             ^ Social influence strength initiating heroin with Rx OUD
+	~	dmnl
+	~	The multiplier effect of social influence on initiating heroin with Rx OUD.
+
+Social influence strength initiating heroin with Rx OUD = 1.95179
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of heroin initiation in individuals with Rx OUD to \
+		Social Influence
+
+Social influence coeff developing HUD  = 
+        SI on developing HUD relative 
+             ^ Social influence strength developing HUD
+	~	dmnl
+	~	The multiplier effect of social influence on developing HUD.
+
+Social influence strength developing HUD = 1e-06
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of HUD development to Social Influence.
+
+Effective SI users Rx misuse initiation  = 
+        Rx misuse no PY heroin 
+             + Rx OUD no PY heroin total 
+             + Rx OUD with PY heroin total 
+             + Nondisordered heroin use 
+                  * Fraction of NDHU with Rx avg
+	~	people
+	~	The total number of people who use Rx who have an influence on other \
+		people's initiation of Rx.
+
+Effective SI users HUD development  = 
+        HUD total
+	~	people
+	~	The total number of people who use heroin who have an influence on other \
+		people's escalation to HUD.
+
+SI on developing HUD reference  = 
+        INITIAL( SI on developing HUD current  )
+	~	dmnl
+	~	Social Influence impact on the development of HUD at model initiation \
+		(INITIAL TIME).
+
+SI on developing HUD current  = 
+        Effective SI users HUD development 
+             / Population
+	~	dmnl
+	~	Current Social Influence impact on the development of HUD.
+
+SI on developing HUD relative  = 
+        SI on developing HUD current 
+             / SI on developing HUD reference
+	~	dmnl
+	~	Current Social Influence impact on the development of HUD relative to \
+		model initiation (INITIAL TIME).
+
+Fraction of NDHU with Rx avg=
+	GET DATA MEAN ( Fraction of NDHU who use Rx NSDUH , 
+	             INITIAL TIME, 
+	             MaxDataTime)
+	~	dmnl [0.3,0.85]
+	~	Fraction of NDHU users that also use Rx opioids. [Source: NSDUH]
+
+SI on initiating Rx misuse current  = 
+        Effective SI users Rx misuse initiation 
+             / Population
+	~	dmnl
+	~	Current Social Influence impact on the initiation of Rx misuse.
+
+SI on initiating Rx misuse reference  = 
+        INITIAL( SI on initiating Rx misuse current  )
+	~	dmnl
+	~	Social Influence impact on the initiation of Rx misuse at model initiation \
+		(INITIAL TIME).
+
+SI on initiating Rx misuse relative  = 
+        SI on initiating Rx misuse current 
+             / SI on initiating Rx misuse reference
+	~	dmnl
+	~	Social Influence impact on the initiation of Rx misuse relative to model \
+		initiation (INITIAL TIME).
+
+Social influence strength initiating Rx misuse = 0.790187
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of initiation of Rx misuse to Social Influence
+
+Social influence coeff initiating Rx misuse  = 
+        SI on initiating Rx misuse relative 
+             ^ Social influence strength initiating Rx misuse
+	~	dmnl
+	~	The multiplier effect of social influence on initiating Rx opioid misuse.
+
+Social influence strength initiating NDHU no Rx = 0.120815
+	~	dmnl [0,2]
+	~	[ACAL] Sensitivity of heroin initiation in individuals with no Rx misuse \
+		to Social Influence
+
+Social influence coeff initiating NDHU no Rx  = 
+        SI on initiating heroin relative 
+             ^ Social influence strength initiating NDHU no Rx
+	~	dmnl
+	~	The multiplier effect of social influence on initiating heroin without Rx \
+		misuse or OUD.
+
+Rx OUD no PY heroin total=
+	Rx OUD no PY heroin no MOUD 
+	             + SUM ( ( 1
+	                       - Remission fraction in Tx[TxT!] ) 
+	                       * Rx OUD no heroin by MOUD[TxT!] )
+	~	person
+	~	Individuals with Rx OUD but no past year heroin use.
+
+Rx OUD with PY heroin total=
+	Rx OUD with PY heroin no MOUD 
+	             + SUM ( ( 1
+	                       - Remission fraction in Tx[TxT!] ) 
+	                       * Rx OUD with heroin by MOUD[TxT!] )
+	~	person
+	~
+
+HUD total=
+	HUD no MOUD 
+	             + SUM ( ( 1
+	                       - Remission fraction in Tx[TxT!] ) 
+	                       * HUD by MOUD[TxT!] )
+	~	person
+	~	Total number of people with heroin use disorder, including those in and \
+		out of treatment.
+
+Total in Remission=
+	Total HUD in remission + Total in Rx OUD Remission
+	~	person
+	~	The number of people in remission, totaled across those in treatment and \
+		out of treatment.
+
+SI on remission current=
+	Total in Remission/Population
+	~	dmnl
+	~
+
+SI on remission relative=
+	SI on remission current/SI on remission reference
+	~	dmnl
+	~
+
+SI on remission reference= INITIAL(
+	SI on remission current)
+	~	dmnl
+	~
+
+Social influence strength relapse net=
+	Social influence strength relapse
+	
+	                  + RAMP ( Policy change social influence strength relapse
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration )
+	~	dmnl
+	~	The multiplier effect of social influence on relapse rates, after \
+		accounting for any policy changes. Used only for policy testing - KEEP \
+		THIS AT ZERO by default
+
+Social influence coefficient relapse=
+	SI on remission relative^ -Social influence strength relapse net
+	~	dmnl
+	~
+
+Social influence strength remission=
+	0
+	~	dmnl
+	~	The multiplier effect of social influence on remission rates. Used only for policy \
+		testing - KEEP THIS AT ZERO by default
+		KEEP THIS AT ZERO by default
+
+Social influence coefficient remission=
+	SI on remission relative^Social influence strength remission
+	~	dmnl
+	~		~	:SUPPLEMENTARY
+
+Social influence strength relapse=
+	0
+	~	dmnl
+	~	The multiplier effect of social influence on relapse rates. Used only for \
+		policy testing - KEEP THIS AT ZERO by default
+
+Policy activation time=
+	2022
+	~	year [2000,2030]
+	~	Assumed start time for all policy changes
+
+Policy change social influence strength relapse=
+	0
+	~	dmnl [-2,2,0.01]
+	~	NOTE - functions as direct input to the SI strength rather than % change \
+		since SI strength is at zero by default! .19 achieves a 20% decrease in \
+		the relapse rate relative to baseline by 2024, commensurate with other \
+		policy changes at 20% in desired direction.
+
+Policy rampup duration=
+	3
+	~	year [?,10]
+	~

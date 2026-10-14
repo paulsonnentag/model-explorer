@@ -1,0 +1,596 @@
+SOURCE model, view "Data variables"
+Extracted from Vensim Files/OSM_Master_CURRENT.mdl. 108 equations.
+Variables can appear in several views; the .mdl file is the source of truth.
+==============================================================================
+
+Tx point patients OTP MMT NSSATS
+	~	people
+	~	Point in time count of patients in Methadone treatment at an OTP. [Source: \
+		NSSATS]
+
+Total Rx MME prescribed IQVIA
+	~	MME/year
+	~	Total prescription opioids prescribed in units of morphine milligram \
+		equivalents (MMEs), a standardized way of comparing opioid medications \
+		according to their relative potency. [Source: IQVIA]
+
+Total Rx misuse initiation SAMHSA
+	~	people/year
+	~	Individuals initiating Rx Misuse from any source. [Source: SAMHSA]
+
+NSDUH misuse redefinition fixed effect = 0.440093
+	~	dmnl [0.1,0.5]
+	~	[ACAL] Interpret as "2015 redefinition resulted in X% increase in NSDUH \
+		reporting of misuse"
+
+NSDUH misuse redefinition effect=
+	1
+	             - RAMP ( NSDUH misuse redefinition fixed effect 
+	                       / ( 1
+	                            + NSDUH misuse redefinition fixed effect ) 
+	                       / OneYear , 
+	                  NSDUH misuse redefinition time , 
+	                  ( NSDUH misuse redefinition time 
+	                       + OneYear ) )
+	~	dmnl
+	~	The magnitude (based on redefinition fixed effect) and timing \
+		(redefinition time) of the reduced estimate of misusers due to NSDUH's \
+		rewording in 2015.
+
+NSDUH misuse redefinition time  = 2014
+	~	year
+	~	The last year the old definition of misuse was used in NSDUH.
+
+Fraction of heroin initiation with Rx OUD DATA := Initiating heroin with Rx OUD DATA 
+             / Total heroin initiation DATA
+	~	dmnl
+	~	Fraction of individuals initiating heroin use who have an Rx OUD, \
+		calculated from NSDUH data.[Source: NSDUH]
+	~	:SUPPLEMENTARY
+
+Fraction of heroin initiation with Rx misuse DATA := Initiating heroin with Rx misuse DATA\
+		 
+             / Total heroin initiation DATA
+	~	dmnl
+	~	Fraction of heroin initiation occurring among people who misuse Rx \
+		opioids, calculated from NSDUH. [Source: NSDUH]
+	~	:SUPPLEMENTARY
+
+Fraction of heroin initiation no Rx DATA := Initiating heroin no Rx DATA 
+             / Total heroin initiation DATA
+	~	dmnl
+	~	Fraction of individuals initiating heroin use with no prior Rx opioid \
+		misuse, calculated from NSDUH. [Source: NSDUH]
+	~	:SUPPLEMENTARY
+
+Rx misuse no PY heroin NSDUH
+	~	people [?,1.1e+07]
+	~
+
+Population
+	~	people
+	~	Total population in US ages 12 and older, using NSDUH's population count. \
+		Population is used in the model to standardize the effect of social \
+		influence relative to the size of the current 'at risk' population. We \
+		limit to persons 12 and older because we assume children under 12 are not \
+		at great risk of initiating opioid misuse. [Source: NSDUH]
+
+Total overdose deaths NVSS:RAW:
+	~	people/year
+	~
+
+Total overdose deaths base heroin NVSS
+	~	people/year
+	~
+
+Total overdose deaths base Rx NVSS
+	~	people/year
+	~
+
+Rx misuse no PY heroin NSDUH redef corrected=
+	IF THEN ELSE (Time <= MaxDataTime, NSDUH misuse redefinition effect 
+	             * Rx misuse no PY heroin NSDUH, :NA:)
+	~	person
+	~
+
+Total Rx misuse initiation SAMHSA redef corrected=
+	IF THEN ELSE (Time <= MaxDataTime , Total Rx misuse initiation SAMHSA 
+	             * NSDUH misuse redefinition effect, :NA:)
+	~	people/year
+	~	[DATA] Total number of people who initiate Rx opioid misuse, based on \
+		SAMHSA report, after correcting for rewording in NSDUH 2015 which created \
+		a trend break. [Source: SAMHSA]
+
+Initiating Rx misuse diverted RDAS SAMHSA
+	~	person/Years
+	~	Individuals initiating Rx Misuse with prescription opioids (potentially \
+		including counterfeits) that come from the street supply). [Source: NSDUH \
+		RDAS, SAMHSA]
+
+Total overdose deaths synth heroin NVSS
+	~	people/year
+	~	[Source: NVSS]
+
+Total overdose deaths synth no H NVSS
+	~	people/year
+	~	[Source: NVSS]
+
+Total prescription opioid Rx IQVIA
+	~	Rx/year
+	~	Estimated annual number of opioid analgesic prescriptions dispensed from \
+		U.S. outpatient pharmacies including retail and mail order pharmacies. \
+		[Source: IQVIA]
+
+Fentanyl penetration curve NFLIS
+	~	dmnl
+	~	The proportion of opioid drugs tested in forensic settings that were \
+		positive for fentanyl or fentanyl analogues. [Source: DEA National \
+		Forensic Laboratory Information System (NFLIS)]
+
+Rx OUD no PY heroin NSDUH
+	~	people [?,4e+06]
+	~	Individuals with Rx OUD and no past year heroin use. [Source: NSDUH]
+
+Initiating Rx misuse own Rx RDAS SAMHSA redef correction=
+	IF THEN ELSE(Initiating Rx misuse diverted RDAS SAMHSA = :NA:, :NA:, Total Rx misuse initiation SAMHSA redef corrected\
+		 - Initiating Rx misuse diverted RDAS SAMHSA)
+	~	person/Years
+	~	Estimated number of people initiating prescription opioid misuse with \
+		their own prescription after accounting for model-estimated correction due \
+		to NSDUH 2015 rewording, which significantly increased number of people \
+		reporting misuse.
+
+Nondisordered heroin use NSDUH RAND
+	~	people
+	~	Individuals with Non-Disordered Heroin Use [Source: NSDUH adjusted with \
+		RAND]
+
+HUD NSDUH RAND
+	~	people
+	~	Individuals with HUD. [Source: NSDUH adjusted with RAND]
+
+Initiating heroin with Rx OUD NSDUH RDAS RAND
+	~	people/year
+	~	Individuals initiating heroin use who already have an Rx OUD. [Source: \
+		NSDUH RDAS adjusted with RAND]
+
+Initiating heroin with Rx misuse NSDUH RDAS RAND
+	~	people/year
+	~	Individuals initiating heroin use who already misuse Rx opioids. [Source: \
+		NSDUH RDAS adjusted with RAND]
+
+Initiating heroin no Rx NSDUH RDAS RAND
+	~	people/year
+	~	[Source: NSDUH RDAS adjusted with RAND]
+
+Rx OUD with PY heroin NSDUH RAND
+	~	people [?,200000]
+	~
+
+Tx point patients Viv IQVIA
+	~	person
+	~	Point in time count of patients in Vivitrol treatment. [Source: IQVIA NSP]
+
+Rx OUD with PY heroin DATA := Rx OUD with PY heroin NSDUH RAND
+	~	people
+	~
+
+Nondisordered heroin use DATA := Nondisordered heroin use NSDUH RAND
+	~	people
+	~
+
+HUD DATA:INTERPOLATE::=
+	(1 - Switch for alternative HUD data) * HUD NSDUH RAND + Switch for alternative HUD data\
+		 * HUD NSDUH RAND alternative
+	~	people
+	~	Individuals with HUD, calculated from data. [Source: NSDUH adjusted with \
+		RAND ratio]
+
+Initiating heroin with Rx OUD DATA := Initiating heroin with Rx OUD NSDUH RDAS RAND
+	~	person/Years
+	~	[Source: NSDUH RDAS adjusted with RAND]
+
+Initiating heroin with Rx misuse DATA := Initiating heroin with Rx misuse NSDUH RDAS RAND
+	~	people/year
+	~
+
+Initiating heroin no Rx DATA := Initiating heroin no Rx NSDUH RDAS RAND
+	~	people/year
+	~
+
+Total heroin initiation SAMHSA RAND
+	~	people/year
+	~	Individuals initiating heroin use. [Source: SAMHSA adjusted with RAND]
+
+Total heroin initiation DATA := Total heroin initiation SAMHSA RAND
+	~	person/Years
+	~
+
+Rx OUD all total DATA := X IF MISSING ( Rx OUD no PY heroin NSDUH 
+                  + Rx OUD with PY heroin DATA , 
+             :NA:)
+	~	people
+	~
+
+Total heroin users DATA := X IF MISSING ( HUD DATA 
+                  + Rx OUD with PY heroin DATA 
+                  + Nondisordered heroin use DATA , 
+             :NA:)
+	~	people
+	~
+
+Total Rx users excl heroin DATA=
+	Rx misuse no PY heroin NSDUH redef corrected 
+	             + Rx OUD no PY heroin NSDUH
+	~	people
+	~
+
+Fraction of all Rx users excl heroin with OUD DATA=
+	IF THEN ELSE (Time < 2019, Rx OUD no PY heroin NSDUH 
+	             / Total Rx users excl heroin DATA,
+	                   :NA: )
+	~	dmnl
+	~	Fraction of total Rx misuse excluding heroin that is Rx OUD, calculated \
+		from NSDUH data. [Source: NSDUH]
+	~	:SUPPLEMENTARY
+
+MMT OTP capacity utilization NSSATS=
+	0.866
+	~	dmnl
+	~	[DATA] The fraction of total capacity in OTPs that is utilized. [Source: \
+		N-SSATS 2012, 2013, and 2016]
+
+MMT capacity estimated DATA:INTERPOLATE::=
+	Tx point patients OTP MMT NSSATS 
+	             / MMT OTP capacity utilization NSSATS
+	~	people
+	~
+
+Viv capacity estimated DATA := Tx point patients Viv IQVIA 
+             / Viv capacity utilization NSSATS
+	~	person
+	~	National Vivitrol treatment capacity.
+
+Tx average duration net[TxT]  = 
+        Tx average duration[TxT] 
+             * ( 1
+                  + RAMP ( Policy change Tx average duration 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	year
+	~	Average duration in years per episode for each type of MOUD treatment, \
+		after accounting for policy changes.
+
+Tx point patients Bup DATA:INTERPOLATE::=
+	Tx monthly patients Bup IQVIA TPT
+	~	people
+	~
+
+Tx average duration[Bup]  = 
+        INITIAL( Tx average duration Bup  ) ~~
+
+Tx average duration[MMT]  = 
+        INITIAL( Tx average duration MMT  ) ~~
+
+Tx average duration[Viv]  = 
+        INITIAL( Tx average duration Viv  )
+	~	Years
+	~
+
+Total nondisordered heroin users DATA:INTERPOLATE::=
+	X IF MISSING (Nondisordered heroin use DATA 
+	             + Rx OUD with PY heroin DATA, :NA:)
+	~	people
+	~
+
+Total Rx Users corrected DATA=
+	IF THEN ELSE (Time < 2019, Rx misuse no PY heroin NSDUH redef corrected 
+	             + Rx OUD all total DATA 
+	             + ( HUD DATA 
+	                  * Fraction of HUD who use Rx NSDUH ) 
+	             + ( Total nondisordered heroin users DATA 
+	                  * Fraction of NDHU who use Rx NSDUH ), :NA:)
+	~	person
+	~	Total number of people who misuse Rx opioids, including heroin users, \
+		based on NSDUH, after correcting for rewording in NSDUH 2015 which \
+		introduced a trend break. [Source: NSDUH]
+	~	:SUPPLEMENTARY
+
+Fraction of HUD who use Rx NSDUH
+	~	dmnl
+	~	This exogenous data is used to estimate the total number of prescription \
+		opioid users as an output variable, which cannot be done directly in our \
+		model due to not differentiating Rx use among heroin users.
+
+Fraction of NDHU who use Rx NSDUH
+	~	dmnl
+	~	This exogenous data is used to estimate the total number of prescription \
+		opioid users as an output variable, which cannot be done directly in our \
+		model due to not differentiating Rx use among heroin users. [Source: IQVIA]
+
+Initial fraction lifetime Rx users with lifetime H use NESARC  = 0.0512
+	~	dmnl
+	~	[LIT] Fraction of all individuals with lifetime Rx use who had also used \
+		heroin [Source: Wu 2011]
+
+Initial HUD in remission NESARC=
+	212971
+	~	people [350000,?]
+	~	[LIT] Number of people in remission from HUD at model initiation (INITIAL \
+		TIME), with RAND adjustment. [Source: Martins 2017, Hoffman 2019]
+
+Initial stock base values[RXM]= INITIAL(
+	 Rx misuse no PY heroin NSDUH redef corrected) ~~
+
+Initial stock base values[NDH]= INITIAL(
+	 Nondisordered heroin use DATA) ~~
+
+Initial stock base values[OUB]=
+	0 ~~
+
+Initial stock base values[OUM]= INITIAL(
+	 Tx point patients OTP MMT NSSATS 
+	                  * ( 1
+	                       - Initial MMT fraction with HUD 
+	                       - Initial MMT fraction with Rx OUD with H )) ~~
+
+Initial stock base values[OUV]=
+	0 ~~
+
+Initial stock base values[OUT]= INITIAL(
+	 Rx OUD no PY heroin NSDUH) ~~
+
+Initial stock base values[OUR]= INITIAL(
+	 Initial Rx OUD in remission NESARC 
+	                  * ( 1
+	                       - Initial fraction lifetime Rx users with lifetime H use NESARC\
+		 ) 
+	                  * ( 1
+	                       - Remission fraction in Tx MMT )) ~~
+
+Initial stock base values[OHB]=
+	0 ~~
+
+Initial stock base values[OHM]= INITIAL(
+	 Tx point patients OTP MMT NSSATS 
+	                  * Initial MMT fraction with Rx OUD with H) ~~
+
+Initial stock base values[OHV]=
+	0 ~~
+
+Initial stock base values[OHT]= INITIAL(
+	 Rx OUD with PY heroin DATA) ~~
+
+Initial stock base values[OHR]= INITIAL(
+	 Initial Rx OUD in remission NESARC 
+	                  * Initial fraction lifetime Rx users with lifetime H use NESARC 
+	                  * ( 1
+	                       - Remission fraction in Tx MMT )) ~~
+
+Initial stock base values[HUB]=
+	0 ~~
+
+Initial stock base values[HUM]= INITIAL(
+	 Tx point patients OTP MMT NSSATS 
+	                  * Initial MMT fraction with HUD) ~~
+
+Initial stock base values[HUV]=
+	0 ~~
+
+Initial stock base values[HUT]= INITIAL(
+	 HUD DATA) ~~
+
+Initial stock base values[HUR]= INITIAL(
+	 Initial HUD in remission NESARC 
+	                  * ( 1
+	                       - Remission fraction in Tx MMT )) ~~
+
+Initial stock base values[OUS]= INITIAL(
+	Initial Rx OUD in stable remission NESARC * (1 - Initial fraction lifetime Rx users with lifetime H use NESARC\
+		)) ~~
+
+Initial stock base values[OHS]= INITIAL(
+	Initial Rx OUD in stable remission NESARC * Initial fraction lifetime Rx users with lifetime H use NESARC\
+		) ~~
+
+Initial stock base values[HUS]= INITIAL(
+	Initial HUD in stable remission NESARC)
+	~	people
+	~	Stock value at model initiation
+
+Initial MMT fraction with HUD=
+	0.96
+	~	dmnl [0.5,1]
+	~	[DATA] TEDS analysis of 1999 data (fraction of all planned MAT episodes \
+		for a primary substance of heroin, rx opioids or non Rx methadone where \
+		heroin was primary or only drug named as "substance of abuse" - assumed \
+		MMT was only MOUD being planned) [Source: TEDSA 1999]
+
+Initial MMT fraction with Rx OUD with H=
+	0.0048
+	~	dmnl [0,0.5]
+	~	[DATA] TEDS analysis of 1999 data (Fraction of all planned MAT episodes \
+		for a primary substance of heroin, rx opioids or non Rx methadone where Rx \
+		opioids were the primary drug named as "substance of abuse" and heroin was \
+		the secondary - assumed MMT was only MAT being planned [Source: TEDSA 1999]
+
+Initial Rx OUD in remission NESARC=
+	983787
+	~	people
+	~	[LIT] Number of people at model initiation (INITIAL TIME) who were in \
+		remission from Rx OUD, with or without heroin use history. [Source: \
+		Compton 2007, Grella 2009, Hoffman 2019]
+
+Remission fraction in Tx MMT=
+	Tx success fraction[MMT]
+	~	dmnl
+	~	[EXP] Fraction of individuals in methadone maintenance treatment who are \
+		in remission, set equal to the fraction who exit in remission at given \
+		average duration x.[Source: Drs. Katherine McHugh, Keith Humphreys, Ben \
+		Bearnot, John Kelly, personal communication, 7/31/20]
+
+Viv capacity utilization NSSATS=
+	0.88
+	~	dmnl
+	~	The fraction of capacity utilized by all facilities reporting that they \
+		offered Vivitrol in N-SSATS. [Source:N-SSATS 2012, 2013, and 2016]
+
+Nx kits distributed HR IQVIA
+	~	kits
+	~	The estimated number of kits distributed by harm reduction programs and \
+		through mail and retail channels. [Source: IQVIA, Wheeler 2015]
+
+Nx kits distributed Rx user=
+	Nx kits distributed net
+	             * ( 1
+	                  - Fraction Nx kits to H users )
+	~	kits
+	~	The estimated number of naloxone kits distributed by harm reduction \
+		programs and through mail and retail channels (IQVIA) to prescription \
+		opioid users.
+
+Nx kits distributed H user=
+	Nx kits distributed net * Fraction Nx kits to H users
+	~	kits
+	~	The estimated number of naloxone kits distributed by harm reduction \
+		programs and through mail and retail channels (IQVIA) to heroin users. \
+		[Source: IQVIA, Wheeler 2015]
+
+Fraction Nx kits to H users = 0.937116
+	~	dmnl
+	~	[ACAL, LIT] The fraction of naloxone kits distributed nationally that go \
+		to heroin users, using the fraction of overdose reversals reported that \
+		were for non-precription opioid, i.e., heroin overdoses in 2013, as a \
+		prior. [Source: Wheeler 2015]
+
+Initiating Rx misuse own Rx RDAS SAMHSA
+	~	people/year
+	~		~	:SUPPLEMENTARY
+
+Total with UD DATA:INTERPOLATE::=
+	HUD DATA + Rx OUD all total DATA
+	~	people
+	~		~	:SUPPLEMENTARY
+
+Bup providers DATA:INTERPOLATE:
+	~	people
+	~	[DATA, LIT] The total number of buprenorphine-waivered providers, as \
+		derived from published studies and SAMHSA website. [Source: Kissin 2006, \
+		Fiellin 2007, SAMHSA 2014, Knudsen 2015, Jones 2015,  Stein 2015, HHS \
+		2016, CRS 2018, SAMHSA 2020)
+
+ADF fraction of prescribed Rx opioids base
+	~	dmnl
+	~	The fraction of prescribed opioids that are FDA-approved abuse-deterrent \
+		formulations (ADF). [Source: IQVIA NPA]
+
+Rx OUD in remission total prior=
+	IF THEN ELSE(Time=2013,Rx OUD in remission total prior NESARC, :NA:)
+	~	people
+	~
+
+HUD in remission total prior=
+	IF THEN ELSE(Time=2013, HUD in remission total prior NESARC, :NA:)
+	~	people
+	~
+
+OneYear=
+	1
+	~	year
+	~	Time constant reflecting one year.
+
+Nx kits distributed net=
+	Projection output data[NxKD] 
+	             * ( 1
+	                  + RAMP ( Policy change Nx kits distributed
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	kits
+	~
+
+Initial Rx OUD in stable remission NESARC=
+	866830
+	~	people
+	~	[LIT] Number of people in at model initiation (INITIAL TIME) who were in \
+		stable remission from Rx OUD, with or without heroin use history. [Source: \
+		Compton 2007, Grella 2009, Hoffman 2019]
+
+Initial HUD in stable remission NESARC=
+	187652
+	~	people [350000,?]
+	~	[LIT] Number of people in remission from HUD at model initiation (INITIAL \
+		TIME), with RAND adjustment. [Source: Martins 2017, Hoffman 2019]
+
+Rx OUD in stable remission total prior=
+	IF THEN ELSE(Time=2013, Rx OUD in stable remission total prior NESARC, :NA:)
+	~	people
+	~
+
+HUD in stable remission total prior=
+	IF THEN ELSE(Time=2013, HUD in stable remission total prior NESARC, :NA:)
+	~	people
+	~
+
+HUD NSDUH RAND alternative:INTERPOLATE:
+	~	people
+	~	Used for sensitivity test assuming that HUD did not fall after 2017 as \
+		indicated in NSDUH. 2018 and 2019 values are held constant at 2017 values.
+
+Switch for alternative HUD data=
+	0
+	~	dmnl
+	~	Switch for testing alternative HUD data conditions (e.g. constant HUD from \
+		2017).
+
+Patients receiving opioid prescription annual IQVIA:INTERPOLATE:
+	~	people/year
+	~	Estimated total number of unique (non-duplicated) patients receiving \
+		opioid analgesic prescriptions dispensed from U.S. outpatient retail \
+		pharmacies each year [Source: IQVIA TPT]
+
+MaxDataTime=
+	2020
+	~	year
+	~
+
+Heroin price index DATA:INTERPOLATE:
+	~	dmnl
+	~
+
+Rx OUD in remission total prior NESARC=
+	893153
+	~	people
+	~	[LIT] Number of people in remission (>=1 but <5 years) from Rx OUD in \
+		2012-13. [Source: Saha 2016, Hoffman 2019]
+
+Rx OUD in stable remission total prior NESARC=
+	1.34983e+06
+	~	people
+	~	[LIT] Number of people in stable (5+ years) remission from Rx OUD in \
+		2012-13. [Source: Saha 2016, Hoffman 2019]
+
+HUD in remission total prior NESARC=
+	284174
+	~	people
+	~	[LIT] Number of people in remission (>=1 but <5 years) from HUD in \
+		2012-13. [Source: Martins 2017, Hoffman 2019]
+
+HUD in stable remission total prior NESARC=
+	485323
+	~	people
+	~	[LIT] Number of people in stable (5+ years) remission from HUD in 2012-13. \
+		[Source: Martins 2017, Hoffman 2019]
+
+Tx monthly patients Bup IQVIA TPT:INTERPOLATE:
+	~	people
+	~
+
+Patients with current month opioid Rx IQVIA:INTERPOLATE:
+	~	people
+	~	Estimated total number of unique (non-duplicated) patients with \
+		current-month opioid analgesic prescriptions dispensed from U.S. \
+		outpatient retail pharmacies [Source: IQVIA TPT]

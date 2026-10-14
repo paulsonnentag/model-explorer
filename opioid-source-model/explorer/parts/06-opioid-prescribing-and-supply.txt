@@ -1,0 +1,281 @@
+SOURCE model, view "Opioid Prescribing and Supply"
+Extracted from Vensim Files/OSM_Master_CURRENT.mdl. 37 equations.
+Variables can appear in several views; the .mdl file is the source of truth.
+==============================================================================
+
+Overdose death rate base MU  = 0.00017
+	~	1/year
+	~	[LIT] Overdose death rate among people who have been prescribed opioids. \
+		[Source: Dunn 2010]
+
+Overdose death MU  = 
+        Patients with current month opioid Rx 
+             * Overdose death rate base MU
+	~	people/year
+	~
+
+Prescriptions per person DATA:INTERPOLATE::=
+	Total prescription opioid Rx IQVIA 
+	             / Patients receiving opioid prescription annual IQVIA
+	~	Rx/person
+	~	[DATA] Average number of prescriptions dispensed per patient. [Source: \
+		IQVIA NPA & TPT]
+
+Total prescription opioid Rx IQVIA
+	~	Rx/year
+	~	Estimated annual number of opioid analgesic prescriptions dispensed from \
+		U.S. outpatient pharmacies including retail and mail order pharmacies. \
+		[Source: IQVIA]
+
+Total Rx MME prescribed IQVIA
+	~	MME/year
+	~	Total prescription opioids prescribed in units of morphine milligram \
+		equivalents (MMEs), a standardized way of comparing opioid medications \
+		according to their relative potency. [Source: IQVIA]
+
+Avg MME per opioid Rx IQVIA := Total Rx MME prescribed IQVIA 
+             / Total prescription opioid Rx IQVIA
+	~	MME/Rx
+	~	The average strength (in MMEs) of opioid prescriptions over time. [Source: \
+		IQVIA NSP and NPA]
+
+Average MME per day  = 
+        Projection output data[MME] 
+             * ( 1
+                  + RAMP ( Policy change average MME per day 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	MME/person/day
+	~	The average strength (in MMEs) of opioid prescriptions, after accounting \
+		for policy changes.
+
+Patients receiving opioid prescription annual  = 
+        Projection output data[PtRx] 
+             * ( 1
+                  + RAMP ( Policy change patients with opioid prescription 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	people/year
+	~	Annual number of individuals who been prescribed an opioid as derived from \
+		IQVIA and Symphony Health, after accounting for policy effects.
+
+Rx supply relative=
+	Average MME per day relative 
+	             ^ (4 * Sensitivity of Rx supply to MME per day / (Sensitivity of Rx supply to MME per day\
+		 + Sensitivity of Rx supply to patients receiving prescription
+	 + Sensitivity of Rx supply to Rx per person + Sensitivity of Rx supply to days per prescription\
+		))
+	             * Patients receiving opioid prescription annual relative 
+	                  ^ (4 * Sensitivity of Rx supply to patients receiving prescription\
+		/ (Sensitivity of Rx supply to MME per day
+	 + Sensitivity of Rx supply to patients receiving prescription + Sensitivity of Rx supply to Rx per person\
+		 + Sensitivity of Rx supply to MME per day)) * Prescriptions per person relative
+	 ^ (4 * Sensitivity of Rx supply to Rx per person / (Sensitivity of Rx supply to MME per day\
+		 + Sensitivity of Rx supply to patients receiving prescription
+	 + Sensitivity of Rx supply to Rx per person + Sensitivity of Rx supply to days per prescription\
+		)) 
+	* Average days per prescription relative
+	             ^ (4 * Sensitivity of Rx supply to MME per day / (Sensitivity of Rx supply to MME per day\
+		 + Sensitivity of Rx supply to patients receiving prescription
+	 + Sensitivity of Rx supply to Rx per person + Sensitivity of Rx supply to days per prescription\
+		))
+	~	dmnl
+	~	Supply of prescription opioids available for potential misuse, indexed to \
+		model start. Can be thought of as 'excess' pills not used as prescribed \
+		within the time period of the prescription, which therefore present \
+		potential opportunities for misuse.
+
+Sensitivity of Rx supply to MME per day  = 1
+	~	dmnl [0,2]
+	~	[ASM] Weight parameter determining the relative importance of prescription \
+		strengths (MME/day) vs. number of people with opioid prescriptions in \
+		affecting the supply of 'excess' Rx available for misuse. A value of 1 is \
+		neutral, giving equal importance to size & number. A values less than 1 \
+		indicates that diversion is driven more by the number of people with a \
+		prescription, while a value greater than 1 indicates diversion is driven \
+		more by the strength of presriptions.
+
+Patients receiving opioid prescription annual relative=
+	Patients receiving opioid prescription annual
+	             / Patients receiving opioid prescription annual reference
+	~	dmnl
+	~	The current number of patients with active opioid prescriptions relative \
+		to model initiation.
+
+Patients receiving opioid prescription annual reference= INITIAL(
+	Patients receiving opioid prescription annual)
+	~	people/year
+	~	The number of patients with an active opioid prescription at model \
+		initiation. [Source: IQVIA]
+
+Average MME per day reference  = 
+        INITIAL( Average MME per day  )
+	~	MME/Rx
+	~	The initial value of the average strength (in MMEs) of opioid \
+		prescriptions.
+
+Average MME per day relative  = 
+        Average MME per day 
+             / Average MME per day reference
+	~	dmnl
+	~	The average strength (in MMEs) of opioid prescriptions, relative to the \
+		reference (1999) value. This value is used to impact the relative supply \
+		available for diversion.
+
+Patients with current month opioid Rx=
+	Patients receiving opioid prescription annual 
+	             * Average duration of medical opioid use
+	~	people
+	~	Estimated total number of patients with current-month opioid analgesic \
+		prescriptions.
+
+Average duration of medical opioid use DATA:INTERPOLATE::=
+	Patients with current month opioid Rx IQVIA / Patients receiving opioid prescription annual IQVIA
+	~	Years
+	~	[DATA] Average person-years of use or exposure per year. Numerically \
+		equivalent to the average duration of use (in years). [Source: IQVIA TPT]
+
+Rx supply relative net  = 
+        Rx supply relative 
+             * ( 1
+                  + RAMP ( Policy change Rx supply relative 
+                            / Policy rampup duration , 
+                       Policy activation time , 
+                       Policy activation time 
+                            + Policy rampup duration ) )
+	~	dmnl
+	~	Supply of prescription opioids available for potential misuse, indexed to \
+		model initiation, after accounting for policy changes.
+
+Policy rampup duration=
+	3
+	~	year [?,10]
+	~
+
+Policy activation time=
+	2022
+	~	year [2000,2030]
+	~	Assumed start time for all policy changes
+
+Policy change Rx supply relative  = 0
+	~	dmnl [-0.5,2,0.05]
+	~
+
+Prescriptions per person reference= INITIAL(
+	Prescriptions per person)
+	~	Rx/person
+	~
+
+Prescriptions per person relative=
+	Prescriptions per person / Prescriptions per person reference
+	~	dmnl
+	~
+
+Sensitivity of Rx supply to Rx per person=
+	1
+	~	dmnl
+	~	[MCAL] Sensitivity of Rx opioid street supply to number of Rxs to patients \
+		receiving prescription opioids.
+
+Sensitivity of Rx supply to patients receiving prescription=
+	1
+	~	dmnl
+	~	[MCAL] Sensitivity of Rx opioid street supply to patients receiving \
+		prescription opioids.
+
+Prescriptions per person=
+	Projection output data[RxPP]
+	             * ( 1
+	                  + RAMP ( Policy change prescriptions per person
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	Rx/person
+	~
+
+Total Rx MME prescribed=
+	Patients receiving opioid prescription annual * Prescriptions per person * Average days per prescription\
+		 * Average MME per day
+	~	MME/year
+	~	Total opioid MMEs dispensed in any given year
+	~	:SUPPLEMENTARY
+
+Total prescription opioid Rx=
+	Patients receiving opioid prescription annual * Prescriptions per person
+	~	Rx/year
+	~	Total opioid analgesic prescriptions dispensed each year
+	~	:SUPPLEMENTARY
+
+Patients receiving opioid prescription annual IQVIA:INTERPOLATE:
+	~	people/year
+	~	Estimated total number of unique (non-duplicated) patients receiving \
+		opioid analgesic prescriptions dispensed from U.S. outpatient retail \
+		pharmacies each year [Source: IQVIA TPT]
+
+Patients with current month opioid Rx IQVIA:INTERPOLATE:
+	~	people
+	~	Estimated total number of unique (non-duplicated) patients with \
+		current-month opioid analgesic prescriptions dispensed from U.S. \
+		outpatient retail pharmacies [Source: IQVIA TPT]
+
+Average days per prescription DATA:INTERPOLATE::=
+	Average duration of medical opioid use DATA / Prescriptions per person DATA / OneDay
+	~	person*day/Rx
+	~	Average length of prescriptions, in days, based on average total duration \
+		of opioid use per person compared to number of prescriptions per person.
+
+Average MME per day DATA:INTERPOLATE::=
+	Avg MME per opioid Rx IQVIA / Average days per prescription DATA
+	~	MME/person/day
+	~
+
+OneDay=
+	0.00273973
+	~	Years / day
+	~
+
+Average days per prescription=
+	Projection output data[RxDur]
+	             * ( 1
+	                  + RAMP ( Policy change days per prescription
+	                            / Policy rampup duration , 
+	                       Policy activation time , 
+	                       Policy activation time 
+	                            + Policy rampup duration ) )
+	~	person*days/Rx
+	~	The average length (in days) of opioid prescriptions, after accounting for \
+		policy changes.
+
+Average days per prescription reference= INITIAL(
+	Average days per prescription)
+	~	days
+	~	The average length in days of opioid prescriptions at model initiation. \
+		[Source: IQVIA]
+
+Average days per prescription relative=
+	zidz(Average days per prescription, Average days per prescription reference)
+	~	dmnl
+	~	The current average length of opioid prescriptions relative to model \
+		initiation.
+
+Average duration of medical opioid use=
+	Average days per prescription * Prescriptions per person * OneDay
+	~	Years
+	~	Average person-years of use or exposure per year, equivalent to the \
+		average duration of use (in years), after accounting for policy changes.
+
+Sensitivity of Rx supply to days per prescription=
+	1
+	~	dmnl
+	~	[ASM] Weight parameter determining the relative importance of prescription \
+		durations (days/Rx) vs. number of people with opioid prescriptions, \
+		prescription strengths, etc. in affecting the supply of 'excess' Rx \
+		available for misuse. A value of 1 is neutral, giving equal importance to \
+		size & number. A values less than 1 indicates that diversion is driven \
+		more by the number of people with a prescription, while a value greater \
+		than 1 indicates diversion is driven more by the strength of presriptions.

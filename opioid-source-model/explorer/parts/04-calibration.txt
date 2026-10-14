@@ -1,0 +1,960 @@
+SOURCE model, view "Calibration"
+Extracted from Vensim Files/OSM_Master_CURRENT.mdl. 186 equations.
+Variables can appear in several views; the .mdl file is the source of truth.
+==============================================================================
+
+SimVar[RMis]  = 
+        Rx misuse no PY heroin ~~
+
+SimVar[ROUD]  = 
+        Rx OUD no PY heroin total ~~
+
+SimVar[ROUH]  = 
+        Rx OUD with PY heroin total ~~
+
+SimVar[NDHU]  = 
+        Nondisordered heroin use ~~
+
+SimVar[HUD]  = 
+        HUD total ~~
+
+SimVar[TxBp]  = 
+        Total by MOUD[Bup] ~~
+
+SimVar[TxMt]  = 
+        Total by MOUD[MMT] ~~
+
+SimVar[TxVi]  = 
+        Total by MOUD[Viv] ~~
+
+SimVar[ODRB]=
+	Total overdose deaths base Rx ~~
+
+SimVar[ODHC]  = 
+        Total overdose deaths heroin ~~
+
+SimVar[ODSB]  = 
+        Total overdose deaths synth base ~~
+
+SimVar[InRM]  = 
+        Initiating Rx misuse own Rx ~~
+
+SimVar[InRD]  = 
+        Initiating Rx misuse diverted ~~
+
+SimVar[InHT]  = 
+        Total heroin initiation ~~
+
+SimVar[InHD]  = 
+        Initiating heroin no Rx ~~
+
+SimVar[InHR]  = 
+        Initiating heroin with Rx misuse ~~
+
+SimVar[InHO]  = 
+        Initiating heroin with Rx OUD ~~
+
+SimVar[PrElm]  = :NA: ~~
+
+SimVar[ODTo]  = 
+        Total overdose deaths
+	~	people/year
+	~
+
+Total overdose deaths base Rx  = 
+        Overdose death MU 
+             + Overdose death Rx misuse 
+             + Total overdose deaths Rx OUD no H 
+                  * OD death fraction base Rx OUD no H 
+             + Total overdose deaths Rx OUD with H
+	~	people/year
+	~
+
+DataVarBase[RMis]  = 
+        Rx misuse no PY heroin NSDUH redef corrected ~~
+
+DataVarBase[ROUD]:INTERPOLATE::=
+	Rx OUD no PY heroin NSDUH ~~
+
+DataVarBase[ROUH]:INTERPOLATE::=
+	Rx OUD with PY heroin DATA ~~
+
+DataVarBase[NDHU]:INTERPOLATE::=
+	Nondisordered heroin use DATA ~~
+
+DataVarBase[HUD]:INTERPOLATE::=
+	HUD DATA ~~
+
+DataVarBase[TxBp]:INTERPOLATE::=
+	Tx point patients Bup DATA ~~
+
+DataVarBase[TxMt]:INTERPOLATE::=
+	Tx point patients OTP MMT NSSATS ~~
+
+DataVarBase[TxVi]:INTERPOLATE::=
+	Tx point patients Viv IQVIA ~~
+
+DataVarBase[ODRB]:INTERPOLATE::=
+	Total overdose deaths base Rx NVSS ~~
+
+DataVarBase[ODHC]=
+	Total overdose deaths heroin and excess estimated ~~
+
+DataVarBase[ODSB]=
+	OD deaths synth baseline estimated ~~
+
+DataVarBase[InRM]=
+	Initiating Rx misuse own Rx RDAS SAMHSA redef correction ~~
+
+DataVarBase[InRD]:INTERPOLATE::=
+	Initiating Rx misuse diverted RDAS SAMHSA ~~
+
+DataVarBase[InHT]:INTERPOLATE::=
+	Total heroin initiation DATA ~~
+
+DataVarBase[InHD]:INTERPOLATE::=
+	Initiating heroin no Rx DATA ~~
+
+DataVarBase[InHR]:INTERPOLATE::=
+	Initiating heroin with Rx misuse DATA ~~
+
+DataVarBase[InHO]:INTERPOLATE::=
+	Initiating heroin with Rx OUD DATA ~~
+
+DataVarBase[PrElm]  = :NA: ~~
+
+DataVarBase[ODTo]:INTERPOLATE::=
+	Total overdose deaths NVSS
+	~	people/year
+	~
+
+OD deaths synth baseline estimated=
+	IF THEN ELSE ( Time 
+	                  < Fentanyl introduction time, 
+	             Total overdose deaths synth no H NVSS , 
+	             :NA:)
+	~	people/year
+	~	Estimate of synthetic-involved overdose deaths attributable to baseline \
+		(pre-2013) penetration or use of synthetics, as opposed to the post-2013 \
+		increase in synthetic penetration.
+
+Total overdose deaths base Rx NVSS
+	~	people/year
+	~
+
+BaseErr[Normal,Elm]=
+	PEType[Normal] 
+	             * IF THEN ELSE ( DataVar[Elm] 
+	                       = :NA:, 
+	                  0, 
+	                  - ( ( SimVar[Elm] 
+	                       - DataVar[Elm] ) 
+	                       * Weights[Normal,Elm] ) 
+	                       ^ 2) ~~
+
+BaseErr[MAPE,Elm]  = 
+        PEType[MAPE] 
+             * IF THEN ELSE ( DataVar[Elm] 
+                       = :NA:, 
+                  0, 
+                  - ABS ( zidz ( ( SimVar[Elm] 
+                                 - DataVar[Elm] ) , 
+                            DataVar[Elm] ) ) 
+                       * 100) ~~
+
+BaseErr[Gaussian,Elm]  = 
+        PEType[Gaussian] 
+             * IF THEN ELSE ( DataVar[Elm] 
+                       = :NA:, 
+                  0, 
+                  - ( SimVar[Elm] 
+                       - DataVar[Elm] ) 
+                       ^ 2
+                       / Weights[Gaussian,Elm] 
+                            ^ 2
+                       / 2
+                       - ln ( Weights[Gaussian,Elm] ) ) ~~
+
+BaseErr[NegBin,Elm]  = 
+        PEType[NegBin] 
+             * IF THEN ELSE ( DataVar[Elm] 
+                       = :NA:, 
+                  0, 
+                  IF THEN ELSE ( DataVar[Elm] 
+                            = 0, 
+                       - ln ( 1
+                                 + Weights[NegBin,Elm] 
+                                      * Max ( eps , 
+                                           SimVar[Elm] ) ) 
+                            / Weights[NegBin,Elm] , 
+                       GAMMA LN ( DataVar[Elm] 
+                                 + 1
+                                      / Weights[NegBin,Elm] ) 
+                            - GAMMA LN ( 1
+                                      / Weights[NegBin,Elm] ) 
+                            - GAMMA LN ( DataVar[Elm] 
+                                      + 1) 
+                            - ( DataVar[Elm] 
+                                 + 1
+                                      / Weights[NegBin,Elm] ) 
+                                 * ln ( 1
+                                           + Weights[NegBin,Elm] 
+                                                * Max ( eps , 
+                                                     SimVar[Elm] ) ) 
+                            + DataVar[Elm] 
+                                 * ( ln ( Weights[NegBin,Elm] ) 
+                                      + ln ( Max ( eps , 
+                                                SimVar[Elm] ) ) ) ) ) ~~
+
+BaseErr[LogGauss,Elm]  = 
+        PEType[LogGauss] 
+             * IF THEN ELSE ( DataVar[Elm] 
+                       = :NA:, 
+                  0, 
+                  - ( ln ( SimVar[Elm] 
+                            + eps ) 
+                       - ln ( DataVar[Elm] 
+                                 + eps ) ) 
+                       ^ 2
+                       / Weights[Gaussian,Elm] 
+                            ^ 2
+                       / 2
+                       - ln ( Weights[Gaussian,Elm] ) )
+	~	dmnl
+	~		~	:SUPPLEMENTARY
+
+Weights[Normal,Elm]  = 
+        INITIAL( 1
+                  / StDev[Elm] 
+                  * WeightModManual[Elm]  ) ~~
+
+Weights[Gaussian,Elm]  = 
+        INITIAL( StDev[Elm] 
+                  * WeightMod[Elm] 
+                  / WeightModManual[Elm]  ) ~~
+
+Weights[MAPE,Elm]  = 
+        INITIAL( 1
+                  * WeightModManual[Elm]  ) ~~
+
+Weights[NegBin,Elm]  = 
+        INITIAL( WeightModManual[Elm] 
+                  * WeightMod[Elm]  ) ~~
+
+Weights[LogGauss,Elm]  = 
+        INITIAL( StDev[Elm] 
+                  * WeightMod[Elm] 
+                  / WeightModManual[Elm]  )
+	~	dmnl
+	~
+
+eps  = 0.0001
+	~	dmnl
+	~
+
+Rx misuse no PY heroin  = 
+        INTEG( Initiating Rx misuse diverted 
+                  + Initiating Rx misuse own Rx 
+                  - Developing Rx OUD 
+                  - Initiating heroin with Rx misuse 
+                  - Net quitting Rx misuse 
+                  + Net quitting heroin with Rx misuse 
+                  - NonOD death misuse 
+                  - Overdose death Rx misuse , 
+             Initial Rx misuse no H )
+	~	people [?,1.1e+07]
+	~
+
+Rx misuse no PY heroin NSDUH redef corrected=
+	IF THEN ELSE (Time <= MaxDataTime, NSDUH misuse redefinition effect 
+	             * Rx misuse no PY heroin NSDUH, :NA:)
+	~	person
+	~
+
+Rx OUD no PY heroin total=
+	Rx OUD no PY heroin no MOUD 
+	             + SUM ( ( 1
+	                       - Remission fraction in Tx[TxT!] ) 
+	                       * Rx OUD no heroin by MOUD[TxT!] )
+	~	person
+	~	Individuals with Rx OUD but no past year heroin use.
+
+Rx OUD no PY heroin NSDUH
+	~	people [?,4e+06]
+	~	Individuals with Rx OUD and no past year heroin use. [Source: NSDUH]
+
+Rx OUD with PY heroin total=
+	Rx OUD with PY heroin no MOUD 
+	             + SUM ( ( 1
+	                       - Remission fraction in Tx[TxT!] ) 
+	                       * Rx OUD with heroin by MOUD[TxT!] )
+	~	person
+	~
+
+Nondisordered heroin use  = 
+        INTEG( Initiating heroin no Rx 
+                  + Initiating heroin with Rx misuse 
+                  - Developing HUD no Rx OUD 
+                  - Net quitting heroin with Rx misuse 
+                  - Net quitting NDHU 
+                  - NonOD death NDHU 
+                  - Overdose death NDHU , 
+             Initial NDHU )
+	~	people [?,300000]
+	~	Individuals with Non-Disordered Heroin Use
+
+HUD total=
+	HUD no MOUD 
+	             + SUM ( ( 1
+	                       - Remission fraction in Tx[TxT!] ) 
+	                       * HUD by MOUD[TxT!] )
+	~	person
+	~	Total number of people with heroin use disorder, including those in and \
+		out of treatment.
+
+Total by MOUD[TxT]=
+	HUD by MOUD[TxT] 
+	             + Rx OUD no heroin by MOUD[TxT] 
+	             + Rx OUD with heroin by MOUD[TxT]
+	             + HUD in remission in MOUD Tx[TxT]
+	             + Rx OUD no PY heroin in remission in MOUD Tx[TxT]
+	             + Rx OUD with PY heroin in remission in MOUD Tx[TxT]
+	~	person
+	~	Number of people in each type of MOUD treatment, totaled across use \
+		disorders.
+
+Tx point patients OTP MMT NSSATS
+	~	people
+	~	Point in time count of patients in Methadone treatment at an OTP. [Source: \
+		NSSATS]
+
+Initiating Rx misuse diverted  = 
+        Initiating Rx misuse diverted net 
+             * Perceived risk coeff initiating Rx misuse diverted 
+             * Rx availability coeff initiating Rx misuse 
+             * Social influence coeff initiating Rx misuse
+	~	people/year
+	~
+
+Initiating Rx misuse own Rx=
+	Patients with current month opioid Rx 
+	             * Initiation rate Rx misuse own Rx effective
+	~	people/year
+	~
+
+Initiating Rx misuse diverted RDAS SAMHSA
+	~	person/Years
+	~	Individuals initiating Rx Misuse with prescription opioids (potentially \
+		including counterfeits) that come from the street supply). [Source: NSDUH \
+		RDAS, SAMHSA]
+
+Total heroin initiation  = 
+        Initiating heroin no Rx 
+             + Initiating heroin with Rx misuse 
+             + Initiating heroin with Rx OUD
+	~	people/year [?,500000]
+	~
+
+Initiating heroin no Rx  = 
+        Initiating heroin no Rx net 
+             * Heroin availability coeff initiating NDHU no Rx 
+             * Perceived risk coeff initiating NDHU no Rx 
+             * Social influence coeff initiating NDHU no Rx
+	~	people/year
+	~	Individuals initiating NDHU without first using Rx opioids, ie initiation \
+		of heroin use directly. [Source: SAMHSA]
+
+Initiating heroin with Rx misuse=
+	Rx misuse no PY heroin 
+	             * Initiation rate heroin with Rx misuse effective
+	~	person/Years
+	~
+
+Initiating heroin with Rx OUD=
+	Rx OUD no PY heroin no MOUD 
+	             * Initiation rate heroin with Rx OUD effective
+	~	people/year
+	~
+
+Initial HUD in MOUD Tx[Bup]  = 
+        INITIAL( Initial stock base values[HUB] 
+                  * Initial stock correction[HUB]  ) ~~
+
+Initial HUD in MOUD Tx[MMT]  = 
+        INITIAL( Initial stock base values[HUM] 
+                  * Initial stock correction[HUM]  ) ~~
+
+Initial HUD in MOUD Tx[Viv]  = 
+        INITIAL( Initial stock base values[HUV] 
+                  * Initial stock correction[HUV]  )
+	~	people
+	~	Individuals with HUD in OAT at model initiation.
+
+Initial HUD total  = 
+        INITIAL( Initial stock base values[HUT] 
+                  * Initial stock correction[HUT]  )
+	~	people
+	~	Individuals with HUD in or out of treatment at model initiation, adjusted \
+		with the calibrated initial stock correction.
+
+Initial NDHU  = 
+        INITIAL( Initial stock base values[NDH] 
+                  * Initial stock correction[NDH]  )
+	~	people
+	~	Individuals with nondisordered heroin use at model initiation, adjusted \
+		with the calibrated initial stock correction. [Source: NSDUH]
+
+Initial Rx misuse no H  = 
+        INITIAL( Initial stock base values[RXM] 
+                  * Initial stock correction[RXM]  )
+	~	people
+	~	Individuals with Rx misuse and no heroin use in at model initiation, \
+		adjusted with the calibrated initial stock correction [Source: NSDUH]
+
+Initial Rx OUD no H in Tx[Bup]  = 
+        INITIAL( Initial stock base values[OUB] 
+                  * Initial stock correction[OUB]  ) ~~
+
+Initial Rx OUD no H in Tx[MMT]  = 
+        Initial stock base values[OUM] 
+             * Initial stock correction[OUM] ~~
+
+Initial Rx OUD no H in Tx[Viv]  = 
+        Initial stock base values[OUV] 
+             * Initial stock correction[OUV]
+	~	people
+	~	Individuals with Rx OUD and no heroin use in MOUD treatment in .
+
+Initial Rx OUD no H total  = 
+        INITIAL( Initial stock base values[OUT] 
+                  * Initial stock correction[OUT]  )
+	~	people
+	~	Individuals with Rx OUD and no heroin use in or out of treatment at model \
+		initiation, adjusted with the calibrated initial stock correction.
+
+Initial Rx OUD with H in Tx[Bup]  = 
+        INITIAL( Initial stock base values[OHB] 
+                  * Initial stock correction[OHB]  ) ~~
+
+Initial Rx OUD with H in Tx[MMT]  = 
+        INITIAL( Initial stock base values[OHM] 
+                  * Initial stock correction[OHM]  ) ~~
+
+Initial Rx OUD with H in Tx[Viv]  = 
+        INITIAL( Initial stock base values[OHV] 
+                  * Initial stock correction[OHV]  )
+	~	people
+	~	Individuals with Rx OUD and NDHU in OAT at model initiation. Bup was \
+		approved in Oct 2002 so we assume any initial enrollees are negligible - \
+		and they're not tracked anywhere
+
+Initial Rx OUD with H total  = 
+        INITIAL( Initial stock base values[OHT] 
+                  * Initial stock correction[OHT]  )
+	~	people
+	~	Total number of people, in or out of treatment, with Rx OUD who had used \
+		heroin in the past year in at model initiation, adjusted with the \
+		calibrated initial stock correction.
+
+Initial stock base values[RXM]= INITIAL(
+	 Rx misuse no PY heroin NSDUH redef corrected) ~~
+
+Initial stock base values[NDH]= INITIAL(
+	 Nondisordered heroin use DATA) ~~
+
+Initial stock base values[OUB]=
+	0 ~~
+
+Initial stock base values[OUM]= INITIAL(
+	 Tx point patients OTP MMT NSSATS 
+	                  * ( 1
+	                       - Initial MMT fraction with HUD 
+	                       - Initial MMT fraction with Rx OUD with H )) ~~
+
+Initial stock base values[OUV]=
+	0 ~~
+
+Initial stock base values[OUT]= INITIAL(
+	 Rx OUD no PY heroin NSDUH) ~~
+
+Initial stock base values[OUR]= INITIAL(
+	 Initial Rx OUD in remission NESARC 
+	                  * ( 1
+	                       - Initial fraction lifetime Rx users with lifetime H use NESARC\
+		 ) 
+	                  * ( 1
+	                       - Remission fraction in Tx MMT )) ~~
+
+Initial stock base values[OHB]=
+	0 ~~
+
+Initial stock base values[OHM]= INITIAL(
+	 Tx point patients OTP MMT NSSATS 
+	                  * Initial MMT fraction with Rx OUD with H) ~~
+
+Initial stock base values[OHV]=
+	0 ~~
+
+Initial stock base values[OHT]= INITIAL(
+	 Rx OUD with PY heroin DATA) ~~
+
+Initial stock base values[OHR]= INITIAL(
+	 Initial Rx OUD in remission NESARC 
+	                  * Initial fraction lifetime Rx users with lifetime H use NESARC 
+	                  * ( 1
+	                       - Remission fraction in Tx MMT )) ~~
+
+Initial stock base values[HUB]=
+	0 ~~
+
+Initial stock base values[HUM]= INITIAL(
+	 Tx point patients OTP MMT NSSATS 
+	                  * Initial MMT fraction with HUD) ~~
+
+Initial stock base values[HUV]=
+	0 ~~
+
+Initial stock base values[HUT]= INITIAL(
+	 HUD DATA) ~~
+
+Initial stock base values[HUR]= INITIAL(
+	 Initial HUD in remission NESARC 
+	                  * ( 1
+	                       - Remission fraction in Tx MMT )) ~~
+
+Initial stock base values[OUS]= INITIAL(
+	Initial Rx OUD in stable remission NESARC * (1 - Initial fraction lifetime Rx users with lifetime H use NESARC\
+		)) ~~
+
+Initial stock base values[OHS]= INITIAL(
+	Initial Rx OUD in stable remission NESARC * Initial fraction lifetime Rx users with lifetime H use NESARC\
+		) ~~
+
+Initial stock base values[HUS]= INITIAL(
+	Initial HUD in stable remission NESARC)
+	~	people
+	~	Stock value at model initiation
+
+Initial stock correction[Initials]=
+	1.01799, 1.02517, 1.05762, 1.2, 1.09558, 0.869523, 1.0535, 1, 1.16412, 0.8, 0.937737\
+		, 0.8, 0.8, 1, 0.841935, 1.03489, 0.82041, 0.8, 0.8, 1
+	~	dmnl
+	~	[ACAL] Multiplier for initial values of stocks to account for noise/error \
+		in initial data point
+
+StDev[Elm]  = 1
+	~	dmnl
+	~
+
+WeightMod[Elm]  = 1
+	~	dmnl
+	~
+
+PEType[PET]  = 0, 0, 1, 0, 0
+	~	dmnl
+	~
+
+SimPrior[StElm]=
+	:NA: ~~
+
+SimPrior[FlElm]=
+	:NA: ~~
+
+SimPrior[NFRR]=
+	Nonfatal OD ratio Rx ~~
+
+SimPrior[NFRH]=
+	Nonfatal OD ratio heroin ~~
+
+SimPrior[DFRB]=
+	Tx demand fulfilment ratio[Bup] ~~
+
+SimPrior[NxHF]=
+	Nx utilization events H user fraction ~~
+
+SimPrior[RemO]=
+	Rx OUD in early or Tx remission ~~
+
+SimPrior[RemH]=
+	HUD in early or Tx remission ~~
+
+SimPrior[PNxH]=
+	Probability Nx bystander heroin ~~
+
+SimPrior[ReSO]=
+	Rx OUD in stable remission total ~~
+
+SimPrior[ReSH]=
+	HUD in stable remission
+	~	
+	~
+
+DataPriorBase[StElm]=
+	:NA: ~~
+
+DataPriorBase[FlElm]=
+	:NA: ~~
+
+DataPriorBase[NFRR]=
+	Nonfatal OD ratio Rx prior ~~
+
+DataPriorBase[NFRH]=
+	Nonfatal OD ratio heroin prior ~~
+
+DataPriorBase[DFRB]=
+	Bup demand fulfilment ratio prior ~~
+
+DataPriorBase[NxHF]=
+	Nx utilization events H user fraction prior ~~
+
+DataPriorBase[RemO]=
+	Rx OUD in remission total prior ~~
+
+DataPriorBase[RemH]=
+	HUD in remission total prior ~~
+
+DataPriorBase[PNxH]=
+	Probability Nx bystander heroin prior ~~
+
+DataPriorBase[ReSO]=
+	Rx OUD in stable remission total prior ~~
+
+DataPriorBase[ReSH]=
+	HUD in stable remission total prior
+	~	
+	~
+
+PriorErr[Elm]=
+	IF THEN ELSE ( DataPrior[Elm] 
+	                  = :NA:
+	                  :OR: SimPrior[Elm] 
+	                       = :NA:, 
+	             0, 
+	             - ( ( SimPrior[Elm] 
+	                  - DataPrior[Elm] ) 
+	                  * Weights[Normal,Elm] ) 
+	                  ^ 2
+	                  / 2 / TIME STEP)
+	~	
+	~	Note: If priors are point / annual values, need to divide by TIME STEP to \
+		give comparable weight in payoff (due to time series data contributing to \
+		payoff every TIME STEP); otherwise priors will be under-weighted \
+		proportional to TIME STEP.
+	~	:SUPPLEMENTARY
+
+Initiating Rx misuse own Rx RDAS SAMHSA redef correction=
+	IF THEN ELSE(Initiating Rx misuse diverted RDAS SAMHSA = :NA:, :NA:, Total Rx misuse initiation SAMHSA redef corrected\
+		 - Initiating Rx misuse diverted RDAS SAMHSA)
+	~	person/Years
+	~	Estimated number of people initiating prescription opioid misuse with \
+		their own prescription after accounting for model-estimated correction due \
+		to NSDUH 2015 rewording, which significantly increased number of people \
+		reporting misuse.
+
+Initial Rx OUD no H in remission  = 
+        INITIAL( Initial stock base values[OUR] 
+                  * Initial stock correction[OUR]  )
+	~	people
+	~	Individuals with Rx OUD and no heroin use in remission in at model \
+		initiation, adjusted with the calibrated initial stock correction.
+
+Initial Rx OUD with H in remission  = 
+        INITIAL( Initial stock base values[OHR] 
+                  * Initial stock correction[OHR]  )
+	~	people
+	~	Individuals with Rx OUD and heroin use in remission at model initiation, \
+		adjusted with the calibrated initial stock correction.
+
+Initial HUD in remission  = 
+        INITIAL( Initial stock base values[HUR] 
+                  * Initial stock correction[HUR]  )
+	~	people
+	~	Individuals with HUD in remission at model initiation
+
+WeightModManual[Elm]  = 1
+	~	dmnl
+	~
+
+Total heroin initiation DATA := Total heroin initiation SAMHSA RAND
+	~	person/Years
+	~
+
+Initiating heroin no Rx DATA := Initiating heroin no Rx NSDUH RDAS RAND
+	~	people/year
+	~
+
+Initiating heroin with Rx misuse DATA := Initiating heroin with Rx misuse NSDUH RDAS RAND
+	~	people/year
+	~
+
+Initiating heroin with Rx OUD DATA := Initiating heroin with Rx OUD NSDUH RDAS RAND
+	~	person/Years
+	~	[Source: NSDUH RDAS adjusted with RAND]
+
+HUD DATA:INTERPOLATE::=
+	(1 - Switch for alternative HUD data) * HUD NSDUH RAND + Switch for alternative HUD data\
+		 * HUD NSDUH RAND alternative
+	~	people
+	~	Individuals with HUD, calculated from data. [Source: NSDUH adjusted with \
+		RAND ratio]
+
+Nondisordered heroin use DATA := Nondisordered heroin use NSDUH RAND
+	~	people
+	~
+
+Rx OUD with PY heroin DATA := Rx OUD with PY heroin NSDUH RAND
+	~	people
+	~
+
+Tx point patients Viv IQVIA
+	~	person
+	~	Point in time count of patients in Vivitrol treatment. [Source: IQVIA NSP]
+
+Tx point patients Bup DATA:INTERPOLATE::=
+	Tx monthly patients Bup IQVIA TPT
+	~	people
+	~
+
+Nonfatal OD ratio Rx  = 
+        Total nonfatal overdoses Rx 
+             / Total overdose deaths Rx
+	~	dmnl
+	~
+
+Nonfatal OD ratio heroin  = 
+        Total nonfatal overdoses heroin 
+             / Total overdose deaths heroin
+	~	dmnl
+	~	Ratio of nonfatal to fatal overdoses (X : 1) for heroin
+
+Nonfatal OD ratio heroin prior=
+	IF THEN ELSE((Time < Fentanyl introduction time :AND: MODULO(Time, 1)=0), 30 , :NA:)
+	~	dmnl
+	~	[LIT] The ratio of nonfatal to fatal overdoses involving heroin at model \
+		initiation. [Source: Darke 2003, Neale 2003]
+
+Nonfatal OD ratio Rx prior=
+	IF THEN ELSE((Time < Fentanyl introduction time :AND: MODULO(Time, 1)=0), 35 , :NA:)
+	~	dmnl [30,50,1]
+	~	[ASM, LIT] Assumed larger than nonfatal OD ratio for heroin.[Source: Darke \
+		2003, Neale 2003]
+
+Total overdose deaths synth base  = 
+        Total overdose deaths Rx OUD no H 
+             * OD death fraction synth baseline Rx OUD no H
+	~	people/year
+	~
+
+Total overdose deaths  = 
+        Overdose death Rx misuse 
+             + Overdose death NDHU 
+             + Overdose death MU 
+             + Total overdose deaths Rx OUD no H 
+             + Total overdose deaths Rx OUD with H 
+             + Total overdose deaths HUD
+	~	person/Years
+	~
+
+Total overdose deaths NVSS:RAW:
+	~	people/year
+	~
+
+Total overdose deaths heroin and excess estimated=
+	IF THEN ELSE ( Time 
+	                                 > Total overdose data last time , 
+	                            :NA:, 
+	Total overdose deaths base heroin NVSS 
+	                                 + OD deaths synth excess estimated)
+	~	person/Years
+	~
+
+Total overdose deaths heroin  = 
+        Overdose death NDHU 
+             + Total overdose deaths HUD
+	~	person/Years
+	~
+
+MaxDataTime=
+	2020
+	~	year
+	~
+
+DataVar[Elm]=
+	IF THEN ELSE(Time <= MaxDataTime, DataVarBase[Elm], :NA:)
+	~	
+	~
+
+DataPrior[Elm]=
+	IF THEN ELSE(Time <= MaxDataTime, DataPriorBase[Elm] , :NA:)
+	~	
+	~
+
+Bup demand fulfilment ratio prior=
+	IF THEN ELSE(Time =2018, 0.587, :NA:)
+	~	dmnl
+	~	[LIT] The fraction of demand (after accounting for non-access barriers) \
+		that is met, thereby reflecting access barriers. This value is used as a \
+		prior for 2018 to calibrate the model. [Source: Beetham 2019].
+
+Tx demand fulfilment ratio[TxT]=
+	MIN ( Tx capacity relative to demand[TxT] , 
+	             1)
+	~	dmnl
+	~	Proportion of demand for treatment that can be met at any given time based \
+		on Tx capacity, which is reduced by access-related barriers. Demand as \
+		defined here has already accounted for people lost due to affordability, \
+		stigma,or other non-access barriers.
+
+Nx utilization events H user fraction prior=
+	IF THEN ELSE(Time = 2013, 0.86, :NA:)
+	~	dmnl
+	~	[LIT] The fraction of all overdose reversals reported to harm reduction \
+		programs that were reported to be used for non-prescription opioid opioid \
+		(i.e., heroin) overdoses. Used as a prior to calibrate the estimated \
+		fraction of all kits distributed to heroin users. [Source: Wheeler 2015]
+
+Rx OUD in remission total prior=
+	IF THEN ELSE(Time=2013,Rx OUD in remission total prior NESARC, :NA:)
+	~	people
+	~
+
+HUD in remission total prior=
+	IF THEN ELSE(Time=2013, HUD in remission total prior NESARC, :NA:)
+	~	people
+	~
+
+Nx utilization events H user fraction=
+	zidz(Nx utilization events H user, Nx utilization events total)
+	~	dmnl
+	~	Fraction of total overdose events where naloxone is utilized that are in \
+		heroin users (and not Rx opioid users)
+
+Rx OUD in early or Tx remission=
+	Rx OUD no heroin in remission + Rx OUD with heroin in remission + SUM(Rx OUD no PY heroin in remission in MOUD Tx\
+		[TxT!] + Rx OUD with PY heroin in remission in MOUD Tx[TxT!])
+	~	people
+	~
+
+HUD in early or Tx remission=
+	HUD in remission + SUM(HUD in remission in MOUD Tx[TxT!])
+	~	people
+	~
+
+NormErr[TSElm]=
+	IF THEN ELSE(DataVar[TSElm]=:NA:, :NA:, zidz((DataVar[TSElm]-SimVar[TSElm]),SimVar[TSElm\
+		])) ~~
+
+NormErr[PrElm]=
+	:NA:
+	~	
+	~	Residuals for time series data (data - simulated values) normalised to \
+		simulated values.
+
+RepVar[TSElm]=
+	SimVar[TSElm] * (1 +  RAMP(1, NoiseStartTime , NoiseStartTime + 1) * RepErr[TSElm]) ~~
+
+RepVar[PrElm]=
+	:NA:
+	~	
+	~
+
+Switch for historical noise=
+	0
+	~	dmnl
+	~	If set to 0, recovers DataVar as RepVar; if set to 1, generates RepVar \
+		with new (simulated) noise stream
+
+IsYear[Year]:INTERPOLATE:
+	~	
+	~
+
+RepErr[TSElm]=
+	Max(-0.999, IF THEN ELSE(Switch for historical noise = 1, SUM(RepErrRaw[TSElm,Year!]\
+		 * IsYear[Year!]), IF THEN ELSE(NormErr[TSElm] = :NA:, SUM(RepErrRaw[TSElm,Year!] *\
+		 IsYear[Year!]), NormErr[TSElm]))) ~~
+
+RepErr[PrElm]=
+	:NA:
+	~	
+	~
+
+RepErrRaw[TSElm, Year]=
+	0 ~~
+
+RepErrRaw[PrElm, Year]=
+	:NA:
+	~	dmnl
+	~
+
+NoiseStartTime=
+	2031
+	~	year
+	~
+
+Initial HUD in stable remission= INITIAL(
+	Initial stock base values[HUS] * Initial stock correction[HUS])
+	~	people
+	~
+
+Initial Rx OUD with H in stable remission= INITIAL(
+	Initial stock base values[OHS] 
+	                  * Initial stock correction[OHS])
+	~	people
+	~
+
+Initial Rx OUD no H in stable remission= INITIAL(
+	Initial stock base values[OUS] 
+	                  * Initial stock correction[OUS])
+	~	people
+	~
+
+Probability Nx bystander heroin=
+	1 - EXP(-Nx kit distribution efficiency net * Nx kits per 100k population H user)
+	~	dmnl
+	~	The likelihood that a bystander will administer naloxone in the event of a \
+		witnessed heroin overdose, after accounting for any policy changes. \
+		Estimated weighted average of 34% in 2017 (assumed for heroin overdoses). \
+		See 'Estimated Nx distribution efficiency based on Irvine...Green 2020'
+
+Probability Nx bystander heroin prior=
+	IF THEN ELSE(Time = 2019, 0.2, :NA:)
+	~	dmnl
+	~	[DATA] Probability of naloxone distribution by a bystander [Source: Irvine \
+		et al 2020]
+
+SynVar[Elm]=
+	IF THEN ELSE(DataVar[Elm] = :NA:, :NA: , RepVar[Elm] )
+	~	
+	~
+
+Rx OUD in stable remission total=
+	Rx OUD no heroin in stable remission + Rx OUD with heroin in stable remission
+	~	people
+	~	Total people with Rx OUD in stable remission
+
+HUD in stable remission= INTEG (
+	Stabilizing remission HUD-NonOD death HUD in stable remission,
+		Initial HUD in stable remission)
+	~	people
+	~
+
+Rx OUD in stable remission total prior=
+	IF THEN ELSE(Time=2013, Rx OUD in stable remission total prior NESARC, :NA:)
+	~	people
+	~
+
+HUD in stable remission total prior=
+	IF THEN ELSE(Time=2013, HUD in stable remission total prior NESARC, :NA:)
+	~	people
+	~
+
+MAX THREADS=
+	46
+	~	dmnl
+	~	Maximum number of parallel process threads to run. For use when running \
+		with Vengine on multi-core server. Set to (number of cores - 2)
+	~	:SUPPLEMENTARY
+
+TIME STEP  = 0.0625
+	~	year [0,?]
+	~	The time step for the simulation.

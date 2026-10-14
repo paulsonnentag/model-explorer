@@ -1,0 +1,5 @@
+# The published SOURCE model and replication package; a git repository of its own.
+opioid-source-model/source-model/
+
+.DS_Store
+node_modules/

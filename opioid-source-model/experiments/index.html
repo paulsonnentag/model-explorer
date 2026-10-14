@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SOURCE model · visualization experiments</title>
+<style>
+  body { margin: 0; font: 15px/1.55 system-ui, -apple-system, sans-serif; background: #f6f4ef; color: #1f2328; }
+  main { max-width: 860px; margin: 0 auto; padding: 56px 28px; }
+  h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .lede { color: #555; margin: 0 0 36px; max-width: 640px; }
+  ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  a.card { display: grid; grid-template-columns: 64px 1fr; gap: 18px; padding: 20px 22px; background: #fff; border: 1px solid #e3dfd5;
+           border-radius: 10px; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; }
+  a.card:hover { border-color: #2f6db5; transform: translateY(-1px); }
+  .num { font: 600 28px/1 ui-monospace, Menlo, monospace; color: #b8b2a3; }
+  h2 { font-size: 17px; margin: 0 0 4px; }
+  p { margin: 0; color: #4b5058; }
+  .q { margin-top: 8px; font-size: 13px; color: #7a7466; font-style: italic; }
+  footer { margin-top: 40px; font-size: 13px; color: #8a8478; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <h1>FDA SOURCE opioid model: visualization experiments</h1>
+  <p class="lede">Different ways to look at the same model: Lim et al. 2022 (PNAS), the
+    <code>.mdl</code> file, its data and the published runs. Every experiment runs the model live in the browser on the same engine,
+    which is checked against Vensim's published results.</p>
+  <ol>
+    <li><a class="card" href="/01-explorer/">
+      <span class="num">01</span>
+      <span>
+        <h2>Explorer</h2>
+        <p>A dependency graph centred on one variable at a time: where it comes from, what it drives, and what it means.
+          Edit any assumption and every chart re-runs. Switch to the modelers' own stock-and-flow diagrams, running live,
+          and see where people come from and go for any group.</p>
+        <span class="q">Question: what is this number made of?</span>
+      </span>
+    </a></li>
+    <li><a class="card" href="/02-paper/">
+      <span class="num">02</span>
+      <span>
+        <h2>Paper view</h2>
+        <p>The PDF on the left. Click a figure, the table or a highlighted claim, and the right side opens it up:
+          the variables it plots, the data behind it, the assumptions it depends on, and a live re-run.</p>
+        <span class="q">Question: where does this figure come from, and does it hold up?</span>
+      </span>
+    </a></li>
+    <li><a class="card" href="/03-stock-map/">
+      <span class="num">03</span>
+      <span>
+        <h2>Stock map</h2>
+        <p>All 14 groups of people on one page, laid out by rule (stage of addiction × which opioids) rather than drawn by hand.
+          Arrows are as thick as the flow of people; press play to watch the epidemic move through the system.
+          The effects found in the equations are listed beside it as formulas; open one to paint the flows it changes, or switch it off to re-run the model.
+          Stocks and flows unfold in place into their history and the factors of their rate.</p>
+        <span class="q">Question: where are people, and where are they going?</span>
+      </span>
+    </a></li>
+  </ol>
+  <footer>Served by <code>node opioid-source-model/experiments/serve.ts</code>.
+    Source: <a href="https://github.com/FDA/SOURCE">FDA/SOURCE</a>.</footer>
+</main>
+</body>
+</html>
