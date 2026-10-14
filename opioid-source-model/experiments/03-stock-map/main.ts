@@ -1,5 +1,5 @@
 // Entry point: compiles the model, lays out every group of people by rule, finds the effects in the
-// equations, and plays the run over time. Everything unfolds in place: the paper's hypotheses on the
+// equations, and plays the run over time. Everything unfolds in place: the papers' findings on the
 // left, stocks and flows on the map, loops on the right.
 
 import type { Bundle } from "../core/inputs.ts";
@@ -8,7 +8,7 @@ import { formatNumber } from "../shared/chart.ts";
 import { rateFactors } from "../shared/factors.ts";
 import { peopleFlows } from "../shared/flows.ts";
 import { escapeHtml } from "../shared/html.ts";
-import { findInputs, findLoops, knockoutCells, loopTitle } from "../shared/loops.ts";
+import { findInputs, findLoops } from "../shared/loops.ts";
 import { isPlain, plainToggle, setPlain } from "../shared/plain.ts";
 import { FUTURES, LEVERS, Runs, type WhatIf } from "../shared/runs.ts";
 import { buildSemantics } from "../shared/semantics.ts";
@@ -49,7 +49,6 @@ async function main() {
     inputs,
     factors: new Map(peopleFlows(sem).map((f) => [f.key, rateFactors(sem, f.key, loops, inputs)])),
     fitted: new Map(loops.flatMap((l) => l.links.map((link) => [link.strength, defaults[sem.vars.get(link.strength)!.cells[0]]] as const))),
-    loopsOff: new Set(),
     year: 2016,
     maxFlow: 1,
     plain: isPlain(),
@@ -61,7 +60,7 @@ async function main() {
     hypothesis: null,
     alternative: null,
     cardOffsets: new Map(),
-    actions: { setYear, toggle, hover, switchLoop, restoreLoops, selectHypothesis, cycleHypothesis, applyAlternative },
+    actions: { setYear, toggle, hover, selectHypothesis, cycleHypothesis, applyAlternative },
   };
   // Widths use the base run's largest flow, so the same thickness means the same number in every scenario.
   app.maxFlow = Math.max(...app.layout.edges.map((e) => peak(edgeSeries(app, e))));
@@ -116,33 +115,14 @@ function setYear(year: number) {
   renderToolbar();
 }
 
-function switchLoop(id: string) {
-  if (app.loopsOff.has(id)) app.loopsOff.delete(id);
-  else app.loopsOff.add(id);
-  rerun();
-}
-
-function restoreLoops() {
-  app.loopsOff.clear();
-  rerun();
-}
-
-// Loop switches are the only edits this page makes, so the reference is the same what-if without them.
-function rerun() {
-  const edits = new Map<number, number>();
-  for (const loop of app.loops) if (app.loopsOff.has(loop.id)) for (const [cell, value] of knockoutCells(app.sem, loop)) edits.set(cell, value);
-  setWhatIf({ edits });
-}
-
 // Any change made by hand leaves the hypothesis's alternative; while one is applied, the dashed
-// comparison is the hypothesis's first alternative instead of the same run with loops on.
+// comparison is the hypothesis's first alternative.
 function setWhatIf(patch: Partial<WhatIf>, fromHypothesis = false) {
   if (!fromHypothesis) app.alternative = null;
   app.whatIf = { ...app.whatIf, ...patch };
   app.current = app.runs.current(app.whatIf);
   const active = activeAlternative();
-  if (active) app.reference = active.index > 0 ? app.runs.current(alternativeWhatIf(app, active.hypothesis.alternatives[0])) : null;
-  else app.reference = app.whatIf.edits.size ? app.runs.current({ ...app.whatIf, edits: new Map() }) : null;
+  app.reference = active && active.index > 0 ? app.runs.current(alternativeWhatIf(active.hypothesis.alternatives[0])) : null;
   renderAll();
 }
 
@@ -166,8 +146,7 @@ function applyAlternative(hypothesisId: string, alternativeId: string) {
   const hypothesis = HYPOTHESES.find((h) => h.id === hypothesisId)!;
   const alternative = hypothesis.alternatives.find((a) => a.id === alternativeId)!;
   app.alternative = `${hypothesisId}:${alternativeId}`;
-  app.loopsOff = new Set(alternative.loopsOff ?? []);
-  setWhatIf(alternativeWhatIf(app, alternative), true);
+  setWhatIf(alternativeWhatIf(alternative), true);
   renderControls();
 }
 
@@ -232,14 +211,11 @@ function renderControls() {
 
 function renderToolbar() {
   const total = app.layout.nodes.reduce((sum, n) => sum + valueAt(app, n.key), 0);
-  const off = app.loops.filter((l) => app.loopsOff.has(l.id));
   const active = activeAlternative();
   const banner =
     active && active.index > 0
-      ? `<span class="banner">Hypothesis ${HYPOTHESES.indexOf(active.hypothesis) + 1}: ${escapeHtml(active.alternative.label)} · dashed = ${escapeHtml(active.hypothesis.alternatives[0].label.toLowerCase())} <a data-do="fitted">Back</a></span>`
-      : off.length
-        ? `<span class="banner">${off.length === 1 ? "1 loop" : `${off.length} loops`} off: ${escapeHtml(off.map((l) => loopTitle(l, app.plain)).join(", "))} · dashed = with loops on <a data-do="restore">Switch all back on</a></span>`
-        : "";
+      ? `<span class="banner">Finding ${HYPOTHESES.indexOf(active.hypothesis) + 1}: ${escapeHtml(active.alternative.label)} · dashed = ${escapeHtml(active.hypothesis.alternatives[0].label.toLowerCase())} <a data-do="fitted">Back</a></span>`
+      : "";
   byId("toolbar").innerHTML = `
     <span class="group">Stocks <button data-do="stocks">Collapse all</button><button data-do="stocks+">Expand all</button></span>
     <span class="group">Flows <button data-do="flows">Collapse all</button><button data-do="flows+">Expand all</button></span>
@@ -249,7 +225,6 @@ function renderToolbar() {
   byId("toolbar").onclick = (e) => {
     const action = (e.target as HTMLElement).closest<HTMLElement>("[data-do]")?.dataset.do;
     if (!action) return;
-    if (action === "restore") return restoreLoops();
     if (action === "fitted" && active) return applyAlternative(active.hypothesis.id, active.hypothesis.alternatives[0].id);
     collapse(action.replace("+", "") as "stocks" | "flows" | "everything", action.endsWith("+"));
   };
@@ -262,7 +237,7 @@ function renderLegend() {
     ? `<span class="sep"></span><span class="muted">Stacked by ${escapeHtml(rangeLabel(app, arrayed.key))}:</span>${parts.map((p, i) => `<span><i style="background:${PART_COLORS[i % PART_COLORS.length]}"></i>${escapeHtml(partLabel(app, p.label))}</span>`).join("")}`
     : "";
   const active = activeAlternative();
-  const compareTo = active ? (active.index > 0 ? active.hypothesis.alternatives[0].label : null) : app.loopsOff.size ? "Run with loops on" : null;
+  const compareTo = active && active.index > 0 ? active.hypothesis.alternatives[0].label : null;
   const ghost = compareTo ? `<span class="sep"></span><span><i class="dashed"></i>${escapeHtml(compareTo)}</span>` : "";
   byId("legend").innerHTML = `<span><i style="background:#9aa3ad"></i>Flow of people (thickness = people per year; click to unfold; hover or open a loop to colour the flows it changes)</span>${ghost}${split}`;
 }

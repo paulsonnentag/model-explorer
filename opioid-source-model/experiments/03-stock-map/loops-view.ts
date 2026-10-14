@@ -30,7 +30,6 @@ export function renderLoops(root: HTMLElement, app: MapApp) {
     if (!target) return;
     const [kind, ...rest] = target.dataset.act!.split(":");
     const id = rest.join(":");
-    if (kind === "switch") return app.actions.switchLoop(id);
     if (kind === "flow-of") {
       const edge = edgesOf(app, [id])[0];
       if (edge) app.actions.toggle("flow", edge.id);
@@ -52,13 +51,10 @@ export function revealLoop(root: HTMLElement, id: string) {
 function loopSection(app: MapApp, loop: Loop): string {
   const family = FAMILIES[loop.family];
   const open = app.openLoops.has(loop.id);
-  const off = app.loopsOff.has(loop.id);
-  const active = loopActive(app, loop);
-  return `<section class="loop${open ? " open" : ""}${off ? " knocked" : ""}" data-loop="${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" style="--c:${family.color}">
+  return `<section class="loop${open ? " open" : ""}" data-loop="${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" style="--c:${family.color}">
     <header data-act="loop:${escapeHtml(loop.id)}">
       <span class="chev">${open ? "▾" : "▸"}</span><i class="dot"></i>
       <span class="title">${escapeHtml(loopTitle(loop, app.plain))}<small>${escapeHtml(app.plain ? family.plainTitle : family.title)} · ${loop.flows.length} flow${loop.flows.length === 1 ? "" : "s"}</small></span>
-      ${active ? `<button class="switch${off ? " off" : ""}" data-act="switch:${escapeHtml(loop.id)}" title="${off ? "Switch back on" : "Switch off: set its strengths to 1e-6 and re-run"}">${off ? "off" : "on"}</button>` : ""}
     </header>
     ${open ? loopBody(app, loop) : ""}
   </section>`;

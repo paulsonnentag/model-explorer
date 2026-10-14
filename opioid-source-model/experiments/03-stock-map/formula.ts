@@ -35,7 +35,7 @@ export function factorRows(app: MapApp, flow: string): string {
       const link = loop ? linkOf(loop, f.key) : null;
       if (loop && link) {
         const off = !isActive(app, link.strength);
-        return `<li class="f f-loop${off ? " off" : ""}${app.loopsOff.has(loop.id) ? " knocked" : ""}" style="--c:${FAMILIES[loop.family].color}" data-act="open-loop:${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" data-var="${escapeHtml(loop.driver)}" title="${escapeHtml(tooltip(app, f, link, loop))}">
+        return `<li class="f f-loop${off ? " off" : ""}" style="--c:${FAMILIES[loop.family].color}" data-act="open-loop:${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" data-var="${escapeHtml(loop.driver)}" title="${escapeHtml(tooltip(app, f, link, loop))}">
           <i>${op}</i><b data-live="x:${escapeHtml(f.key)}"></b><span>${FAMILIES[loop.family].noun}<sup>${exponent(app, link)}</sup></span></li>`;
       }
       return `<li class="f f-${f.kind}" data-hover="${hoverOf(app, flow, f)}" data-var="${escapeHtml(f.key)}" title="${escapeHtml(modelName(app, f.key))}"><i>${op}</i><b data-live="v:${escapeHtml(f.key)}"></b><span>${escapeHtml(factorName(app, flow, f))}</span></li>`;

@@ -27,14 +27,13 @@ export type MapApp = {
   runs: Runs;
   whatIf: WhatIf;
   current: RunResult;
-  // The same scenario with every loop switched back on; null while none is off.
+  // The run the dashed lines compare against: a finding's first alternative while another is applied.
   reference: RunResult | null;
   layout: MapLayout;
   loops: Loop[];
   inputs: ExternalInput[];
   factors: Map<string, Factor[] | null>;
   fitted: Map<string, number>;
-  loopsOff: Set<string>;
   year: number;
   maxFlow: number;
   plain: boolean;
@@ -51,8 +50,6 @@ export type MapApp = {
     setYear: (year: number) => void;
     toggle: (kind: Toggle, id: string) => void;
     hover: (hover: Hover) => void;
-    switchLoop: (id: string) => void;
-    restoreLoops: () => void;
     selectHypothesis: (id: string | null) => void;
     cycleHypothesis: (step: number) => void;
     applyAlternative: (hypothesis: string, alternative: string) => void;
