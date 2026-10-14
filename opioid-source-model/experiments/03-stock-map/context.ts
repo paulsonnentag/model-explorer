@@ -43,6 +43,9 @@ export type MapApp = {
   openStocks: Set<string>;
   compactStocks: Set<string>;
   hover: Hover;
+  // The unfolded hypothesis, and the "hypothesisId:alternativeId" the model is running, if any.
+  hypothesis: string | null;
+  alternative: string | null;
   cardOffsets: Map<string, [number, number]>;
   actions: {
     setYear: (year: number) => void;
@@ -50,6 +53,9 @@ export type MapApp = {
     hover: (hover: Hover) => void;
     switchLoop: (id: string) => void;
     restoreLoops: () => void;
+    selectHypothesis: (id: string | null) => void;
+    cycleHypothesis: (step: number) => void;
+    applyAlternative: (hypothesis: string, alternative: string) => void;
   };
 };
 
@@ -70,9 +76,9 @@ export function highlights(app: MapApp): { edges: Map<string, string>; nodes: Ma
   const hover = app.hover;
   if (hover?.kind === "loop") paintLoop(app.loops.find((l) => l.id === hover.id));
   if (hover?.kind === "input") paintEdges(edgesOf(app, app.inputs.find((i) => i.id === hover.id)?.flows ?? []), HOVER_COLOR);
-  if (hover?.kind === "stock") nodes.set(hover.id, HOVER_COLOR);
+  if (hover?.kind === "stock") for (const k of hover.id.split("|")) nodes.set(k, HOVER_COLOR);
   if (hover?.kind === "edge") paintEdges(app.layout.edges.filter((e) => e.id === hover.id), HOVER_COLOR);
-  if (hover?.kind === "flow") paintEdges(edgesOf(app, [hover.id]), HOVER_COLOR);
+  if (hover?.kind === "flow") paintEdges(edgesOf(app, hover.id.split("|")), HOVER_COLOR);
   if (hover?.kind === "var") {
     const { flows, people } = upstreamTerminals(app.sem, hover.id);
     paintEdges(edgesOf(app, flows), HOVER_COLOR);

@@ -1,6 +1,6 @@
 // Entry point: compiles the model, lays out every group of people by rule, finds the effects in the
-// equations, and plays the run over time. Everything unfolds in place: loops on the left, stocks and
-// flows on the map.
+// equations, and plays the run over time. Everything unfolds in place: the paper's hypotheses on the
+// left, stocks and flows on the map, loops on the right.
 
 import type { Bundle } from "../core/inputs.ts";
 import { compileModel } from "../core/compile.ts";
@@ -14,6 +14,7 @@ import { FUTURES, LEVERS, Runs, type WhatIf } from "../shared/runs.ts";
 import { buildSemantics } from "../shared/semantics.ts";
 import { peak } from "../shared/totals.ts";
 import { PART_COLORS, type Hover, type MapApp, type Toggle, edgeSeries, partLabel, partsOf, rangeLabel, valueAt } from "./context.ts";
+import { HYPOTHESES, alternativeWhatIf, renderHypotheses } from "./hypotheses.ts";
 import { layoutStockMap } from "./layout.ts";
 import { renderLoops, revealLoop, updateLoops } from "./loops-view.ts";
 import { renderCards, renderMap, updateMap } from "./map.ts";
@@ -57,13 +58,19 @@ async function main() {
     openStocks: new Set(),
     compactStocks: new Set(),
     hover: null,
+    hypothesis: null,
+    alternative: null,
     cardOffsets: new Map(),
-    actions: { setYear, toggle, hover, switchLoop, restoreLoops },
+    actions: { setYear, toggle, hover, switchLoop, restoreLoops, selectHypothesis, cycleHypothesis, applyAlternative },
   };
   // Widths use the base run's largest flow, so the same thickness means the same number in every scenario.
   app.maxFlow = Math.max(...app.layout.edges.map((e) => peak(edgeSeries(app, e))));
   renderControls();
   renderAll();
+  document.addEventListener("keydown", (e) => {
+    if ((e.target instanceof Element && e.target.closest("input, select, textarea")) || (e.key !== "ArrowLeft" && e.key !== "ArrowRight")) return;
+    cycleHypothesis(e.key === "ArrowRight" ? 1 : -1);
+  });
   byId("loading").classList.add("hidden");
 }
 
@@ -72,6 +79,7 @@ function renderAll() {
   renderLegend();
   renderMap(byId("map"), app);
   renderLoops(byId("loops"), app);
+  renderHypotheses(byId("hypotheses"), app);
 }
 
 function toggle(kind: Toggle, id: string) {
@@ -126,11 +134,49 @@ function rerun() {
   setWhatIf({ edits });
 }
 
-function setWhatIf(patch: Partial<WhatIf>) {
+// Any change made by hand leaves the hypothesis's alternative; while one is applied, the dashed
+// comparison is the hypothesis's first alternative instead of the same run with loops on.
+function setWhatIf(patch: Partial<WhatIf>, fromHypothesis = false) {
+  if (!fromHypothesis) app.alternative = null;
   app.whatIf = { ...app.whatIf, ...patch };
   app.current = app.runs.current(app.whatIf);
-  app.reference = app.whatIf.edits.size ? app.runs.current({ ...app.whatIf, edits: new Map() }) : null;
+  const active = activeAlternative();
+  if (active) app.reference = active.index > 0 ? app.runs.current(alternativeWhatIf(app, active.hypothesis.alternatives[0])) : null;
+  else app.reference = app.whatIf.edits.size ? app.runs.current({ ...app.whatIf, edits: new Map() }) : null;
   renderAll();
+}
+
+function selectHypothesis(id: string | null) {
+  app.hypothesis = id;
+  const hypothesis = HYPOTHESES.find((h) => h.id === id);
+  if (hypothesis) app.openLoops = new Set(hypothesis.loops);
+  renderHypotheses(byId("hypotheses"), app);
+  renderLoops(byId("loops"), app);
+  updateMap(byId("map"), app);
+  byId("hypotheses").querySelector(".hyp.open")?.scrollIntoView({ block: "nearest" });
+}
+
+function cycleHypothesis(step: number) {
+  const index = HYPOTHESES.findIndex((h) => h.id === app.hypothesis);
+  const next = index < 0 ? (step > 0 ? 0 : HYPOTHESES.length - 1) : (index + step + HYPOTHESES.length) % HYPOTHESES.length;
+  selectHypothesis(HYPOTHESES[next].id);
+}
+
+function applyAlternative(hypothesisId: string, alternativeId: string) {
+  const hypothesis = HYPOTHESES.find((h) => h.id === hypothesisId)!;
+  const alternative = hypothesis.alternatives.find((a) => a.id === alternativeId)!;
+  app.alternative = `${hypothesisId}:${alternativeId}`;
+  app.loopsOff = new Set(alternative.loopsOff ?? []);
+  setWhatIf(alternativeWhatIf(app, alternative), true);
+  renderControls();
+}
+
+function activeAlternative() {
+  if (!app.alternative) return null;
+  const [hypothesisId, alternativeId] = app.alternative.split(":");
+  const hypothesis = HYPOTHESES.find((h) => h.id === hypothesisId)!;
+  const index = hypothesis.alternatives.findIndex((a) => a.id === alternativeId);
+  return { hypothesis, alternative: hypothesis.alternatives[index], index };
 }
 
 function togglePlain(plain: boolean) {
@@ -169,7 +215,7 @@ function renderControls() {
   byId("controls").innerHTML = `
     <label>Future (2021–2032)<select id="ctl-future">${FUTURES.map((f) => option(f.name, f.label, f.name === app.whatIf.future)).join("")}</select></label>
     <label>Policy from 2022<select id="ctl-lever">${LEVERS.map((l) => option(l.name, l.label, l.name === app.whatIf.lever)).join("")}</select></label>
-    <label class="check"><input type="checkbox" id="ctl-nofent"> History without illicit fentanyl</label>
+    <label class="check"><input type="checkbox" id="ctl-nofent"${app.whatIf.noFentanyl ? " checked" : ""}> History without illicit fentanyl</label>
     ${plainToggle()}
     <div class="year">
       <button id="play" title="Play through the run">▶</button>
@@ -187,16 +233,24 @@ function renderControls() {
 function renderToolbar() {
   const total = app.layout.nodes.reduce((sum, n) => sum + valueAt(app, n.key), 0);
   const off = app.loops.filter((l) => app.loopsOff.has(l.id));
+  const active = activeAlternative();
+  const banner =
+    active && active.index > 0
+      ? `<span class="banner">Hypothesis ${HYPOTHESES.indexOf(active.hypothesis) + 1}: ${escapeHtml(active.alternative.label)} · dashed = ${escapeHtml(active.hypothesis.alternatives[0].label.toLowerCase())} <a data-do="fitted">Back</a></span>`
+      : off.length
+        ? `<span class="banner">${off.length === 1 ? "1 loop" : `${off.length} loops`} off: ${escapeHtml(off.map((l) => loopTitle(l, app.plain)).join(", "))} · dashed = with loops on <a data-do="restore">Switch all back on</a></span>`
+        : "";
   byId("toolbar").innerHTML = `
     <span class="group">Stocks <button data-do="stocks">Collapse all</button><button data-do="stocks+">Expand all</button></span>
     <span class="group">Flows <button data-do="flows">Collapse all</button><button data-do="flows+">Expand all</button></span>
     <button data-do="everything">Collapse everything</button>
-    ${off.length ? `<span class="banner">${off.length === 1 ? "1 loop" : `${off.length} loops`} off: ${escapeHtml(off.map((l) => loopTitle(l, app.plain)).join(", "))} · dashed = with loops on <a data-do="restore">Switch all back on</a></span>` : ""}
+    ${banner}
     <span class="summary">${formatNumber(total)} people tracked in ${Math.floor(app.year)}</span>`;
   byId("toolbar").onclick = (e) => {
     const action = (e.target as HTMLElement).closest<HTMLElement>("[data-do]")?.dataset.do;
     if (!action) return;
     if (action === "restore") return restoreLoops();
+    if (action === "fitted" && active) return applyAlternative(active.hypothesis.id, active.hypothesis.alternatives[0].id);
     collapse(action.replace("+", "") as "stocks" | "flows" | "everything", action.endsWith("+"));
   };
 }
@@ -207,7 +261,9 @@ function renderLegend() {
   const split = arrayed
     ? `<span class="sep"></span><span class="muted">Stacked by ${escapeHtml(rangeLabel(app, arrayed.key))}:</span>${parts.map((p, i) => `<span><i style="background:${PART_COLORS[i % PART_COLORS.length]}"></i>${escapeHtml(partLabel(app, p.label))}</span>`).join("")}`
     : "";
-  const ghost = app.loopsOff.size ? `<span class="sep"></span><span><i class="dashed"></i>Run with loops on</span>` : "";
+  const active = activeAlternative();
+  const compareTo = active ? (active.index > 0 ? active.hypothesis.alternatives[0].label : null) : app.loopsOff.size ? "Run with loops on" : null;
+  const ghost = compareTo ? `<span class="sep"></span><span><i class="dashed"></i>${escapeHtml(compareTo)}</span>` : "";
   byId("legend").innerHTML = `<span><i style="background:#9aa3ad"></i>Flow of people (thickness = people per year; click to unfold; hover or open a loop to colour the flows it changes)</span>${ghost}${split}`;
 }
 
