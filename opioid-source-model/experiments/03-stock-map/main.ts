@@ -1,10 +1,9 @@
-// Entry point: compiles the model, lays out every group of people by rule, finds the effects in the
-// equations, and plays the run over time. Everything unfolds in place: the papers' findings on the
-// left, stocks and flows on the map, loops on the right.
+// Entry point: compiles the model from opioid-model/ and lays out the trail. Panels open left to right
+// from the menu, or from links inside other panels; all of them show the same run of the model, and
+// whatever the pointer is over lights up on the map.
 
-import type { Bundle } from "../core/inputs.ts";
 import { compileModel } from "../core/compile.ts";
-import { formatNumber } from "../shared/chart.ts";
+import type { ModelFolder } from "../core/model-folder.ts";
 import { rateFactors } from "../shared/factors.ts";
 import { peopleFlows } from "../shared/flows.ts";
 import { escapeHtml } from "../shared/html.ts";
@@ -13,14 +12,16 @@ import { isPlain, plainToggle, setPlain } from "../shared/plain.ts";
 import { FUTURES, LEVERS, Runs, type WhatIf } from "../shared/runs.ts";
 import { buildSemantics } from "../shared/semantics.ts";
 import { peak } from "../shared/totals.ts";
-import { PART_COLORS, type Hover, type MapApp, type Toggle, edgeSeries, partLabel, partsOf, rangeLabel, valueAt } from "./context.ts";
-import { HYPOTHESES, alternativeWhatIf, renderHypotheses } from "./hypotheses.ts";
+import { type Hover, type MapApp, type Toggle, bindHover, edgeSeries } from "./context.ts";
+import { parseFinding } from "./finding-file.ts";
+import { alternativeWhatIf, findingOf } from "./findings.ts";
 import { layoutStockMap } from "./layout.ts";
-import { renderLoops, revealLoop, updateLoops } from "./loops-view.ts";
-import { renderCards, renderMap, updateMap } from "./map.ts";
+import { mapCanvas, renderCards, renderMap, updateMap } from "./map.ts";
+import { focusPanel, isPanelKind, panelBody, parseKey, redrawPanel, refreshTrail, renderTrail, updateTrail } from "./trail.ts";
 
 const FIRST_YEAR = 1999;
 const LAST_YEAR = 2032;
+const FITTED: WhatIf = { future: "Base", lever: "None", strength: "20", noFentanyl: false, edits: new Map() };
 
 let app: MapApp;
 let playTimer = 0;
@@ -28,21 +29,26 @@ let playTimer = 0;
 main();
 
 async function main() {
-  const bundle: Bundle = await (await fetch("/api/bundle")).json();
+  const bundle: ModelFolder = await (await fetch("/api/model")).json();
   const model = compileModel({ definitions: bundle.mdl.definitions, ranges: bundle.mdl.ranges, data: bundle.data });
   const sem = buildSemantics(bundle, model);
   const runs = new Runs(bundle, model);
-  const whatIf: WhatIf = { future: "Base", lever: "None", strength: "20", noFentanyl: false, edits: new Map() };
   const loops = findLoops(sem);
   const inputs = findInputs(sem);
   const defaults = model.defaults();
+  const lines = new Map<string, number>();
+  for (const d of bundle.mdl.definitions) if (!lines.has(d.key)) lines.set(d.key, d.line);
   app = {
     bundle,
+    findings: bundle.findings.map((f, i) => parseFinding(f.file, f.text, i + 1)),
+    panels: [],
+    focus: new Map(),
+    lines,
     model,
     sem,
     runs,
-    whatIf,
-    current: runs.current(whatIf),
+    whatIf: FITTED,
+    current: runs.current(FITTED),
     reference: null,
     layout: layoutStockMap(sem),
     loops,
@@ -57,121 +63,141 @@ async function main() {
     openStocks: new Set(),
     compactStocks: new Set(),
     hover: null,
-    hypothesis: null,
     alternative: null,
     cardOffsets: new Map(),
-    actions: { setYear, toggle, hover, selectHypothesis, cycleHypothesis, applyAlternative },
+    actions: { setYear, toggle, hover, setWhatIf: (patch) => setWhatIf(patch), open, close, applyAlternative },
   };
   // Widths use the base run's largest flow, so the same thickness means the same number in every scenario.
   app.maxFlow = Math.max(...app.layout.edges.map((e) => peak(edgeSeries(app, e))));
-  renderControls();
-  renderAll();
-  document.addEventListener("keydown", (e) => {
-    if ((e.target instanceof Element && e.target.closest("input, select, textarea")) || (e.key !== "ArrowLeft" && e.key !== "ArrowRight")) return;
-    cycleHypothesis(e.key === "ArrowRight" ? 1 : -1);
+  renderHeader();
+  const root = trail();
+  bindHover(root, app);
+  root.addEventListener("click", (e) => {
+    const target = e.target as Element;
+    const closing = target.closest<HTMLElement>("[data-close]");
+    if (closing) return close(closing.dataset.close!);
+    const link = target.closest<HTMLElement>("[data-open]");
+    if (link) {
+      e.preventDefault();
+      open(link.dataset.open!);
+    }
   });
+  renderTrail(root, app);
   byId("loading").classList.add("hidden");
 }
 
-function renderAll() {
-  renderToolbar();
-  renderLegend();
-  renderMap(byId("map"), app);
-  renderLoops(byId("loops"), app);
-  renderHypotheses(byId("hypotheses"), app);
+// Adds the panel at the end of the trail, or scrolls to it if it is already open.
+function open(spec: string) {
+  const at = spec.indexOf(">");
+  const key = at < 0 ? spec : spec.slice(0, at);
+  const focus = at < 0 ? undefined : spec.slice(at + 1);
+  if (!isPanelKind(parseKey(key).kind)) return;
+  if (focus) app.focus.set(key, focus);
+  if (!app.panels.includes(key)) {
+    app.panels.push(key);
+    panelsChanged();
+  }
+  focusPanel(trail(), app, key, focus);
+}
+
+function close(key: string) {
+  app.panels = app.panels.filter((k) => k !== key);
+  app.focus.delete(key);
+  panelsChanged();
+}
+
+// Open loops paint their arrows on the map, and the list of loops marks which are open.
+function panelsChanged() {
+  app.openLoops = new Set(app.panels.filter((k) => k.startsWith("loop:")).map((k) => parseKey(k).id));
+  renderTrail(trail(), app);
+  redrawPanel(trail(), app, "loops");
+  withMap((canvas) => updateMap(canvas, app));
 }
 
 function toggle(kind: Toggle, id: string) {
   const flip = (set: Set<string>) => (set.has(id) ? set.delete(id) : set.add(id));
-  if (kind === "loop") {
-    flip(app.openLoops);
-    renderLoops(byId("loops"), app);
-    if (app.openLoops.has(id)) revealLoop(byId("loops"), id);
-    return updateMap(byId("map"), app);
+  if (kind === "compact") {
+    flip(app.compactStocks);
+    return withMap((canvas) => renderMap(canvas, app));
   }
-  if (kind === "flow") {
-    flip(app.openFlows);
-    return renderCards(byId("map"), app);
-  }
-  if (kind === "stock") {
-    flip(app.openStocks);
-    return renderCards(byId("map"), app);
-  }
-  flip(app.compactStocks);
-  renderMap(byId("map"), app);
+  flip(kind === "flow" ? app.openFlows : app.openStocks);
+  withMap((canvas) => renderCards(canvas, app));
 }
 
 function hover(next: Hover) {
   app.hover = next;
-  updateMap(byId("map"), app);
+  withMap((canvas) => updateMap(canvas, app));
 }
 
 function setYear(year: number) {
   app.year = year;
   byId<HTMLInputElement>("year").value = String(year);
   byId("year-label").textContent = String(Math.floor(year));
-  updateMap(byId("map"), app);
-  updateLoops(byId("loops"), app);
-  renderToolbar();
+  updateTrail(trail(), app);
 }
 
-// Any change made by hand leaves the hypothesis's alternative; while one is applied, the dashed
-// comparison is the hypothesis's first alternative.
-function setWhatIf(patch: Partial<WhatIf>, fromHypothesis = false) {
-  if (!fromHypothesis) app.alternative = null;
+// Any change made by hand leaves the finding's run; while one is applied, the dashed comparison is the
+// finding's first run.
+function setWhatIf(patch: Partial<WhatIf>, fromFinding = false) {
+  if (!fromFinding) app.alternative = null;
   app.whatIf = { ...app.whatIf, ...patch };
   app.current = app.runs.current(app.whatIf);
   const active = activeAlternative();
-  app.reference = active && active.index > 0 ? app.runs.current(alternativeWhatIf(active.hypothesis.alternatives[0])) : null;
-  renderAll();
+  app.reference = active && active.index > 0 ? app.runs.current(alternativeWhatIf(active.finding.runs[0])) : null;
+  refreshTrail(trail(), app);
+  renderRunning();
 }
 
-function selectHypothesis(id: string | null) {
-  app.hypothesis = id;
-  const hypothesis = HYPOTHESES.find((h) => h.id === id);
-  if (hypothesis) app.openLoops = new Set(hypothesis.loops);
-  renderHypotheses(byId("hypotheses"), app);
-  renderLoops(byId("loops"), app);
-  updateMap(byId("map"), app);
-  byId("hypotheses").querySelector(".hyp.open")?.scrollIntoView({ block: "nearest" });
-}
-
-function cycleHypothesis(step: number) {
-  const index = HYPOTHESES.findIndex((h) => h.id === app.hypothesis);
-  const next = index < 0 ? (step > 0 ? 0 : HYPOTHESES.length - 1) : (index + step + HYPOTHESES.length) % HYPOTHESES.length;
-  selectHypothesis(HYPOTHESES[next].id);
-}
-
-function applyAlternative(hypothesisId: string, alternativeId: string) {
-  const hypothesis = HYPOTHESES.find((h) => h.id === hypothesisId)!;
-  const alternative = hypothesis.alternatives.find((a) => a.id === alternativeId)!;
-  app.alternative = `${hypothesisId}:${alternativeId}`;
-  setWhatIf(alternativeWhatIf(alternative), true);
-  renderControls();
+function applyAlternative(findingId: string, alternativeId: string) {
+  const finding = findingOf(app, findingId);
+  app.alternative = `${findingId}:${alternativeId}`;
+  setWhatIf(alternativeWhatIf(finding.runs.find((a) => a.id === alternativeId)!), true);
 }
 
 function activeAlternative() {
   if (!app.alternative) return null;
-  const [hypothesisId, alternativeId] = app.alternative.split(":");
-  const hypothesis = HYPOTHESES.find((h) => h.id === hypothesisId)!;
-  const index = hypothesis.alternatives.findIndex((a) => a.id === alternativeId);
-  return { hypothesis, alternative: hypothesis.alternatives[index], index };
+  const [findingId, alternativeId] = app.alternative.split(":");
+  const finding = findingOf(app, findingId);
+  const index = finding.runs.findIndex((a) => a.id === alternativeId);
+  return { finding, alternative: finding.runs[index], index };
+}
+
+function renderHeader() {
+  byId("controls").innerHTML = `
+    ${plainToggle()}
+    <div class="year">
+      <button id="play" title="Play through the run">▶</button>
+      <input id="year" type="range" min="${FIRST_YEAR}" max="${LAST_YEAR}" step="0.25" value="${app.year}">
+      <span id="year-label">${Math.floor(app.year)}</span>
+    </div>`;
+  byId("ctl-plain").addEventListener("change", (e) => togglePlain((e.target as HTMLInputElement).checked));
+  byId("year").addEventListener("input", (e) => setYear(Number((e.target as HTMLInputElement).value)));
+  byId("play").addEventListener("click", togglePlay);
+  byId("running").addEventListener("click", (e) => {
+    const target = e.target as Element;
+    if (target.closest("[data-reset]")) setWhatIf(FITTED);
+    else if (target.closest("[data-whatifs]")) open("whatifs");
+  });
+  renderRunning();
+}
+
+// What the whole trail is showing: the run, and what the dashed lines compare it with.
+function renderRunning() {
+  const w = app.whatIf;
+  const parts = [FUTURES.find((f) => f.name === w.future)?.label ?? w.future];
+  if (w.noFentanyl) parts.push("history without fentanyl");
+  if (w.lever !== "None") parts.push(`${LEVERS.find((l) => l.name === w.lever)?.label ?? w.lever}${app.runs.hasStrengths(w.lever) ? ` (${w.strength}%)` : ""}`);
+  const active = activeAlternative();
+  const from = active ? `Finding ${active.finding.number}: ${active.alternative.label}` : "";
+  const dashed = active && active.index > 0 ? ` · dashed = ${active.finding.runs[0].label.toLowerCase()}` : "";
+  const fitted = app.runs.isReference(w) && w.future === "Base";
+  byId("running").innerHTML = `<span class="muted">Running</span> <a data-whatifs title="Open the what-ifs">${escapeHtml(from || parts.join(" · "))}</a>${escapeHtml(dashed)}${fitted ? "" : ` <button data-reset>Back to the fitted run</button>`}`;
 }
 
 function togglePlain(plain: boolean) {
   setPlain(plain);
   app.plain = plain;
-  renderAll();
-}
-
-function collapse(what: "stocks" | "flows" | "everything", expand = false) {
-  if (what === "stocks" || what === "everything") {
-    app.compactStocks = expand ? new Set() : new Set(app.layout.nodes.map((n) => n.key));
-    if (!expand) app.openStocks.clear();
-  }
-  if (what === "flows" || what === "everything") app.openFlows = expand ? new Set(app.layout.edges.map((e) => e.id)) : new Set();
-  if (what === "everything") app.openLoops.clear();
-  renderAll();
+  refreshTrail(trail(), app);
 }
 
 function togglePlay() {
@@ -189,57 +215,13 @@ function togglePlay() {
   byId("play").textContent = playTimer ? "❚❚" : "▶";
 }
 
-function renderControls() {
-  const option = (value: string, label: string, selected: boolean) => `<option value="${value}"${selected ? " selected" : ""}>${escapeHtml(label)}</option>`;
-  byId("controls").innerHTML = `
-    <label>Future (2021–2032)<select id="ctl-future">${FUTURES.map((f) => option(f.name, f.label, f.name === app.whatIf.future)).join("")}</select></label>
-    <label>Policy from 2022<select id="ctl-lever">${LEVERS.map((l) => option(l.name, l.label, l.name === app.whatIf.lever)).join("")}</select></label>
-    <label class="check"><input type="checkbox" id="ctl-nofent"${app.whatIf.noFentanyl ? " checked" : ""}> History without illicit fentanyl</label>
-    ${plainToggle()}
-    <div class="year">
-      <button id="play" title="Play through the run">▶</button>
-      <input id="year" type="range" min="${FIRST_YEAR}" max="${LAST_YEAR}" step="0.25" value="${app.year}">
-      <span id="year-label">${Math.floor(app.year)}</span>
-    </div>`;
-  byId("ctl-future").addEventListener("change", (e) => setWhatIf({ future: (e.target as HTMLSelectElement).value }));
-  byId("ctl-lever").addEventListener("change", (e) => setWhatIf({ lever: (e.target as HTMLSelectElement).value }));
-  byId("ctl-nofent").addEventListener("change", (e) => setWhatIf({ noFentanyl: (e.target as HTMLInputElement).checked }));
-  byId("ctl-plain").addEventListener("change", (e) => togglePlain((e.target as HTMLInputElement).checked));
-  byId("year").addEventListener("input", (e) => setYear(Number((e.target as HTMLInputElement).value)));
-  byId("play").addEventListener("click", togglePlay);
+function withMap(fn: (canvas: HTMLElement) => void) {
+  const body = panelBody(trail(), "map");
+  if (body) fn(mapCanvas(body));
 }
 
-function renderToolbar() {
-  const total = app.layout.nodes.reduce((sum, n) => sum + valueAt(app, n.key), 0);
-  const active = activeAlternative();
-  const banner =
-    active && active.index > 0
-      ? `<span class="banner">Finding ${HYPOTHESES.indexOf(active.hypothesis) + 1}: ${escapeHtml(active.alternative.label)} · dashed = ${escapeHtml(active.hypothesis.alternatives[0].label.toLowerCase())} <a data-do="fitted">Back</a></span>`
-      : "";
-  byId("toolbar").innerHTML = `
-    <span class="group">Stocks <button data-do="stocks">Collapse all</button><button data-do="stocks+">Expand all</button></span>
-    <span class="group">Flows <button data-do="flows">Collapse all</button><button data-do="flows+">Expand all</button></span>
-    <button data-do="everything">Collapse everything</button>
-    ${banner}
-    <span class="summary">${formatNumber(total)} people tracked in ${Math.floor(app.year)}</span>`;
-  byId("toolbar").onclick = (e) => {
-    const action = (e.target as HTMLElement).closest<HTMLElement>("[data-do]")?.dataset.do;
-    if (!action) return;
-    if (action === "fitted" && active) return applyAlternative(active.hypothesis.id, active.hypothesis.alternatives[0].id);
-    collapse(action.replace("+", "") as "stocks" | "flows" | "everything", action.endsWith("+"));
-  };
-}
-
-function renderLegend() {
-  const arrayed = app.layout.nodes.find((n) => partsOf(app, [n.key]));
-  const parts = arrayed ? partsOf(app, [arrayed.key])! : [];
-  const split = arrayed
-    ? `<span class="sep"></span><span class="muted">Stacked by ${escapeHtml(rangeLabel(app, arrayed.key))}:</span>${parts.map((p, i) => `<span><i style="background:${PART_COLORS[i % PART_COLORS.length]}"></i>${escapeHtml(partLabel(app, p.label))}</span>`).join("")}`
-    : "";
-  const active = activeAlternative();
-  const compareTo = active && active.index > 0 ? active.hypothesis.alternatives[0].label : null;
-  const ghost = compareTo ? `<span class="sep"></span><span><i class="dashed"></i>${escapeHtml(compareTo)}</span>` : "";
-  byId("legend").innerHTML = `<span><i style="background:#9aa3ad"></i>Flow of people (thickness = people per year; click to unfold; hover or open a loop to colour the flows it changes)</span>${ghost}${split}`;
+function trail(): HTMLElement {
+  return byId("trail");
 }
 
 function byId<T extends HTMLElement = HTMLElement>(id: string): T {

@@ -1,27 +1,35 @@
-// The shared state of the stock map, and helpers for reading stocks, flows and loops out of the
-// current run.
+// The shared state of the trail, and helpers for reading stocks, flows and loops out of the current
+// run and for linking anything on screen to the file and line it comes from.
 
 import type { CompiledModel, RunResult } from "../core/compile.ts";
-import type { Bundle } from "../core/inputs.ts";
+import type { ModelFolder } from "../core/model-folder.ts";
 import { formatNumber } from "../shared/chart.ts";
 import type { Factor } from "../shared/factors.ts";
 import type { PeopleFlow } from "../shared/flows.ts";
 import { type ExternalInput, FAMILIES, INACTIVE, type Loop, upstreamTerminals } from "../shared/loops.ts";
+import { escapeHtml } from "../shared/html.ts";
 import { PLAIN_STOCKS, dejargon, plainFlowPhrase } from "../shared/plain.ts";
 import type { Runs, WhatIf } from "../shared/runs.ts";
 import type { Semantics } from "../shared/semantics.ts";
 import { totalAt, totalSeries } from "../shared/totals.ts";
 import { PLAIN_ELEMENTS, PLAIN_RANGES, PLAIN_STAGES, PLAIN_SUBSTANCES } from "./labels.ts";
+import type { Finding } from "./finding-file.ts";
 import { type MapEdge, type MapLayout, STAGES, SUBSTANCES } from "./layout.ts";
 
 // What the pointer is over: a loop or input row, or one variable in a formula. `var` lights up what a
 // variable is computed from; `path` is "loopId|inputId", the arrows through which an input feeds a loop.
 export type Hover = { kind: "loop" | "input" | "stock" | "edge" | "flow" | "var" | "path"; id: string } | null;
 
-export type Toggle = "loop" | "flow" | "stock" | "compact";
+export type Toggle = "flow" | "stock" | "compact";
 
 export type MapApp = {
-  bundle: Bundle;
+  bundle: ModelFolder;
+  findings: Finding[];
+  // The open panels, left to right, by key ("finding:peak", "source:model.mdl"); what each was last
+  // opened at ("var:hud total" for a source file), and the line each model variable starts on.
+  panels: string[];
+  focus: Map<string, string>;
+  lines: Map<string, number>;
   model: CompiledModel;
   sem: Semantics;
   runs: Runs;
@@ -42,17 +50,18 @@ export type MapApp = {
   openStocks: Set<string>;
   compactStocks: Set<string>;
   hover: Hover;
-  // The unfolded hypothesis, and the "hypothesisId:alternativeId" the model is running, if any.
-  hypothesis: string | null;
+  // The "findingId:alternativeId" the model is running, if any.
   alternative: string | null;
   cardOffsets: Map<string, [number, number]>;
   actions: {
     setYear: (year: number) => void;
     toggle: (kind: Toggle, id: string) => void;
     hover: (hover: Hover) => void;
-    selectHypothesis: (id: string | null) => void;
-    cycleHypothesis: (step: number) => void;
-    applyAlternative: (hypothesis: string, alternative: string) => void;
+    setWhatIf: (patch: Partial<WhatIf>) => void;
+    // `spec` is a panel key, optionally followed by ">" and what to show in it: "map>stock:hud no moud".
+    open: (spec: string) => void;
+    close: (key: string) => void;
+    applyAlternative: (finding: string, alternative: string) => void;
   };
 };
 
@@ -131,6 +140,7 @@ export function liveText(app: MapApp, spec: string): string {
   const id = rest.join(":");
   const was = (now: number, ref: number | null, format: (v: number) => string) =>
     ref !== null && Math.abs(ref - now) > Math.max(1e-9, Math.abs(ref) * 0.005) ? `${format(now)} (was ${format(ref)})` : format(now);
+  if (kind === "tracked") return `${formatNumber(app.layout.nodes.reduce((sum, n) => sum + valueAt(app, n.key), 0))} people tracked in ${Math.floor(app.year)}`;
   if (kind === "x") return was(valueAt(app, id), referenceValue(app, id), (v) => `×${v.toFixed(2)}`);
   if (kind === "flow") return was(valueAt(app, id), referenceValue(app, id), (v) => `${formatNumber(v)}/yr`);
   if (kind === "edge") {
@@ -271,4 +281,11 @@ export function explorerQuery(whatIf: WhatIf): string {
   if (whatIf.lever !== "None") params.set("lever", whatIf.lever);
   if (whatIf.noFentanyl) params.set("nofent", "1");
   return params.toString();
+}
+
+// A link to where a variable is defined in the model file.
+export function sourceLink(app: MapApp, key: string): string {
+  const line = app.lines.get(key);
+  if (!line) return "";
+  return `<a class="src" data-open="source:model.mdl>var:${escapeHtml(key)}" title="Open the definition in model.mdl">model.mdl:${line}</a>`;
 }

@@ -1,0 +1,3673 @@
+# Historical data the model is compared against, one row per data point, read from the authors' published
+# Base run (X8_final_Base.tab), which keeps data variables at their data points: a readable copy of the .vdf files.
+variable	time	value
+total with ud data	1999	1544880
+total with ud data	2000	1450390
+total with ud data	2001	1916100
+total with ud data	2002	2539350
+total with ud data	2003	2306870
+total with ud data	2004	2806840
+total with ud data	2005	2554820
+total with ud data	2006	2851290
+total with ud data	2007	2890300
+total with ud data	2008	3094350
+total with ud data	2009	3580300
+total with ud data	2010	3802990
+total with ud data	2011	3636920
+total with ud data	2012	4031380
+total with ud data	2013	3759580
+total with ud data	2014	4293950
+total with ud data	2015	4370120
+total with ud data	2016	4356040
+total with ud data	2017	4112390
+total with ud data	2018	3746740
+total with ud data	2019	3074420
+total with ud data	2020	3869700
+isyear[y99]	1999	1
+isyear[y99]	2000	0
+isyear[y99]	2001	0
+isyear[y99]	2002	0
+isyear[y99]	2003	0
+isyear[y99]	2004	0
+isyear[y99]	2005	0
+isyear[y99]	2006	0
+isyear[y99]	2007	0
+isyear[y99]	2008	0
+isyear[y99]	2009	0
+isyear[y99]	2010	0
+isyear[y99]	2011	0
+isyear[y99]	2012	0
+isyear[y99]	2013	0
+isyear[y99]	2014	0
+isyear[y99]	2015	0
+isyear[y99]	2016	0
+isyear[y99]	2017	0
+isyear[y99]	2018	0
+isyear[y99]	2019	0
+isyear[y99]	2020	0
+isyear[y99]	2021	0
+isyear[y00]	1999	0
+isyear[y00]	2000	1
+isyear[y00]	2001	0
+isyear[y00]	2002	0
+isyear[y00]	2003	0
+isyear[y00]	2004	0
+isyear[y00]	2005	0
+isyear[y00]	2006	0
+isyear[y00]	2007	0
+isyear[y00]	2008	0
+isyear[y00]	2009	0
+isyear[y00]	2010	0
+isyear[y00]	2011	0
+isyear[y00]	2012	0
+isyear[y00]	2013	0
+isyear[y00]	2014	0
+isyear[y00]	2015	0
+isyear[y00]	2016	0
+isyear[y00]	2017	0
+isyear[y00]	2018	0
+isyear[y00]	2019	0
+isyear[y00]	2020	0
+isyear[y00]	2021	0
+isyear[y01]	1999	0
+isyear[y01]	2000	0
+isyear[y01]	2001	1
+isyear[y01]	2002	0
+isyear[y01]	2003	0
+isyear[y01]	2004	0
+isyear[y01]	2005	0
+isyear[y01]	2006	0
+isyear[y01]	2007	0
+isyear[y01]	2008	0
+isyear[y01]	2009	0
+isyear[y01]	2010	0
+isyear[y01]	2011	0
+isyear[y01]	2012	0
+isyear[y01]	2013	0
+isyear[y01]	2014	0
+isyear[y01]	2015	0
+isyear[y01]	2016	0
+isyear[y01]	2017	0
+isyear[y01]	2018	0
+isyear[y01]	2019	0
+isyear[y01]	2020	0
+isyear[y01]	2021	0
+isyear[y02]	1999	0
+isyear[y02]	2000	0
+isyear[y02]	2001	0
+isyear[y02]	2002	1
+isyear[y02]	2003	0
+isyear[y02]	2004	0
+isyear[y02]	2005	0
+isyear[y02]	2006	0
+isyear[y02]	2007	0
+isyear[y02]	2008	0
+isyear[y02]	2009	0
+isyear[y02]	2010	0
+isyear[y02]	2011	0
+isyear[y02]	2012	0
+isyear[y02]	2013	0
+isyear[y02]	2014	0
+isyear[y02]	2015	0
+isyear[y02]	2016	0
+isyear[y02]	2017	0
+isyear[y02]	2018	0
+isyear[y02]	2019	0
+isyear[y02]	2020	0
+isyear[y02]	2021	0
+isyear[y03]	1999	0
+isyear[y03]	2000	0
+isyear[y03]	2001	0
+isyear[y03]	2002	0
+isyear[y03]	2003	1
+isyear[y03]	2004	0
+isyear[y03]	2005	0
+isyear[y03]	2006	0
+isyear[y03]	2007	0
+isyear[y03]	2008	0
+isyear[y03]	2009	0
+isyear[y03]	2010	0
+isyear[y03]	2011	0
+isyear[y03]	2012	0
+isyear[y03]	2013	0
+isyear[y03]	2014	0
+isyear[y03]	2015	0
+isyear[y03]	2016	0
+isyear[y03]	2017	0
+isyear[y03]	2018	0
+isyear[y03]	2019	0
+isyear[y03]	2020	0
+isyear[y03]	2021	0
+isyear[y04]	1999	0
+isyear[y04]	2000	0
+isyear[y04]	2001	0
+isyear[y04]	2002	0
+isyear[y04]	2003	0
+isyear[y04]	2004	1
+isyear[y04]	2005	0
+isyear[y04]	2006	0
+isyear[y04]	2007	0
+isyear[y04]	2008	0
+isyear[y04]	2009	0
+isyear[y04]	2010	0
+isyear[y04]	2011	0
+isyear[y04]	2012	0
+isyear[y04]	2013	0
+isyear[y04]	2014	0
+isyear[y04]	2015	0
+isyear[y04]	2016	0
+isyear[y04]	2017	0
+isyear[y04]	2018	0
+isyear[y04]	2019	0
+isyear[y04]	2020	0
+isyear[y04]	2021	0
+isyear[y05]	1999	0
+isyear[y05]	2000	0
+isyear[y05]	2001	0
+isyear[y05]	2002	0
+isyear[y05]	2003	0
+isyear[y05]	2004	0
+isyear[y05]	2005	1
+isyear[y05]	2006	0
+isyear[y05]	2007	0
+isyear[y05]	2008	0
+isyear[y05]	2009	0
+isyear[y05]	2010	0
+isyear[y05]	2011	0
+isyear[y05]	2012	0
+isyear[y05]	2013	0
+isyear[y05]	2014	0
+isyear[y05]	2015	0
+isyear[y05]	2016	0
+isyear[y05]	2017	0
+isyear[y05]	2018	0
+isyear[y05]	2019	0
+isyear[y05]	2020	0
+isyear[y05]	2021	0
+isyear[y06]	1999	0
+isyear[y06]	2000	0
+isyear[y06]	2001	0
+isyear[y06]	2002	0
+isyear[y06]	2003	0
+isyear[y06]	2004	0
+isyear[y06]	2005	0
+isyear[y06]	2006	1
+isyear[y06]	2007	0
+isyear[y06]	2008	0
+isyear[y06]	2009	0
+isyear[y06]	2010	0
+isyear[y06]	2011	0
+isyear[y06]	2012	0
+isyear[y06]	2013	0
+isyear[y06]	2014	0
+isyear[y06]	2015	0
+isyear[y06]	2016	0
+isyear[y06]	2017	0
+isyear[y06]	2018	0
+isyear[y06]	2019	0
+isyear[y06]	2020	0
+isyear[y06]	2021	0
+isyear[y07]	1999	0
+isyear[y07]	2000	0
+isyear[y07]	2001	0
+isyear[y07]	2002	0
+isyear[y07]	2003	0
+isyear[y07]	2004	0
+isyear[y07]	2005	0
+isyear[y07]	2006	0
+isyear[y07]	2007	1
+isyear[y07]	2008	0
+isyear[y07]	2009	0
+isyear[y07]	2010	0
+isyear[y07]	2011	0
+isyear[y07]	2012	0
+isyear[y07]	2013	0
+isyear[y07]	2014	0
+isyear[y07]	2015	0
+isyear[y07]	2016	0
+isyear[y07]	2017	0
+isyear[y07]	2018	0
+isyear[y07]	2019	0
+isyear[y07]	2020	0
+isyear[y07]	2021	0
+isyear[y08]	1999	0
+isyear[y08]	2000	0
+isyear[y08]	2001	0
+isyear[y08]	2002	0
+isyear[y08]	2003	0
+isyear[y08]	2004	0
+isyear[y08]	2005	0
+isyear[y08]	2006	0
+isyear[y08]	2007	0
+isyear[y08]	2008	1
+isyear[y08]	2009	0
+isyear[y08]	2010	0
+isyear[y08]	2011	0
+isyear[y08]	2012	0
+isyear[y08]	2013	0
+isyear[y08]	2014	0
+isyear[y08]	2015	0
+isyear[y08]	2016	0
+isyear[y08]	2017	0
+isyear[y08]	2018	0
+isyear[y08]	2019	0
+isyear[y08]	2020	0
+isyear[y08]	2021	0
+isyear[y09]	1999	0
+isyear[y09]	2000	0
+isyear[y09]	2001	0
+isyear[y09]	2002	0
+isyear[y09]	2003	0
+isyear[y09]	2004	0
+isyear[y09]	2005	0
+isyear[y09]	2006	0
+isyear[y09]	2007	0
+isyear[y09]	2008	0
+isyear[y09]	2009	1
+isyear[y09]	2010	0
+isyear[y09]	2011	0
+isyear[y09]	2012	0
+isyear[y09]	2013	0
+isyear[y09]	2014	0
+isyear[y09]	2015	0
+isyear[y09]	2016	0
+isyear[y09]	2017	0
+isyear[y09]	2018	0
+isyear[y09]	2019	0
+isyear[y09]	2020	0
+isyear[y09]	2021	0
+isyear[y10]	1999	0
+isyear[y10]	2000	0
+isyear[y10]	2001	0
+isyear[y10]	2002	0
+isyear[y10]	2003	0
+isyear[y10]	2004	0
+isyear[y10]	2005	0
+isyear[y10]	2006	0
+isyear[y10]	2007	0
+isyear[y10]	2008	0
+isyear[y10]	2009	0
+isyear[y10]	2010	1
+isyear[y10]	2011	0
+isyear[y10]	2012	0
+isyear[y10]	2013	0
+isyear[y10]	2014	0
+isyear[y10]	2015	0
+isyear[y10]	2016	0
+isyear[y10]	2017	0
+isyear[y10]	2018	0
+isyear[y10]	2019	0
+isyear[y10]	2020	0
+isyear[y10]	2021	0
+isyear[y11]	1999	0
+isyear[y11]	2000	0
+isyear[y11]	2001	0
+isyear[y11]	2002	0
+isyear[y11]	2003	0
+isyear[y11]	2004	0
+isyear[y11]	2005	0
+isyear[y11]	2006	0
+isyear[y11]	2007	0
+isyear[y11]	2008	0
+isyear[y11]	2009	0
+isyear[y11]	2010	0
+isyear[y11]	2011	1
+isyear[y11]	2012	0
+isyear[y11]	2013	0
+isyear[y11]	2014	0
+isyear[y11]	2015	0
+isyear[y11]	2016	0
+isyear[y11]	2017	0
+isyear[y11]	2018	0
+isyear[y11]	2019	0
+isyear[y11]	2020	0
+isyear[y11]	2021	0
+isyear[y12]	1999	0
+isyear[y12]	2000	0
+isyear[y12]	2001	0
+isyear[y12]	2002	0
+isyear[y12]	2003	0
+isyear[y12]	2004	0
+isyear[y12]	2005	0
+isyear[y12]	2006	0
+isyear[y12]	2007	0
+isyear[y12]	2008	0
+isyear[y12]	2009	0
+isyear[y12]	2010	0
+isyear[y12]	2011	0
+isyear[y12]	2012	1
+isyear[y12]	2013	0
+isyear[y12]	2014	0
+isyear[y12]	2015	0
+isyear[y12]	2016	0
+isyear[y12]	2017	0
+isyear[y12]	2018	0
+isyear[y12]	2019	0
+isyear[y12]	2020	0
+isyear[y12]	2021	0
+isyear[y13]	1999	0
+isyear[y13]	2000	0
+isyear[y13]	2001	0
+isyear[y13]	2002	0
+isyear[y13]	2003	0
+isyear[y13]	2004	0
+isyear[y13]	2005	0
+isyear[y13]	2006	0
+isyear[y13]	2007	0
+isyear[y13]	2008	0
+isyear[y13]	2009	0
+isyear[y13]	2010	0
+isyear[y13]	2011	0
+isyear[y13]	2012	0
+isyear[y13]	2013	1
+isyear[y13]	2014	0
+isyear[y13]	2015	0
+isyear[y13]	2016	0
+isyear[y13]	2017	0
+isyear[y13]	2018	0
+isyear[y13]	2019	0
+isyear[y13]	2020	0
+isyear[y13]	2021	0
+isyear[y14]	1999	0
+isyear[y14]	2000	0
+isyear[y14]	2001	0
+isyear[y14]	2002	0
+isyear[y14]	2003	0
+isyear[y14]	2004	0
+isyear[y14]	2005	0
+isyear[y14]	2006	0
+isyear[y14]	2007	0
+isyear[y14]	2008	0
+isyear[y14]	2009	0
+isyear[y14]	2010	0
+isyear[y14]	2011	0
+isyear[y14]	2012	0
+isyear[y14]	2013	0
+isyear[y14]	2014	1
+isyear[y14]	2015	0
+isyear[y14]	2016	0
+isyear[y14]	2017	0
+isyear[y14]	2018	0
+isyear[y14]	2019	0
+isyear[y14]	2020	0
+isyear[y14]	2021	0
+isyear[y15]	1999	0
+isyear[y15]	2000	0
+isyear[y15]	2001	0
+isyear[y15]	2002	0
+isyear[y15]	2003	0
+isyear[y15]	2004	0
+isyear[y15]	2005	0
+isyear[y15]	2006	0
+isyear[y15]	2007	0
+isyear[y15]	2008	0
+isyear[y15]	2009	0
+isyear[y15]	2010	0
+isyear[y15]	2011	0
+isyear[y15]	2012	0
+isyear[y15]	2013	0
+isyear[y15]	2014	0
+isyear[y15]	2015	1
+isyear[y15]	2016	0
+isyear[y15]	2017	0
+isyear[y15]	2018	0
+isyear[y15]	2019	0
+isyear[y15]	2020	0
+isyear[y15]	2021	0
+isyear[y16]	1999	0
+isyear[y16]	2000	0
+isyear[y16]	2001	0
+isyear[y16]	2002	0
+isyear[y16]	2003	0
+isyear[y16]	2004	0
+isyear[y16]	2005	0
+isyear[y16]	2006	0
+isyear[y16]	2007	0
+isyear[y16]	2008	0
+isyear[y16]	2009	0
+isyear[y16]	2010	0
+isyear[y16]	2011	0
+isyear[y16]	2012	0
+isyear[y16]	2013	0
+isyear[y16]	2014	0
+isyear[y16]	2015	0
+isyear[y16]	2016	1
+isyear[y16]	2017	0
+isyear[y16]	2018	0
+isyear[y16]	2019	0
+isyear[y16]	2020	0
+isyear[y16]	2021	0
+isyear[y17]	1999	0
+isyear[y17]	2000	0
+isyear[y17]	2001	0
+isyear[y17]	2002	0
+isyear[y17]	2003	0
+isyear[y17]	2004	0
+isyear[y17]	2005	0
+isyear[y17]	2006	0
+isyear[y17]	2007	0
+isyear[y17]	2008	0
+isyear[y17]	2009	0
+isyear[y17]	2010	0
+isyear[y17]	2011	0
+isyear[y17]	2012	0
+isyear[y17]	2013	0
+isyear[y17]	2014	0
+isyear[y17]	2015	0
+isyear[y17]	2016	0
+isyear[y17]	2017	1
+isyear[y17]	2018	0
+isyear[y17]	2019	0
+isyear[y17]	2020	0
+isyear[y17]	2021	0
+isyear[y18]	1999	0
+isyear[y18]	2000	0
+isyear[y18]	2001	0
+isyear[y18]	2002	0
+isyear[y18]	2003	0
+isyear[y18]	2004	0
+isyear[y18]	2005	0
+isyear[y18]	2006	0
+isyear[y18]	2007	0
+isyear[y18]	2008	0
+isyear[y18]	2009	0
+isyear[y18]	2010	0
+isyear[y18]	2011	0
+isyear[y18]	2012	0
+isyear[y18]	2013	0
+isyear[y18]	2014	0
+isyear[y18]	2015	0
+isyear[y18]	2016	0
+isyear[y18]	2017	0
+isyear[y18]	2018	1
+isyear[y18]	2019	0
+isyear[y18]	2020	0
+isyear[y18]	2021	0
+isyear[y19]	1999	0
+isyear[y19]	2000	0
+isyear[y19]	2001	0
+isyear[y19]	2002	0
+isyear[y19]	2003	0
+isyear[y19]	2004	0
+isyear[y19]	2005	0
+isyear[y19]	2006	0
+isyear[y19]	2007	0
+isyear[y19]	2008	0
+isyear[y19]	2009	0
+isyear[y19]	2010	0
+isyear[y19]	2011	0
+isyear[y19]	2012	0
+isyear[y19]	2013	0
+isyear[y19]	2014	0
+isyear[y19]	2015	0
+isyear[y19]	2016	0
+isyear[y19]	2017	0
+isyear[y19]	2018	0
+isyear[y19]	2019	1
+isyear[y19]	2020	0
+isyear[y19]	2021	0
+isyear[y20]	1999	0
+isyear[y20]	2000	0
+isyear[y20]	2001	0
+isyear[y20]	2002	0
+isyear[y20]	2003	0
+isyear[y20]	2004	0
+isyear[y20]	2005	0
+isyear[y20]	2006	0
+isyear[y20]	2007	0
+isyear[y20]	2008	0
+isyear[y20]	2009	0
+isyear[y20]	2010	0
+isyear[y20]	2011	0
+isyear[y20]	2012	0
+isyear[y20]	2013	0
+isyear[y20]	2014	0
+isyear[y20]	2015	0
+isyear[y20]	2016	0
+isyear[y20]	2017	0
+isyear[y20]	2018	0
+isyear[y20]	2019	0
+isyear[y20]	2020	1
+isyear[y20]	2021	0
+isyear[y21]	1999	0
+isyear[y21]	2000	0
+isyear[y21]	2001	0
+isyear[y21]	2002	0
+isyear[y21]	2003	0
+isyear[y21]	2004	0
+isyear[y21]	2005	0
+isyear[y21]	2006	0
+isyear[y21]	2007	0
+isyear[y21]	2008	0
+isyear[y21]	2009	0
+isyear[y21]	2010	0
+isyear[y21]	2011	0
+isyear[y21]	2012	0
+isyear[y21]	2013	0
+isyear[y21]	2014	0
+isyear[y21]	2015	0
+isyear[y21]	2016	0
+isyear[y21]	2017	0
+isyear[y21]	2018	0
+isyear[y21]	2019	0
+isyear[y21]	2020	0
+isyear[y21]	2021	1
+isyear[y22]	1999	0
+isyear[y22]	2000	0
+isyear[y22]	2001	0
+isyear[y22]	2002	0
+isyear[y22]	2003	0
+isyear[y22]	2004	0
+isyear[y22]	2005	0
+isyear[y22]	2006	0
+isyear[y22]	2007	0
+isyear[y22]	2008	0
+isyear[y22]	2009	0
+isyear[y22]	2010	0
+isyear[y22]	2011	0
+isyear[y22]	2012	0
+isyear[y22]	2013	0
+isyear[y22]	2014	0
+isyear[y22]	2015	0
+isyear[y22]	2016	0
+isyear[y22]	2017	0
+isyear[y22]	2018	0
+isyear[y22]	2019	0
+isyear[y22]	2020	0
+isyear[y22]	2021	0
+isyear[y23]	1999	0
+isyear[y23]	2000	0
+isyear[y23]	2001	0
+isyear[y23]	2002	0
+isyear[y23]	2003	0
+isyear[y23]	2004	0
+isyear[y23]	2005	0
+isyear[y23]	2006	0
+isyear[y23]	2007	0
+isyear[y23]	2008	0
+isyear[y23]	2009	0
+isyear[y23]	2010	0
+isyear[y23]	2011	0
+isyear[y23]	2012	0
+isyear[y23]	2013	0
+isyear[y23]	2014	0
+isyear[y23]	2015	0
+isyear[y23]	2016	0
+isyear[y23]	2017	0
+isyear[y23]	2018	0
+isyear[y23]	2019	0
+isyear[y23]	2020	0
+isyear[y23]	2021	0
+isyear[y24]	1999	0
+isyear[y24]	2000	0
+isyear[y24]	2001	0
+isyear[y24]	2002	0
+isyear[y24]	2003	0
+isyear[y24]	2004	0
+isyear[y24]	2005	0
+isyear[y24]	2006	0
+isyear[y24]	2007	0
+isyear[y24]	2008	0
+isyear[y24]	2009	0
+isyear[y24]	2010	0
+isyear[y24]	2011	0
+isyear[y24]	2012	0
+isyear[y24]	2013	0
+isyear[y24]	2014	0
+isyear[y24]	2015	0
+isyear[y24]	2016	0
+isyear[y24]	2017	0
+isyear[y24]	2018	0
+isyear[y24]	2019	0
+isyear[y24]	2020	0
+isyear[y24]	2021	0
+isyear[y25]	1999	0
+isyear[y25]	2000	0
+isyear[y25]	2001	0
+isyear[y25]	2002	0
+isyear[y25]	2003	0
+isyear[y25]	2004	0
+isyear[y25]	2005	0
+isyear[y25]	2006	0
+isyear[y25]	2007	0
+isyear[y25]	2008	0
+isyear[y25]	2009	0
+isyear[y25]	2010	0
+isyear[y25]	2011	0
+isyear[y25]	2012	0
+isyear[y25]	2013	0
+isyear[y25]	2014	0
+isyear[y25]	2015	0
+isyear[y25]	2016	0
+isyear[y25]	2017	0
+isyear[y25]	2018	0
+isyear[y25]	2019	0
+isyear[y25]	2020	0
+isyear[y25]	2021	0
+isyear[y26]	1999	0
+isyear[y26]	2000	0
+isyear[y26]	2001	0
+isyear[y26]	2002	0
+isyear[y26]	2003	0
+isyear[y26]	2004	0
+isyear[y26]	2005	0
+isyear[y26]	2006	0
+isyear[y26]	2007	0
+isyear[y26]	2008	0
+isyear[y26]	2009	0
+isyear[y26]	2010	0
+isyear[y26]	2011	0
+isyear[y26]	2012	0
+isyear[y26]	2013	0
+isyear[y26]	2014	0
+isyear[y26]	2015	0
+isyear[y26]	2016	0
+isyear[y26]	2017	0
+isyear[y26]	2018	0
+isyear[y26]	2019	0
+isyear[y26]	2020	0
+isyear[y26]	2021	0
+isyear[y27]	1999	0
+isyear[y27]	2000	0
+isyear[y27]	2001	0
+isyear[y27]	2002	0
+isyear[y27]	2003	0
+isyear[y27]	2004	0
+isyear[y27]	2005	0
+isyear[y27]	2006	0
+isyear[y27]	2007	0
+isyear[y27]	2008	0
+isyear[y27]	2009	0
+isyear[y27]	2010	0
+isyear[y27]	2011	0
+isyear[y27]	2012	0
+isyear[y27]	2013	0
+isyear[y27]	2014	0
+isyear[y27]	2015	0
+isyear[y27]	2016	0
+isyear[y27]	2017	0
+isyear[y27]	2018	0
+isyear[y27]	2019	0
+isyear[y27]	2020	0
+isyear[y27]	2021	0
+isyear[y28]	1999	0
+isyear[y28]	2000	0
+isyear[y28]	2001	0
+isyear[y28]	2002	0
+isyear[y28]	2003	0
+isyear[y28]	2004	0
+isyear[y28]	2005	0
+isyear[y28]	2006	0
+isyear[y28]	2007	0
+isyear[y28]	2008	0
+isyear[y28]	2009	0
+isyear[y28]	2010	0
+isyear[y28]	2011	0
+isyear[y28]	2012	0
+isyear[y28]	2013	0
+isyear[y28]	2014	0
+isyear[y28]	2015	0
+isyear[y28]	2016	0
+isyear[y28]	2017	0
+isyear[y28]	2018	0
+isyear[y28]	2019	0
+isyear[y28]	2020	0
+isyear[y28]	2021	0
+isyear[y29]	1999	0
+isyear[y29]	2000	0
+isyear[y29]	2001	0
+isyear[y29]	2002	0
+isyear[y29]	2003	0
+isyear[y29]	2004	0
+isyear[y29]	2005	0
+isyear[y29]	2006	0
+isyear[y29]	2007	0
+isyear[y29]	2008	0
+isyear[y29]	2009	0
+isyear[y29]	2010	0
+isyear[y29]	2011	0
+isyear[y29]	2012	0
+isyear[y29]	2013	0
+isyear[y29]	2014	0
+isyear[y29]	2015	0
+isyear[y29]	2016	0
+isyear[y29]	2017	0
+isyear[y29]	2018	0
+isyear[y29]	2019	0
+isyear[y29]	2020	0
+isyear[y29]	2021	0
+isyear[y30]	1999	0
+isyear[y30]	2000	0
+isyear[y30]	2001	0
+isyear[y30]	2002	0
+isyear[y30]	2003	0
+isyear[y30]	2004	0
+isyear[y30]	2005	0
+isyear[y30]	2006	0
+isyear[y30]	2007	0
+isyear[y30]	2008	0
+isyear[y30]	2009	0
+isyear[y30]	2010	0
+isyear[y30]	2011	0
+isyear[y30]	2012	0
+isyear[y30]	2013	0
+isyear[y30]	2014	0
+isyear[y30]	2015	0
+isyear[y30]	2016	0
+isyear[y30]	2017	0
+isyear[y30]	2018	0
+isyear[y30]	2019	0
+isyear[y30]	2020	0
+isyear[y30]	2021	0
+isyear[y31]	1999	0
+isyear[y31]	2000	0
+isyear[y31]	2001	0
+isyear[y31]	2002	0
+isyear[y31]	2003	0
+isyear[y31]	2004	0
+isyear[y31]	2005	0
+isyear[y31]	2006	0
+isyear[y31]	2007	0
+isyear[y31]	2008	0
+isyear[y31]	2009	0
+isyear[y31]	2010	0
+isyear[y31]	2011	0
+isyear[y31]	2012	0
+isyear[y31]	2013	0
+isyear[y31]	2014	0
+isyear[y31]	2015	0
+isyear[y31]	2016	0
+isyear[y31]	2017	0
+isyear[y31]	2018	0
+isyear[y31]	2019	0
+isyear[y31]	2020	0
+isyear[y31]	2021	0
+isyear[y32]	1999	0
+isyear[y32]	2000	0
+isyear[y32]	2001	0
+isyear[y32]	2002	0
+isyear[y32]	2003	0
+isyear[y32]	2004	0
+isyear[y32]	2005	0
+isyear[y32]	2006	0
+isyear[y32]	2007	0
+isyear[y32]	2008	0
+isyear[y32]	2009	0
+isyear[y32]	2010	0
+isyear[y32]	2011	0
+isyear[y32]	2012	0
+isyear[y32]	2013	0
+isyear[y32]	2014	0
+isyear[y32]	2015	0
+isyear[y32]	2016	0
+isyear[y32]	2017	0
+isyear[y32]	2018	0
+isyear[y32]	2019	0
+isyear[y32]	2020	0
+isyear[y32]	2021	0
+datavarbase[roud]	1999	770417
+datavarbase[roud]	2000	757479
+datavarbase[roud]	2001	1109100
+datavarbase[roud]	2002	1665920
+datavarbase[roud]	2003	1578240
+datavarbase[roud]	2004	1806260
+datavarbase[roud]	2005	1754590
+datavarbase[roud]	2006	1768850
+datavarbase[roud]	2007	1967310
+datavarbase[roud]	2008	1912900
+datavarbase[roud]	2009	2039040
+datavarbase[roud]	2010	2140500
+datavarbase[roud]	2011	1898580
+datavarbase[roud]	2012	2301340
+datavarbase[roud]	2013	1935810
+datavarbase[roud]	2014	2015600
+datavarbase[roud]	2015	2181670
+datavarbase[roud]	2016	2178980
+datavarbase[roud]	2017	1804720
+datavarbase[roud]	2018	1782700
+datavarbase[roud]	2019	1581220
+datavarbase[roud]	2020	2026210
+datavarbase[rouh]	1999	37111.4
+datavarbase[rouh]	2000	21928.6
+datavarbase[rouh]	2001	74780.5
+datavarbase[rouh]	2002	108749
+datavarbase[rouh]	2003	55584.8
+datavarbase[rouh]	2004	117961
+datavarbase[rouh]	2005	71442.6
+datavarbase[rouh]	2006	87060.8
+datavarbase[rouh]	2007	150573
+datavarbase[rouh]	2008	156783
+datavarbase[rouh]	2009	224461
+datavarbase[rouh]	2010	326888
+datavarbase[rouh]	2011	147533
+datavarbase[rouh]	2012	164063
+datavarbase[rouh]	2013	156537
+datavarbase[rouh]	2014	341831
+datavarbase[rouh]	2015	264583
+datavarbase[rouh]	2016	165522
+datavarbase[rouh]	2017	113889
+datavarbase[rouh]	2018	120245
+datavarbase[rouh]	2019	72522.2
+datavarbase[rouh]	2020	72490.8
+datavarbase[ndhu]	1999	356879
+datavarbase[ndhu]	2000	370785
+datavarbase[ndhu]	2001	637208
+datavarbase[ndhu]	2002	451003
+datavarbase[ndhu]	2003	349908
+datavarbase[ndhu]	2004	397416
+datavarbase[ndhu]	2005	447930
+datavarbase[ndhu]	2006	616585
+datavarbase[ndhu]	2007	320958
+datavarbase[ndhu]	2008	437112
+datavarbase[ndhu]	2009	668803
+datavarbase[ndhu]	2010	454737
+datavarbase[ndhu]	2011	419471
+datavarbase[ndhu]	2012	414767
+datavarbase[ndhu]	2013	494109
+datavarbase[ndhu]	2014	872376
+datavarbase[ndhu]	2015	571335
+datavarbase[ndhu]	2016	859859
+datavarbase[ndhu]	2017	805295
+datavarbase[ndhu]	2018	808562
+datavarbase[ndhu]	2019	832913
+datavarbase[ndhu]	2020	1179440
+datavarbase[hud]	1999	737349
+datavarbase[hud]	2000	670984
+datavarbase[hud]	2001	732227
+datavarbase[hud]	2002	764684
+datavarbase[hud]	2003	673044
+datavarbase[hud]	2004	882618
+datavarbase[hud]	2005	728787
+datavarbase[hud]	2006	995374
+datavarbase[hud]	2007	772413
+datavarbase[hud]	2008	1024670
+datavarbase[hud]	2009	1316790
+datavarbase[hud]	2010	1335600
+datavarbase[hud]	2011	1590810
+datavarbase[hud]	2012	1565980
+datavarbase[hud]	2013	1667230
+datavarbase[hud]	2014	1936510
+datavarbase[hud]	2015	1923870
+datavarbase[hud]	2016	2011540
+datavarbase[hud]	2017	2193780
+datavarbase[hud]	2018	1843790
+datavarbase[hud]	2019	1420680
+datavarbase[hud]	2020	1771000
+datavarbase[txbp]	2001.9375	0
+datavarbase[txbp]	2002	14.4839
+datavarbase[txbp]	2002.0625	57.9422
+datavarbase[txbp]	2002.125	322.805
+datavarbase[txbp]	2002.1875	697.289
+datavarbase[txbp]	2002.25	1144.52
+datavarbase[txbp]	2002.3125	1627.66
+datavarbase[txbp]	2002.375	2155.05
+datavarbase[txbp]	2002.4375	2683.34
+datavarbase[txbp]	2002.5	3187.45
+datavarbase[txbp]	2002.5625	3642.3
+datavarbase[txbp]	2002.625	4213.59
+datavarbase[txbp]	2002.6875	4980.23
+datavarbase[txbp]	2002.75	5899.34
+datavarbase[txbp]	2002.8125	6928.02
+datavarbase[txbp]	2002.875	7279.39
+datavarbase[txbp]	2002.9375	7962.87
+datavarbase[txbp]	2003	8817.32
+datavarbase[txbp]	2003.0625	9681.67
+datavarbase[txbp]	2003.125	10177.2
+datavarbase[txbp]	2003.1875	11340.7
+datavarbase[txbp]	2003.25	12700.5
+datavarbase[txbp]	2003.3125	13784.9
+datavarbase[txbp]	2003.375	14210.4
+datavarbase[txbp]	2003.4375	15321.1
+datavarbase[txbp]	2003.5	16468.7
+datavarbase[txbp]	2003.5625	17005.8
+datavarbase[txbp]	2003.625	18130.9
+datavarbase[txbp]	2003.6875	19178.8
+datavarbase[txbp]	2003.75	20170.4
+datavarbase[txbp]	2003.8125	21126.5
+datavarbase[txbp]	2003.875	22015.3
+datavarbase[txbp]	2003.9375	23099.7
+datavarbase[txbp]	2004	23475
+datavarbase[txbp]	2004.0625	22238.3
+datavarbase[txbp]	2004.125	22725.3
+datavarbase[txbp]	2004.1875	24348.1
+datavarbase[txbp]	2004.25	26030.1
+datavarbase[txbp]	2004.3125	26696.6
+datavarbase[txbp]	2004.375	28067.8
+datavarbase[txbp]	2004.4375	29394.4
+datavarbase[txbp]	2004.5	30478.8
+datavarbase[txbp]	2004.5625	31124.1
+datavarbase[txbp]	2004.625	32199.8
+datavarbase[txbp]	2004.6875	33125.6
+datavarbase[txbp]	2004.75	34281
+datavarbase[txbp]	2004.8125	36044.3
+datavarbase[txbp]	2004.875	37014.6
+datavarbase[txbp]	2004.9375	39058.5
+datavarbase[txbp]	2005	41035.2
+datavarbase[txbp]	2005.0625	41806.2
+datavarbase[txbp]	2005.125	41964.8
+datavarbase[txbp]	2005.1875	44415.3
+datavarbase[txbp]	2005.25	46737.5
+datavarbase[txbp]	2005.3125	46518
+datavarbase[txbp]	2005.375	49490.6
+datavarbase[txbp]	2005.4375	51448.5
+datavarbase[txbp]	2005.5	52703.2
+datavarbase[txbp]	2005.5625	53566
+datavarbase[txbp]	2005.625	56501.8
+datavarbase[txbp]	2005.6875	57930.5
+datavarbase[txbp]	2005.75	59280
+datavarbase[txbp]	2005.8125	61974.3
+datavarbase[txbp]	2005.875	63355.2
+datavarbase[txbp]	2005.9375	64462.1
+datavarbase[txbp]	2006	66819.2
+datavarbase[txbp]	2006.0625	71944.8
+datavarbase[txbp]	2006.125	71582.8
+datavarbase[txbp]	2006.1875	75866.3
+datavarbase[txbp]	2006.25	81165.5
+datavarbase[txbp]	2006.3125	83861.7
+datavarbase[txbp]	2006.375	88120.6
+datavarbase[txbp]	2006.4375	90421.3
+datavarbase[txbp]	2006.5	93091.1
+datavarbase[txbp]	2006.5625	98449.7
+datavarbase[txbp]	2006.625	101544
+datavarbase[txbp]	2006.6875	102479
+datavarbase[txbp]	2006.75	104879
+datavarbase[txbp]	2006.8125	112354
+datavarbase[txbp]	2006.875	113989
+datavarbase[txbp]	2006.9375	116194
+datavarbase[txbp]	2007	120563
+datavarbase[txbp]	2007.0625	128681
+datavarbase[txbp]	2007.125	129501
+datavarbase[txbp]	2007.1875	133346
+datavarbase[txbp]	2007.25	138196
+datavarbase[txbp]	2007.3125	142041
+datavarbase[txbp]	2007.375	146316
+datavarbase[txbp]	2007.4375	148060
+datavarbase[txbp]	2007.5	151159
+datavarbase[txbp]	2007.5625	159482
+datavarbase[txbp]	2007.625	161931
+datavarbase[txbp]	2007.6875	165236
+datavarbase[txbp]	2007.75	170039
+datavarbase[txbp]	2007.8125	176978
+datavarbase[txbp]	2007.875	175757
+datavarbase[txbp]	2007.9375	179719
+datavarbase[txbp]	2008	185369
+datavarbase[txbp]	2008.0625	189221
+datavarbase[txbp]	2008.125	188936
+datavarbase[txbp]	2008.1875	195279
+datavarbase[txbp]	2008.25	202186
+datavarbase[txbp]	2008.3125	203615
+datavarbase[txbp]	2008.375	206948
+datavarbase[txbp]	2008.4375	210968
+datavarbase[txbp]	2008.5	215422
+datavarbase[txbp]	2008.5625	220057
+datavarbase[txbp]	2008.625	220237
+datavarbase[txbp]	2008.6875	222191
+datavarbase[txbp]	2008.75	224573
+datavarbase[txbp]	2008.8125	226040
+datavarbase[txbp]	2008.875	224743
+datavarbase[txbp]	2008.9375	229855
+datavarbase[txbp]	2009	234995
+datavarbase[txbp]	2009.0625	233810
+datavarbase[txbp]	2009.125	234352
+datavarbase[txbp]	2009.1875	244548
+datavarbase[txbp]	2009.25	253989
+datavarbase[txbp]	2009.3125	252317
+datavarbase[txbp]	2009.375	254387
+datavarbase[txbp]	2009.4375	258277
+datavarbase[txbp]	2009.5	261608
+datavarbase[txbp]	2009.5625	262012
+datavarbase[txbp]	2009.625	266002
+datavarbase[txbp]	2009.6875	268265
+datavarbase[txbp]	2009.75	269193
+datavarbase[txbp]	2009.8125	269180
+datavarbase[txbp]	2009.875	274233
+datavarbase[txbp]	2009.9375	277865
+datavarbase[txbp]	2010	281038
+datavarbase[txbp]	2010.0625	284708
+datavarbase[txbp]	2010.125	284917
+datavarbase[txbp]	2010.1875	294877
+datavarbase[txbp]	2010.25	303469
+datavarbase[txbp]	2010.3125	299637
+datavarbase[txbp]	2010.375	306111
+datavarbase[txbp]	2010.4375	311501
+datavarbase[txbp]	2010.5	313807
+datavarbase[txbp]	2010.5625	311045
+datavarbase[txbp]	2010.625	319942
+datavarbase[txbp]	2010.6875	322109
+datavarbase[txbp]	2010.75	321082
+datavarbase[txbp]	2010.8125	320378
+datavarbase[txbp]	2010.875	323684
+datavarbase[txbp]	2010.9375	322988
+datavarbase[txbp]	2011	321016
+datavarbase[txbp]	2011.0625	320478
+datavarbase[txbp]	2011.125	322997
+datavarbase[txbp]	2011.1875	329765
+datavarbase[txbp]	2011.25	334161
+datavarbase[txbp]	2011.3125	329610
+datavarbase[txbp]	2011.375	336110
+datavarbase[txbp]	2011.4375	337693
+datavarbase[txbp]	2011.5	338100
+datavarbase[txbp]	2011.5625	341056
+datavarbase[txbp]	2011.625	348511
+datavarbase[txbp]	2011.6875	347949
+datavarbase[txbp]	2011.75	348408
+datavarbase[txbp]	2011.8125	358862
+datavarbase[txbp]	2011.875	357400
+datavarbase[txbp]	2011.9375	355642
+datavarbase[txbp]	2012	355563
+datavarbase[txbp]	2012.0625	359124
+datavarbase[txbp]	2012.125	356565
+datavarbase[txbp]	2012.1875	362792
+datavarbase[txbp]	2012.25	371476
+datavarbase[txbp]	2012.3125	376329
+datavarbase[txbp]	2012.375	379862
+datavarbase[txbp]	2012.4375	377981
+datavarbase[txbp]	2012.5	378030
+datavarbase[txbp]	2012.5625	387298
+datavarbase[txbp]	2012.625	387861
+datavarbase[txbp]	2012.6875	385903
+datavarbase[txbp]	2012.75	386970
+datavarbase[txbp]	2012.8125	396562
+datavarbase[txbp]	2012.875	391643
+datavarbase[txbp]	2012.9375	393157
+datavarbase[txbp]	2013	398268
+datavarbase[txbp]	2013.0625	404152
+datavarbase[txbp]	2013.125	401551
+datavarbase[txbp]	2013.1875	408226
+datavarbase[txbp]	2013.25	417634
+datavarbase[txbp]	2013.3125	423275
+datavarbase[txbp]	2013.375	426449
+datavarbase[txbp]	2013.4375	425590
+datavarbase[txbp]	2013.5	425983
+datavarbase[txbp]	2013.5625	432871
+datavarbase[txbp]	2013.625	431172
+datavarbase[txbp]	2013.6875	433238
+datavarbase[txbp]	2013.75	440797
+datavarbase[txbp]	2013.8125	455543
+datavarbase[txbp]	2013.875	449401
+datavarbase[txbp]	2013.9375	455754
+datavarbase[txbp]	2014	462211
+datavarbase[txbp]	2014.0625	456473
+datavarbase[txbp]	2014.125	451681
+datavarbase[txbp]	2014.1875	460235
+datavarbase[txbp]	2014.25	470752
+datavarbase[txbp]	2014.3125	471937
+datavarbase[txbp]	2014.375	470211
+datavarbase[txbp]	2014.4375	471944
+datavarbase[txbp]	2014.5	475084
+datavarbase[txbp]	2014.5625	477594
+datavarbase[txbp]	2014.625	473964
+datavarbase[txbp]	2014.6875	475418
+datavarbase[txbp]	2014.75	479999
+datavarbase[txbp]	2014.8125	485756
+datavarbase[txbp]	2014.875	480087
+datavarbase[txbp]	2014.9375	484579
+datavarbase[txbp]	2015	491316
+datavarbase[txbp]	2015.0625	492448
+datavarbase[txbp]	2015.125	494876
+datavarbase[txbp]	2015.1875	503412
+datavarbase[txbp]	2015.25	510526
+datavarbase[txbp]	2015.3125	508757
+datavarbase[txbp]	2015.375	512873
+datavarbase[txbp]	2015.4375	516468
+datavarbase[txbp]	2015.5	518085
+datavarbase[txbp]	2015.5625	516288
+datavarbase[txbp]	2015.625	525263
+datavarbase[txbp]	2015.6875	528368
+datavarbase[txbp]	2015.75	529812
+datavarbase[txbp]	2015.8125	533770
+datavarbase[txbp]	2015.875	538334
+datavarbase[txbp]	2015.9375	542945
+datavarbase[txbp]	2016	545177
+datavarbase[txbp]	2016.0625	542621
+datavarbase[txbp]	2016.125	537055
+datavarbase[txbp]	2016.1875	550463
+datavarbase[txbp]	2016.25	563275
+datavarbase[txbp]	2016.3125	556113
+datavarbase[txbp]	2016.375	568771
+datavarbase[txbp]	2016.4375	574501
+datavarbase[txbp]	2016.5	574418
+datavarbase[txbp]	2016.5625	569644
+datavarbase[txbp]	2016.625	580720
+datavarbase[txbp]	2016.6875	581004
+datavarbase[txbp]	2016.75	580307
+datavarbase[txbp]	2016.8125	588345
+datavarbase[txbp]	2016.875	588263
+datavarbase[txbp]	2016.9375	590701
+datavarbase[txbp]	2017	596624
+datavarbase[txbp]	2017.0625	606967
+datavarbase[txbp]	2017.125	598107
+datavarbase[txbp]	2017.1875	610290
+datavarbase[txbp]	2017.25	626296
+datavarbase[txbp]	2017.3125	629072
+datavarbase[txbp]	2017.375	640385
+datavarbase[txbp]	2017.4375	644417
+datavarbase[txbp]	2017.5	645385
+datavarbase[txbp]	2017.5625	647471
+datavarbase[txbp]	2017.625	656153
+datavarbase[txbp]	2017.6875	651853
+datavarbase[txbp]	2017.75	649805
+datavarbase[txbp]	2017.8125	665081
+datavarbase[txbp]	2017.875	665045
+datavarbase[txbp]	2017.9375	664772
+datavarbase[txbp]	2018	670955
+datavarbase[txbp]	2018.0625	690187
+datavarbase[txbp]	2018.125	678751
+datavarbase[txbp]	2018.1875	687815
+datavarbase[txbp]	2018.25	702174
+datavarbase[txbp]	2018.3125	706769
+datavarbase[txbp]	2018.375	712633
+datavarbase[txbp]	2018.4375	709921
+datavarbase[txbp]	2018.5	709545
+datavarbase[txbp]	2018.5625	722302
+datavarbase[txbp]	2018.625	730272
+datavarbase[txbp]	2018.6875	728771
+datavarbase[txbp]	2018.75	729808
+datavarbase[txbp]	2018.8125	745248
+datavarbase[txbp]	2018.875	740118
+datavarbase[txbp]	2018.9375	742972
+datavarbase[txbp]	2019	750450
+datavarbase[txbp]	2019.0625	759203
+datavarbase[txbp]	2019.125	752586
+datavarbase[txbp]	2019.1875	763544
+datavarbase[txbp]	2019.25	775468
+datavarbase[txbp]	2019.3125	771940
+datavarbase[txbp]	2019.375	780932
+datavarbase[txbp]	2019.4375	787135
+datavarbase[txbp]	2019.5	794478
+datavarbase[txbp]	2019.5625	806827
+datavarbase[txbp]	2019.625	802410
+datavarbase[txbp]	2019.6875	802604
+datavarbase[txbp]	2019.75	807408
+datavarbase[txbp]	2019.8125	816796
+datavarbase[txbp]	2019.875	804849
+datavarbase[txbp]	2019.9375	809959
+datavarbase[txbp]	2020	815070
+datavarbase[txmt]	1999	159054
+datavarbase[txmt]	2000	172497
+datavarbase[txmt]	2001	198998
+datavarbase[txmt]	2002	225500
+datavarbase[txmt]	2003	227003
+datavarbase[txmt]	2004	240961
+datavarbase[txmt]	2005	235836
+datavarbase[txmt]	2006	258752
+datavarbase[txmt]	2007	262684
+datavarbase[txmt]	2008	268071
+datavarbase[txmt]	2009	283177
+datavarbase[txmt]	2010	299643
+datavarbase[txmt]	2011	306440
+datavarbase[txmt]	2012	311718
+datavarbase[txmt]	2013	330308
+datavarbase[txmt]	2014	343576
+datavarbase[txmt]	2015	356843
+datavarbase[txmt]	2016	345443
+datavarbase[txmt]	2017	382867
+datavarbase[txmt]	2018	395708
+datavarbase[txmt]	2019	408550
+datavarbase[txmt]	2020	311531
+datavarbase[txvi]	1999	0
+datavarbase[txvi]	2000	0
+datavarbase[txvi]	2001	0
+datavarbase[txvi]	2002	0
+datavarbase[txvi]	2003	0
+datavarbase[txvi]	2004	0
+datavarbase[txvi]	2005	0
+datavarbase[txvi]	2006	0
+datavarbase[txvi]	2007	0
+datavarbase[txvi]	2008	0
+datavarbase[txvi]	2009	0
+datavarbase[txvi]	2010	434.771
+datavarbase[txvi]	2011	1543.52
+datavarbase[txvi]	2012	2990.27
+datavarbase[txvi]	2013	4705.69
+datavarbase[txvi]	2014	6685.27
+datavarbase[txvi]	2015	10849.4
+datavarbase[txvi]	2016	19529.1
+datavarbase[txvi]	2017	26956.6
+datavarbase[txvi]	2018	30646.6
+datavarbase[txvi]	2019	32227.2
+datavarbase[txvi]	2020	28917.1
+datavarbase[odrb]	1999	4098.12
+datavarbase[odrb]	2000	4665.33
+datavarbase[odrb]	2001	5784.24
+datavarbase[odrb]	2002	7542.82
+datavarbase[odrb]	2003	8574.24
+datavarbase[odrb]	2004	9535.14
+datavarbase[odrb]	2005	10534.8
+datavarbase[odrb]	2006	12213.3
+datavarbase[odrb]	2007	13350.2
+datavarbase[odrb]	2008	13585.2
+datavarbase[odrb]	2009	13542.4
+datavarbase[odrb]	2010	14509.1
+datavarbase[odrb]	2011	15049.1
+datavarbase[odrb]	2012	13854.8
+datavarbase[odrb]	2013	13006.5
+datavarbase[odrb]	2014	12728.6
+datavarbase[odrb]	2015	12254.5
+datavarbase[odrb]	2016	12132.6
+datavarbase[odrb]	2017	10843.2
+datavarbase[odrb]	2018	8871.71
+datavarbase[odrb]	2019	7633.73
+datavarbase[odrb]	2020	7311.39
+datavarbase[inrd]	1999	1622960
+datavarbase[inrd]	2000	2092000
+datavarbase[inrd]	2001	2034650
+datavarbase[inrd]	2002	1971350
+datavarbase[inrd]	2003	2086910
+datavarbase[inrd]	2004	2058020
+datavarbase[inrd]	2005	1863430
+datavarbase[inrd]	2006	1831140
+datavarbase[inrd]	2007	1834540
+datavarbase[inrd]	2008	1860030
+datavarbase[inrd]	2009	1863430
+datavarbase[inrd]	2010	1710480
+datavarbase[inrd]	2011	1604270
+datavarbase[inrd]	2012	1597470
+datavarbase[inrd]	2013	1307720
+datavarbase[inrd]	2014	1210850
+datavarbase[inrd]	2015	1163510
+datavarbase[inrd]	2016	1170630
+datavarbase[inrd]	2017	1100030
+datavarbase[inrd]	2018	1044210
+datavarbase[inrd]	2019	879476
+datavarbase[inrd]	2020	624081
+datavarbase[inht]	1999	323565
+datavarbase[inht]	2000	354677
+datavarbase[inht]	2001	479126
+datavarbase[inht]	2002	364011
+datavarbase[inht]	2003	286231
+datavarbase[inht]	2004	367122
+datavarbase[inht]	2005	336010
+datavarbase[inht]	2006	280008
+datavarbase[inht]	2007	329788
+datavarbase[inht]	2008	360900
+datavarbase[inht]	2009	581795
+datavarbase[inht]	2010	441791
+datavarbase[inht]	2011	553794
+datavarbase[inht]	2012	485348
+datavarbase[inht]	2013	525794
+datavarbase[inht]	2014	659575
+datavarbase[inht]	2015	420013
+datavarbase[inht]	2016	528905
+datavarbase[inht]	2017	252008
+datavarbase[inht]	2018	364011
+datavarbase[inht]	2019	155560
+datavarbase[inht]	2020	320454
+datavarbase[inhd]	1999	108892
+datavarbase[inhd]	2000	119363
+datavarbase[inhd]	2001	161244
+datavarbase[inhd]	2002	122504
+datavarbase[inhd]	2003	96327.7
+datavarbase[inhd]	2004	135256
+datavarbase[inhd]	2005	123793
+datavarbase[inhd]	2006	68573.5
+datavarbase[inhd]	2007	80764.3
+datavarbase[inhd]	2008	96239.9
+datavarbase[inhd]	2009	155145
+datavarbase[inhd]	2010	92721.6
+datavarbase[inhd]	2011	116228
+datavarbase[inhd]	2012	74439.9
+datavarbase[inhd]	2013	80643.2
+datavarbase[inhd]	2014	163787
+datavarbase[inhd]	2015	104298
+datavarbase[inhd]	2016	131339
+datavarbase[inhd]	2017	49172.2
+datavarbase[inhd]	2018	103493
+datavarbase[inhd]	2019	66397.7
+datavarbase[inhr]	1999	124448
+datavarbase[inhr]	2000	136414
+datavarbase[inhr]	2001	184279
+datavarbase[inhr]	2002	140004
+datavarbase[inhr]	2003	110089
+datavarbase[inhr]	2004	135256
+datavarbase[inhr]	2005	123793
+datavarbase[inhr]	2006	117146
+datavarbase[inhr]	2007	137972
+datavarbase[inhr]	2008	156390
+datavarbase[inhr]	2009	252111
+datavarbase[inhr]	2010	158172
+datavarbase[inhr]	2011	198272
+datavarbase[inhr]	2012	178656
+datavarbase[inhr]	2013	193544
+datavarbase[inhr]	2014	243467
+datavarbase[inhr]	2015	155038
+datavarbase[inhr]	2016	195233
+datavarbase[inhr]	2017	114735
+datavarbase[inhr]	2018	124906
+datavarbase[inhr]	2019	32250.3
+datavarbase[inho]	1999	90224.9
+datavarbase[inho]	2000	98900.4
+datavarbase[inho]	2001	133602
+datavarbase[inho]	2002	101503
+datavarbase[inho]	2003	79814.4
+datavarbase[inho]	2004	96611.1
+datavarbase[inho]	2005	88423.7
+datavarbase[inho]	2006	94288.6
+datavarbase[inho]	2007	111051
+datavarbase[inho]	2008	108270
+datavarbase[inho]	2009	174539
+datavarbase[inho]	2010	190897
+datavarbase[inho]	2011	239294
+datavarbase[inho]	2012	232252
+datavarbase[inho]	2013	251607
+datavarbase[inho]	2014	252321
+datavarbase[inho]	2015	160676
+datavarbase[inho]	2016	202333
+datavarbase[inho]	2017	88100.2
+datavarbase[inho]	2018	135612
+datavarbase[inho]	2019	56912.3
+datavarbase[odto]	1999	8063
+datavarbase[odto]	2000	8418
+datavarbase[odto]	2001	9502
+datavarbase[odto]	2002	11926
+datavarbase[odto]	2003	12967
+datavarbase[odto]	2004	13787
+datavarbase[odto]	2005	14959
+datavarbase[odto]	2006	17589
+datavarbase[odto]	2007	18563
+datavarbase[odto]	2008	19647
+datavarbase[odto]	2009	20473
+datavarbase[odto]	2010	21131
+datavarbase[odto]	2011	22847
+datavarbase[odto]	2012	23226
+datavarbase[odto]	2013	25115
+datavarbase[odto]	2014	28719
+datavarbase[odto]	2015	33203
+datavarbase[odto]	2016	42433
+datavarbase[odto]	2017	47882
+datavarbase[odto]	2018	47096
+datavarbase[odto]	2019	50178
+datavarbase[odto]	2020	69061
+average duration of medical opioid use data	1999	0.175194
+average duration of medical opioid use data	2000	0.177551
+average duration of medical opioid use data	2001	0.180685
+average duration of medical opioid use data	2002	0.177901
+average duration of medical opioid use data	2003	0.186094
+average duration of medical opioid use data	2004	0.197945
+average duration of medical opioid use data	2005	0.196887
+average duration of medical opioid use data	2006	0.187942
+average duration of medical opioid use data	2007	0.195102
+average duration of medical opioid use data	2008	0.204907
+average duration of medical opioid use data	2009	0.214984
+average duration of medical opioid use data	2010	0.215425
+average duration of medical opioid use data	2011	0.21729
+average duration of medical opioid use data	2012	0.216513
+average duration of medical opioid use data	2013	0.222461
+average duration of medical opioid use data	2014	0.218889
+average duration of medical opioid use data	2015	0.218534
+average duration of medical opioid use data	2016	0.210708
+average duration of medical opioid use data	2017	0.207954
+average duration of medical opioid use data	2018	0.208864
+average duration of medical opioid use data	2019	0.219558
+average duration of medical opioid use data	2020	0.234021
+average days per prescription data	1999	23.6306
+average days per prescription data	2000	22.9158
+average days per prescription data	2001	21.855
+average days per prescription data	2002	21.912
+average days per prescription data	2003	22.2303
+average days per prescription data	2004	22.197
+average days per prescription data	2005	21.7796
+average days per prescription data	2006	22.1525
+average days per prescription data	2007	21.5005
+average days per prescription data	2008	21.7944
+average days per prescription data	2009	21.7819
+average days per prescription data	2010	21.8396
+average days per prescription data	2011	22.018
+average days per prescription data	2012	21.8157
+average days per prescription data	2013	22.3149
+average days per prescription data	2014	22.202
+average days per prescription data	2015	23.3574
+average days per prescription data	2016	22.8842
+average days per prescription data	2017	22.5393
+average days per prescription data	2018	22.8204
+average days per prescription data	2019	23.7838
+average days per prescription data	2020	24.4476
+average mme per day data	1999	22.6447
+average mme per day data	2000	22.9244
+average mme per day data	2001	26.0099
+average mme per day data	2002	27.7042
+average mme per day data	2003	29.5768
+average mme per day data	2004	31.1929
+average mme per day data	2005	33.089
+average mme per day data	2006	34.6674
+average mme per day data	2007	38.1384
+average mme per day data	2008	39.9081
+average mme per day data	2009	41.3212
+average mme per day data	2010	43.2291
+average mme per day data	2011	42.9493
+average mme per day data	2012	41.7961
+average mme per day data	2013	40.4092
+average mme per day data	2014	40.4598
+average mme per day data	2015	39.1264
+average mme per day data	2016	39.6385
+average mme per day data	2017	38.9873
+average mme per day data	2018	36.4002
+average mme per day data	2019	32.734
+average mme per day data	2020	31.2973
+projection input data[fent]	1999	0
+projection input data[fent]	2000	0
+projection input data[fent]	2001	0
+projection input data[fent]	2002	0
+projection input data[fent]	2003	0
+projection input data[fent]	2004	0
+projection input data[fent]	2005	0
+projection input data[fent]	2006	0
+projection input data[fent]	2007	0.0107552
+projection input data[fent]	2008	0.00563149
+projection input data[fent]	2009	0.00577989
+projection input data[fent]	2010	0.0061042
+projection input data[fent]	2011	0.00538148
+projection input data[fent]	2012	0
+projection input data[fent]	2013	0.00640606
+projection input data[fent]	2014	0.027909
+projection input data[fent]	2015	0.0823173
+projection input data[fent]	2016	0.184736
+projection input data[fent]	2017	0.322101
+projection input data[fent]	2018	0.406104
+projection input data[fent]	2019	0.472717
+projection input data[fent]	2020	0.562129
+projection input data[hpi]	1999	1
+projection input data[hpi]	2000	1.01899
+projection input data[hpi]	2001	1.01266
+projection input data[hpi]	2002	0.848101
+projection input data[hpi]	2003	0.911392
+projection input data[hpi]	2004	0.873418
+projection input data[hpi]	2005	0.734177
+projection input data[hpi]	2006	0.797468
+projection input data[hpi]	2007	0.759494
+projection input data[hpi]	2008	0.675083
+projection input data[hpi]	2009	0.639124
+projection input data[hpi]	2010	0.681551
+projection input data[hpi]	2011	0.558072
+projection input data[hpi]	2012	0.587623
+projection input data[hpi]	2013	0.618685
+projection input data[hpi]	2014	0.638405
+projection input data[hpi]	2015	0.537105
+projection input data[hpi]	2016	0.491483
+projection input data[hpi]	2017	0.481224
+projection input data[hpi]	2018	0.487242
+projection input data[hpi]	2019	0.487242
+projection input data[mme]	1999	22.6447
+projection input data[mme]	2000	22.9244
+projection input data[mme]	2001	26.0099
+projection input data[mme]	2002	27.7042
+projection input data[mme]	2003	29.5768
+projection input data[mme]	2004	31.1929
+projection input data[mme]	2005	33.089
+projection input data[mme]	2006	34.6674
+projection input data[mme]	2007	38.1384
+projection input data[mme]	2008	39.9081
+projection input data[mme]	2009	41.3212
+projection input data[mme]	2010	43.2291
+projection input data[mme]	2011	42.9493
+projection input data[mme]	2012	41.7961
+projection input data[mme]	2013	40.4092
+projection input data[mme]	2014	40.4598
+projection input data[mme]	2015	39.1264
+projection input data[mme]	2016	39.6385
+projection input data[mme]	2017	38.9873
+projection input data[mme]	2018	36.4002
+projection input data[mme]	2019	32.734
+projection input data[mme]	2020	31.2973
+projection input data[bmdcap]	1999	0
+projection input data[bmdcap]	2000	0
+projection input data[bmdcap]	2001	0
+projection input data[bmdcap]	2002	0
+projection input data[bmdcap]	2003	1893
+projection input data[bmdcap]	2004	3256
+projection input data[bmdcap]	2005	5484
+projection input data[bmdcap]	2006	8555.5
+projection input data[bmdcap]	2007	10637
+projection input data[bmdcap]	2008	14365.3
+projection input data[bmdcap]	2009	15817.5
+projection input data[bmdcap]	2010	18023.5
+projection input data[bmdcap]	2011	20148
+projection input data[bmdcap]	2012	22198
+projection input data[bmdcap]	2013	23629
+projection input data[bmdcap]	2014	25738
+projection input data[bmdcap]	2015	28930.5
+projection input data[bmdcap]	2016	32123
+projection input data[bmdcap]	2017	42037
+projection input data[bmdcap]	2018	57426.5
+projection input data[bmdcap]	2019	66800
+projection input data[bmdcap]	2020	94223
+projection input data[bmdcap]	2021	114376
+projection input data[mmtcap]	1999	183665
+projection input data[mmtcap]	2000	199188
+projection input data[mmtcap]	2001	229790
+projection input data[mmtcap]	2002	260393
+projection input data[mmtcap]	2003	262128
+projection input data[mmtcap]	2004	278246
+projection input data[mmtcap]	2005	272328
+projection input data[mmtcap]	2006	298790
+projection input data[mmtcap]	2007	303330
+projection input data[mmtcap]	2008	309551
+projection input data[mmtcap]	2009	326994
+projection input data[mmtcap]	2010	346008
+projection input data[mmtcap]	2011	353857
+projection input data[mmtcap]	2012	359952
+projection input data[mmtcap]	2013	381418
+projection input data[mmtcap]	2014	396739
+projection input data[mmtcap]	2015	412059
+projection input data[mmtcap]	2016	398895
+projection input data[mmtcap]	2017	442110
+projection input data[mmtcap]	2018	456938
+projection input data[mmtcap]	2019	471767
+projection input data[mmtcap]	2020	359736
+projection input data[vivcap]	1999	0
+projection input data[vivcap]	2000	0
+projection input data[vivcap]	2001	0
+projection input data[vivcap]	2002	0
+projection input data[vivcap]	2003	0
+projection input data[vivcap]	2004	0
+projection input data[vivcap]	2005	0
+projection input data[vivcap]	2006	0
+projection input data[vivcap]	2007	0
+projection input data[vivcap]	2008	0
+projection input data[vivcap]	2009	0
+projection input data[vivcap]	2010	494.058
+projection input data[vivcap]	2011	1754
+projection input data[vivcap]	2012	3398.03
+projection input data[vivcap]	2013	5347.37
+projection input data[vivcap]	2014	7596.9
+projection input data[vivcap]	2015	12328.9
+projection input data[vivcap]	2016	22192.2
+projection input data[vivcap]	2017	30632.5
+projection input data[vivcap]	2018	34825.7
+projection input data[vivcap]	2019	36621.8
+projection input data[vivcap]	2020	32860.3
+projection input data[ptrx]	1999	57913400
+projection input data[ptrx]	2000	59397300
+projection input data[ptrx]	2001	60881200
+projection input data[ptrx]	2002	63323100
+projection input data[ptrx]	2003	63804500
+projection input data[ptrx]	2004	62682400
+projection input data[ptrx]	2005	64233700
+projection input data[ptrx]	2006	72484400
+projection input data[ptrx]	2007	71731600
+projection input data[ptrx]	2008	71966600
+projection input data[ptrx]	2009	70242700
+projection input data[ptrx]	2010	72196800
+projection input data[ptrx]	2011	72354200
+projection input data[ptrx]	2012	72620500
+projection input data[ptrx]	2013	69782300
+projection input data[ptrx]	2014	68452000
+projection input data[ptrx]	2015	67098900
+projection input data[ptrx]	2016	64662000
+projection input data[ptrx]	2017	57543400
+projection input data[ptrx]	2018	50847500
+projection input data[ptrx]	2019	45900200
+projection input data[ptrx]	2020	41264700
+projection input data[nxkd]	1999	1103.5
+projection input data[nxkd]	2000	3310.5
+projection input data[nxkd]	2001	4414
+projection input data[nxkd]	2002	5517.5
+projection input data[nxkd]	2003	9350.5
+projection input data[nxkd]	2004	13113.5
+projection input data[nxkd]	2005	14940.5
+projection input data[nxkd]	2006	24726.5
+projection input data[nxkd]	2007	26676.5
+projection input data[nxkd]	2008	35491
+projection input data[nxkd]	2009	39442
+projection input data[nxkd]	2010	47435
+projection input data[nxkd]	2011	49586
+projection input data[nxkd]	2012	69053
+projection input data[nxkd]	2013	141502
+projection input data[nxkd]	2014	211279
+projection input data[nxkd]	2015	325817
+projection input data[nxkd]	2016	573797
+projection input data[nxkd]	2017	916336
+projection input data[nxkd]	2018	1500490
+projection input data[nxkd]	2019	1931150
+projection input data[nxkd]	2020	2303620
+projection input data[adf]	1999	0
+projection input data[adf]	2000	0
+projection input data[adf]	2001	0
+projection input data[adf]	2002	0
+projection input data[adf]	2003	0
+projection input data[adf]	2004	0
+projection input data[adf]	2005	0
+projection input data[adf]	2006	0
+projection input data[adf]	2007	0
+projection input data[adf]	2008	0
+projection input data[adf]	2009	0.000128682
+projection input data[adf]	2010	0.03044
+projection input data[adf]	2011	0.103572
+projection input data[adf]	2012	0.0903876
+projection input data[adf]	2013	0.0851215
+projection input data[adf]	2014	0.0798222
+projection input data[adf]	2015	0.0756991
+projection input data[adf]	2016	0.0706481
+projection input data[adf]	2017	0.0653045
+projection input data[adf]	2018	0.0621789
+projection input data[adf]	2019	0.0557452
+projection input data[adf]	2020	0.0492723
+projection input data[rxpp]	1999	2.70605
+projection input data[rxpp]	2000	2.82801
+projection input data[rxpp]	2001	3.01761
+projection input data[rxpp]	2002	2.9634
+projection input data[rxpp]	2003	3.05547
+projection input data[rxpp]	2004	3.25494
+projection input data[rxpp]	2005	3.29958
+projection input data[rxpp]	2006	3.09665
+projection input data[rxpp]	2007	3.31212
+projection input data[rxpp]	2008	3.43166
+projection input data[rxpp]	2009	3.60249
+projection input data[rxpp]	2010	3.60035
+projection input data[rxpp]	2011	3.60208
+projection input data[rxpp]	2012	3.6225
+projection input data[rxpp]	2013	3.63874
+projection input data[rxpp]	2014	3.59853
+projection input data[rxpp]	2015	3.41497
+projection input data[rxpp]	2016	3.36077
+projection input data[rxpp]	2017	3.36759
+projection input data[rxpp]	2018	3.34066
+projection input data[rxpp]	2019	3.36945
+projection input data[rxpp]	2020	3.4939
+projection input data[rxdur]	1999	23.6306
+projection input data[rxdur]	2000	22.9158
+projection input data[rxdur]	2001	21.855
+projection input data[rxdur]	2002	21.912
+projection input data[rxdur]	2003	22.2303
+projection input data[rxdur]	2004	22.197
+projection input data[rxdur]	2005	21.7796
+projection input data[rxdur]	2006	22.1525
+projection input data[rxdur]	2007	21.5005
+projection input data[rxdur]	2008	21.7944
+projection input data[rxdur]	2009	21.7819
+projection input data[rxdur]	2010	21.8396
+projection input data[rxdur]	2011	22.018
+projection input data[rxdur]	2012	21.8157
+projection input data[rxdur]	2013	22.3149
+projection input data[rxdur]	2014	22.202
+projection input data[rxdur]	2015	23.3574
+projection input data[rxdur]	2016	22.8842
+projection input data[rxdur]	2017	22.5393
+projection input data[rxdur]	2018	22.8204
+projection input data[rxdur]	2019	23.7838
+projection input data[rxdur]	2020	24.4476
+patients with current month opioid rx iqvia	1999	10146100
+patients with current month opioid rx iqvia	1999.0625	10171100
+patients with current month opioid rx iqvia	1999.125	10196100
+patients with current month opioid rx iqvia	1999.1875	10221100
+patients with current month opioid rx iqvia	1999.25	10246100
+patients with current month opioid rx iqvia	1999.3125	10271100
+patients with current month opioid rx iqvia	1999.375	10296100
+patients with current month opioid rx iqvia	1999.4375	10321100
+patients with current month opioid rx iqvia	1999.5	10346100
+patients with current month opioid rx iqvia	1999.5625	10371100
+patients with current month opioid rx iqvia	1999.625	10396100
+patients with current month opioid rx iqvia	1999.6875	10421100
+patients with current month opioid rx iqvia	1999.75	10446100
+patients with current month opioid rx iqvia	1999.8125	10471100
+patients with current month opioid rx iqvia	1999.875	10496100
+patients with current month opioid rx iqvia	1999.9375	10521100
+patients with current month opioid rx iqvia	2000	10546100
+patients with current month opioid rx iqvia	2000.0625	10571100
+patients with current month opioid rx iqvia	2000.125	10596100
+patients with current month opioid rx iqvia	2000.1875	10621100
+patients with current month opioid rx iqvia	2000.25	10646100
+patients with current month opioid rx iqvia	2000.3125	10671100
+patients with current month opioid rx iqvia	2000.375	10696100
+patients with current month opioid rx iqvia	2000.4375	10721100
+patients with current month opioid rx iqvia	2000.5	10746100
+patients with current month opioid rx iqvia	2000.5625	10771100
+patients with current month opioid rx iqvia	2000.625	10796100
+patients with current month opioid rx iqvia	2000.6875	10821100
+patients with current month opioid rx iqvia	2000.75	10846100
+patients with current month opioid rx iqvia	2000.8125	10871100
+patients with current month opioid rx iqvia	2000.875	10896100
+patients with current month opioid rx iqvia	2000.9375	10921100
+patients with current month opioid rx iqvia	2001	11000300
+patients with current month opioid rx iqvia	2001.0625	11188000
+patients with current month opioid rx iqvia	2001.125	10680200
+patients with current month opioid rx iqvia	2001.1875	10854200
+patients with current month opioid rx iqvia	2001.25	11230300
+patients with current month opioid rx iqvia	2001.3125	11329300
+patients with current month opioid rx iqvia	2001.375	11409700
+patients with current month opioid rx iqvia	2001.4375	11202000
+patients with current month opioid rx iqvia	2001.5	11093800
+patients with current month opioid rx iqvia	2001.5625	11472900
+patients with current month opioid rx iqvia	2001.625	11479000
+patients with current month opioid rx iqvia	2001.6875	11241100
+patients with current month opioid rx iqvia	2001.75	11136700
+patients with current month opioid rx iqvia	2001.8125	11543600
+patients with current month opioid rx iqvia	2001.875	11129500
+patients with current month opioid rx iqvia	2001.9375	11135900
+patients with current month opioid rx iqvia	2002	11265300
+patients with current month opioid rx iqvia	2002.0625	11220400
+patients with current month opioid rx iqvia	2002.125	10670700
+patients with current month opioid rx iqvia	2002.1875	10902000
+patients with current month opioid rx iqvia	2002.25	11301900
+patients with current month opioid rx iqvia	2002.3125	11258400
+patients with current month opioid rx iqvia	2002.375	11447700
+patients with current month opioid rx iqvia	2002.4375	11428600
+patients with current month opioid rx iqvia	2002.5	11427200
+patients with current month opioid rx iqvia	2002.5625	11669600
+patients with current month opioid rx iqvia	2002.625	11669300
+patients with current month opioid rx iqvia	2002.6875	11637700
+patients with current month opioid rx iqvia	2002.75	11723300
+patients with current month opioid rx iqvia	2002.8125	12074600
+patients with current month opioid rx iqvia	2002.875	11512100
+patients with current month opioid rx iqvia	2002.9375	11628200
+patients with current month opioid rx iqvia	2003	11873600
+patients with current month opioid rx iqvia	2003.0625	11699700
+patients with current month opioid rx iqvia	2003.125	11405800
+patients with current month opioid rx iqvia	2003.1875	11765700
+patients with current month opioid rx iqvia	2003.25	12149300
+patients with current month opioid rx iqvia	2003.3125	11927100
+patients with current month opioid rx iqvia	2003.375	11829900
+patients with current month opioid rx iqvia	2003.4375	11983500
+patients with current month opioid rx iqvia	2003.5	12182300
+patients with current month opioid rx iqvia	2003.5625	12221300
+patients with current month opioid rx iqvia	2003.625	12362600
+patients with current month opioid rx iqvia	2003.6875	12267800
+patients with current month opioid rx iqvia	2003.75	12162800
+patients with current month opioid rx iqvia	2003.8125	12273000
+patients with current month opioid rx iqvia	2003.875	12206600
+patients with current month opioid rx iqvia	2003.9375	12322900
+patients with current month opioid rx iqvia	2004	12407700
+patients with current month opioid rx iqvia	2004.0625	12247200
+patients with current month opioid rx iqvia	2004.125	11902700
+patients with current month opioid rx iqvia	2004.1875	12269800
+patients with current month opioid rx iqvia	2004.25	12617500
+patients with current month opioid rx iqvia	2004.3125	12216600
+patients with current month opioid rx iqvia	2004.375	12333200
+patients with current month opioid rx iqvia	2004.4375	12454500
+patients with current month opioid rx iqvia	2004.5	12471000
+patients with current month opioid rx iqvia	2004.5625	12273800
+patients with current month opioid rx iqvia	2004.625	12452500
+patients with current month opioid rx iqvia	2004.6875	12323100
+patients with current month opioid rx iqvia	2004.75	12152100
+patients with current month opioid rx iqvia	2004.8125	12205900
+patients with current month opioid rx iqvia	2004.875	12145600
+patients with current month opioid rx iqvia	2004.9375	12279200
+patients with current month opioid rx iqvia	2005	12646800
+patients with current month opioid rx iqvia	2005.0625	13288300
+patients with current month opioid rx iqvia	2005.125	12749900
+patients with current month opioid rx iqvia	2005.1875	13205200
+patients with current month opioid rx iqvia	2005.25	13621500
+patients with current month opioid rx iqvia	2005.3125	12968700
+patients with current month opioid rx iqvia	2005.375	13585200
+patients with current month opioid rx iqvia	2005.4375	13717500
+patients with current month opioid rx iqvia	2005.5	13578400
+patients with current month opioid rx iqvia	2005.5625	13380700
+patients with current month opioid rx iqvia	2005.625	13903200
+patients with current month opioid rx iqvia	2005.6875	13757000
+patients with current month opioid rx iqvia	2005.75	13514800
+patients with current month opioid rx iqvia	2005.8125	13747700
+patients with current month opioid rx iqvia	2005.875	13587300
+patients with current month opioid rx iqvia	2005.9375	13520300
+patients with current month opioid rx iqvia	2006	13622800
+patients with current month opioid rx iqvia	2006.0625	13970200
+patients with current month opioid rx iqvia	2006.125	13198100
+patients with current month opioid rx iqvia	2006.1875	13576400
+patients with current month opioid rx iqvia	2006.25	14093400
+patients with current month opioid rx iqvia	2006.3125	13740300
+patients with current month opioid rx iqvia	2006.375	14141500
+patients with current month opioid rx iqvia	2006.4375	14121800
+patients with current month opioid rx iqvia	2006.5	14016200
+patients with current month opioid rx iqvia	2006.5625	14159100
+patients with current month opioid rx iqvia	2006.625	14473900
+patients with current month opioid rx iqvia	2006.6875	14062200
+patients with current month opioid rx iqvia	2006.75	13776200
+patients with current month opioid rx iqvia	2006.8125	14465400
+patients with current month opioid rx iqvia	2006.875	14093100
+patients with current month opioid rx iqvia	2006.9375	13895800
+patients with current month opioid rx iqvia	2007	13995000
+patients with current month opioid rx iqvia	2007.0625	14511300
+patients with current month opioid rx iqvia	2007.125	14131100
+patients with current month opioid rx iqvia	2007.1875	14173600
+patients with current month opioid rx iqvia	2007.25	14360600
+patients with current month opioid rx iqvia	2007.3125	14415200
+patients with current month opioid rx iqvia	2007.375	14518200
+patients with current month opioid rx iqvia	2007.4375	14369300
+patients with current month opioid rx iqvia	2007.5	14353800
+patients with current month opioid rx iqvia	2007.5625	14855100
+patients with current month opioid rx iqvia	2007.625	14616500
+patients with current month opioid rx iqvia	2007.6875	14454400
+patients with current month opioid rx iqvia	2007.75	14488700
+patients with current month opioid rx iqvia	2007.8125	14838200
+patients with current month opioid rx iqvia	2007.875	14106800
+patients with current month opioid rx iqvia	2007.9375	14303300
+patients with current month opioid rx iqvia	2008	14746500
+patients with current month opioid rx iqvia	2008.0625	14757300
+patients with current month opioid rx iqvia	2008.125	14296100
+patients with current month opioid rx iqvia	2008.1875	14668500
+patients with current month opioid rx iqvia	2008.25	15161600
+patients with current month opioid rx iqvia	2008.3125	15065500
+patients with current month opioid rx iqvia	2008.375	14957400
+patients with current month opioid rx iqvia	2008.4375	14993500
+patients with current month opioid rx iqvia	2008.5	15076300
+patients with current month opioid rx iqvia	2008.5625	15108500
+patients with current month opioid rx iqvia	2008.625	14816900
+patients with current month opioid rx iqvia	2008.6875	14734300
+patients with current month opioid rx iqvia	2008.75	14791000
+patients with current month opioid rx iqvia	2008.8125	14917000
+patients with current month opioid rx iqvia	2008.875	14476300
+patients with current month opioid rx iqvia	2008.9375	14777100
+patients with current month opioid rx iqvia	2009	15101100
+patients with current month opioid rx iqvia	2009.0625	14733100
+patients with current month opioid rx iqvia	2009.125	14366600
+patients with current month opioid rx iqvia	2009.1875	15056500
+patients with current month opioid rx iqvia	2009.25	15736200
+patients with current month opioid rx iqvia	2009.3125	15344500
+patients with current month opioid rx iqvia	2009.375	15219100
+patients with current month opioid rx iqvia	2009.4375	15454300
+patients with current month opioid rx iqvia	2009.5	15696900
+patients with current month opioid rx iqvia	2009.5625	15595400
+patients with current month opioid rx iqvia	2009.625	15751200
+patients with current month opioid rx iqvia	2009.6875	15632500
+patients with current month opioid rx iqvia	2009.75	15456300
+patients with current month opioid rx iqvia	2009.8125	15438600
+patients with current month opioid rx iqvia	2009.875	15406100
+patients with current month opioid rx iqvia	2009.9375	15523400
+patients with current month opioid rx iqvia	2010	15553000
+patients with current month opioid rx iqvia	2010.0625	15258800
+patients with current month opioid rx iqvia	2010.125	14841600
+patients with current month opioid rx iqvia	2010.1875	15431200
+patients with current month opioid rx iqvia	2010.25	15944300
+patients with current month opioid rx iqvia	2010.3125	15303500
+patients with current month opioid rx iqvia	2010.375	15560600
+patients with current month opioid rx iqvia	2010.4375	15730500
+patients with current month opioid rx iqvia	2010.5	15703800
+patients with current month opioid rx iqvia	2010.5625	15372100
+patients with current month opioid rx iqvia	2010.625	15967900
+patients with current month opioid rx iqvia	2010.6875	15864500
+patients with current month opioid rx iqvia	2010.75	15535500
+patients with current month opioid rx iqvia	2010.8125	15451700
+patients with current month opioid rx iqvia	2010.875	15529900
+patients with current month opioid rx iqvia	2010.9375	15598600
+patients with current month opioid rx iqvia	2011	15721900
+patients with current month opioid rx iqvia	2011.0625	15963200
+patients with current month opioid rx iqvia	2011.125	15697000
+patients with current month opioid rx iqvia	2011.1875	15992500
+patients with current month opioid rx iqvia	2011.25	16231400
+patients with current month opioid rx iqvia	2011.3125	15799600
+patients with current month opioid rx iqvia	2011.375	16169900
+patients with current month opioid rx iqvia	2011.4375	16111800
+patients with current month opioid rx iqvia	2011.5	15950000
+patients with current month opioid rx iqvia	2011.5625	16007500
+patients with current month opioid rx iqvia	2011.625	16356800
+patients with current month opioid rx iqvia	2011.6875	15923400
+patients with current month opioid rx iqvia	2011.75	15612100
+patients with current month opioid rx iqvia	2011.8125	16321500
+patients with current month opioid rx iqvia	2011.875	15953700
+patients with current month opioid rx iqvia	2011.9375	15752700
+patients with current month opioid rx iqvia	2012	15723300
+patients with current month opioid rx iqvia	2012.0625	15869700
+patients with current month opioid rx iqvia	2012.125	15018700
+patients with current month opioid rx iqvia	2012.1875	15130900
+patients with current month opioid rx iqvia	2012.25	15545600
+patients with current month opioid rx iqvia	2012.3125	15606000
+patients with current month opioid rx iqvia	2012.375	15705900
+patients with current month opioid rx iqvia	2012.4375	15434600
+patients with current month opioid rx iqvia	2012.5	15292000
+patients with current month opioid rx iqvia	2012.5625	15774100
+patients with current month opioid rx iqvia	2012.625	15723800
+patients with current month opioid rx iqvia	2012.6875	15390000
+patients with current month opioid rx iqvia	2012.75	15273400
+patients with current month opioid rx iqvia	2012.8125	15870200
+patients with current month opioid rx iqvia	2012.875	15245600
+patients with current month opioid rx iqvia	2012.9375	15308300
+patients with current month opioid rx iqvia	2013	15523800
+patients with current month opioid rx iqvia	2013.0625	15361300
+patients with current month opioid rx iqvia	2013.125	14718400
+patients with current month opioid rx iqvia	2013.1875	14943600
+patients with current month opioid rx iqvia	2013.25	15393300
+patients with current month opioid rx iqvia	2013.3125	15428600
+patients with current month opioid rx iqvia	2013.375	15525300
+patients with current month opioid rx iqvia	2013.4375	15454200
+patients with current month opioid rx iqvia	2013.5	15480500
+patients with current month opioid rx iqvia	2013.5625	15867300
+patients with current month opioid rx iqvia	2013.625	15524000
+patients with current month opioid rx iqvia	2013.6875	15308500
+patients with current month opioid rx iqvia	2013.75	15183600
+patients with current month opioid rx iqvia	2013.8125	15111300
+patients with current month opioid rx iqvia	2013.875	14253500
+patients with current month opioid rx iqvia	2013.9375	14550500
+patients with current month opioid rx iqvia	2014	14983400
+patients with current month opioid rx iqvia	2014.0625	14540600
+patients with current month opioid rx iqvia	2014.125	13870400
+patients with current month opioid rx iqvia	2014.1875	14218800
+patients with current month opioid rx iqvia	2014.25	14754500
+patients with current month opioid rx iqvia	2014.3125	14652000
+patients with current month opioid rx iqvia	2014.375	14490400
+patients with current month opioid rx iqvia	2014.4375	14588900
+patients with current month opioid rx iqvia	2014.5	14786800
+patients with current month opioid rx iqvia	2014.5625	14924400
+patients with current month opioid rx iqvia	2014.625	14627500
+patients with current month opioid rx iqvia	2014.6875	14475400
+patients with current month opioid rx iqvia	2014.75	14490900
+patients with current month opioid rx iqvia	2014.8125	14696200
+patients with current month opioid rx iqvia	2014.875	14163200
+patients with current month opioid rx iqvia	2014.9375	14418600
+patients with current month opioid rx iqvia	2015	14663400
+patients with current month opioid rx iqvia	2015.0625	14105100
+patients with current month opioid rx iqvia	2015.125	14009000
+patients with current month opioid rx iqvia	2015.1875	14310200
+patients with current month opioid rx iqvia	2015.25	14469200
+patients with current month opioid rx iqvia	2015.3125	13951400
+patients with current month opioid rx iqvia	2015.375	13920900
+patients with current month opioid rx iqvia	2015.4375	13959600
+patients with current month opioid rx iqvia	2015.5	13913900
+patients with current month opioid rx iqvia	2015.5625	13632100
+patients with current month opioid rx iqvia	2015.625	14048100
+patients with current month opioid rx iqvia	2015.6875	13895500
+patients with current month opioid rx iqvia	2015.75	13588300
+patients with current month opioid rx iqvia	2015.8125	13537200
+patients with current month opioid rx iqvia	2015.875	13498200
+patients with current month opioid rx iqvia	2015.9375	13626600
+patients with current month opioid rx iqvia	2016	13624800
+patients with current month opioid rx iqvia	2016.0625	13198000
+patients with current month opioid rx iqvia	2016.125	12637500
+patients with current month opioid rx iqvia	2016.1875	12995700
+patients with current month opioid rx iqvia	2016.25	13294600
+patients with current month opioid rx iqvia	2016.3125	12565500
+patients with current month opioid rx iqvia	2016.375	12935300
+patients with current month opioid rx iqvia	2016.4375	12999100
+patients with current month opioid rx iqvia	2016.5	12800000
+patients with current month opioid rx iqvia	2016.5625	12381800
+patients with current month opioid rx iqvia	2016.625	12673300
+patients with current month opioid rx iqvia	2016.6875	12424000
+patients with current month opioid rx iqvia	2016.75	12146800
+patients with current month opioid rx iqvia	2016.8125	12349300
+patients with current month opioid rx iqvia	2016.875	12060400
+patients with current month opioid rx iqvia	2016.9375	11983200
+patients with current month opioid rx iqvia	2017	11966400
+patients with current month opioid rx iqvia	2017.0625	11859500
+patients with current month opioid rx iqvia	2017.125	11211200
+patients with current month opioid rx iqvia	2017.1875	11364800
+patients with current month opioid rx iqvia	2017.25	11636600
+patients with current month opioid rx iqvia	2017.3125	11349600
+patients with current month opioid rx iqvia	2017.375	11572100
+patients with current month opioid rx iqvia	2017.4375	11464700
+patients with current month opioid rx iqvia	2017.5	11242700
+patients with current month opioid rx iqvia	2017.5625	11119700
+patients with current month opioid rx iqvia	2017.625	11341600
+patients with current month opioid rx iqvia	2017.6875	10972400
+patients with current month opioid rx iqvia	2017.75	10674400
+patients with current month opioid rx iqvia	2017.8125	11103000
+patients with current month opioid rx iqvia	2017.875	10814400
+patients with current month opioid rx iqvia	2017.9375	10654600
+patients with current month opioid rx iqvia	2018	10620200
+patients with current month opioid rx iqvia	2018.0625	10707200
+patients with current month opioid rx iqvia	2018.125	10178400
+patients with current month opioid rx iqvia	2018.1875	10316600
+patients with current month opioid rx iqvia	2018.25	10592300
+patients with current month opioid rx iqvia	2018.3125	10481400
+patients with current month opioid rx iqvia	2018.375	10575900
+patients with current month opioid rx iqvia	2018.4375	10357800
+patients with current month opioid rx iqvia	2018.5	10190000
+patients with current month opioid rx iqvia	2018.5625	10432000
+patients with current month opioid rx iqvia	2018.625	10438500
+patients with current month opioid rx iqvia	2018.6875	10135100
+patients with current month opioid rx iqvia	2018.75	9962030
+patients with current month opioid rx iqvia	2018.8125	10354400
+patients with current month opioid rx iqvia	2018.875	9923510
+patients with current month opioid rx iqvia	2018.9375	9941780
+patients with current month opioid rx iqvia	2019	10077700
+patients with current month opioid rx iqvia	2019.0625	10002900
+patients with current month opioid rx iqvia	2019.125	9596190
+patients with current month opioid rx iqvia	2019.1875	9455200
+patients with current month opioid rx iqvia	2019.25	9162610
+patients with current month opioid rx iqvia	2019.3125	8307210
+patients with current month opioid rx iqvia	2019.375	8966290
+patients with current month opioid rx iqvia	2019.4375	9518220
+patients with current month opioid rx iqvia	2019.5	9891710
+patients with current month opioid rx iqvia	2019.5625	10015800
+patients with current month opioid rx iqvia	2019.625	9799490
+patients with current month opioid rx iqvia	2019.6875	9706950
+patients with current month opioid rx iqvia	2019.75	9745800
+patients with current month opioid rx iqvia	2019.8125	9922800
+patients with current month opioid rx iqvia	2019.875	9458130
+patients with current month opioid rx iqvia	2019.9375	9557470
+patients with current month opioid rx iqvia	2020	9656810
+patients receiving opioid prescription annual iqvia	1999	57913400
+patients receiving opioid prescription annual iqvia	2000	59397300
+patients receiving opioid prescription annual iqvia	2001	60881200
+patients receiving opioid prescription annual iqvia	2002	63323100
+patients receiving opioid prescription annual iqvia	2003	63804500
+patients receiving opioid prescription annual iqvia	2004	62682400
+patients receiving opioid prescription annual iqvia	2005	64233700
+patients receiving opioid prescription annual iqvia	2006	72484400
+patients receiving opioid prescription annual iqvia	2007	71731600
+patients receiving opioid prescription annual iqvia	2008	71966600
+patients receiving opioid prescription annual iqvia	2009	70242700
+patients receiving opioid prescription annual iqvia	2010	72196800
+patients receiving opioid prescription annual iqvia	2011	72354200
+patients receiving opioid prescription annual iqvia	2012	72620500
+patients receiving opioid prescription annual iqvia	2013	69782300
+patients receiving opioid prescription annual iqvia	2014	68452000
+patients receiving opioid prescription annual iqvia	2015	67098900
+patients receiving opioid prescription annual iqvia	2016	64662000
+patients receiving opioid prescription annual iqvia	2017	57543400
+patients receiving opioid prescription annual iqvia	2018	50847500
+patients receiving opioid prescription annual iqvia	2019	45900200
+patients receiving opioid prescription annual iqvia	2020	41264700
+heroin price index data	1999	1
+heroin price index data	2000	1.01899
+heroin price index data	2001	1.01266
+heroin price index data	2002	0.848101
+heroin price index data	2003	0.911392
+heroin price index data	2004	0.873418
+heroin price index data	2005	0.734177
+heroin price index data	2006	0.797468
+heroin price index data	2007	0.759494
+heroin price index data	2008	0.675083
+heroin price index data	2009	0.639124
+heroin price index data	2010	0.681551
+heroin price index data	2011	0.558072
+heroin price index data	2012	0.587623
+heroin price index data	2013	0.618685
+heroin price index data	2014	0.638405
+heroin price index data	2015	0.537105
+heroin price index data	2016	0.491483
+heroin price index data	2017	0.481224
+heroin price index data	2018	0.487242
+heroin price index data	2019	0.487242
+prescriptions per person data	1999	2.70605
+prescriptions per person data	2000	2.82801
+prescriptions per person data	2001	3.01761
+prescriptions per person data	2002	2.9634
+prescriptions per person data	2003	3.05547
+prescriptions per person data	2004	3.25494
+prescriptions per person data	2005	3.29958
+prescriptions per person data	2006	3.09665
+prescriptions per person data	2007	3.31212
+prescriptions per person data	2008	3.43166
+prescriptions per person data	2009	3.60249
+prescriptions per person data	2010	3.60035
+prescriptions per person data	2011	3.60208
+prescriptions per person data	2012	3.6225
+prescriptions per person data	2013	3.63874
+prescriptions per person data	2014	3.59853
+prescriptions per person data	2015	3.41497
+prescriptions per person data	2016	3.36077
+prescriptions per person data	2017	3.36759
+prescriptions per person data	2018	3.34066
+prescriptions per person data	2019	3.36945
+prescriptions per person data	2020	3.4939
+bup providers data	1999	0
+bup providers data	2000	0
+bup providers data	2001	0
+bup providers data	2002	0
+bup providers data	2003	1893
+bup providers data	2004	3256
+bup providers data	2005	5484
+bup providers data	2006	8555.5
+bup providers data	2007	10637
+bup providers data	2008	14365.3
+bup providers data	2009	15817.5
+bup providers data	2010	18023.5
+bup providers data	2011	20148
+bup providers data	2012	22198
+bup providers data	2013	23629
+bup providers data	2014	25738
+bup providers data	2015	28930.5
+bup providers data	2016	32123
+bup providers data	2017	42037
+bup providers data	2018	57426.5
+bup providers data	2019	66800
+bup providers data	2020	94223
+bup providers data	2021	114376
+adf fraction of prescribed rx opioids base	1999	0
+adf fraction of prescribed rx opioids base	2000	0
+adf fraction of prescribed rx opioids base	2001	0
+adf fraction of prescribed rx opioids base	2002	0
+adf fraction of prescribed rx opioids base	2003	0
+adf fraction of prescribed rx opioids base	2004	0
+adf fraction of prescribed rx opioids base	2005	0
+adf fraction of prescribed rx opioids base	2006	0
+adf fraction of prescribed rx opioids base	2007	0
+adf fraction of prescribed rx opioids base	2008	0
+adf fraction of prescribed rx opioids base	2009	0.000128682
+adf fraction of prescribed rx opioids base	2010	0.03044
+adf fraction of prescribed rx opioids base	2011	0.103572
+adf fraction of prescribed rx opioids base	2012	0.0903876
+adf fraction of prescribed rx opioids base	2013	0.0851215
+adf fraction of prescribed rx opioids base	2014	0.0798222
+adf fraction of prescribed rx opioids base	2015	0.0756991
+adf fraction of prescribed rx opioids base	2016	0.0706481
+adf fraction of prescribed rx opioids base	2017	0.0653045
+adf fraction of prescribed rx opioids base	2018	0.0621789
+adf fraction of prescribed rx opioids base	2019	0.0557452
+adf fraction of prescribed rx opioids base	2020	0.0492723
+fraction of hud who use rx nsduh	1999	0.436704
+fraction of hud who use rx nsduh	2000	0.494329
+fraction of hud who use rx nsduh	2001	0.504523
+fraction of hud who use rx nsduh	2002	0.547294
+fraction of hud who use rx nsduh	2003	0.494719
+fraction of hud who use rx nsduh	2004	0.480288
+fraction of hud who use rx nsduh	2005	0.668857
+fraction of hud who use rx nsduh	2006	0.701468
+fraction of hud who use rx nsduh	2007	0.745807
+fraction of hud who use rx nsduh	2008	0.748344
+fraction of hud who use rx nsduh	2009	0.661456
+fraction of hud who use rx nsduh	2010	0.699658
+fraction of hud who use rx nsduh	2011	0.714523
+fraction of hud who use rx nsduh	2012	0.776046
+fraction of hud who use rx nsduh	2013	0.794105
+fraction of hud who use rx nsduh	2014	0.663574
+fraction of hud who use rx nsduh	2015	0.733097
+fraction of hud who use rx nsduh	2016	0.764026
+fraction of hud who use rx nsduh	2017	0.635452
+fraction of hud who use rx nsduh	2018	0.701884
+fraction of hud who use rx nsduh	2019	0.639454
+fraction of ndhu who use rx nsduh	1999	0.437508
+fraction of ndhu who use rx nsduh	2000	0.372362
+fraction of ndhu who use rx nsduh	2001	0.425927
+fraction of ndhu who use rx nsduh	2002	0.547816
+fraction of ndhu who use rx nsduh	2003	0.373221
+fraction of ndhu who use rx nsduh	2004	0.39139
+fraction of ndhu who use rx nsduh	2005	0.4878
+fraction of ndhu who use rx nsduh	2006	0.578039
+fraction of ndhu who use rx nsduh	2007	0.721622
+fraction of ndhu who use rx nsduh	2008	0.424347
+fraction of ndhu who use rx nsduh	2009	0.676851
+fraction of ndhu who use rx nsduh	2010	0.475428
+fraction of ndhu who use rx nsduh	2011	0.470888
+fraction of ndhu who use rx nsduh	2012	0.48412
+fraction of ndhu who use rx nsduh	2013	0.700068
+fraction of ndhu who use rx nsduh	2014	0.455053
+fraction of ndhu who use rx nsduh	2015	0.590433
+fraction of ndhu who use rx nsduh	2016	0.351161
+fraction of ndhu who use rx nsduh	2017	0.522758
+fraction of ndhu who use rx nsduh	2018	0.390974
+fraction of ndhu who use rx nsduh	2019	0.245773
+nx kits distributed hr iqvia	1999	1103.5
+nx kits distributed hr iqvia	2000	3310.5
+nx kits distributed hr iqvia	2001	4414
+nx kits distributed hr iqvia	2002	5517.5
+nx kits distributed hr iqvia	2003	9350.5
+nx kits distributed hr iqvia	2004	13113.5
+nx kits distributed hr iqvia	2005	14940.5
+nx kits distributed hr iqvia	2006	24726.5
+nx kits distributed hr iqvia	2007	26676.5
+nx kits distributed hr iqvia	2008	35491
+nx kits distributed hr iqvia	2009	39442
+nx kits distributed hr iqvia	2010	47435
+nx kits distributed hr iqvia	2011	49586
+nx kits distributed hr iqvia	2012	69053
+nx kits distributed hr iqvia	2013	141502
+nx kits distributed hr iqvia	2014	211279
+nx kits distributed hr iqvia	2015	325817
+nx kits distributed hr iqvia	2016	573797
+nx kits distributed hr iqvia	2017	916336
+nx kits distributed hr iqvia	2018	1500490
+nx kits distributed hr iqvia	2019	1931150
+nx kits distributed hr iqvia	2020	2303620
+avg mme per opioid rx iqvia	1999	535.108
+avg mme per opioid rx iqvia	2000	525.331
+avg mme per opioid rx iqvia	2001	568.445
+avg mme per opioid rx iqvia	2002	607.053
+avg mme per opioid rx iqvia	2003	657.504
+avg mme per opioid rx iqvia	2004	692.39
+avg mme per opioid rx iqvia	2005	720.666
+avg mme per opioid rx iqvia	2006	767.97
+avg mme per opioid rx iqvia	2007	819.994
+avg mme per opioid rx iqvia	2008	869.772
+avg mme per opioid rx iqvia	2009	900.056
+avg mme per opioid rx iqvia	2010	944.104
+avg mme per opioid rx iqvia	2011	945.659
+avg mme per opioid rx iqvia	2012	911.809
+avg mme per opioid rx iqvia	2013	901.727
+avg mme per opioid rx iqvia	2014	898.286
+avg mme per opioid rx iqvia	2015	913.892
+avg mme per opioid rx iqvia	2016	907.095
+avg mme per opioid rx iqvia	2017	878.745
+avg mme per opioid rx iqvia	2018	830.669
+avg mme per opioid rx iqvia	2019	778.541
+avg mme per opioid rx iqvia	2020	765.145
+fentanyl penetration curve nflis	1999	0
+fentanyl penetration curve nflis	2000	0
+fentanyl penetration curve nflis	2001	0
+fentanyl penetration curve nflis	2002	0
+fentanyl penetration curve nflis	2003	0
+fentanyl penetration curve nflis	2004	0
+fentanyl penetration curve nflis	2005	0
+fentanyl penetration curve nflis	2006	0
+fentanyl penetration curve nflis	2007	0.0107552
+fentanyl penetration curve nflis	2008	0.00563149
+fentanyl penetration curve nflis	2009	0.00577989
+fentanyl penetration curve nflis	2010	0.0061042
+fentanyl penetration curve nflis	2011	0.00538148
+fentanyl penetration curve nflis	2012	0
+fentanyl penetration curve nflis	2013	0.00640606
+fentanyl penetration curve nflis	2014	0.027909
+fentanyl penetration curve nflis	2015	0.0823173
+fentanyl penetration curve nflis	2016	0.184736
+fentanyl penetration curve nflis	2017	0.322101
+fentanyl penetration curve nflis	2018	0.406104
+fentanyl penetration curve nflis	2019	0.472717
+fentanyl penetration curve nflis	2020	0.562129
+mmt capacity estimated data	1999	183665
+mmt capacity estimated data	2000	199188
+mmt capacity estimated data	2001	229790
+mmt capacity estimated data	2002	260393
+mmt capacity estimated data	2003	262128
+mmt capacity estimated data	2004	278246
+mmt capacity estimated data	2005	272328
+mmt capacity estimated data	2006	298790
+mmt capacity estimated data	2007	303330
+mmt capacity estimated data	2008	309551
+mmt capacity estimated data	2009	326994
+mmt capacity estimated data	2010	346008
+mmt capacity estimated data	2011	353857
+mmt capacity estimated data	2012	359952
+mmt capacity estimated data	2013	381418
+mmt capacity estimated data	2014	396739
+mmt capacity estimated data	2015	412059
+mmt capacity estimated data	2016	398895
+mmt capacity estimated data	2017	442110
+mmt capacity estimated data	2018	456938
+mmt capacity estimated data	2019	471767
+mmt capacity estimated data	2020	359736
+population	1999	221123000
+population	2000	223280000
+population	2001	225636000
+population	2002	235143000
+population	2003	237682000
+population	2004	240515000
+population	2005	243220000
+population	2006	246022000
+population	2007	247845000
+population	2008	249815000
+population	2009	251816000
+population	2010	253619000
+population	2011	257599000
+population	2012	260057000
+population	2013	262391000
+population	2014	265123000
+population	2015	267694000
+population	2016	269430000
+population	2017	272103000
+population	2018	273753000
+population	2019	275221000
+population	2020	277196000
+population	2021	279162000
+total prescription opioid rx iqvia	1999	156717000
+total prescription opioid rx iqvia	2000	167976000
+total prescription opioid rx iqvia	2001	183716000
+total prescription opioid rx iqvia	2002	187651000
+total prescription opioid rx iqvia	2003	194953000
+total prescription opioid rx iqvia	2004	204028000
+total prescription opioid rx iqvia	2005	211944000
+total prescription opioid rx iqvia	2006	224459000
+total prescription opioid rx iqvia	2007	237584000
+total prescription opioid rx iqvia	2008	246965000
+total prescription opioid rx iqvia	2009	253048000
+total prescription opioid rx iqvia	2010	259934000
+total prescription opioid rx iqvia	2011	260626000
+total prescription opioid rx iqvia	2012	263068000
+total prescription opioid rx iqvia	2013	253919000
+total prescription opioid rx iqvia	2014	246326000
+total prescription opioid rx iqvia	2015	229141000
+total prescription opioid rx iqvia	2016	217314000
+total prescription opioid rx iqvia	2017	193783000
+total prescription opioid rx iqvia	2018	169864000
+total prescription opioid rx iqvia	2019	154658000
+total prescription opioid rx iqvia	2020	144175000
+total rx mme prescribed iqvia	1999	83860300000
+total rx mme prescribed iqvia	2000	88243000000
+total rx mme prescribed iqvia	2001	104432000000
+total rx mme prescribed iqvia	2002	113914000000
+total rx mme prescribed iqvia	2003	128182000000
+total rx mme prescribed iqvia	2004	141267000000
+total rx mme prescribed iqvia	2005	152741000000
+total rx mme prescribed iqvia	2006	172377000000
+total rx mme prescribed iqvia	2007	194817000000
+total rx mme prescribed iqvia	2008	214804000000
+total rx mme prescribed iqvia	2009	227758000000
+total rx mme prescribed iqvia	2010	245405000000
+total rx mme prescribed iqvia	2011	246463000000
+total rx mme prescribed iqvia	2012	239868000000
+total rx mme prescribed iqvia	2013	228966000000
+total rx mme prescribed iqvia	2014	221272000000
+total rx mme prescribed iqvia	2015	209410000000
+total rx mme prescribed iqvia	2016	197124000000
+total rx mme prescribed iqvia	2017	170286000000
+total rx mme prescribed iqvia	2018	141101000000
+total rx mme prescribed iqvia	2019	120408000000
+total rx mme prescribed iqvia	2020	110315000000
+viv capacity estimated data	1999	0
+viv capacity estimated data	2000	0
+viv capacity estimated data	2001	0
+viv capacity estimated data	2002	0
+viv capacity estimated data	2003	0
+viv capacity estimated data	2004	0
+viv capacity estimated data	2005	0
+viv capacity estimated data	2006	0
+viv capacity estimated data	2007	0
+viv capacity estimated data	2008	0
+viv capacity estimated data	2009	0
+viv capacity estimated data	2010	494.058
+viv capacity estimated data	2011	1754
+viv capacity estimated data	2012	3398.03
+viv capacity estimated data	2013	5347.37
+viv capacity estimated data	2014	7596.9
+viv capacity estimated data	2015	12328.9
+viv capacity estimated data	2016	22192.2
+viv capacity estimated data	2017	30632.5
+viv capacity estimated data	2018	34825.7
+viv capacity estimated data	2019	36621.8
+viv capacity estimated data	2020	32860.3
+tx point patients bup data	2001.9375	0
+tx point patients bup data	2002	14.4839
+tx point patients bup data	2002.0625	57.9422
+tx point patients bup data	2002.125	322.805
+tx point patients bup data	2002.1875	697.289
+tx point patients bup data	2002.25	1144.52
+tx point patients bup data	2002.3125	1627.66
+tx point patients bup data	2002.375	2155.05
+tx point patients bup data	2002.4375	2683.34
+tx point patients bup data	2002.5	3187.45
+tx point patients bup data	2002.5625	3642.3
+tx point patients bup data	2002.625	4213.59
+tx point patients bup data	2002.6875	4980.23
+tx point patients bup data	2002.75	5899.34
+tx point patients bup data	2002.8125	6928.02
+tx point patients bup data	2002.875	7279.39
+tx point patients bup data	2002.9375	7962.87
+tx point patients bup data	2003	8817.32
+tx point patients bup data	2003.0625	9681.67
+tx point patients bup data	2003.125	10177.2
+tx point patients bup data	2003.1875	11340.7
+tx point patients bup data	2003.25	12700.5
+tx point patients bup data	2003.3125	13784.9
+tx point patients bup data	2003.375	14210.4
+tx point patients bup data	2003.4375	15321.1
+tx point patients bup data	2003.5	16468.7
+tx point patients bup data	2003.5625	17005.8
+tx point patients bup data	2003.625	18130.9
+tx point patients bup data	2003.6875	19178.8
+tx point patients bup data	2003.75	20170.4
+tx point patients bup data	2003.8125	21126.5
+tx point patients bup data	2003.875	22015.3
+tx point patients bup data	2003.9375	23099.7
+tx point patients bup data	2004	23475
+tx point patients bup data	2004.0625	22238.3
+tx point patients bup data	2004.125	22725.3
+tx point patients bup data	2004.1875	24348.1
+tx point patients bup data	2004.25	26030.1
+tx point patients bup data	2004.3125	26696.6
+tx point patients bup data	2004.375	28067.8
+tx point patients bup data	2004.4375	29394.4
+tx point patients bup data	2004.5	30478.8
+tx point patients bup data	2004.5625	31124.1
+tx point patients bup data	2004.625	32199.8
+tx point patients bup data	2004.6875	33125.6
+tx point patients bup data	2004.75	34281
+tx point patients bup data	2004.8125	36044.3
+tx point patients bup data	2004.875	37014.6
+tx point patients bup data	2004.9375	39058.5
+tx point patients bup data	2005	41035.2
+tx point patients bup data	2005.0625	41806.2
+tx point patients bup data	2005.125	41964.8
+tx point patients bup data	2005.1875	44415.3
+tx point patients bup data	2005.25	46737.5
+tx point patients bup data	2005.3125	46518
+tx point patients bup data	2005.375	49490.6
+tx point patients bup data	2005.4375	51448.5
+tx point patients bup data	2005.5	52703.2
+tx point patients bup data	2005.5625	53566
+tx point patients bup data	2005.625	56501.8
+tx point patients bup data	2005.6875	57930.5
+tx point patients bup data	2005.75	59280
+tx point patients bup data	2005.8125	61974.3
+tx point patients bup data	2005.875	63355.2
+tx point patients bup data	2005.9375	64462.1
+tx point patients bup data	2006	66819.2
+tx point patients bup data	2006.0625	71944.8
+tx point patients bup data	2006.125	71582.8
+tx point patients bup data	2006.1875	75866.3
+tx point patients bup data	2006.25	81165.5
+tx point patients bup data	2006.3125	83861.7
+tx point patients bup data	2006.375	88120.6
+tx point patients bup data	2006.4375	90421.3
+tx point patients bup data	2006.5	93091.1
+tx point patients bup data	2006.5625	98449.7
+tx point patients bup data	2006.625	101544
+tx point patients bup data	2006.6875	102479
+tx point patients bup data	2006.75	104879
+tx point patients bup data	2006.8125	112354
+tx point patients bup data	2006.875	113989
+tx point patients bup data	2006.9375	116194
+tx point patients bup data	2007	120563
+tx point patients bup data	2007.0625	128681
+tx point patients bup data	2007.125	129501
+tx point patients bup data	2007.1875	133346
+tx point patients bup data	2007.25	138196
+tx point patients bup data	2007.3125	142041
+tx point patients bup data	2007.375	146316
+tx point patients bup data	2007.4375	148060
+tx point patients bup data	2007.5	151159
+tx point patients bup data	2007.5625	159482
+tx point patients bup data	2007.625	161931
+tx point patients bup data	2007.6875	165236
+tx point patients bup data	2007.75	170039
+tx point patients bup data	2007.8125	176978
+tx point patients bup data	2007.875	175757
+tx point patients bup data	2007.9375	179719
+tx point patients bup data	2008	185369
+tx point patients bup data	2008.0625	189221
+tx point patients bup data	2008.125	188936
+tx point patients bup data	2008.1875	195279
+tx point patients bup data	2008.25	202186
+tx point patients bup data	2008.3125	203615
+tx point patients bup data	2008.375	206948
+tx point patients bup data	2008.4375	210968
+tx point patients bup data	2008.5	215422
+tx point patients bup data	2008.5625	220057
+tx point patients bup data	2008.625	220237
+tx point patients bup data	2008.6875	222191
+tx point patients bup data	2008.75	224573
+tx point patients bup data	2008.8125	226040
+tx point patients bup data	2008.875	224743
+tx point patients bup data	2008.9375	229855
+tx point patients bup data	2009	234995
+tx point patients bup data	2009.0625	233810
+tx point patients bup data	2009.125	234352
+tx point patients bup data	2009.1875	244548
+tx point patients bup data	2009.25	253989
+tx point patients bup data	2009.3125	252317
+tx point patients bup data	2009.375	254387
+tx point patients bup data	2009.4375	258277
+tx point patients bup data	2009.5	261608
+tx point patients bup data	2009.5625	262012
+tx point patients bup data	2009.625	266002
+tx point patients bup data	2009.6875	268265
+tx point patients bup data	2009.75	269193
+tx point patients bup data	2009.8125	269180
+tx point patients bup data	2009.875	274233
+tx point patients bup data	2009.9375	277865
+tx point patients bup data	2010	281038
+tx point patients bup data	2010.0625	284708
+tx point patients bup data	2010.125	284917
+tx point patients bup data	2010.1875	294877
+tx point patients bup data	2010.25	303469
+tx point patients bup data	2010.3125	299637
+tx point patients bup data	2010.375	306111
+tx point patients bup data	2010.4375	311501
+tx point patients bup data	2010.5	313807
+tx point patients bup data	2010.5625	311045
+tx point patients bup data	2010.625	319942
+tx point patients bup data	2010.6875	322109
+tx point patients bup data	2010.75	321082
+tx point patients bup data	2010.8125	320378
+tx point patients bup data	2010.875	323684
+tx point patients bup data	2010.9375	322988
+tx point patients bup data	2011	321016
+tx point patients bup data	2011.0625	320478
+tx point patients bup data	2011.125	322997
+tx point patients bup data	2011.1875	329765
+tx point patients bup data	2011.25	334161
+tx point patients bup data	2011.3125	329610
+tx point patients bup data	2011.375	336110
+tx point patients bup data	2011.4375	337693
+tx point patients bup data	2011.5	338100
+tx point patients bup data	2011.5625	341056
+tx point patients bup data	2011.625	348511
+tx point patients bup data	2011.6875	347949
+tx point patients bup data	2011.75	348408
+tx point patients bup data	2011.8125	358862
+tx point patients bup data	2011.875	357400
+tx point patients bup data	2011.9375	355642
+tx point patients bup data	2012	355563
+tx point patients bup data	2012.0625	359124
+tx point patients bup data	2012.125	356565
+tx point patients bup data	2012.1875	362792
+tx point patients bup data	2012.25	371476
+tx point patients bup data	2012.3125	376329
+tx point patients bup data	2012.375	379862
+tx point patients bup data	2012.4375	377981
+tx point patients bup data	2012.5	378030
+tx point patients bup data	2012.5625	387298
+tx point patients bup data	2012.625	387861
+tx point patients bup data	2012.6875	385903
+tx point patients bup data	2012.75	386970
+tx point patients bup data	2012.8125	396562
+tx point patients bup data	2012.875	391643
+tx point patients bup data	2012.9375	393157
+tx point patients bup data	2013	398268
+tx point patients bup data	2013.0625	404152
+tx point patients bup data	2013.125	401551
+tx point patients bup data	2013.1875	408226
+tx point patients bup data	2013.25	417634
+tx point patients bup data	2013.3125	423275
+tx point patients bup data	2013.375	426449
+tx point patients bup data	2013.4375	425590
+tx point patients bup data	2013.5	425983
+tx point patients bup data	2013.5625	432871
+tx point patients bup data	2013.625	431172
+tx point patients bup data	2013.6875	433238
+tx point patients bup data	2013.75	440797
+tx point patients bup data	2013.8125	455543
+tx point patients bup data	2013.875	449401
+tx point patients bup data	2013.9375	455754
+tx point patients bup data	2014	462211
+tx point patients bup data	2014.0625	456473
+tx point patients bup data	2014.125	451681
+tx point patients bup data	2014.1875	460235
+tx point patients bup data	2014.25	470752
+tx point patients bup data	2014.3125	471937
+tx point patients bup data	2014.375	470211
+tx point patients bup data	2014.4375	471944
+tx point patients bup data	2014.5	475084
+tx point patients bup data	2014.5625	477594
+tx point patients bup data	2014.625	473964
+tx point patients bup data	2014.6875	475418
+tx point patients bup data	2014.75	479999
+tx point patients bup data	2014.8125	485756
+tx point patients bup data	2014.875	480087
+tx point patients bup data	2014.9375	484579
+tx point patients bup data	2015	491316
+tx point patients bup data	2015.0625	492448
+tx point patients bup data	2015.125	494876
+tx point patients bup data	2015.1875	503412
+tx point patients bup data	2015.25	510526
+tx point patients bup data	2015.3125	508757
+tx point patients bup data	2015.375	512873
+tx point patients bup data	2015.4375	516468
+tx point patients bup data	2015.5	518085
+tx point patients bup data	2015.5625	516288
+tx point patients bup data	2015.625	525263
+tx point patients bup data	2015.6875	528368
+tx point patients bup data	2015.75	529812
+tx point patients bup data	2015.8125	533770
+tx point patients bup data	2015.875	538334
+tx point patients bup data	2015.9375	542945
+tx point patients bup data	2016	545177
+tx point patients bup data	2016.0625	542621
+tx point patients bup data	2016.125	537055
+tx point patients bup data	2016.1875	550463
+tx point patients bup data	2016.25	563275
+tx point patients bup data	2016.3125	556113
+tx point patients bup data	2016.375	568771
+tx point patients bup data	2016.4375	574501
+tx point patients bup data	2016.5	574418
+tx point patients bup data	2016.5625	569644
+tx point patients bup data	2016.625	580720
+tx point patients bup data	2016.6875	581004
+tx point patients bup data	2016.75	580307
+tx point patients bup data	2016.8125	588345
+tx point patients bup data	2016.875	588263
+tx point patients bup data	2016.9375	590701
+tx point patients bup data	2017	596624
+tx point patients bup data	2017.0625	606967
+tx point patients bup data	2017.125	598107
+tx point patients bup data	2017.1875	610290
+tx point patients bup data	2017.25	626296
+tx point patients bup data	2017.3125	629072
+tx point patients bup data	2017.375	640385
+tx point patients bup data	2017.4375	644417
+tx point patients bup data	2017.5	645385
+tx point patients bup data	2017.5625	647471
+tx point patients bup data	2017.625	656153
+tx point patients bup data	2017.6875	651853
+tx point patients bup data	2017.75	649805
+tx point patients bup data	2017.8125	665081
+tx point patients bup data	2017.875	665045
+tx point patients bup data	2017.9375	664772
+tx point patients bup data	2018	670955
+tx point patients bup data	2018.0625	690187
+tx point patients bup data	2018.125	678751
+tx point patients bup data	2018.1875	687815
+tx point patients bup data	2018.25	702174
+tx point patients bup data	2018.3125	706769
+tx point patients bup data	2018.375	712633
+tx point patients bup data	2018.4375	709921
+tx point patients bup data	2018.5	709545
+tx point patients bup data	2018.5625	722302
+tx point patients bup data	2018.625	730272
+tx point patients bup data	2018.6875	728771
+tx point patients bup data	2018.75	729808
+tx point patients bup data	2018.8125	745248
+tx point patients bup data	2018.875	740118
+tx point patients bup data	2018.9375	742972
+tx point patients bup data	2019	750450
+tx point patients bup data	2019.0625	759203
+tx point patients bup data	2019.125	752586
+tx point patients bup data	2019.1875	763544
+tx point patients bup data	2019.25	775468
+tx point patients bup data	2019.3125	771940
+tx point patients bup data	2019.375	780932
+tx point patients bup data	2019.4375	787135
+tx point patients bup data	2019.5	794478
+tx point patients bup data	2019.5625	806827
+tx point patients bup data	2019.625	802410
+tx point patients bup data	2019.6875	802604
+tx point patients bup data	2019.75	807408
+tx point patients bup data	2019.8125	816796
+tx point patients bup data	2019.875	804849
+tx point patients bup data	2019.9375	809959
+tx point patients bup data	2020	815070
+tx monthly patients bup iqvia tpt	2001.9375	0
+tx monthly patients bup iqvia tpt	2002	14.4839
+tx monthly patients bup iqvia tpt	2002.0625	57.9422
+tx monthly patients bup iqvia tpt	2002.125	322.805
+tx monthly patients bup iqvia tpt	2002.1875	697.289
+tx monthly patients bup iqvia tpt	2002.25	1144.52
+tx monthly patients bup iqvia tpt	2002.3125	1627.66
+tx monthly patients bup iqvia tpt	2002.375	2155.05
+tx monthly patients bup iqvia tpt	2002.4375	2683.34
+tx monthly patients bup iqvia tpt	2002.5	3187.45
+tx monthly patients bup iqvia tpt	2002.5625	3642.3
+tx monthly patients bup iqvia tpt	2002.625	4213.59
+tx monthly patients bup iqvia tpt	2002.6875	4980.23
+tx monthly patients bup iqvia tpt	2002.75	5899.34
+tx monthly patients bup iqvia tpt	2002.8125	6928.02
+tx monthly patients bup iqvia tpt	2002.875	7279.39
+tx monthly patients bup iqvia tpt	2002.9375	7962.87
+tx monthly patients bup iqvia tpt	2003	8817.32
+tx monthly patients bup iqvia tpt	2003.0625	9681.67
+tx monthly patients bup iqvia tpt	2003.125	10177.2
+tx monthly patients bup iqvia tpt	2003.1875	11340.7
+tx monthly patients bup iqvia tpt	2003.25	12700.5
+tx monthly patients bup iqvia tpt	2003.3125	13784.9
+tx monthly patients bup iqvia tpt	2003.375	14210.4
+tx monthly patients bup iqvia tpt	2003.4375	15321.1
+tx monthly patients bup iqvia tpt	2003.5	16468.7
+tx monthly patients bup iqvia tpt	2003.5625	17005.8
+tx monthly patients bup iqvia tpt	2003.625	18130.9
+tx monthly patients bup iqvia tpt	2003.6875	19178.8
+tx monthly patients bup iqvia tpt	2003.75	20170.4
+tx monthly patients bup iqvia tpt	2003.8125	21126.5
+tx monthly patients bup iqvia tpt	2003.875	22015.3
+tx monthly patients bup iqvia tpt	2003.9375	23099.7
+tx monthly patients bup iqvia tpt	2004	23475
+tx monthly patients bup iqvia tpt	2004.0625	22238.3
+tx monthly patients bup iqvia tpt	2004.125	22725.3
+tx monthly patients bup iqvia tpt	2004.1875	24348.1
+tx monthly patients bup iqvia tpt	2004.25	26030.1
+tx monthly patients bup iqvia tpt	2004.3125	26696.6
+tx monthly patients bup iqvia tpt	2004.375	28067.8
+tx monthly patients bup iqvia tpt	2004.4375	29394.4
+tx monthly patients bup iqvia tpt	2004.5	30478.8
+tx monthly patients bup iqvia tpt	2004.5625	31124.1
+tx monthly patients bup iqvia tpt	2004.625	32199.8
+tx monthly patients bup iqvia tpt	2004.6875	33125.6
+tx monthly patients bup iqvia tpt	2004.75	34281
+tx monthly patients bup iqvia tpt	2004.8125	36044.3
+tx monthly patients bup iqvia tpt	2004.875	37014.6
+tx monthly patients bup iqvia tpt	2004.9375	39058.5
+tx monthly patients bup iqvia tpt	2005	41035.2
+tx monthly patients bup iqvia tpt	2005.0625	41806.2
+tx monthly patients bup iqvia tpt	2005.125	41964.8
+tx monthly patients bup iqvia tpt	2005.1875	44415.3
+tx monthly patients bup iqvia tpt	2005.25	46737.5
+tx monthly patients bup iqvia tpt	2005.3125	46518
+tx monthly patients bup iqvia tpt	2005.375	49490.6
+tx monthly patients bup iqvia tpt	2005.4375	51448.5
+tx monthly patients bup iqvia tpt	2005.5	52703.2
+tx monthly patients bup iqvia tpt	2005.5625	53566
+tx monthly patients bup iqvia tpt	2005.625	56501.8
+tx monthly patients bup iqvia tpt	2005.6875	57930.5
+tx monthly patients bup iqvia tpt	2005.75	59280
+tx monthly patients bup iqvia tpt	2005.8125	61974.3
+tx monthly patients bup iqvia tpt	2005.875	63355.2
+tx monthly patients bup iqvia tpt	2005.9375	64462.1
+tx monthly patients bup iqvia tpt	2006	66819.2
+tx monthly patients bup iqvia tpt	2006.0625	71944.8
+tx monthly patients bup iqvia tpt	2006.125	71582.8
+tx monthly patients bup iqvia tpt	2006.1875	75866.3
+tx monthly patients bup iqvia tpt	2006.25	81165.5
+tx monthly patients bup iqvia tpt	2006.3125	83861.7
+tx monthly patients bup iqvia tpt	2006.375	88120.6
+tx monthly patients bup iqvia tpt	2006.4375	90421.3
+tx monthly patients bup iqvia tpt	2006.5	93091.1
+tx monthly patients bup iqvia tpt	2006.5625	98449.7
+tx monthly patients bup iqvia tpt	2006.625	101544
+tx monthly patients bup iqvia tpt	2006.6875	102479
+tx monthly patients bup iqvia tpt	2006.75	104879
+tx monthly patients bup iqvia tpt	2006.8125	112354
+tx monthly patients bup iqvia tpt	2006.875	113989
+tx monthly patients bup iqvia tpt	2006.9375	116194
+tx monthly patients bup iqvia tpt	2007	120563
+tx monthly patients bup iqvia tpt	2007.0625	128681
+tx monthly patients bup iqvia tpt	2007.125	129501
+tx monthly patients bup iqvia tpt	2007.1875	133346
+tx monthly patients bup iqvia tpt	2007.25	138196
+tx monthly patients bup iqvia tpt	2007.3125	142041
+tx monthly patients bup iqvia tpt	2007.375	146316
+tx monthly patients bup iqvia tpt	2007.4375	148060
+tx monthly patients bup iqvia tpt	2007.5	151159
+tx monthly patients bup iqvia tpt	2007.5625	159482
+tx monthly patients bup iqvia tpt	2007.625	161931
+tx monthly patients bup iqvia tpt	2007.6875	165236
+tx monthly patients bup iqvia tpt	2007.75	170039
+tx monthly patients bup iqvia tpt	2007.8125	176978
+tx monthly patients bup iqvia tpt	2007.875	175757
+tx monthly patients bup iqvia tpt	2007.9375	179719
+tx monthly patients bup iqvia tpt	2008	185369
+tx monthly patients bup iqvia tpt	2008.0625	189221
+tx monthly patients bup iqvia tpt	2008.125	188936
+tx monthly patients bup iqvia tpt	2008.1875	195279
+tx monthly patients bup iqvia tpt	2008.25	202186
+tx monthly patients bup iqvia tpt	2008.3125	203615
+tx monthly patients bup iqvia tpt	2008.375	206948
+tx monthly patients bup iqvia tpt	2008.4375	210968
+tx monthly patients bup iqvia tpt	2008.5	215422
+tx monthly patients bup iqvia tpt	2008.5625	220057
+tx monthly patients bup iqvia tpt	2008.625	220237
+tx monthly patients bup iqvia tpt	2008.6875	222191
+tx monthly patients bup iqvia tpt	2008.75	224573
+tx monthly patients bup iqvia tpt	2008.8125	226040
+tx monthly patients bup iqvia tpt	2008.875	224743
+tx monthly patients bup iqvia tpt	2008.9375	229855
+tx monthly patients bup iqvia tpt	2009	234995
+tx monthly patients bup iqvia tpt	2009.0625	233810
+tx monthly patients bup iqvia tpt	2009.125	234352
+tx monthly patients bup iqvia tpt	2009.1875	244548
+tx monthly patients bup iqvia tpt	2009.25	253989
+tx monthly patients bup iqvia tpt	2009.3125	252317
+tx monthly patients bup iqvia tpt	2009.375	254387
+tx monthly patients bup iqvia tpt	2009.4375	258277
+tx monthly patients bup iqvia tpt	2009.5	261608
+tx monthly patients bup iqvia tpt	2009.5625	262012
+tx monthly patients bup iqvia tpt	2009.625	266002
+tx monthly patients bup iqvia tpt	2009.6875	268265
+tx monthly patients bup iqvia tpt	2009.75	269193
+tx monthly patients bup iqvia tpt	2009.8125	269180
+tx monthly patients bup iqvia tpt	2009.875	274233
+tx monthly patients bup iqvia tpt	2009.9375	277865
+tx monthly patients bup iqvia tpt	2010	281038
+tx monthly patients bup iqvia tpt	2010.0625	284708
+tx monthly patients bup iqvia tpt	2010.125	284917
+tx monthly patients bup iqvia tpt	2010.1875	294877
+tx monthly patients bup iqvia tpt	2010.25	303469
+tx monthly patients bup iqvia tpt	2010.3125	299637
+tx monthly patients bup iqvia tpt	2010.375	306111
+tx monthly patients bup iqvia tpt	2010.4375	311501
+tx monthly patients bup iqvia tpt	2010.5	313807
+tx monthly patients bup iqvia tpt	2010.5625	311045
+tx monthly patients bup iqvia tpt	2010.625	319942
+tx monthly patients bup iqvia tpt	2010.6875	322109
+tx monthly patients bup iqvia tpt	2010.75	321082
+tx monthly patients bup iqvia tpt	2010.8125	320378
+tx monthly patients bup iqvia tpt	2010.875	323684
+tx monthly patients bup iqvia tpt	2010.9375	322988
+tx monthly patients bup iqvia tpt	2011	321016
+tx monthly patients bup iqvia tpt	2011.0625	320478
+tx monthly patients bup iqvia tpt	2011.125	322997
+tx monthly patients bup iqvia tpt	2011.1875	329765
+tx monthly patients bup iqvia tpt	2011.25	334161
+tx monthly patients bup iqvia tpt	2011.3125	329610
+tx monthly patients bup iqvia tpt	2011.375	336110
+tx monthly patients bup iqvia tpt	2011.4375	337693
+tx monthly patients bup iqvia tpt	2011.5	338100
+tx monthly patients bup iqvia tpt	2011.5625	341056
+tx monthly patients bup iqvia tpt	2011.625	348511
+tx monthly patients bup iqvia tpt	2011.6875	347949
+tx monthly patients bup iqvia tpt	2011.75	348408
+tx monthly patients bup iqvia tpt	2011.8125	358862
+tx monthly patients bup iqvia tpt	2011.875	357400
+tx monthly patients bup iqvia tpt	2011.9375	355642
+tx monthly patients bup iqvia tpt	2012	355563
+tx monthly patients bup iqvia tpt	2012.0625	359124
+tx monthly patients bup iqvia tpt	2012.125	356565
+tx monthly patients bup iqvia tpt	2012.1875	362792
+tx monthly patients bup iqvia tpt	2012.25	371476
+tx monthly patients bup iqvia tpt	2012.3125	376329
+tx monthly patients bup iqvia tpt	2012.375	379862
+tx monthly patients bup iqvia tpt	2012.4375	377981
+tx monthly patients bup iqvia tpt	2012.5	378030
+tx monthly patients bup iqvia tpt	2012.5625	387298
+tx monthly patients bup iqvia tpt	2012.625	387861
+tx monthly patients bup iqvia tpt	2012.6875	385903
+tx monthly patients bup iqvia tpt	2012.75	386970
+tx monthly patients bup iqvia tpt	2012.8125	396562
+tx monthly patients bup iqvia tpt	2012.875	391643
+tx monthly patients bup iqvia tpt	2012.9375	393157
+tx monthly patients bup iqvia tpt	2013	398268
+tx monthly patients bup iqvia tpt	2013.0625	404152
+tx monthly patients bup iqvia tpt	2013.125	401551
+tx monthly patients bup iqvia tpt	2013.1875	408226
+tx monthly patients bup iqvia tpt	2013.25	417634
+tx monthly patients bup iqvia tpt	2013.3125	423275
+tx monthly patients bup iqvia tpt	2013.375	426449
+tx monthly patients bup iqvia tpt	2013.4375	425590
+tx monthly patients bup iqvia tpt	2013.5	425983
+tx monthly patients bup iqvia tpt	2013.5625	432871
+tx monthly patients bup iqvia tpt	2013.625	431172
+tx monthly patients bup iqvia tpt	2013.6875	433238
+tx monthly patients bup iqvia tpt	2013.75	440797
+tx monthly patients bup iqvia tpt	2013.8125	455543
+tx monthly patients bup iqvia tpt	2013.875	449401
+tx monthly patients bup iqvia tpt	2013.9375	455754
+tx monthly patients bup iqvia tpt	2014	462211
+tx monthly patients bup iqvia tpt	2014.0625	456473
+tx monthly patients bup iqvia tpt	2014.125	451681
+tx monthly patients bup iqvia tpt	2014.1875	460235
+tx monthly patients bup iqvia tpt	2014.25	470752
+tx monthly patients bup iqvia tpt	2014.3125	471937
+tx monthly patients bup iqvia tpt	2014.375	470211
+tx monthly patients bup iqvia tpt	2014.4375	471944
+tx monthly patients bup iqvia tpt	2014.5	475084
+tx monthly patients bup iqvia tpt	2014.5625	477594
+tx monthly patients bup iqvia tpt	2014.625	473964
+tx monthly patients bup iqvia tpt	2014.6875	475418
+tx monthly patients bup iqvia tpt	2014.75	479999
+tx monthly patients bup iqvia tpt	2014.8125	485756
+tx monthly patients bup iqvia tpt	2014.875	480087
+tx monthly patients bup iqvia tpt	2014.9375	484579
+tx monthly patients bup iqvia tpt	2015	491316
+tx monthly patients bup iqvia tpt	2015.0625	492448
+tx monthly patients bup iqvia tpt	2015.125	494876
+tx monthly patients bup iqvia tpt	2015.1875	503412
+tx monthly patients bup iqvia tpt	2015.25	510526
+tx monthly patients bup iqvia tpt	2015.3125	508757
+tx monthly patients bup iqvia tpt	2015.375	512873
+tx monthly patients bup iqvia tpt	2015.4375	516468
+tx monthly patients bup iqvia tpt	2015.5	518085
+tx monthly patients bup iqvia tpt	2015.5625	516288
+tx monthly patients bup iqvia tpt	2015.625	525263
+tx monthly patients bup iqvia tpt	2015.6875	528368
+tx monthly patients bup iqvia tpt	2015.75	529812
+tx monthly patients bup iqvia tpt	2015.8125	533770
+tx monthly patients bup iqvia tpt	2015.875	538334
+tx monthly patients bup iqvia tpt	2015.9375	542945
+tx monthly patients bup iqvia tpt	2016	545177
+tx monthly patients bup iqvia tpt	2016.0625	542621
+tx monthly patients bup iqvia tpt	2016.125	537055
+tx monthly patients bup iqvia tpt	2016.1875	550463
+tx monthly patients bup iqvia tpt	2016.25	563275
+tx monthly patients bup iqvia tpt	2016.3125	556113
+tx monthly patients bup iqvia tpt	2016.375	568771
+tx monthly patients bup iqvia tpt	2016.4375	574501
+tx monthly patients bup iqvia tpt	2016.5	574418
+tx monthly patients bup iqvia tpt	2016.5625	569644
+tx monthly patients bup iqvia tpt	2016.625	580720
+tx monthly patients bup iqvia tpt	2016.6875	581004
+tx monthly patients bup iqvia tpt	2016.75	580307
+tx monthly patients bup iqvia tpt	2016.8125	588345
+tx monthly patients bup iqvia tpt	2016.875	588263
+tx monthly patients bup iqvia tpt	2016.9375	590701
+tx monthly patients bup iqvia tpt	2017	596624
+tx monthly patients bup iqvia tpt	2017.0625	606967
+tx monthly patients bup iqvia tpt	2017.125	598107
+tx monthly patients bup iqvia tpt	2017.1875	610290
+tx monthly patients bup iqvia tpt	2017.25	626296
+tx monthly patients bup iqvia tpt	2017.3125	629072
+tx monthly patients bup iqvia tpt	2017.375	640385
+tx monthly patients bup iqvia tpt	2017.4375	644417
+tx monthly patients bup iqvia tpt	2017.5	645385
+tx monthly patients bup iqvia tpt	2017.5625	647471
+tx monthly patients bup iqvia tpt	2017.625	656153
+tx monthly patients bup iqvia tpt	2017.6875	651853
+tx monthly patients bup iqvia tpt	2017.75	649805
+tx monthly patients bup iqvia tpt	2017.8125	665081
+tx monthly patients bup iqvia tpt	2017.875	665045
+tx monthly patients bup iqvia tpt	2017.9375	664772
+tx monthly patients bup iqvia tpt	2018	670955
+tx monthly patients bup iqvia tpt	2018.0625	690187
+tx monthly patients bup iqvia tpt	2018.125	678751
+tx monthly patients bup iqvia tpt	2018.1875	687815
+tx monthly patients bup iqvia tpt	2018.25	702174
+tx monthly patients bup iqvia tpt	2018.3125	706769
+tx monthly patients bup iqvia tpt	2018.375	712633
+tx monthly patients bup iqvia tpt	2018.4375	709921
+tx monthly patients bup iqvia tpt	2018.5	709545
+tx monthly patients bup iqvia tpt	2018.5625	722302
+tx monthly patients bup iqvia tpt	2018.625	730272
+tx monthly patients bup iqvia tpt	2018.6875	728771
+tx monthly patients bup iqvia tpt	2018.75	729808
+tx monthly patients bup iqvia tpt	2018.8125	745248
+tx monthly patients bup iqvia tpt	2018.875	740118
+tx monthly patients bup iqvia tpt	2018.9375	742972
+tx monthly patients bup iqvia tpt	2019	750450
+tx monthly patients bup iqvia tpt	2019.0625	759203
+tx monthly patients bup iqvia tpt	2019.125	752586
+tx monthly patients bup iqvia tpt	2019.1875	763544
+tx monthly patients bup iqvia tpt	2019.25	775468
+tx monthly patients bup iqvia tpt	2019.3125	771940
+tx monthly patients bup iqvia tpt	2019.375	780932
+tx monthly patients bup iqvia tpt	2019.4375	787135
+tx monthly patients bup iqvia tpt	2019.5	794478
+tx monthly patients bup iqvia tpt	2019.5625	806827
+tx monthly patients bup iqvia tpt	2019.625	802410
+tx monthly patients bup iqvia tpt	2019.6875	802604
+tx monthly patients bup iqvia tpt	2019.75	807408
+tx monthly patients bup iqvia tpt	2019.8125	816796
+tx monthly patients bup iqvia tpt	2019.875	804849
+tx monthly patients bup iqvia tpt	2019.9375	809959
+tx monthly patients bup iqvia tpt	2020	815070
+hud nsduh rand alternative	1999	737349
+hud nsduh rand alternative	2000	670984
+hud nsduh rand alternative	2001	732227
+hud nsduh rand alternative	2002	764684
+hud nsduh rand alternative	2003	673044
+hud nsduh rand alternative	2004	882618
+hud nsduh rand alternative	2005	728787
+hud nsduh rand alternative	2006	995374
+hud nsduh rand alternative	2007	772413
+hud nsduh rand alternative	2008	1024670
+hud nsduh rand alternative	2009	1316790
+hud nsduh rand alternative	2010	1335600
+hud nsduh rand alternative	2011	1590810
+hud nsduh rand alternative	2012	1565980
+hud nsduh rand alternative	2013	1667230
+hud nsduh rand alternative	2014	1936510
+hud nsduh rand alternative	2015	1923870
+hud nsduh rand alternative	2016	2011540
+hud nsduh rand alternative	2017	2193780
+hud nsduh rand alternative	2018	2193780
+hud nsduh rand alternative	2019	2193780
+hud nsduh rand alternative	2020	2193780
+hud data	1999	737349
+hud data	2000	670984
+hud data	2001	732227
+hud data	2002	764684
+hud data	2003	673044
+hud data	2004	882618
+hud data	2005	728787
+hud data	2006	995374
+hud data	2007	772413
+hud data	2008	1024670
+hud data	2009	1316790
+hud data	2010	1335600
+hud data	2011	1590810
+hud data	2012	1565980
+hud data	2013	1667230
+hud data	2014	1936510
+hud data	2015	1923870
+hud data	2016	2011540
+hud data	2017	2193780
+hud data	2018	1843790
+hud data	2019	1420680
+hud data	2020	1771000
+initiating rx misuse own rx rdas samhsa	1999	287039
+initiating rx misuse own rx rdas samhsa	2000	369995
+initiating rx misuse own rx rdas samhsa	2001	359851
+initiating rx misuse own rx rdas samhsa	2002	348655
+initiating rx misuse own rx rdas samhsa	2003	369093
+initiating rx misuse own rx rdas samhsa	2004	363984
+initiating rx misuse own rx rdas samhsa	2005	329569
+initiating rx misuse own rx rdas samhsa	2006	323858
+initiating rx misuse own rx rdas samhsa	2007	324459
+initiating rx misuse own rx rdas samhsa	2008	328968
+initiating rx misuse own rx rdas samhsa	2009	329569
+initiating rx misuse own rx rdas samhsa	2010	302518
+initiating rx misuse own rx rdas samhsa	2011	283733
+initiating rx misuse own rx rdas samhsa	2012	282531
+initiating rx misuse own rx rdas samhsa	2013	231284
+initiating rx misuse own rx rdas samhsa	2014	214152
+initiating rx misuse own rx rdas samhsa	2015	962487
+initiating rx misuse own rx rdas samhsa	2016	968372
+initiating rx misuse own rx rdas samhsa	2017	909971
+initiating rx misuse own rx rdas samhsa	2018	863794
+initiating rx misuse own rx rdas samhsa	2019	727524
+initiating rx misuse own rx rdas samhsa	2020	516256
+total nondisordered heroin users data	1999	393991
+total nondisordered heroin users data	2000	392713
+total nondisordered heroin users data	2001	711988
+total nondisordered heroin users data	2002	559752
+total nondisordered heroin users data	2003	405493
+total nondisordered heroin users data	2004	515377
+total nondisordered heroin users data	2005	519372
+total nondisordered heroin users data	2006	703646
+total nondisordered heroin users data	2007	471531
+total nondisordered heroin users data	2008	593895
+total nondisordered heroin users data	2009	893264
+total nondisordered heroin users data	2010	781625
+total nondisordered heroin users data	2011	567005
+total nondisordered heroin users data	2012	578830
+total nondisordered heroin users data	2013	650646
+total nondisordered heroin users data	2014	1214210
+total nondisordered heroin users data	2015	835918
+total nondisordered heroin users data	2016	1025380
+total nondisordered heroin users data	2017	919184
+total nondisordered heroin users data	2018	928807
+total nondisordered heroin users data	2019	905435
+total nondisordered heroin users data	2020	1251930
+fraction of all heroin users with hud data	1999	0.651748
+fraction of all heroin users with hud data	2000	0.630803
+fraction of all heroin users with hud data	2001	0.507007
+fraction of all heroin users with hud data	2002	0.577366
+fraction of all heroin users with hud data	2003	0.624034
+fraction of all heroin users with hud data	2004	0.631345
+fraction of all heroin users with hud data	2005	0.58389
+fraction of all heroin users with hud data	2006	0.585852
+fraction of all heroin users with hud data	2007	0.620939
+fraction of all heroin users with hud data	2008	0.633072
+fraction of all heroin users with hud data	2009	0.595818
+fraction of all heroin users with hud data	2010	0.630826
+fraction of all heroin users with hud data	2011	0.737232
+fraction of all heroin users with hud data	2012	0.730125
+fraction of all heroin users with hud data	2013	0.719292
+fraction of all heroin users with hud data	2014	0.614625
+fraction of all heroin users with hud data	2015	0.697107
+fraction of all heroin users with hud data	2016	0.662361
+fraction of all heroin users with hud data	2017	0.704724
+fraction of all heroin users with hud data	2018	0.665005
+fraction of all heroin users with hud data	2019	0.610752
+fraction of all heroin users with hud data	2020	0.585855
+fraction of heroin initiation no rx data	1999	0.336538
+fraction of heroin initiation no rx data	2000	0.336538
+fraction of heroin initiation no rx data	2001	0.336538
+fraction of heroin initiation no rx data	2002	0.336538
+fraction of heroin initiation no rx data	2003	0.336538
+fraction of heroin initiation no rx data	2004	0.368421
+fraction of heroin initiation no rx data	2005	0.368421
+fraction of heroin initiation no rx data	2006	0.244898
+fraction of heroin initiation no rx data	2007	0.244898
+fraction of heroin initiation no rx data	2008	0.266667
+fraction of heroin initiation no rx data	2009	0.266667
+fraction of heroin initiation no rx data	2010	0.209877
+fraction of heroin initiation no rx data	2011	0.209877
+fraction of heroin initiation no rx data	2012	0.153374
+fraction of heroin initiation no rx data	2013	0.153374
+fraction of heroin initiation no rx data	2014	0.248322
+fraction of heroin initiation no rx data	2015	0.248322
+fraction of heroin initiation no rx data	2016	0.248322
+fraction of heroin initiation no rx data	2017	0.195122
+fraction of heroin initiation no rx data	2018	0.284314
+fraction of heroin initiation no rx data	2019	0.426829
+fraction of heroin initiation with rx misuse data	1999	0.384615
+fraction of heroin initiation with rx misuse data	2000	0.384615
+fraction of heroin initiation with rx misuse data	2001	0.384615
+fraction of heroin initiation with rx misuse data	2002	0.384615
+fraction of heroin initiation with rx misuse data	2003	0.384615
+fraction of heroin initiation with rx misuse data	2004	0.368421
+fraction of heroin initiation with rx misuse data	2005	0.368421
+fraction of heroin initiation with rx misuse data	2006	0.418367
+fraction of heroin initiation with rx misuse data	2007	0.418367
+fraction of heroin initiation with rx misuse data	2008	0.433333
+fraction of heroin initiation with rx misuse data	2009	0.433333
+fraction of heroin initiation with rx misuse data	2010	0.358025
+fraction of heroin initiation with rx misuse data	2011	0.358025
+fraction of heroin initiation with rx misuse data	2012	0.368098
+fraction of heroin initiation with rx misuse data	2013	0.368098
+fraction of heroin initiation with rx misuse data	2014	0.369128
+fraction of heroin initiation with rx misuse data	2015	0.369128
+fraction of heroin initiation with rx misuse data	2016	0.369128
+fraction of heroin initiation with rx misuse data	2017	0.455285
+fraction of heroin initiation with rx misuse data	2018	0.343137
+fraction of heroin initiation with rx misuse data	2019	0.207317
+fraction of heroin initiation with rx oud data	1999	0.278846
+fraction of heroin initiation with rx oud data	2000	0.278846
+fraction of heroin initiation with rx oud data	2001	0.278846
+fraction of heroin initiation with rx oud data	2002	0.278846
+fraction of heroin initiation with rx oud data	2003	0.278846
+fraction of heroin initiation with rx oud data	2004	0.263158
+fraction of heroin initiation with rx oud data	2005	0.263158
+fraction of heroin initiation with rx oud data	2006	0.336735
+fraction of heroin initiation with rx oud data	2007	0.336735
+fraction of heroin initiation with rx oud data	2008	0.3
+fraction of heroin initiation with rx oud data	2009	0.3
+fraction of heroin initiation with rx oud data	2010	0.432099
+fraction of heroin initiation with rx oud data	2011	0.432099
+fraction of heroin initiation with rx oud data	2012	0.478528
+fraction of heroin initiation with rx oud data	2013	0.478528
+fraction of heroin initiation with rx oud data	2014	0.38255
+fraction of heroin initiation with rx oud data	2015	0.38255
+fraction of heroin initiation with rx oud data	2016	0.38255
+fraction of heroin initiation with rx oud data	2017	0.349594
+fraction of heroin initiation with rx oud data	2018	0.372549
+fraction of heroin initiation with rx oud data	2019	0.365854
+hud nsduh rand	1999	737349
+hud nsduh rand	2000	670984
+hud nsduh rand	2001	732227
+hud nsduh rand	2002	764684
+hud nsduh rand	2003	673044
+hud nsduh rand	2004	882618
+hud nsduh rand	2005	728787
+hud nsduh rand	2006	995374
+hud nsduh rand	2007	772413
+hud nsduh rand	2008	1024670
+hud nsduh rand	2009	1316790
+hud nsduh rand	2010	1335600
+hud nsduh rand	2011	1590810
+hud nsduh rand	2012	1565980
+hud nsduh rand	2013	1667230
+hud nsduh rand	2014	1936510
+hud nsduh rand	2015	1923870
+hud nsduh rand	2016	2011540
+hud nsduh rand	2017	2193780
+hud nsduh rand	2018	1843790
+hud nsduh rand	2019	1420680
+hud nsduh rand	2020	1771000
+initiating heroin no rx data	1999	108892
+initiating heroin no rx data	2000	119363
+initiating heroin no rx data	2001	161244
+initiating heroin no rx data	2002	122504
+initiating heroin no rx data	2003	96327.7
+initiating heroin no rx data	2004	135256
+initiating heroin no rx data	2005	123793
+initiating heroin no rx data	2006	68573.5
+initiating heroin no rx data	2007	80764.3
+initiating heroin no rx data	2008	96239.9
+initiating heroin no rx data	2009	155145
+initiating heroin no rx data	2010	92721.6
+initiating heroin no rx data	2011	116228
+initiating heroin no rx data	2012	74439.9
+initiating heroin no rx data	2013	80643.2
+initiating heroin no rx data	2014	163787
+initiating heroin no rx data	2015	104298
+initiating heroin no rx data	2016	131339
+initiating heroin no rx data	2017	49172.2
+initiating heroin no rx data	2018	103493
+initiating heroin no rx data	2019	66397.7
+initiating heroin no rx nsduh rdas rand	1999	108892
+initiating heroin no rx nsduh rdas rand	2000	119363
+initiating heroin no rx nsduh rdas rand	2001	161244
+initiating heroin no rx nsduh rdas rand	2002	122504
+initiating heroin no rx nsduh rdas rand	2003	96327.7
+initiating heroin no rx nsduh rdas rand	2004	135256
+initiating heroin no rx nsduh rdas rand	2005	123793
+initiating heroin no rx nsduh rdas rand	2006	68573.5
+initiating heroin no rx nsduh rdas rand	2007	80764.3
+initiating heroin no rx nsduh rdas rand	2008	96239.9
+initiating heroin no rx nsduh rdas rand	2009	155145
+initiating heroin no rx nsduh rdas rand	2010	92721.6
+initiating heroin no rx nsduh rdas rand	2011	116228
+initiating heroin no rx nsduh rdas rand	2012	74439.9
+initiating heroin no rx nsduh rdas rand	2013	80643.2
+initiating heroin no rx nsduh rdas rand	2014	163787
+initiating heroin no rx nsduh rdas rand	2015	104298
+initiating heroin no rx nsduh rdas rand	2016	131339
+initiating heroin no rx nsduh rdas rand	2017	49172.2
+initiating heroin no rx nsduh rdas rand	2018	103493
+initiating heroin no rx nsduh rdas rand	2019	66397.7
+initiating heroin with rx misuse data	1999	124448
+initiating heroin with rx misuse data	2000	136414
+initiating heroin with rx misuse data	2001	184279
+initiating heroin with rx misuse data	2002	140004
+initiating heroin with rx misuse data	2003	110089
+initiating heroin with rx misuse data	2004	135256
+initiating heroin with rx misuse data	2005	123793
+initiating heroin with rx misuse data	2006	117146
+initiating heroin with rx misuse data	2007	137972
+initiating heroin with rx misuse data	2008	156390
+initiating heroin with rx misuse data	2009	252111
+initiating heroin with rx misuse data	2010	158172
+initiating heroin with rx misuse data	2011	198272
+initiating heroin with rx misuse data	2012	178656
+initiating heroin with rx misuse data	2013	193544
+initiating heroin with rx misuse data	2014	243467
+initiating heroin with rx misuse data	2015	155038
+initiating heroin with rx misuse data	2016	195233
+initiating heroin with rx misuse data	2017	114735
+initiating heroin with rx misuse data	2018	124906
+initiating heroin with rx misuse data	2019	32250.3
+initiating heroin with rx misuse nsduh rdas rand	1999	124448
+initiating heroin with rx misuse nsduh rdas rand	2000	136414
+initiating heroin with rx misuse nsduh rdas rand	2001	184279
+initiating heroin with rx misuse nsduh rdas rand	2002	140004
+initiating heroin with rx misuse nsduh rdas rand	2003	110089
+initiating heroin with rx misuse nsduh rdas rand	2004	135256
+initiating heroin with rx misuse nsduh rdas rand	2005	123793
+initiating heroin with rx misuse nsduh rdas rand	2006	117146
+initiating heroin with rx misuse nsduh rdas rand	2007	137972
+initiating heroin with rx misuse nsduh rdas rand	2008	156390
+initiating heroin with rx misuse nsduh rdas rand	2009	252111
+initiating heroin with rx misuse nsduh rdas rand	2010	158172
+initiating heroin with rx misuse nsduh rdas rand	2011	198272
+initiating heroin with rx misuse nsduh rdas rand	2012	178656
+initiating heroin with rx misuse nsduh rdas rand	2013	193544
+initiating heroin with rx misuse nsduh rdas rand	2014	243467
+initiating heroin with rx misuse nsduh rdas rand	2015	155038
+initiating heroin with rx misuse nsduh rdas rand	2016	195233
+initiating heroin with rx misuse nsduh rdas rand	2017	114735
+initiating heroin with rx misuse nsduh rdas rand	2018	124906
+initiating heroin with rx misuse nsduh rdas rand	2019	32250.3
+initiating heroin with rx oud data	1999	90224.9
+initiating heroin with rx oud data	2000	98900.4
+initiating heroin with rx oud data	2001	133602
+initiating heroin with rx oud data	2002	101503
+initiating heroin with rx oud data	2003	79814.4
+initiating heroin with rx oud data	2004	96611.1
+initiating heroin with rx oud data	2005	88423.7
+initiating heroin with rx oud data	2006	94288.6
+initiating heroin with rx oud data	2007	111051
+initiating heroin with rx oud data	2008	108270
+initiating heroin with rx oud data	2009	174539
+initiating heroin with rx oud data	2010	190897
+initiating heroin with rx oud data	2011	239294
+initiating heroin with rx oud data	2012	232252
+initiating heroin with rx oud data	2013	251607
+initiating heroin with rx oud data	2014	252321
+initiating heroin with rx oud data	2015	160676
+initiating heroin with rx oud data	2016	202333
+initiating heroin with rx oud data	2017	88100.2
+initiating heroin with rx oud data	2018	135612
+initiating heroin with rx oud data	2019	56912.3
+initiating heroin with rx oud nsduh rdas rand	1999	90224.9
+initiating heroin with rx oud nsduh rdas rand	2000	98900.4
+initiating heroin with rx oud nsduh rdas rand	2001	133602
+initiating heroin with rx oud nsduh rdas rand	2002	101503
+initiating heroin with rx oud nsduh rdas rand	2003	79814.4
+initiating heroin with rx oud nsduh rdas rand	2004	96611.1
+initiating heroin with rx oud nsduh rdas rand	2005	88423.7
+initiating heroin with rx oud nsduh rdas rand	2006	94288.6
+initiating heroin with rx oud nsduh rdas rand	2007	111051
+initiating heroin with rx oud nsduh rdas rand	2008	108270
+initiating heroin with rx oud nsduh rdas rand	2009	174539
+initiating heroin with rx oud nsduh rdas rand	2010	190897
+initiating heroin with rx oud nsduh rdas rand	2011	239294
+initiating heroin with rx oud nsduh rdas rand	2012	232252
+initiating heroin with rx oud nsduh rdas rand	2013	251607
+initiating heroin with rx oud nsduh rdas rand	2014	252321
+initiating heroin with rx oud nsduh rdas rand	2015	160676
+initiating heroin with rx oud nsduh rdas rand	2016	202333
+initiating heroin with rx oud nsduh rdas rand	2017	88100.2
+initiating heroin with rx oud nsduh rdas rand	2018	135612
+initiating heroin with rx oud nsduh rdas rand	2019	56912.3
+initiating rx misuse diverted rdas samhsa	1999	1622960
+initiating rx misuse diverted rdas samhsa	2000	2092000
+initiating rx misuse diverted rdas samhsa	2001	2034650
+initiating rx misuse diverted rdas samhsa	2002	1971350
+initiating rx misuse diverted rdas samhsa	2003	2086910
+initiating rx misuse diverted rdas samhsa	2004	2058020
+initiating rx misuse diverted rdas samhsa	2005	1863430
+initiating rx misuse diverted rdas samhsa	2006	1831140
+initiating rx misuse diverted rdas samhsa	2007	1834540
+initiating rx misuse diverted rdas samhsa	2008	1860030
+initiating rx misuse diverted rdas samhsa	2009	1863430
+initiating rx misuse diverted rdas samhsa	2010	1710480
+initiating rx misuse diverted rdas samhsa	2011	1604270
+initiating rx misuse diverted rdas samhsa	2012	1597470
+initiating rx misuse diverted rdas samhsa	2013	1307720
+initiating rx misuse diverted rdas samhsa	2014	1210850
+initiating rx misuse diverted rdas samhsa	2015	1163510
+initiating rx misuse diverted rdas samhsa	2016	1170630
+initiating rx misuse diverted rdas samhsa	2017	1100030
+initiating rx misuse diverted rdas samhsa	2018	1044210
+initiating rx misuse diverted rdas samhsa	2019	879476
+initiating rx misuse diverted rdas samhsa	2020	624081
+nondisordered heroin use data	1999	356879
+nondisordered heroin use data	2000	370785
+nondisordered heroin use data	2001	637208
+nondisordered heroin use data	2002	451003
+nondisordered heroin use data	2003	349908
+nondisordered heroin use data	2004	397416
+nondisordered heroin use data	2005	447930
+nondisordered heroin use data	2006	616585
+nondisordered heroin use data	2007	320958
+nondisordered heroin use data	2008	437112
+nondisordered heroin use data	2009	668803
+nondisordered heroin use data	2010	454737
+nondisordered heroin use data	2011	419471
+nondisordered heroin use data	2012	414767
+nondisordered heroin use data	2013	494109
+nondisordered heroin use data	2014	872376
+nondisordered heroin use data	2015	571335
+nondisordered heroin use data	2016	859859
+nondisordered heroin use data	2017	805295
+nondisordered heroin use data	2018	808562
+nondisordered heroin use data	2019	832913
+nondisordered heroin use data	2020	1179440
+nondisordered heroin use nsduh rand	1999	356879
+nondisordered heroin use nsduh rand	2000	370785
+nondisordered heroin use nsduh rand	2001	637208
+nondisordered heroin use nsduh rand	2002	451003
+nondisordered heroin use nsduh rand	2003	349908
+nondisordered heroin use nsduh rand	2004	397416
+nondisordered heroin use nsduh rand	2005	447930
+nondisordered heroin use nsduh rand	2006	616585
+nondisordered heroin use nsduh rand	2007	320958
+nondisordered heroin use nsduh rand	2008	437112
+nondisordered heroin use nsduh rand	2009	668803
+nondisordered heroin use nsduh rand	2010	454737
+nondisordered heroin use nsduh rand	2011	419471
+nondisordered heroin use nsduh rand	2012	414767
+nondisordered heroin use nsduh rand	2013	494109
+nondisordered heroin use nsduh rand	2014	872376
+nondisordered heroin use nsduh rand	2015	571335
+nondisordered heroin use nsduh rand	2016	859859
+nondisordered heroin use nsduh rand	2017	805295
+nondisordered heroin use nsduh rand	2018	808562
+nondisordered heroin use nsduh rand	2019	832913
+nondisordered heroin use nsduh rand	2020	1179440
+rx misuse no py heroin nsduh	1999	5590140
+rx misuse no py heroin nsduh	2000	5586580
+rx misuse no py heroin nsduh	2001	6933350
+rx misuse no py heroin nsduh	2002	9225310
+rx misuse no py heroin nsduh	2003	10003100
+rx misuse no py heroin nsduh	2004	9389310
+rx misuse no py heroin nsduh	2005	9709430
+rx misuse no py heroin nsduh	2006	10191600
+rx misuse no py heroin nsduh	2007	10292400
+rx misuse no py heroin nsduh	2008	9795120
+rx misuse no py heroin nsduh	2009	9965810
+rx misuse no py heroin nsduh	2010	9823490
+rx misuse no py heroin nsduh	2011	8794760
+rx misuse no py heroin nsduh	2012	9898270
+rx misuse no py heroin nsduh	2013	8543370
+rx misuse no py heroin nsduh	2014	7654610
+rx misuse no py heroin nsduh	2015	9631760
+rx misuse no py heroin nsduh	2016	8783830
+rx misuse no py heroin nsduh	2017	8379500
+rx misuse no py heroin nsduh	2018	7663420
+rx misuse no py heroin nsduh	2019	7798730
+rx misuse no py heroin nsduh	2020	6483800
+rx oud all total data	1999	807528
+rx oud all total data	2000	779408
+rx oud all total data	2001	1183880
+rx oud all total data	2002	1774670
+rx oud all total data	2003	1633820
+rx oud all total data	2004	1924220
+rx oud all total data	2005	1826040
+rx oud all total data	2006	1855910
+rx oud all total data	2007	2117890
+rx oud all total data	2008	2069680
+rx oud all total data	2009	2263500
+rx oud all total data	2010	2467390
+rx oud all total data	2011	2046110
+rx oud all total data	2012	2465400
+rx oud all total data	2013	2092350
+rx oud all total data	2014	2357440
+rx oud all total data	2015	2446250
+rx oud all total data	2016	2344500
+rx oud all total data	2017	1918600
+rx oud all total data	2018	1902950
+rx oud all total data	2019	1653750
+rx oud all total data	2020	2098700
+rx oud no py heroin nsduh	1999	770417
+rx oud no py heroin nsduh	2000	757479
+rx oud no py heroin nsduh	2001	1109100
+rx oud no py heroin nsduh	2002	1665920
+rx oud no py heroin nsduh	2003	1578240
+rx oud no py heroin nsduh	2004	1806260
+rx oud no py heroin nsduh	2005	1754590
+rx oud no py heroin nsduh	2006	1768850
+rx oud no py heroin nsduh	2007	1967310
+rx oud no py heroin nsduh	2008	1912900
+rx oud no py heroin nsduh	2009	2039040
+rx oud no py heroin nsduh	2010	2140500
+rx oud no py heroin nsduh	2011	1898580
+rx oud no py heroin nsduh	2012	2301340
+rx oud no py heroin nsduh	2013	1935810
+rx oud no py heroin nsduh	2014	2015600
+rx oud no py heroin nsduh	2015	2181670
+rx oud no py heroin nsduh	2016	2178980
+rx oud no py heroin nsduh	2017	1804720
+rx oud no py heroin nsduh	2018	1782700
+rx oud no py heroin nsduh	2019	1581220
+rx oud no py heroin nsduh	2020	2026210
+rx oud with py heroin data	1999	37111.4
+rx oud with py heroin data	2000	21928.6
+rx oud with py heroin data	2001	74780.5
+rx oud with py heroin data	2002	108749
+rx oud with py heroin data	2003	55584.8
+rx oud with py heroin data	2004	117961
+rx oud with py heroin data	2005	71442.6
+rx oud with py heroin data	2006	87060.8
+rx oud with py heroin data	2007	150573
+rx oud with py heroin data	2008	156783
+rx oud with py heroin data	2009	224461
+rx oud with py heroin data	2010	326888
+rx oud with py heroin data	2011	147533
+rx oud with py heroin data	2012	164063
+rx oud with py heroin data	2013	156537
+rx oud with py heroin data	2014	341831
+rx oud with py heroin data	2015	264583
+rx oud with py heroin data	2016	165522
+rx oud with py heroin data	2017	113889
+rx oud with py heroin data	2018	120245
+rx oud with py heroin data	2019	72522.2
+rx oud with py heroin data	2020	72490.8
+rx oud with py heroin nsduh rand	1999	37111.4
+rx oud with py heroin nsduh rand	2000	21928.6
+rx oud with py heroin nsduh rand	2001	74780.5
+rx oud with py heroin nsduh rand	2002	108749
+rx oud with py heroin nsduh rand	2003	55584.8
+rx oud with py heroin nsduh rand	2004	117961
+rx oud with py heroin nsduh rand	2005	71442.6
+rx oud with py heroin nsduh rand	2006	87060.8
+rx oud with py heroin nsduh rand	2007	150573
+rx oud with py heroin nsduh rand	2008	156783
+rx oud with py heroin nsduh rand	2009	224461
+rx oud with py heroin nsduh rand	2010	326888
+rx oud with py heroin nsduh rand	2011	147533
+rx oud with py heroin nsduh rand	2012	164063
+rx oud with py heroin nsduh rand	2013	156537
+rx oud with py heroin nsduh rand	2014	341831
+rx oud with py heroin nsduh rand	2015	264583
+rx oud with py heroin nsduh rand	2016	165522
+rx oud with py heroin nsduh rand	2017	113889
+rx oud with py heroin nsduh rand	2018	120245
+rx oud with py heroin nsduh rand	2019	72522.2
+rx oud with py heroin nsduh rand	2020	72490.8
+total heroin initiation data	1999	323565
+total heroin initiation data	2000	354677
+total heroin initiation data	2001	479126
+total heroin initiation data	2002	364011
+total heroin initiation data	2003	286231
+total heroin initiation data	2004	367122
+total heroin initiation data	2005	336010
+total heroin initiation data	2006	280008
+total heroin initiation data	2007	329788
+total heroin initiation data	2008	360900
+total heroin initiation data	2009	581795
+total heroin initiation data	2010	441791
+total heroin initiation data	2011	553794
+total heroin initiation data	2012	485348
+total heroin initiation data	2013	525794
+total heroin initiation data	2014	659575
+total heroin initiation data	2015	420013
+total heroin initiation data	2016	528905
+total heroin initiation data	2017	252008
+total heroin initiation data	2018	364011
+total heroin initiation data	2019	155560
+total heroin initiation data	2020	320454
+total heroin initiation samhsa rand	1999	323565
+total heroin initiation samhsa rand	2000	354677
+total heroin initiation samhsa rand	2001	479126
+total heroin initiation samhsa rand	2002	364011
+total heroin initiation samhsa rand	2003	286231
+total heroin initiation samhsa rand	2004	367122
+total heroin initiation samhsa rand	2005	336010
+total heroin initiation samhsa rand	2006	280008
+total heroin initiation samhsa rand	2007	329788
+total heroin initiation samhsa rand	2008	360900
+total heroin initiation samhsa rand	2009	581795
+total heroin initiation samhsa rand	2010	441791
+total heroin initiation samhsa rand	2011	553794
+total heroin initiation samhsa rand	2012	485348
+total heroin initiation samhsa rand	2013	525794
+total heroin initiation samhsa rand	2014	659575
+total heroin initiation samhsa rand	2015	420013
+total heroin initiation samhsa rand	2016	528905
+total heroin initiation samhsa rand	2017	252008
+total heroin initiation samhsa rand	2018	364011
+total heroin initiation samhsa rand	2019	155560
+total heroin initiation samhsa rand	2020	320454
+total heroin users data	1999	1131340
+total heroin users data	2000	1063700
+total heroin users data	2001	1444220
+total heroin users data	2002	1324440
+total heroin users data	2003	1078540
+total heroin users data	2004	1398000
+total heroin users data	2005	1248160
+total heroin users data	2006	1699020
+total heroin users data	2007	1243940
+total heroin users data	2008	1618560
+total heroin users data	2009	2210060
+total heroin users data	2010	2117220
+total heroin users data	2011	2157810
+total heroin users data	2012	2144810
+total heroin users data	2013	2317880
+total heroin users data	2014	3150720
+total heroin users data	2015	2759780
+total heroin users data	2016	3036920
+total heroin users data	2017	3112970
+total heroin users data	2018	2772600
+total heroin users data	2019	2326110
+total heroin users data	2020	3022930
+total overdose deaths base heroin nvss	1999	2870.76
+total overdose deaths base heroin nvss	2000	2618.68
+total overdose deaths base heroin nvss	2001	2394.28
+total overdose deaths base heroin nvss	2002	2679.84
+total overdose deaths base heroin nvss	2003	2606.3
+total overdose deaths base heroin nvss	2004	2237.13
+total overdose deaths base heroin nvss	2005	2330.78
+total overdose deaths base heroin nvss	2006	2263.16
+total overdose deaths base heroin nvss	2007	2697.38
+total overdose deaths base heroin nvss	2008	3433.64
+total overdose deaths base heroin nvss	2009	3615.24
+total overdose deaths base heroin nvss	2010	3294.46
+total overdose deaths base heroin nvss	2011	4814.9
+total overdose deaths base heroin nvss	2012	6441.69
+total overdose deaths base heroin nvss	2013	8691.57
+total overdose deaths base heroin nvss	2014	10045.5
+total overdose deaths base heroin nvss	2015	10780.6
+total overdose deaths base heroin nvss	2016	10031.4
+total overdose deaths base heroin nvss	2017	7603.3
+total overdose deaths base heroin nvss	2018	6055.8
+total overdose deaths base heroin nvss	2019	5344.93
+total overdose deaths base heroin nvss	2020	4203.49
+total overdose deaths base rx nvss	1999	4098.12
+total overdose deaths base rx nvss	2000	4665.33
+total overdose deaths base rx nvss	2001	5784.24
+total overdose deaths base rx nvss	2002	7542.82
+total overdose deaths base rx nvss	2003	8574.24
+total overdose deaths base rx nvss	2004	9535.14
+total overdose deaths base rx nvss	2005	10534.8
+total overdose deaths base rx nvss	2006	12213.3
+total overdose deaths base rx nvss	2007	13350.2
+total overdose deaths base rx nvss	2008	13585.2
+total overdose deaths base rx nvss	2009	13542.4
+total overdose deaths base rx nvss	2010	14509.1
+total overdose deaths base rx nvss	2011	15049.1
+total overdose deaths base rx nvss	2012	13854.8
+total overdose deaths base rx nvss	2013	13006.5
+total overdose deaths base rx nvss	2014	12728.6
+total overdose deaths base rx nvss	2015	12254.5
+total overdose deaths base rx nvss	2016	12132.6
+total overdose deaths base rx nvss	2017	10843.2
+total overdose deaths base rx nvss	2018	8871.71
+total overdose deaths base rx nvss	2019	7633.73
+total overdose deaths base rx nvss	2020	7311.39
+total overdose deaths nvss	1999	8063
+total overdose deaths nvss	2000	8418
+total overdose deaths nvss	2001	9502
+total overdose deaths nvss	2002	11926
+total overdose deaths nvss	2003	12967
+total overdose deaths nvss	2004	13787
+total overdose deaths nvss	2005	14959
+total overdose deaths nvss	2006	17589
+total overdose deaths nvss	2007	18563
+total overdose deaths nvss	2008	19647
+total overdose deaths nvss	2009	20473
+total overdose deaths nvss	2010	21131
+total overdose deaths nvss	2011	22847
+total overdose deaths nvss	2012	23226
+total overdose deaths nvss	2013	25115
+total overdose deaths nvss	2014	28719
+total overdose deaths nvss	2015	33203
+total overdose deaths nvss	2016	42433
+total overdose deaths nvss	2017	47882
+total overdose deaths nvss	2018	47096
+total overdose deaths nvss	2019	50178
+total overdose deaths nvss	2020	69061
+total overdose deaths synth heroin nvss	1999	35.5329
+total overdose deaths synth heroin nvss	2000	35.9314
+total overdose deaths synth heroin nvss	2001	36.8771
+total overdose deaths synth heroin nvss	2002	39.0079
+total overdose deaths synth heroin nvss	2003	35.4255
+total overdose deaths synth heroin nvss	2004	27.6485
+total overdose deaths synth heroin nvss	2005	64.0846
+total overdose deaths synth heroin nvss	2006	140.804
+total overdose deaths synth heroin nvss	2007	28.2507
+total overdose deaths synth heroin nvss	2008	45.2539
+total overdose deaths synth heroin nvss	2009	59.0835
+total overdose deaths synth heroin nvss	2010	61.661
+total overdose deaths synth heroin nvss	2011	77.4812
+total overdose deaths synth heroin nvss	2012	106.829
+total overdose deaths synth heroin nvss	2013	279.152
+total overdose deaths synth heroin nvss	2014	1160.89
+total overdose deaths synth heroin nvss	2015	2911.26
+total overdose deaths synth heroin nvss	2016	6080.8
+total overdose deaths synth heroin nvss	2017	8394.3
+total overdose deaths synth heroin nvss	2018	9335.43
+total overdose deaths synth heroin nvss	2019	8982.65
+total overdose deaths synth heroin nvss	2020	9191.29
+total overdose deaths synth no h nvss	1999	1058.58
+total overdose deaths synth no h nvss	2000	1098.06
+total overdose deaths synth no h nvss	2001	1286.6
+total overdose deaths synth no h nvss	2002	1664.33
+total overdose deaths synth no h nvss	2003	1751.03
+total overdose deaths synth no h nvss	2004	1987.09
+total overdose deaths synth no h nvss	2005	2029.34
+total overdose deaths synth no h nvss	2006	2971.76
+total overdose deaths synth no h nvss	2007	2487.2
+total overdose deaths synth no h nvss	2008	2582.87
+total overdose deaths synth no h nvss	2009	3256.28
+total overdose deaths synth no h nvss	2010	3265.83
+total overdose deaths synth no h nvss	2011	2905.55
+total overdose deaths synth no h nvss	2012	2822.72
+total overdose deaths synth no h nvss	2013	3137.75
+total overdose deaths synth no h nvss	2014	4784.04
+total overdose deaths synth no h nvss	2015	7256.63
+total overdose deaths synth no h nvss	2016	14188.2
+total overdose deaths synth no h nvss	2017	21041.2
+total overdose deaths synth no h nvss	2018	22833.1
+total overdose deaths synth no h nvss	2019	28216.7
+total overdose deaths synth no h nvss	2020	48354.8
+total rx misuse initiation samhsa	1999	1910000
+total rx misuse initiation samhsa	2000	2462000
+total rx misuse initiation samhsa	2001	2394500
+total rx misuse initiation samhsa	2002	2320000
+total rx misuse initiation samhsa	2003	2456000
+total rx misuse initiation samhsa	2004	2422000
+total rx misuse initiation samhsa	2005	2193000
+total rx misuse initiation samhsa	2006	2155000
+total rx misuse initiation samhsa	2007	2159000
+total rx misuse initiation samhsa	2008	2189000
+total rx misuse initiation samhsa	2009	2193000
+total rx misuse initiation samhsa	2010	2013000
+total rx misuse initiation samhsa	2011	1888000
+total rx misuse initiation samhsa	2012	1880000
+total rx misuse initiation samhsa	2013	1539000
+total rx misuse initiation samhsa	2014	1425000
+total rx misuse initiation samhsa	2015	2126000
+total rx misuse initiation samhsa	2016	2139000
+total rx misuse initiation samhsa	2017	2010000
+total rx misuse initiation samhsa	2018	1908000
+total rx misuse initiation samhsa	2019	1607000
+total rx misuse initiation samhsa	2020	1140340
+tx point patients otp mmt nssats	1999	159054
+tx point patients otp mmt nssats	2000	172497
+tx point patients otp mmt nssats	2001	198998
+tx point patients otp mmt nssats	2002	225500
+tx point patients otp mmt nssats	2003	227003
+tx point patients otp mmt nssats	2004	240961
+tx point patients otp mmt nssats	2005	235836
+tx point patients otp mmt nssats	2006	258752
+tx point patients otp mmt nssats	2007	262684
+tx point patients otp mmt nssats	2008	268071
+tx point patients otp mmt nssats	2009	283177
+tx point patients otp mmt nssats	2010	299643
+tx point patients otp mmt nssats	2011	306440
+tx point patients otp mmt nssats	2012	311718
+tx point patients otp mmt nssats	2013	330308
+tx point patients otp mmt nssats	2014	343576
+tx point patients otp mmt nssats	2015	356843
+tx point patients otp mmt nssats	2016	345443
+tx point patients otp mmt nssats	2017	382867
+tx point patients otp mmt nssats	2018	395708
+tx point patients otp mmt nssats	2019	408550
+tx point patients otp mmt nssats	2020	311531
+tx point patients viv iqvia	1999	0
+tx point patients viv iqvia	2000	0
+tx point patients viv iqvia	2001	0
+tx point patients viv iqvia	2002	0
+tx point patients viv iqvia	2003	0
+tx point patients viv iqvia	2004	0
+tx point patients viv iqvia	2005	0
+tx point patients viv iqvia	2006	0
+tx point patients viv iqvia	2007	0
+tx point patients viv iqvia	2008	0
+tx point patients viv iqvia	2009	0
+tx point patients viv iqvia	2010	434.771
+tx point patients viv iqvia	2011	1543.52
+tx point patients viv iqvia	2012	2990.27
+tx point patients viv iqvia	2013	4705.69
+tx point patients viv iqvia	2014	6685.27
+tx point patients viv iqvia	2015	10849.4
+tx point patients viv iqvia	2016	19529.1
+tx point patients viv iqvia	2017	26956.6
+tx point patients viv iqvia	2018	30646.6
+tx point patients viv iqvia	2019	32227.2
+tx point patients viv iqvia	2020	28917.1

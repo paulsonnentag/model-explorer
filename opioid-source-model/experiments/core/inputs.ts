@@ -120,7 +120,11 @@ export function publishedRunFile(scenario: string): string | null {
 }
 
 function readFittedValues(): { fitted: FittedValue[]; stats: string[] } {
-  const lines = read(FILES.fittedValues).split(/\r?\n/);
+  return parseFittedValues(read(FILES.fittedValues));
+}
+
+export function parseFittedValues(text: string): { fitted: FittedValue[]; stats: string[] } {
+  const lines = text.split(/\r?\n/);
   const stats = lines.filter((l) => l.startsWith(":COMSYS")).map((l) => l.replace(":COMSYS", "").trim());
   const fitted = lines.flatMap((line) => {
     const m = line.match(/^\s*([-\d.e+]+)\s*<=\s*(.+?)\s*=\s*([-\d.e+]+)\s*<=\s*([-\d.e+]+)\s*$/);
@@ -130,7 +134,11 @@ function readFittedValues(): { fitted: FittedValue[]; stats: string[] } {
 }
 
 function readCin(file: string): Override[] {
-  return read(file)
+  return parseCin(read(file));
+}
+
+export function parseCin(text: string): Override[] {
+  return text
     .split(/\r?\n/)
     .filter((line) => line.includes("=") && !line.trim().startsWith(":"))
     .map((line) => {

@@ -16,6 +16,7 @@ import {
   rangeLabel,
   referenceSeries,
   seriesOf,
+  sourceLink,
   stageLabel,
   substanceLabel,
 } from "./context.ts";
@@ -33,6 +34,7 @@ export function flowCard(app: MapApp, edge: MapEdge): string {
       .map(
         (f) => `<section>
           <div class="flow-head"><a href="${explorerLink(f.key, explorerQuery(app.whatIf))}" title="Open in the Explorer">${escapeHtml(flowLabel(app, f))}</a><b data-live="flow:${escapeHtml(f.key)}"></b></div>
+          <div class="src-row">${sourceLink(app, f.key)}</div>
           ${spark(app, f.key)}
           ${partRows(app, f.key)}
           ${factorRows(app, f.key)}
@@ -52,7 +54,7 @@ export function stockCard(app: MapApp, key: string): string {
   return `<div class="card stock-card" data-card="stock:${escapeHtml(key)}">
     <header data-drag="stock:${escapeHtml(key)}"><span>${escapeHtml(stageLabel(app, node.stage))} · ${escapeHtml(substanceLabel(app, node.substance))}</span><button data-act="stock:${escapeHtml(key)}" title="Collapse">×</button></header>
     <section>
-      ${app.plain ? `<div class="model-name">${escapeHtml(app.sem.vars.get(key)?.modelName ?? key)}</div>` : ""}
+      <div class="model-name">${app.plain ? escapeHtml(app.sem.vars.get(key)?.modelName ?? key) : ""} ${sourceLink(app, key)}</div>
       ${description ? `<p class="desc">${escapeHtml(description)}</p>` : ""}
       ${partsOf(app, [key]) ? `${spark(app, key)}${partRows(app, key)}` : ""}
       <h4>Coming in</h4><ul class="moves">${inflows.map((e) => item(e, e.from, "starts using")).join("") || '<li class="muted">Nothing</li>'}</ul>

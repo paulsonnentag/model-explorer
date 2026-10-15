@@ -13,7 +13,6 @@ import {
   PART_COLORS,
   PART_FILLS,
   type Toggle,
-  bindHover,
   edgeReference,
   edgeValue,
   highlights,
@@ -32,6 +31,7 @@ import {
   valueAt,
 } from "./context.ts";
 import { COL_W, LEFT, type MapEdge, type MapNode, NODE_H, NODE_W, ROW_H, STAGES, SUBSTANCES, TOP } from "./layout.ts";
+import type { PanelView } from "./trail.ts";
 
 const MAX_WIDTH = 24;
 const STUB = 54;
@@ -40,6 +40,63 @@ const NEUTRAL = "#9aa3ad";
 const SLOT_H = 900;
 const LOWER_HALF = 0.55;
 const MARKER_COLORS: Record<string, string> = { neutral: NEUTRAL, hover: HOVER_COLOR, ...Object.fromEntries(Object.entries(FAMILIES).map(([id, f]) => [id, f.color])) };
+
+// The panel around the map: buttons to fold everything, the map, and what its marks mean. Its height
+// is the window's, so its width follows from the layout's proportions, leaving room for one panel beside it.
+export const mapPanel: PanelView = {
+  width: (app) => Math.round(Math.max(760, Math.min(window.innerWidth - 440, ((window.innerHeight - 190) * app.layout.width) / app.layout.height + 24))),
+  kind: () => "Stock and flow model",
+  title: () => "Every group of people, and how they move",
+  render(body, app) {
+    body.innerHTML = `<div class="map-toolbar">
+        <span class="group">Groups <button data-fold="stocks">Collapse</button><button data-fold="stocks+">Expand</button></span>
+        <span class="group">Flows <button data-fold="flows">Close cards</button><button data-fold="flows+">Open all</button></span>
+        <span class="summary" data-live="tracked"></span>
+      </div>
+      <div class="map-canvas"></div>
+      <div class="map-legend">${legendHtml(app)}</div>`;
+    body.querySelector<HTMLElement>(".map-toolbar")!.onclick = (e) => {
+      const fold = (e.target as Element).closest<HTMLElement>("[data-fold]")?.dataset.fold;
+      if (!fold) return;
+      const expand = fold.endsWith("+");
+      if (fold.startsWith("stocks")) {
+        app.compactStocks = expand ? new Set() : new Set(app.layout.nodes.map((n) => n.key));
+        if (!expand) app.openStocks.clear();
+      } else app.openFlows = expand ? new Set(app.layout.edges.map((e) => e.id)) : new Set();
+      renderMap(mapCanvas(body), app);
+    };
+    renderMap(mapCanvas(body), app);
+  },
+  update: (body, app) => updateMap(mapCanvas(body), app),
+  // "stock:key" or "flow:key" unfolds that box or arrow and lights it up.
+  focus(body, app, _, spec) {
+    const [kind, ...rest] = spec.split(":");
+    const key = rest.join(":");
+    if (kind === "stock") app.openStocks.add(key);
+    const edge = kind === "flow" ? app.layout.edges.find((e) => e.flows.some((f) => f.key === key)) : null;
+    if (edge) app.openFlows.add(edge.id);
+    renderCards(mapCanvas(body), app);
+    const el = body.querySelector(kind === "stock" ? `g.node[data-key="${CSS.escape(key)}"]` : `g.edge[data-edge="${CSS.escape(edge?.id ?? "")}"]`);
+    el?.classList.remove("flash");
+    void (el as HTMLElement | null)?.getBoundingClientRect();
+    el?.classList.add("flash");
+  },
+  source: () => `<a data-open="source:model.mdl">model.mdl</a> <span class="muted">· every box is a stock and every arrow a flow defined there</span>`,
+};
+
+export function mapCanvas(body: ParentNode): HTMLElement {
+  return body.querySelector<HTMLElement>(".map-canvas")!;
+}
+
+function legendHtml(app: MapApp): string {
+  const arrayed = app.layout.nodes.find((n) => partsOf(app, [n.key]));
+  const parts = arrayed ? partsOf(app, [arrayed.key])! : [];
+  const split = arrayed
+    ? `<span class="sep"></span><span class="muted">Stacked by ${escapeHtml(rangeLabel(app, arrayed.key))}:</span>${parts.map((p, i) => `<span><i style="background:${PART_COLORS[i % PART_COLORS.length]}"></i>${escapeHtml(partLabel(app, p.label))}</span>`).join("")}`
+    : "";
+  const ghost = app.reference ? `<span class="sep"></span><span><i class="dashed"></i>Comparison run</span>` : "";
+  return `<span><i style="background:#9aa3ad"></i>Flow of people (thickness = people per year; click to unfold)</span>${ghost}${split}`;
+}
 
 export function renderMap(root: HTMLElement, app: MapApp) {
   const { layout } = app;
@@ -62,12 +119,9 @@ export function renderMap(root: HTMLElement, app: MapApp) {
     const target = (e.target as Element).closest<HTMLElement | SVGElement>("[data-act]");
     if (!target || (e.target as Element).closest("a[href]")) return;
     const [kind, ...rest] = target.dataset.act!.split(":");
-    const id = rest.join(":");
-    if (kind === "open-loop") return app.actions.toggle("loop", id);
-    app.actions.toggle(kind as Toggle, id);
+    app.actions.toggle(kind as Toggle, rest.join(":"));
   });
   enableDragging(svg, app);
-  bindHover(svg, app);
   renderCards(root, app);
 }
 

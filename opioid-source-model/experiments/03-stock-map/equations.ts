@@ -131,5 +131,5 @@ function refHtml(app: MapApp, key: string, context: string, shown: Set<string>):
   const kind = info.role === "stock" ? " people" : app.factors.has(key) ? " flow" : app.inputs.some((i) => i.key === key) ? " input" : shown.has(key) ? " shown" : "";
   const input = app.inputs.find((i) => i.key === key);
   const hover = input ? `input:${input.id}` : `var:${key}`;
-  return `<span class="v${kind}" data-hover="${escapeHtml(hover)}" data-var="${escapeHtml(key)}" title="${escapeHtml(info.modelName)}: ${escapeHtml(formatNumber(valueAt(app, key)))}">${name}${value}</span>`;
+  return `<span class="v${kind}" data-hover="${escapeHtml(hover)}" data-var="${escapeHtml(key)}" data-open="source:model.mdl>var:${escapeHtml(key)}" title="${escapeHtml(info.modelName)}: ${escapeHtml(formatNumber(valueAt(app, key)))}">${name}${value}</span>`;
 }

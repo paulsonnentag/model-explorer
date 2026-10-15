@@ -3,6 +3,7 @@
 // The browser code is TypeScript; it is served as JavaScript by stripping the types on the fly,
 // so there is no build step. Everything else is read straight from the SOURCE repository.
 // /files/<path> serves anything under opioid-source-model/ (the paper PDF, the repository's figures).
+// /api/model and /model/<path> serve the sorted copy in opioid-source-model/opioid-model/ (the trail view).
 
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { readFileSync, existsSync, statSync } from "node:fs";
@@ -10,6 +11,7 @@ import { join, dirname, normalize, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { stripTypeScriptTypes } from "node:module";
 import { loadBundle, publishedRunFile, readTab, REPO_DIR, type Bundle } from "./core/inputs.ts";
+import { loadModelFolder, MODEL_DIR } from "./core/model-folder.ts";
 
 const EXPERIMENTS_DIR = dirname(fileURLToPath(import.meta.url));
 const PROJECT_DIR = join(EXPERIMENTS_DIR, "..");
@@ -29,10 +31,12 @@ createServer((req, res) => {
 function route(req: IncomingMessage, res: ServerResponse) {
   const url = new URL(req.url ?? "/", "http://localhost");
   if (url.pathname === "/api/bundle") return sendJson(res, browserBundle());
+  if (url.pathname === "/api/model") return sendJson(res, loadModelFolder());
   if (url.pathname.startsWith("/api/published/")) return sendPublished(res, url);
   if (url.pathname === "/source") return sendSource(res, url);
   const path = decodeURIComponent(url.pathname);
   if (path.startsWith("/files/")) return sendWithin(res, PROJECT_DIR, path.slice("/files".length));
+  if (path.startsWith("/model/")) return sendWithin(res, MODEL_DIR, path.slice("/model".length));
   sendWithin(res, EXPERIMENTS_DIR, path.endsWith("/") ? `${path}index.html` : path);
 }
 
@@ -103,6 +107,11 @@ function sendFile(res: ServerResponse, file: string) {
     ".pdf": "application/pdf",
     ".svg": "image/svg+xml",
     ".png": "image/png",
+    ".md": "text/plain; charset=utf-8",
+    ".mdl": "text/plain; charset=utf-8",
+    ".cin": "text/plain; charset=utf-8",
+    ".out": "text/plain; charset=utf-8",
+    ".tsv": "text/plain; charset=utf-8",
   };
   res.writeHead(200, { "content-type": types[ext] ?? "application/octet-stream", "cache-control": "no-store" }).end(readFileSync(file));
 }

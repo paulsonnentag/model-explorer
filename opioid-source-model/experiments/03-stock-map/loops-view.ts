@@ -1,63 +1,60 @@
-// The left column: every effect the equations contain, grouped into feedback loops, effects driven
-// from outside, and effects fitted to zero. A loop unfolds into the formulas it appears in, each with
-// its multiplier over time; hovering or opening one paints its arrows on the map.
+// Every effect the equations contain, grouped into feedback loops, effects driven from outside, and
+// effects fitted to zero; and one panel per loop with its driver's equations and the formulas it
+// appears in, each with its multiplier over time. Hovering or opening a loop paints its arrows on the map.
 
 import { type Line, sparkline } from "../shared/chart.ts";
 import { escapeHtml } from "../shared/html.ts";
 import { type ExternalInput, FAMILIES, type Loop, type LoopLink, loopTitle } from "../shared/loops.ts";
-import { type MapApp, bindHover, edgesOf, inputPath, isActive, loopActive, nameOf, referenceSeries, seriesOf, updateLive } from "./context.ts";
+import { type MapApp, edgesOf, inputPath, isActive, loopActive, nameOf, referenceSeries, seriesOf, sourceLink } from "./context.ts";
 import { driverEquations } from "./equations.ts";
 import { exponent, flowName, formulaLine } from "./formula.ts";
+import type { PanelView } from "./trail.ts";
 
-export function renderLoops(root: HTMLElement, app: MapApp) {
-  const groups: [string, string, Loop[]][] = [
-    ["Feedback loops", "The driver is computed from groups of people that these flows change.", app.loops.filter((l) => l.feedback && loopActive(app, l))],
-    ["Driven from outside", "Same form, but the driver comes from data, so nothing circles back.", app.loops.filter((l) => !l.feedback && loopActive(app, l))],
-    ["Fitted to zero", "Every strength was estimated at ~0: in the equations, but doing nothing.", app.loops.filter((l) => !loopActive(app, l))],
-  ];
-  root.innerHTML = `<div class="loops-head"><b>Effects on flows</b>
-      <p>Each effect multiplies the rate of a few flows by <i>driver<sup>strength</sup></i>. The driver is 1 in 1999, so the multiplier starts at ×1.</p></div>
-    ${groups
-      .filter(([, , loops]) => loops.length)
-      .map(([title, hint, loops]) => `<h3>${title}</h3><p class="hint">${hint}</p>${loops.map((l) => loopSection(app, l)).join("")}`)
-      .join("")}`;
-  if (!root.dataset.hoverBound) {
-    bindHover(root, app);
-    root.dataset.hoverBound = "1";
-  }
-  root.onclick = (e) => {
-    const target = (e.target as Element).closest<HTMLElement>("[data-act]");
-    if (!target) return;
-    const [kind, ...rest] = target.dataset.act!.split(":");
-    const id = rest.join(":");
-    if (kind === "flow-of") {
-      const edge = edgesOf(app, [id])[0];
-      if (edge) app.actions.toggle("flow", edge.id);
-      return;
-    }
-    if (kind === "loop" || kind === "stock") app.actions.toggle(kind, id);
-  };
-  updateLoops(root, app);
+export const loopsPanel: PanelView = {
+  width: () => 360,
+  kind: () => "Feedback loops",
+  title: () => "Effects on flows",
+  render(body, app) {
+    const groups: [string, string, Loop[]][] = [
+      ["Feedback loops", "The driver is computed from groups of people that these flows change.", app.loops.filter((l) => l.feedback && loopActive(app, l))],
+      ["Driven from outside", "Same form, but the driver comes from data, so nothing circles back.", app.loops.filter((l) => !l.feedback && loopActive(app, l))],
+      ["Fitted to zero", "Every strength was estimated at ~0: in the equations, but doing nothing.", app.loops.filter((l) => !loopActive(app, l))],
+    ];
+    body.innerHTML = `<p class="hint">Each effect multiplies the rate of a few flows by <i>driver<sup>strength</sup></i>. The driver is 1 in 1999, so the multiplier starts at ×1.</p>
+      ${groups
+        .filter(([, , loops]) => loops.length)
+        .map(([title, hint, loops]) => `<h3>${title}</h3><p class="hint">${hint}</p>${loops.map((l) => loopRow(app, l)).join("")}`)
+        .join("")}`;
+  },
+  source: () => `<a data-open="source:model.mdl">model.mdl</a>`,
+};
+
+export const loopPanel: PanelView = {
+  width: () => 400,
+  kind: (app, id) => {
+    const loop = loopOf(app, id);
+    return app.plain ? FAMILIES[loop.family].plainTitle : FAMILIES[loop.family].title;
+  },
+  title: (app, id) => loopTitle(loopOf(app, id), app.plain),
+  render(body, app, id) {
+    const loop = loopOf(app, id);
+    body.style.setProperty("--c", FAMILIES[loop.family].color);
+    body.innerHTML = loopBody(app, loop);
+  },
+  source: (app, id) => sourceLink(app, loopOf(app, id).driver),
+};
+
+function loopOf(app: MapApp, id: string): Loop {
+  return app.loops.find((l) => l.id === id)!;
 }
 
-export function updateLoops(root: HTMLElement, app: MapApp) {
-  updateLive(root, app);
-}
-
-export function revealLoop(root: HTMLElement, id: string) {
-  root.querySelector(`section.loop[data-loop="${CSS.escape(id)}"]`)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-}
-
-function loopSection(app: MapApp, loop: Loop): string {
+function loopRow(app: MapApp, loop: Loop): string {
   const family = FAMILIES[loop.family];
-  const open = app.openLoops.has(loop.id);
-  return `<section class="loop${open ? " open" : ""}" data-loop="${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" style="--c:${family.color}">
-    <header data-act="loop:${escapeHtml(loop.id)}">
-      <span class="chev">${open ? "▾" : "▸"}</span><i class="dot"></i>
-      <span class="title">${escapeHtml(loopTitle(loop, app.plain))}<small>${escapeHtml(app.plain ? family.plainTitle : family.title)} · ${loop.flows.length} flow${loop.flows.length === 1 ? "" : "s"}</small></span>
-    </header>
-    ${open ? loopBody(app, loop) : ""}
-  </section>`;
+  const open = app.panels.includes(`loop:${loop.id}`);
+  return `<a class="loop${open ? " open" : ""}" data-open="loop:${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" style="--c:${family.color}">
+    <i class="dot"></i>
+    <span class="title">${escapeHtml(loopTitle(loop, app.plain))}<small>${escapeHtml(app.plain ? family.plainTitle : family.title)} · ${loop.flows.length} flow${loop.flows.length === 1 ? "" : "s"}</small></span>
+  </a>`;
 }
 
 function loopBody(app: MapApp, loop: Loop): string {
@@ -74,7 +71,7 @@ function loopBody(app: MapApp, loop: Loop): string {
     ${driverEquations(app, loop)}
     ${inputs.length ? `<div class="fed">Outside inputs: ${inputs.map((i) => inputChip(app, loop, i)).join("")}</div>` : ""}
     ${active.map((link) => linkRow(app, loop, link, family.color)).join("")}
-    ${inactive.length ? `<div class="inactive">Fitted to zero on: ${inactive.flatMap((l) => l.flows).map((f) => `<a data-act="flow-of:${escapeHtml(f)}" data-hover="flow:${escapeHtml(f)}" data-var="${escapeHtml(f)}">${escapeHtml(flowName(app, f))}</a>`).join(", ")}</div>` : ""}
+    ${inactive.length ? `<div class="inactive">Fitted to zero on: ${inactive.flatMap((l) => l.flows).map((f) => `<a data-open="map>flow:${escapeHtml(f)}" data-hover="flow:${escapeHtml(f)}" data-var="${escapeHtml(f)}">${escapeHtml(flowName(app, f))}</a>`).join(", ")}</div>` : ""}
   </div>`;
 }
 

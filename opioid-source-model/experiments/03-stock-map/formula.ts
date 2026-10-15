@@ -13,7 +13,7 @@ import { shortName } from "./equations.ts";
 // One line: `flow = people × base rate × risk^s × …`, with one loop's factor picked out.
 export function formulaLine(app: MapApp, flow: string, picked: Loop | null): string {
   const factors = app.factors.get(flow);
-  const lhs = `<a class="lhs" data-act="flow-of:${escapeHtml(flow)}" data-hover="flow:${escapeHtml(flow)}" data-var="${escapeHtml(flow)}" title="${escapeHtml(modelName(app, flow))}">${escapeHtml(flowName(app, flow))}</a>`;
+  const lhs = `<a class="lhs" data-open="map>flow:${escapeHtml(flow)}" data-hover="flow:${escapeHtml(flow)}" data-var="${escapeHtml(flow)}" title="${escapeHtml(modelName(app, flow))}">${escapeHtml(flowName(app, flow))}</a>`;
   if (!factors) return `<span class="formula">${lhs} = <span class="muted">${escapeHtml(equationText(app, flow))}</span></span>`;
   const terms = factors.map((f, i) => {
     const op = i === 0 ? (f.power < 0 ? "1 ÷ " : "") : f.power < 0 ? " ÷ " : " × ";
@@ -35,10 +35,10 @@ export function factorRows(app: MapApp, flow: string): string {
       const link = loop ? linkOf(loop, f.key) : null;
       if (loop && link) {
         const off = !isActive(app, link.strength);
-        return `<li class="f f-loop${off ? " off" : ""}" style="--c:${FAMILIES[loop.family].color}" data-act="open-loop:${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" data-var="${escapeHtml(loop.driver)}" title="${escapeHtml(tooltip(app, f, link, loop))}">
+        return `<li class="f f-loop${off ? " off" : ""}" style="--c:${FAMILIES[loop.family].color}" data-open="loop:${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" data-var="${escapeHtml(loop.driver)}" title="${escapeHtml(tooltip(app, f, link, loop))}">
           <i>${op}</i><b data-live="x:${escapeHtml(f.key)}"></b><span>${FAMILIES[loop.family].noun}<sup>${exponent(app, link)}</sup></span></li>`;
       }
-      return `<li class="f f-${f.kind}" data-hover="${hoverOf(app, flow, f)}" data-var="${escapeHtml(f.key)}" title="${escapeHtml(modelName(app, f.key))}"><i>${op}</i><b data-live="v:${escapeHtml(f.key)}"></b><span>${escapeHtml(factorName(app, flow, f))}</span></li>`;
+      return `<li class="f f-${f.kind}" data-hover="${hoverOf(app, flow, f)}" data-var="${escapeHtml(f.key)}" data-open="source:model.mdl>var:${escapeHtml(f.key)}" title="${escapeHtml(modelName(app, f.key))}"><i>${op}</i><b data-live="v:${escapeHtml(f.key)}"></b><span>${escapeHtml(factorName(app, flow, f))}</span></li>`;
     })
     .join("")}</ul>`;
 }
@@ -59,9 +59,9 @@ function term(app: MapApp, flow: string, f: Factor, picked: Loop | null): string
   if (loop && link) {
     const isPicked = picked?.id === loop.id;
     const off = !isActive(app, link.strength);
-    return `<span class="t t-loop${isPicked ? " picked" : ""}${off ? " off" : ""}" style="--c:${FAMILIES[loop.family].color}" data-hover="loop:${escapeHtml(loop.id)}" data-var="${escapeHtml(loop.driver)}" title="${escapeHtml(tooltip(app, f, link, loop))}">${FAMILIES[loop.family].noun}<sup>${exponent(app, link)}</sup></span>`;
+    return `<span class="t t-loop${isPicked ? " picked" : ""}${off ? " off" : ""}" style="--c:${FAMILIES[loop.family].color}" data-open="loop:${escapeHtml(loop.id)}" data-hover="loop:${escapeHtml(loop.id)}" data-var="${escapeHtml(loop.driver)}" title="${escapeHtml(tooltip(app, f, link, loop))}">${FAMILIES[loop.family].noun}<sup>${exponent(app, link)}</sup></span>`;
   }
-  return `<span class="t t-${f.kind}" data-hover="${hoverOf(app, flow, f)}" data-var="${escapeHtml(f.key)}" title="${escapeHtml(modelName(app, f.key))}">${escapeHtml(factorName(app, flow, f))}</span>`;
+  return `<span class="t t-${f.kind}" data-hover="${hoverOf(app, flow, f)}" data-var="${escapeHtml(f.key)}" data-open="source:model.mdl>var:${escapeHtml(f.key)}" title="${escapeHtml(modelName(app, f.key))}">${escapeHtml(factorName(app, flow, f))}</span>`;
 }
 
 function factorName(app: MapApp, flow: string, f: Factor): string {
