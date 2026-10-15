@@ -41,7 +41,12 @@ export function renderTrail(root: HTMLElement, app: MapApp) {
   let previous: Element | null = null;
   for (const key of app.panels) {
     const el = existing.get(key) ?? createPanel(app, key);
-    if (el.previousElementSibling !== previous || !el.isConnected) root.insertBefore(el, previous ? previous.nextSibling : root.firstChild);
+    if (el.previousElementSibling !== previous || !el.isConnected) {
+      const body = el.querySelector<HTMLElement>(".body")!;
+      const scroll = [body.scrollTop, body.scrollLeft];
+      root.insertBefore(el, previous ? previous.nextSibling : root.firstChild);
+      [body.scrollTop, body.scrollLeft] = scroll;
+    }
     if (!existing.has(key)) draw(el, app, key);
     previous = el;
   }

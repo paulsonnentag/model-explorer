@@ -79,25 +79,31 @@ async function main() {
     const link = target.closest<HTMLElement>("[data-open]");
     if (link) {
       e.preventDefault();
-      open(link.dataset.open!);
+      open(link.dataset.open!, link.closest<HTMLElement>("section.panel")?.dataset.panel);
     }
   });
   renderTrail(root, app);
   byId("loading").classList.add("hidden");
 }
 
-// Adds the panel at the end of the trail, or scrolls to it if it is already open.
-function open(spec: string) {
+// Puts the panel right after the one the link is in, moving it there if it is already open elsewhere;
+// links from the menu or the header open at the end.
+function open(spec: string, from?: string) {
   const at = spec.indexOf(">");
   const key = at < 0 ? spec : spec.slice(0, at);
   const focus = at < 0 ? undefined : spec.slice(at + 1);
   if (!isPanelKind(parseKey(key).kind)) return;
   if (focus) app.focus.set(key, focus);
-  if (!app.panels.includes(key)) {
-    app.panels.push(key);
-    panelsChanged();
-  }
+  if (key !== from) place(key, from);
   focusPanel(trail(), app, key, focus);
+}
+
+function place(key: string, from: string | undefined) {
+  const panels = app.panels.filter((k) => k !== key);
+  panels.splice(from && panels.includes(from) ? panels.indexOf(from) + 1 : panels.length, 0, key);
+  if (panels.join("\n") === app.panels.join("\n")) return;
+  app.panels = panels;
+  panelsChanged();
 }
 
 function close(key: string) {
