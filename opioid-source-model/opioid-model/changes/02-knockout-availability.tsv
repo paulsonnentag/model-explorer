@@ -1,0 +1,614 @@
+# The authors' published runs, yearly: before = X8_final_Base_vars.tab at HEAD, after = X8_lk_run_av_Base_vars.tab at HEAD, refitted = X8_lk_av_Base_vars.tab at HEAD, in Analysis & Graphing/X8_IterCal/Results.
+variable	side	time	value
+HUD total	before	1999	589879
+HUD total	before	2000	670692
+HUD total	before	2001	713885
+HUD total	before	2002	749840
+HUD total	before	2003	788366
+HUD total	before	2004	824707
+HUD total	before	2005	872937
+HUD total	before	2006	920084
+HUD total	before	2007	970232
+HUD total	before	2008	1031130
+HUD total	before	2009	1107630
+HUD total	before	2010	1190670
+HUD total	before	2011	1309230
+HUD total	before	2012	1489290
+HUD total	before	2013	1614650
+HUD total	before	2014	1735920
+HUD total	before	2015	1866850
+HUD total	before	2016	2001890
+HUD total	before	2017	2092410
+HUD total	before	2018	2139590
+HUD total	before	2019	2150810
+HUD total	before	2020	2149240
+HUD total	before	2021	2105400
+HUD total	before	2022	2042340
+HUD total	before	2023	1969460
+HUD total	before	2024	1891870
+HUD total	before	2025	1814870
+HUD total	before	2026	1744540
+HUD total	before	2027	1677410
+HUD total	before	2028	1612370
+HUD total	before	2029	1549160
+HUD total	before	2030	1487800
+HUD total	before	2031	1428500
+HUD total	before	2032	1373350
+Projected cumulative UD person years	before	1999	0
+Projected cumulative UD person years	before	2000	0
+Projected cumulative UD person years	before	2001	0
+Projected cumulative UD person years	before	2002	0
+Projected cumulative UD person years	before	2003	0
+Projected cumulative UD person years	before	2004	0
+Projected cumulative UD person years	before	2005	0
+Projected cumulative UD person years	before	2006	0
+Projected cumulative UD person years	before	2007	0
+Projected cumulative UD person years	before	2008	0
+Projected cumulative UD person years	before	2009	0
+Projected cumulative UD person years	before	2010	0
+Projected cumulative UD person years	before	2011	0
+Projected cumulative UD person years	before	2012	0
+Projected cumulative UD person years	before	2013	0
+Projected cumulative UD person years	before	2014	0
+Projected cumulative UD person years	before	2015	0
+Projected cumulative UD person years	before	2016	0
+Projected cumulative UD person years	before	2017	0
+Projected cumulative UD person years	before	2018	0
+Projected cumulative UD person years	before	2019	0
+Projected cumulative UD person years	before	2020	0
+Projected cumulative UD person years	before	2021	3837630
+Projected cumulative UD person years	before	2022	7526090
+Projected cumulative UD person years	before	2023	11055700
+Projected cumulative UD person years	before	2024	14423100
+Projected cumulative UD person years	before	2025	17629700
+Projected cumulative UD person years	before	2026	20686400
+Projected cumulative UD person years	before	2027	23605400
+Projected cumulative UD person years	before	2028	26396200
+Projected cumulative UD person years	before	2029	29067200
+Projected cumulative UD person years	before	2030	31626400
+Projected cumulative UD person years	before	2031	34081600
+Projected cumulative UD person years	before	2032	36441400
+Projected cumulative overdose deaths	before	1999	0
+Projected cumulative overdose deaths	before	2000	0
+Projected cumulative overdose deaths	before	2001	0
+Projected cumulative overdose deaths	before	2002	0
+Projected cumulative overdose deaths	before	2003	0
+Projected cumulative overdose deaths	before	2004	0
+Projected cumulative overdose deaths	before	2005	0
+Projected cumulative overdose deaths	before	2006	0
+Projected cumulative overdose deaths	before	2007	0
+Projected cumulative overdose deaths	before	2008	0
+Projected cumulative overdose deaths	before	2009	0
+Projected cumulative overdose deaths	before	2010	0
+Projected cumulative overdose deaths	before	2011	0
+Projected cumulative overdose deaths	before	2012	0
+Projected cumulative overdose deaths	before	2013	0
+Projected cumulative overdose deaths	before	2014	0
+Projected cumulative overdose deaths	before	2015	0
+Projected cumulative overdose deaths	before	2016	0
+Projected cumulative overdose deaths	before	2017	0
+Projected cumulative overdose deaths	before	2018	0
+Projected cumulative overdose deaths	before	2019	0
+Projected cumulative overdose deaths	before	2020	0
+Projected cumulative overdose deaths	before	2021	63175.7
+Projected cumulative overdose deaths	before	2022	126671
+Projected cumulative overdose deaths	before	2023	189486
+Projected cumulative overdose deaths	before	2024	250722
+Projected cumulative overdose deaths	before	2025	309741
+Projected cumulative overdose deaths	before	2026	366794
+Projected cumulative overdose deaths	before	2027	422010
+Projected cumulative overdose deaths	before	2028	475279
+Projected cumulative overdose deaths	before	2029	526537
+Projected cumulative overdose deaths	before	2030	575768
+Projected cumulative overdose deaths	before	2031	623003
+Projected cumulative overdose deaths	before	2032	668424
+Total heroin initiation	before	1999	248331
+Total heroin initiation	before	2000	269658
+Total heroin initiation	before	2001	282436
+Total heroin initiation	before	2002	295124
+Total heroin initiation	before	2003	312472
+Total heroin initiation	before	2004	329220
+Total heroin initiation	before	2005	356274
+Total heroin initiation	before	2006	373911
+Total heroin initiation	before	2007	395962
+Total heroin initiation	before	2008	426837
+Total heroin initiation	before	2009	464190
+Total heroin initiation	before	2010	492789
+Total heroin initiation	before	2011	549058
+Total heroin initiation	before	2012	557051
+Total heroin initiation	before	2013	550086
+Total heroin initiation	before	2014	523809
+Total heroin initiation	before	2015	490051
+Total heroin initiation	before	2016	435594
+Total heroin initiation	before	2017	357561
+Total heroin initiation	before	2018	288763
+Total heroin initiation	before	2019	237756
+Total heroin initiation	before	2020	199504
+Total heroin initiation	before	2021	169805
+Total heroin initiation	before	2022	148991
+Total heroin initiation	before	2023	134043
+Total heroin initiation	before	2024	122998
+Total heroin initiation	before	2025	114374
+Total heroin initiation	before	2026	107908
+Total heroin initiation	before	2027	102854
+Total heroin initiation	before	2028	98835.6
+Total heroin initiation	before	2029	95612.8
+Total heroin initiation	before	2030	93009.9
+Total heroin initiation	before	2031	90900.4
+Total heroin initiation	before	2032	89236.6
+Total overdose deaths	before	1999	9620.8
+Total overdose deaths	before	2000	10973.6
+Total overdose deaths	before	2001	11988.3
+Total overdose deaths	before	2002	13016.4
+Total overdose deaths	before	2003	14177.9
+Total overdose deaths	before	2004	15302.3
+Total overdose deaths	before	2005	16420.8
+Total overdose deaths	before	2006	17556.5
+Total overdose deaths	before	2007	19047.2
+Total overdose deaths	before	2008	20115.3
+Total overdose deaths	before	2009	21311.8
+Total overdose deaths	before	2010	22435.5
+Total overdose deaths	before	2011	23419.6
+Total overdose deaths	before	2012	23999.4
+Total overdose deaths	before	2013	24714.9
+Total overdose deaths	before	2014	25998.5
+Total overdose deaths	before	2015	29328
+Total overdose deaths	before	2016	36563.8
+Total overdose deaths	before	2017	46897.1
+Total overdose deaths	before	2018	52018.6
+Total overdose deaths	before	2019	55640.8
+Total overdose deaths	before	2020	62580
+Total overdose deaths	before	2021	63514.4
+Total overdose deaths	before	2022	63295.6
+Total overdose deaths	before	2023	62110.5
+Total overdose deaths	before	2024	60121.4
+Total overdose deaths	before	2025	57894.4
+Total overdose deaths	before	2026	56095.4
+Total overdose deaths	before	2027	54197.9
+Total overdose deaths	before	2028	52206.6
+Total overdose deaths	before	2029	50179.6
+Total overdose deaths	before	2030	48163.3
+Total overdose deaths	before	2031	46209
+Total overdose deaths	before	2032	44570.6
+Total with UD	before	1999	1392600
+Total with UD	before	2000	1607910
+Total with UD	before	2001	1785680
+Total with UD	before	2002	1962950
+Total with UD	before	2003	2146150
+Total with UD	before	2004	2334340
+Total with UD	before	2005	2525680
+Total with UD	before	2006	2717340
+Total with UD	before	2007	2926690
+Total with UD	before	2008	3145410
+Total with UD	before	2009	3363700
+Total with UD	before	2010	3575450
+Total with UD	before	2011	3771900
+Total with UD	before	2012	3937590
+Total with UD	before	2013	4062580
+Total with UD	before	2014	4150370
+Total with UD	before	2015	4203780
+Total with UD	before	2016	4229200
+Total with UD	before	2017	4198560
+Total with UD	before	2018	4119300
+Total with UD	before	2019	4009700
+Total with UD	before	2020	3901360
+Total with UD	before	2021	3760590
+Total with UD	before	2022	3605100
+Total with UD	before	2023	3443580
+Total with UD	before	2024	3281220
+Total with UD	before	2025	3124470
+Total with UD	before	2026	2981870
+Total with UD	before	2027	2849470
+Total with UD	before	2028	2725810
+Total with UD	before	2029	2610310
+Total with UD	before	2030	2502670
+Total with UD	before	2031	2402810
+Total with UD	before	2032	2312590
+HUD total	after	1999	589879
+HUD total	after	2000	669648
+HUD total	after	2001	712750
+HUD total	after	2002	746390
+HUD total	after	2003	781260
+HUD total	after	2004	815373
+HUD total	after	2005	853738
+HUD total	after	2006	888405
+HUD total	after	2007	926319
+HUD total	after	2008	963552
+HUD total	after	2009	1000320
+HUD total	after	2010	1035570
+HUD total	after	2011	1070810
+HUD total	after	2012	1104560
+HUD total	after	2013	1134170
+HUD total	after	2014	1160410
+HUD total	after	2015	1180490
+HUD total	after	2016	1196640
+HUD total	after	2017	1189650
+HUD total	after	2018	1177150
+HUD total	after	2019	1162700
+HUD total	after	2020	1160170
+HUD total	after	2021	1131520
+HUD total	after	2022	1097720
+HUD total	after	2023	1064910
+HUD total	after	2024	1034260
+HUD total	after	2025	1003800
+HUD total	after	2026	973338
+HUD total	after	2027	942994
+HUD total	after	2028	912941
+HUD total	after	2029	883318
+HUD total	after	2030	854232
+HUD total	after	2031	825763
+HUD total	after	2032	797971
+Projected cumulative overdose deaths	after	1999	0
+Projected cumulative overdose deaths	after	2000	0
+Projected cumulative overdose deaths	after	2001	0
+Projected cumulative overdose deaths	after	2002	0
+Projected cumulative overdose deaths	after	2003	0
+Projected cumulative overdose deaths	after	2004	0
+Projected cumulative overdose deaths	after	2005	0
+Projected cumulative overdose deaths	after	2006	0
+Projected cumulative overdose deaths	after	2007	0
+Projected cumulative overdose deaths	after	2008	0
+Projected cumulative overdose deaths	after	2009	0
+Projected cumulative overdose deaths	after	2010	0
+Projected cumulative overdose deaths	after	2011	0
+Projected cumulative overdose deaths	after	2012	0
+Projected cumulative overdose deaths	after	2013	0
+Projected cumulative overdose deaths	after	2014	0
+Projected cumulative overdose deaths	after	2015	0
+Projected cumulative overdose deaths	after	2016	0
+Projected cumulative overdose deaths	after	2017	0
+Projected cumulative overdose deaths	after	2018	0
+Projected cumulative overdose deaths	after	2019	0
+Projected cumulative overdose deaths	after	2020	0
+Projected cumulative overdose deaths	after	2021	35260.4
+Projected cumulative overdose deaths	after	2022	70802
+Projected cumulative overdose deaths	after	2023	106497
+Projected cumulative overdose deaths	after	2024	142414
+Projected cumulative overdose deaths	after	2025	178381
+Projected cumulative overdose deaths	after	2026	214159
+Projected cumulative overdose deaths	after	2027	249552
+Projected cumulative overdose deaths	after	2028	284416
+Projected cumulative overdose deaths	after	2029	318655
+Projected cumulative overdose deaths	after	2030	352211
+Projected cumulative overdose deaths	after	2031	385050
+Projected cumulative overdose deaths	after	2032	417162
+Projected cumulative UD person years	after	1999	0
+Projected cumulative UD person years	after	2000	0
+Projected cumulative UD person years	after	2001	0
+Projected cumulative UD person years	after	2002	0
+Projected cumulative UD person years	after	2003	0
+Projected cumulative UD person years	after	2004	0
+Projected cumulative UD person years	after	2005	0
+Projected cumulative UD person years	after	2006	0
+Projected cumulative UD person years	after	2007	0
+Projected cumulative UD person years	after	2008	0
+Projected cumulative UD person years	after	2009	0
+Projected cumulative UD person years	after	2010	0
+Projected cumulative UD person years	after	2011	0
+Projected cumulative UD person years	after	2012	0
+Projected cumulative UD person years	after	2013	0
+Projected cumulative UD person years	after	2014	0
+Projected cumulative UD person years	after	2015	0
+Projected cumulative UD person years	after	2016	0
+Projected cumulative UD person years	after	2017	0
+Projected cumulative UD person years	after	2018	0
+Projected cumulative UD person years	after	2019	0
+Projected cumulative UD person years	after	2020	0
+Projected cumulative UD person years	after	2021	2854240
+Projected cumulative UD person years	after	2022	5657580
+Projected cumulative UD person years	after	2023	8409450
+Projected cumulative UD person years	after	2024	11113700
+Projected cumulative UD person years	after	2025	13772200
+Projected cumulative UD person years	after	2026	16385600
+Projected cumulative UD person years	after	2027	18954400
+Projected cumulative UD person years	after	2028	21479100
+Projected cumulative UD person years	after	2029	23960700
+Projected cumulative UD person years	after	2030	26400200
+Projected cumulative UD person years	after	2031	28798800
+Projected cumulative UD person years	after	2032	31157800
+Total heroin initiation	after	1999	248331
+Total heroin initiation	after	2000	270644
+Total heroin initiation	after	2001	287987
+Total heroin initiation	after	2002	293126
+Total heroin initiation	after	2003	306512
+Total heroin initiation	after	2004	316661
+Total heroin initiation	after	2005	324540
+Total heroin initiation	after	2006	327208
+Total heroin initiation	after	2007	328789
+Total heroin initiation	after	2008	326628
+Total heroin initiation	after	2009	323884
+Total heroin initiation	after	2010	319894
+Total heroin initiation	after	2011	311754
+Total heroin initiation	after	2012	305691
+Total heroin initiation	after	2013	298973
+Total heroin initiation	after	2014	288896
+Total heroin initiation	after	2015	272866
+Total heroin initiation	after	2016	249617
+Total heroin initiation	after	2017	216788
+Total heroin initiation	after	2018	190574
+Total heroin initiation	after	2019	171834
+Total heroin initiation	after	2020	157374
+Total heroin initiation	after	2021	143758
+Total heroin initiation	after	2022	134433
+Total heroin initiation	after	2023	127826
+Total heroin initiation	after	2024	122784
+Total heroin initiation	after	2025	118736
+Total heroin initiation	after	2026	115434
+Total heroin initiation	after	2027	112522
+Total heroin initiation	after	2028	109906
+Total heroin initiation	after	2029	107555
+Total heroin initiation	after	2030	105443
+Total heroin initiation	after	2031	103546
+Total heroin initiation	after	2032	101841
+Total overdose deaths	after	1999	9620.8
+Total overdose deaths	after	2000	11044.5
+Total overdose deaths	after	2001	12160.9
+Total overdose deaths	after	2002	13218.7
+Total overdose deaths	after	2003	14354.4
+Total overdose deaths	after	2004	15368.7
+Total overdose deaths	after	2005	16259.7
+Total overdose deaths	after	2006	17023.5
+Total overdose deaths	after	2007	17923.3
+Total overdose deaths	after	2008	18230.4
+Total overdose deaths	after	2009	18528.9
+Total overdose deaths	after	2010	18711.4
+Total overdose deaths	after	2011	18748.9
+Total overdose deaths	after	2012	18534.8
+Total overdose deaths	after	2013	18550.1
+Total overdose deaths	after	2014	18940.5
+Total overdose deaths	after	2015	20394.4
+Total overdose deaths	after	2016	23609.3
+Total overdose deaths	after	2017	27575.7
+Total overdose deaths	after	2018	29366.3
+Total overdose deaths	after	2019	30972.2
+Total overdose deaths	after	2020	35024
+Total overdose deaths	after	2021	35426.6
+Total overdose deaths	after	2022	35622.6
+Total overdose deaths	after	2023	35824.5
+Total overdose deaths	after	2024	35983.9
+Total overdose deaths	after	2025	35903.4
+Total overdose deaths	after	2026	35601.9
+Total overdose deaths	after	2027	35131.7
+Total overdose deaths	after	2028	34544.6
+Total overdose deaths	after	2029	33883
+Total overdose deaths	after	2030	33178.5
+Total overdose deaths	after	2031	32453.7
+Total overdose deaths	after	2032	31723.9
+Total with UD	after	1999	1392600
+Total with UD	after	2000	1619310
+Total with UD	after	2001	1813460
+Total with UD	after	2002	1999760
+Total with UD	after	2003	2183280
+Total with UD	after	2004	2355130
+Total with UD	after	2005	2514770
+Total with UD	after	2006	2649410
+Total with UD	after	2007	2765680
+Total with UD	after	2008	2858750
+Total with UD	after	2009	2931930
+Total with UD	after	2010	2985770
+Total with UD	after	2011	3024730
+Total with UD	after	2012	3050450
+Total with UD	after	2013	3062890
+Total with UD	after	2014	3064700
+Total with UD	after	2015	3054510
+Total with UD	after	2016	3037210
+Total with UD	after	2017	2991990
+Total with UD	after	2018	2943630
+Total with UD	after	2019	2900180
+Total with UD	after	2020	2875890
+Total with UD	after	2021	2827570
+Total with UD	after	2022	2775620
+Total with UD	after	2023	2726040
+Total with UD	after	2024	2679800
+Total with UD	after	2025	2634460
+Total with UD	after	2026	2589590
+Total with UD	after	2027	2545270
+Total with UD	after	2028	2501680
+Total with UD	after	2029	2459050
+Total with UD	after	2030	2417540
+Total with UD	after	2031	2377320
+Total with UD	after	2032	2338490
+HUD total	refitted	1999	589879
+HUD total	refitted	2000	634600
+HUD total	refitted	2001	665606
+HUD total	refitted	2002	697040
+HUD total	refitted	2003	734754
+HUD total	refitted	2004	776142
+HUD total	refitted	2005	826776
+HUD total	refitted	2006	880215
+HUD total	refitted	2007	945028
+HUD total	refitted	2008	1019390
+HUD total	refitted	2009	1105050
+HUD total	refitted	2010	1202540
+HUD total	refitted	2011	1313650
+HUD total	refitted	2012	1435910
+HUD total	refitted	2013	1565690
+HUD total	refitted	2014	1700840
+HUD total	refitted	2015	1832240
+HUD total	refitted	2016	1952230
+HUD total	refitted	2017	2026920
+HUD total	refitted	2018	2059880
+HUD total	refitted	2019	2062450
+HUD total	refitted	2020	2059240
+HUD total	refitted	2021	2017520
+HUD total	refitted	2022	1957680
+HUD total	refitted	2023	1888400
+HUD total	refitted	2024	1814640
+HUD total	refitted	2025	1739670
+HUD total	refitted	2026	1665360
+HUD total	refitted	2027	1592880
+HUD total	refitted	2028	1526070
+HUD total	refitted	2029	1463230
+HUD total	refitted	2030	1403060
+HUD total	refitted	2031	1345050
+HUD total	refitted	2032	1289480
+Projected cumulative overdose deaths	refitted	1999	0
+Projected cumulative overdose deaths	refitted	2000	0
+Projected cumulative overdose deaths	refitted	2001	0
+Projected cumulative overdose deaths	refitted	2002	0
+Projected cumulative overdose deaths	refitted	2003	0
+Projected cumulative overdose deaths	refitted	2004	0
+Projected cumulative overdose deaths	refitted	2005	0
+Projected cumulative overdose deaths	refitted	2006	0
+Projected cumulative overdose deaths	refitted	2007	0
+Projected cumulative overdose deaths	refitted	2008	0
+Projected cumulative overdose deaths	refitted	2009	0
+Projected cumulative overdose deaths	refitted	2010	0
+Projected cumulative overdose deaths	refitted	2011	0
+Projected cumulative overdose deaths	refitted	2012	0
+Projected cumulative overdose deaths	refitted	2013	0
+Projected cumulative overdose deaths	refitted	2014	0
+Projected cumulative overdose deaths	refitted	2015	0
+Projected cumulative overdose deaths	refitted	2016	0
+Projected cumulative overdose deaths	refitted	2017	0
+Projected cumulative overdose deaths	refitted	2018	0
+Projected cumulative overdose deaths	refitted	2019	0
+Projected cumulative overdose deaths	refitted	2020	0
+Projected cumulative overdose deaths	refitted	2021	64484.9
+Projected cumulative overdose deaths	refitted	2022	130344
+Projected cumulative overdose deaths	refitted	2023	196578
+Projected cumulative overdose deaths	refitted	2024	262236
+Projected cumulative overdose deaths	refitted	2025	326538
+Projected cumulative overdose deaths	refitted	2026	388931
+Projected cumulative overdose deaths	refitted	2027	449068
+Projected cumulative overdose deaths	refitted	2028	507069
+Projected cumulative overdose deaths	refitted	2029	563260
+Projected cumulative overdose deaths	refitted	2030	617659
+Projected cumulative overdose deaths	refitted	2031	670264
+Projected cumulative overdose deaths	refitted	2032	721105
+Projected cumulative UD person years	refitted	1999	0
+Projected cumulative UD person years	refitted	2000	0
+Projected cumulative UD person years	refitted	2001	0
+Projected cumulative UD person years	refitted	2002	0
+Projected cumulative UD person years	refitted	2003	0
+Projected cumulative UD person years	refitted	2004	0
+Projected cumulative UD person years	refitted	2005	0
+Projected cumulative UD person years	refitted	2006	0
+Projected cumulative UD person years	refitted	2007	0
+Projected cumulative UD person years	refitted	2008	0
+Projected cumulative UD person years	refitted	2009	0
+Projected cumulative UD person years	refitted	2010	0
+Projected cumulative UD person years	refitted	2011	0
+Projected cumulative UD person years	refitted	2012	0
+Projected cumulative UD person years	refitted	2013	0
+Projected cumulative UD person years	refitted	2014	0
+Projected cumulative UD person years	refitted	2015	0
+Projected cumulative UD person years	refitted	2016	0
+Projected cumulative UD person years	refitted	2017	0
+Projected cumulative UD person years	refitted	2018	0
+Projected cumulative UD person years	refitted	2019	0
+Projected cumulative UD person years	refitted	2020	0
+Projected cumulative UD person years	refitted	2021	4013480
+Projected cumulative UD person years	refitted	2022	7970450
+Projected cumulative UD person years	refitted	2023	11861900
+Projected cumulative UD person years	refitted	2024	15682800
+Projected cumulative UD person years	refitted	2025	19431000
+Projected cumulative UD person years	refitted	2026	23106100
+Projected cumulative UD person years	refitted	2027	26708700
+Projected cumulative UD person years	refitted	2028	30242800
+Projected cumulative UD person years	refitted	2029	33715400
+Projected cumulative UD person years	refitted	2030	37131200
+Projected cumulative UD person years	refitted	2031	40493400
+Projected cumulative UD person years	refitted	2032	43804700
+Total heroin initiation	refitted	1999	219919
+Total heroin initiation	refitted	2000	245005
+Total heroin initiation	refitted	2001	269412
+Total heroin initiation	refitted	2002	282503
+Total heroin initiation	refitted	2003	307677
+Total heroin initiation	refitted	2004	333170
+Total heroin initiation	refitted	2005	360633
+Total heroin initiation	refitted	2006	386108
+Total heroin initiation	refitted	2007	413769
+Total heroin initiation	refitted	2008	439511
+Total heroin initiation	refitted	2009	466953
+Total heroin initiation	refitted	2010	493807
+Total heroin initiation	refitted	2011	511259
+Total heroin initiation	refitted	2012	530722
+Total heroin initiation	refitted	2013	545492
+Total heroin initiation	refitted	2014	545573
+Total heroin initiation	refitted	2015	521075
+Total heroin initiation	refitted	2016	467496
+Total heroin initiation	refitted	2017	385794
+Total heroin initiation	refitted	2018	317281
+Total heroin initiation	refitted	2019	269335
+Total heroin initiation	refitted	2020	233945
+Total heroin initiation	refitted	2021	203614
+Total heroin initiation	refitted	2022	180970
+Total heroin initiation	refitted	2023	163578
+Total heroin initiation	refitted	2024	149952
+Total heroin initiation	refitted	2025	138874
+Total heroin initiation	refitted	2026	129154
+Total heroin initiation	refitted	2027	120609
+Total heroin initiation	refitted	2028	113511
+Total heroin initiation	refitted	2029	107396
+Total heroin initiation	refitted	2030	101975
+Total heroin initiation	refitted	2031	97104.3
+Total heroin initiation	refitted	2032	92729.4
+Total overdose deaths	refitted	1999	10233.6
+Total overdose deaths	refitted	2000	11346
+Total overdose deaths	refitted	2001	12227.6
+Total overdose deaths	refitted	2002	13132
+Total overdose deaths	refitted	2003	14221.3
+Total overdose deaths	refitted	2004	15337.1
+Total overdose deaths	refitted	2005	16495.6
+Total overdose deaths	refitted	2006	17675.8
+Total overdose deaths	refitted	2007	19121.8
+Total overdose deaths	refitted	2008	20104.8
+Total overdose deaths	refitted	2009	21142.9
+Total overdose deaths	refitted	2010	22092.8
+Total overdose deaths	refitted	2011	22877.1
+Total overdose deaths	refitted	2012	23312.3
+Total overdose deaths	refitted	2013	24002.9
+Total overdose deaths	refitted	2014	25268.8
+Total overdose deaths	refitted	2015	28401.7
+Total overdose deaths	refitted	2016	35275.7
+Total overdose deaths	refitted	2017	45544.3
+Total overdose deaths	refitted	2018	51026.8
+Total overdose deaths	refitted	2019	55296.5
+Total overdose deaths	refitted	2020	63407.1
+Total overdose deaths	refitted	2021	65377
+Total overdose deaths	refitted	2022	66225.9
+Total overdose deaths	refitted	2023	66074.4
+Total overdose deaths	refitted	2024	65047.4
+Total overdose deaths	refitted	2025	63361.4
+Total overdose deaths	refitted	2026	61236.6
+Total overdose deaths	refitted	2027	58899.9
+Total overdose deaths	refitted	2028	57029.1
+Total overdose deaths	refitted	2029	55240.4
+Total overdose deaths	refitted	2030	53444.9
+Total overdose deaths	refitted	2031	51657.7
+Total overdose deaths	refitted	2032	49971.2
+Total with UD	refitted	1999	1448810
+Total with UD	refitted	2000	1603490
+Total with UD	refitted	2001	1747850
+Total with UD	refitted	2002	1900560
+Total with UD	refitted	2003	2068660
+Total with UD	refitted	2004	2250770
+Total with UD	refitted	2005	2448440
+Total with UD	refitted	2006	2648330
+Total with UD	refitted	2007	2854110
+Total with UD	refitted	2008	3056300
+Total with UD	refitted	2009	3251380
+Total with UD	refitted	2010	3433170
+Total with UD	refitted	2011	3598260
+Total with UD	refitted	2012	3742620
+Total with UD	refitted	2013	3864060
+Total with UD	refitted	2014	3962790
+Total with UD	refitted	2015	4036140
+Total with UD	refitted	2016	4088700
+Total with UD	refitted	2017	4098460
+Total with UD	refitted	2018	4082010
+Total with UD	refitted	2019	4053800
+Total with UD	refitted	2020	4034470
+Total with UD	refitted	2021	3985400
+Total with UD	refitted	2022	3923230
+Total with UD	refitted	2023	3854500
+Total with UD	refitted	2024	3782480
+Total with UD	refitted	2025	3709360
+Total with UD	refitted	2026	3636440
+Total with UD	refitted	2027	3564790
+Total with UD	refitted	2028	3500510
+Total with UD	refitted	2029	3441810
+Total with UD	refitted	2030	3386820
+Total with UD	refitted	2031	3334730
+Total with UD	refitted	2032	3285730

@@ -1,0 +1,40 @@
+diff --git a/model.mdl b/model.mdl
+--- a/model.mdl
++++ b/model.mdl
+@@ -270,6 +270,19 @@ Relapsing to HUD=
+ 	~	person/Years
+ 	~		|
+ 
++Relapsing from stable remission HUD=
++	HUD in stable remission 
++	             * Relapse rate HUD net * Relapse rate stable remission relative * Social influence coefficient relapse
++	~	person/Years
++	~	Return to heroin use disorder after remission has stabilized, at a fraction of \
++		the relapse rate from early remission.
++	|
++
++Relapse rate stable remission relative = 0.1
++	~	dmnl [0,1]
++	~	[ASSUMPTION] Relapse risk once remission has stabilized, relative to early remission.
++	|
++
+ Relapsing to Rx OUD with H=
+ 	Rx OUD with heroin in remission 
+ 	             * Relapse rate HUD net * Relapse rate Rx OUD relative to HUD * Social influence coefficient relapse
+@@ -502,7 +515,7 @@ Initial HUD in stable remission= INITIAL(
+ 	~		|
+ 
+ HUD in stable remission= INTEG (
+-	Stabilizing remission HUD-NonOD death HUD in stable remission,
++	Stabilizing remission HUD-NonOD death HUD in stable remission-Relapsing from stable remission HUD,
+ 		Initial HUD in stable remission)
+ 	~	people
+ 	~		|
+@@ -1934,6 +1947,7 @@ HUD no MOUD  =
+                   - NonOD death HUD 
+                   - Overdose death HUD 
+                   + Relapsing to HUD 
++                  + Relapsing from stable remission HUD 
+                   + SUM ( Tx exit with UD HUD[TxT!] 
+                             - Tx engagement HUD[TxT!] ) , 
+              Initial HUD )

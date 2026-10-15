@@ -90,12 +90,15 @@ export const ANSWERS: Answer[] = [
 export class Runs {
   private bundle: Bundle;
   private model: CompiledModel;
+  // Applied after every what-if, last: a file a proposed change adds to every run.
+  private appended: Override[];
   private cache = new Map<string, RunResult>();
   lastRunMs = 0;
 
-  constructor(bundle: Bundle, model: CompiledModel) {
+  constructor(bundle: Bundle, model: CompiledModel, appended: Override[] = []) {
     this.bundle = bundle;
     this.model = model;
+    this.appended = appended;
   }
 
   current(w: WhatIf): RunResult {
@@ -133,7 +136,7 @@ export class Runs {
     const names = [w.future];
     const lever = this.leverFile(w);
     if (lever) names.push(lever);
-    return [...scenarioOverrides(this.bundle, names), ...(w.noFentanyl ? this.counterfactualOverrides() : [])];
+    return [...scenarioOverrides(this.bundle, names), ...(w.noFentanyl ? this.counterfactualOverrides() : []), ...this.appended];
   }
 
   valueAt(run: RunResult, variable: string, time: number): number {

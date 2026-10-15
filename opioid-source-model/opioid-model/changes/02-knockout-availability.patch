@@ -1,0 +1,14 @@
+diff --git a/what-ifs/tests/KnockoutAv.cin b/what-ifs/tests/KnockoutAv.cin
+new file mode 100644
+--- /dev/null
++++ b/what-ifs/tests/KnockoutAv.cin
+@@ -0,0 +1,9 @@
++Heroin availability strength developing HUD = 0
++Heroin availability strength initiating NDHU no Rx = 0
++Heroin availability strength net quit NDHU = 0
++Rx availability strength developing Rx OUD = 0
++Rx availability strength initiating Rx misuse = 0
++Rx availability strength net quit Rx misuse = 0
++Rx vs H availability strength developing HUD with Rx OUD = 0
++Rx vs H availability strength initiating heroin with Rx OUD = 0
++Rx vs H availability strength initiating NDHU with Rx = 0

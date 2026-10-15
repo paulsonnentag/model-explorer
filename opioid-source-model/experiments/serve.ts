@@ -3,10 +3,11 @@
 // The browser code is TypeScript; it is served as JavaScript by stripping the types on the fly,
 // so there is no build step. Everything else is read straight from the SOURCE repository.
 // /files/<path> serves anything under opioid-source-model/ (the paper PDF, the repository's figures).
-// /api/model and /model/<path> serve the sorted copy in opioid-source-model/opioid-model/ (the trail view).
+// /api/model and /model/<path> serve the sorted copy in opioid-source-model/opioid-model/ (the trail view);
+// /api/changes the files in its changes/ folder (the diff review).
 
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
-import { readFileSync, existsSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, dirname, normalize, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { stripTypeScriptTypes } from "node:module";
@@ -32,6 +33,7 @@ function route(req: IncomingMessage, res: ServerResponse) {
   const url = new URL(req.url ?? "/", "http://localhost");
   if (url.pathname === "/api/bundle") return sendJson(res, browserBundle());
   if (url.pathname === "/api/model") return sendJson(res, loadModelFolder());
+  if (url.pathname === "/api/changes") return sendJson(res, loadChanges());
   if (url.pathname.startsWith("/api/published/")) return sendPublished(res, url);
   if (url.pathname === "/source") return sendSource(res, url);
   const path = decodeURIComponent(url.pathname);
@@ -45,6 +47,13 @@ function sendWithin(res: ServerResponse, root: string, path: string) {
   if (!file.startsWith(root) || !existsSync(file)) return res.writeHead(404).end("Not found");
   if (statSync(file).isDirectory()) return res.writeHead(302, { location: `${path}/` }).end();
   sendFile(res, file);
+}
+
+function loadChanges(): { file: string; text: string }[] {
+  const dir = join(MODEL_DIR, "changes");
+  return readdirSync(dir)
+    .sort()
+    .map((name) => ({ file: `changes/${name}`, text: readFileSync(join(dir, name), "utf-8") }));
 }
 
 function browserBundle() {
