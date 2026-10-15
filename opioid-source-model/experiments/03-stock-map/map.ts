@@ -9,6 +9,7 @@ import { peak } from "../shared/totals.ts";
 import { CARD_W, flowCard, stockCard } from "./cards.ts";
 import {
   HOVER_COLOR,
+  type Hover,
   type MapApp,
   PART_COLORS,
   PART_FILLS,
@@ -27,6 +28,7 @@ import {
   seriesOf,
   stageLabel,
   substanceLabel,
+  targetsOf,
   updateLive,
   valueAt,
 } from "./context.ts";
@@ -68,18 +70,20 @@ export const mapPanel: PanelView = {
     renderMap(mapCanvas(body), app);
   },
   update: (body, app) => updateMap(mapCanvas(body), app),
-  // "stock:key" or "flow:key" unfolds that box or arrow and lights it up.
+  // A hover spec ("stock:a|b", "flow:key", "var:key") flashes what it stands for; a single box or arrow
+  // also unfolds into its card.
   focus(body, app, _, spec) {
     const [kind, ...rest] = spec.split(":");
-    const key = rest.join(":");
-    if (kind === "stock") app.openStocks.add(key);
-    const edge = kind === "flow" ? app.layout.edges.find((e) => e.flows.some((f) => f.key === key)) : null;
-    if (edge) app.openFlows.add(edge.id);
+    const { edges, nodes } = targetsOf(app, { kind, id: rest.join(":") } as NonNullable<Hover>);
+    if (kind === "stock" && nodes.length === 1) app.openStocks.add(nodes[0]);
+    if (kind === "flow" && edges.length === 1) app.openFlows.add(edges[0].id);
     renderCards(mapCanvas(body), app);
-    const el = body.querySelector(kind === "stock" ? `g.node[data-key="${CSS.escape(key)}"]` : `g.edge[data-edge="${CSS.escape(edge?.id ?? "")}"]`);
-    el?.classList.remove("flash");
-    void (el as HTMLElement | null)?.getBoundingClientRect();
-    el?.classList.add("flash");
+    const selectors = [...nodes.map((k) => `g.node[data-key="${CSS.escape(k)}"]`), ...edges.map((e) => `g.edge[data-edge="${CSS.escape(e.id)}"]`)];
+    for (const el of selectors.length ? body.querySelectorAll(selectors.join(",")) : []) {
+      el.classList.remove("flash");
+      void el.getBoundingClientRect();
+      el.classList.add("flash");
+    }
   },
   source: () => `<a data-open="source:model.mdl">model.mdl</a> <span class="muted">· every box is a stock and every arrow a flow defined there</span>`,
 };

@@ -65,7 +65,7 @@ function row(app: MapApp, id: string, label: string, scenario: string | null, pi
       ${users.map((f) => `<a class="chip" data-open="finding:${escapeHtml(f.id)}" title="${escapeHtml(f.title)}">Finding ${f.number}</a>`).join("")}
       ${file ? `<button class="fold" data-fold="${escapeHtml(id)}" title="What this file changes">${file.overrides.length} line${file.overrides.length === 1 ? "" : "s"} ${open ? "▾" : "▸"}</button>` : ""}
     </div>
-    ${file && open ? `<div class="cin"><a class="src" data-open="source:${escapeHtml(file.file)}">${escapeHtml(file.file)}</a>${file.overrides.map((o) => override(app, o.target, o.value)).join("")}</div>` : ""}
+    ${file && open ? `<div class="cin"><a class="src" data-open="source:${escapeHtml(file.file)}">${escapeHtml(file.file)}</a><a class="src as-of-link" data-open="source:model.mdl@${escapeHtml(file.file)}">model as of this file</a>${file.overrides.map((o) => override(app, o.target, o.value)).join("")}</div>` : ""}
   </div>`;
 }
 

@@ -95,7 +95,8 @@ function chartBlock(app: MapApp, f: Finding, c: Chart, runs: RunResult[], active
   const markers = times[start] < DATA_ENDS ? [{ time: DATA_ENDS, label: "data ends" }] : [];
   const points = c.relative ? [] : dataPoints(app, c, times[start]);
   const dots = points.length ? `<div class="dots">Dots: ${c.data.map((key) => `<span data-hover="var:${escapeHtml(key)}">${escapeHtml(key)}</span> ${sourceLink(app, key)}`).join(", ")}</div>` : "";
-  return `<div class="f-chart" data-hover="${escapeHtml(hoverOf(app, c.keys))}" data-var="${escapeHtml(c.keys.join("|"))}">
+  const hover = hoverOf(app, c.keys);
+  return `<div class="f-chart" data-hover="${escapeHtml(hover)}" data-var="${escapeHtml(c.keys.join("|"))}" data-open="map>${escapeHtml(hover)}" title="Click to show it on the map">
     <div class="label">${escapeHtml(c.label)} ${c.keys.length === 1 ? sourceLink(app, c.keys[0]) : ""}</div>${note}
     ${chart({ times: times.slice(start), lines, points, markers, width: CHART_W, height: 104 })}${dots}</div>`;
 }

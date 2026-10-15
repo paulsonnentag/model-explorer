@@ -81,18 +81,29 @@ export function highlights(app: MapApp): { edges: Map<string, string>; nodes: Ma
   };
   const hover = app.hover;
   if (hover?.kind === "loop") paintLoop(app.loops.find((l) => l.id === hover.id));
-  if (hover?.kind === "input") paintEdges(edgesOf(app, app.inputs.find((i) => i.id === hover.id)?.flows ?? []), HOVER_COLOR);
-  if (hover?.kind === "stock") for (const k of hover.id.split("|")) nodes.set(k, HOVER_COLOR);
-  if (hover?.kind === "edge") paintEdges(app.layout.edges.filter((e) => e.id === hover.id), HOVER_COLOR);
-  if (hover?.kind === "flow") paintEdges(edgesOf(app, hover.id.split("|")), HOVER_COLOR);
-  if (hover?.kind === "var") {
-    const { flows, people } = upstreamTerminals(app.sem, hover.id);
-    paintEdges(edgesOf(app, flows), HOVER_COLOR);
-    for (const k of people) if (!nodes.has(k)) nodes.set(k, HOVER_COLOR);
+  else if (hover) {
+    const targets = targetsOf(app, hover);
+    paintEdges(targets.edges, HOVER_COLOR);
+    for (const k of targets.nodes) if (!nodes.has(k)) nodes.set(k, HOVER_COLOR);
   }
-  if (hover?.kind === "path") paintEdges(edgesOf(app, inputPath(app, hover.id)), HOVER_COLOR);
   for (const loop of app.loops) if (app.openLoops.has(loop.id)) paintLoop(loop);
   return edges.size || nodes.size ? { edges, nodes } : null;
+}
+
+// The arrows and boxes a hover spec stands for on the map. A `var` stands for the groups and flows it
+// is computed from.
+export function targetsOf(app: MapApp, hover: NonNullable<Hover>): { edges: MapEdge[]; nodes: string[] } {
+  const ids = hover.id.split("|");
+  if (hover.kind === "input") return { edges: edgesOf(app, app.inputs.find((i) => i.id === hover.id)?.flows ?? []), nodes: [] };
+  if (hover.kind === "stock") return { edges: [], nodes: ids };
+  if (hover.kind === "edge") return { edges: app.layout.edges.filter((e) => e.id === hover.id), nodes: [] };
+  if (hover.kind === "flow") return { edges: edgesOf(app, ids), nodes: [] };
+  if (hover.kind === "path") return { edges: edgesOf(app, inputPath(app, hover.id)), nodes: [] };
+  if (hover.kind === "var") {
+    const { flows, people } = upstreamTerminals(app.sem, hover.id);
+    return { edges: edgesOf(app, flows), nodes: people };
+  }
+  return { edges: [], nodes: [] };
 }
 
 // The flows a loop's driver is computed from that the input also reaches, from "loopId|inputId".

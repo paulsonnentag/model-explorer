@@ -1,23 +1,35 @@
 // The files behind everything else: the folder, and any file in it with the lines in question
 // highlighted. In model.mdl each definition's first line lights up what it stands for on the map;
-// in a what-if file each line opens the constant it overrides.
+// in a what-if file each line opens the constant it overrides. "model.mdl@<what-if file>" is the model
+// as that run sees it: the constants the file replaces are struck out and marked with their new values.
 
 import { parseCellName } from "../core/compile.ts";
+import type { Override } from "../core/compile.ts";
 import { escapeHtml } from "../shared/html.ts";
+import { LEVERS, type WhatIf } from "../shared/runs.ts";
 import type { MapApp } from "./context.ts";
 import { PAPERS } from "./paper.ts";
 import type { PanelView } from "./trail.ts";
 
 const SKETCH_MARKER = "\\\\\\---///";
 const HIDDEN_VIEWS = new Set(["Dashboard", "Fit to Data", "ChangeLog"]);
+const SHOWN_VALUES = 4;
+
+type Setting = { file: string; target: string; value: number; whatIf: boolean };
 
 export const sourcePanel: PanelView = {
   static: true,
   width: () => 600,
-  kind: () => "Source",
-  title: (_, path) => path,
-  render(body, app, path) {
-    body.innerHTML = `<div class="src-info"></div><div class="code muted">Loading ${escapeHtml(path)}…</div>`;
+  kind: (_, id) => (id.includes("@") ? "Source · as of a what-if" : "Source"),
+  title: (_, id) => (id.includes("@") ? `model.mdl as of ${id.split("/").pop()}` : id),
+  render(body, app, id) {
+    const [path, asOf] = id.split("@");
+    body.innerHTML = `<div class="src-head">${barHtml(app, path, asOf)}<div class="src-info"></div></div><div class="code muted">Loading ${escapeHtml(path)}…</div>`;
+    body.onclick = (e) => {
+      const run = (e.target as Element).closest<HTMLElement>("[data-run-file]");
+      const patch = run && runOf(app, run.dataset.runFile!);
+      if (patch) app.actions.setWhatIf(patch);
+    };
     if (path.endsWith(".vdf")) {
       body.querySelector(".code")!.innerHTML = `A binary Vensim data file. The same data points, readable: <a data-open="source:data/historical.tsv">data/historical.tsv</a>`;
       return;
@@ -25,24 +37,26 @@ export const sourcePanel: PanelView = {
     fetch(`/model/${path}`)
       .then((r) => r.text())
       .then((text) => {
-        body.querySelector(".code")!.outerHTML = codeHtml(app, path, text);
-        const spec = app.focus.get(`source:${path}`);
-        if (spec) sourcePanel.focus!(body, app, path, spec);
+        body.querySelector(".code")!.outerHTML = codeHtml(app, path, text, asOf ? settingsAsOf(app, asOf) : new Map());
+        markReplaced(body);
+        const spec = app.focus.get(`source:${id}`);
+        if (spec) sourcePanel.focus!(body, app, id, spec);
       });
   },
-  focus(body, app, path, spec) {
+  focus(body, app, id, spec) {
+    const path = id.split("@")[0];
     const [kind, ...rest] = spec.split(":");
-    const id = rest.join(":");
+    const target = rest.join(":");
     const lines = [...body.querySelectorAll<HTMLElement>(".ln")];
     if (!lines.length) return;
-    const start = kind === "line" ? Number(id) : kind === "var" ? lineOf(app, path, id, lines) : 0;
+    const start = kind === "line" ? Number(target) : kind === "var" ? lineOf(app, path, target, lines) : 0;
     if (!start) return;
     const end = blockEnd(lines, start);
     lines.forEach((el, i) => el.classList.toggle("hit", i + 1 >= start && i + 1 <= end));
     lines[start - 1].scrollIntoView({ block: "center" });
-    body.querySelector(".src-info")!.innerHTML = kind === "var" ? infoHtml(app, path, id, start) : "";
+    body.querySelector(".src-info")!.innerHTML = kind === "var" ? infoHtml(app, path, target, start) : "";
   },
-  source: (_, path) => `<a href="/model/${escapeHtml(path)}" target="_blank">open the raw file</a>`,
+  source: (_, id) => `<a href="/model/${escapeHtml(id.split("@")[0])}" target="_blank">open the raw file</a>`,
 };
 
 export const filesPanel: PanelView = {
@@ -76,9 +90,56 @@ export const filesPanel: PanelView = {
   },
 };
 
+// Above a what-if file, a way to see the model as of it; above the model as of a file, what that file
+// changes.
+function barHtml(app: MapApp, path: string, asOf: string | undefined): string {
+  const scenario = app.bundle.scenarios.find((s) => s.file === (asOf ?? path));
+  if (!scenario) return "";
+  const run = runOf(app, scenario.file) ? `<button data-run-file="${escapeHtml(scenario.file)}">Run the trail in this what-if</button>` : "";
+  if (!asOf) return `<div class="as-of">A what-if. <a data-open="source:model.mdl@${escapeHtml(path)}">View model.mdl as of this file</a>${run}</div>`;
+  const keys = [...new Set(scenario.overrides.map((o) => parseCellName(o.target).variable))];
+  const name = (key: string) => app.bundle.mdl.definitions.find((d) => d.key === key)?.name ?? key;
+  const everyRun = app.bundle.baseChanges.reduce((n, c) => n + c.overrides.length, app.bundle.fitted.length);
+  return `<div class="as-of">The equations as written, then every-run/ (${everyRun} values, faint), then <a data-open="source:${escapeHtml(asOf)}">${escapeHtml(asOf.split("/").pop()!)}</a>, which replaces:
+    <span class="set-list">${keys.map((k) => `<a data-open="source:model.mdl@${escapeHtml(asOf)}>var:${escapeHtml(k)}" data-hover="var:${escapeHtml(k)}" data-var="${escapeHtml(k)}">${escapeHtml(name(k))}</a>`).join("")}</span>
+    ${run}<a data-open="source:model.mdl">model.mdl as written</a></div>`;
+}
+
+// What the model's constants are set to by the time the what-if runs, latest file last.
+function settingsAsOf(app: MapApp, file: string): Map<string, Setting[]> {
+  const b = app.bundle;
+  const layers: { file: string; overrides: Override[]; whatIf: boolean }[] = [
+    ...b.baseChanges.map((c) => ({ ...c, whatIf: false })),
+    { file: b.files.fittedValues, overrides: b.fitted, whatIf: false },
+    { file, overrides: b.scenarios.find((s) => s.file === file)?.overrides ?? [], whatIf: true },
+  ];
+  const settings = new Map<string, Setting[]>();
+  for (const layer of layers) {
+    for (const o of layer.overrides) {
+      if (typeof o.value !== "number") continue;
+      const key = parseCellName(o.target).variable;
+      const kept = (settings.get(key) ?? []).filter((s) => s.target !== o.target && !(layer.whatIf && !s.whatIf));
+      settings.set(key, [...kept, { file: layer.file, target: o.target, value: o.value, whatIf: layer.whatIf }]);
+    }
+  }
+  return settings;
+}
+
+// The run a what-if file stands for, in the trail's terms; tests and odd strengths have none.
+function runOf(app: MapApp, file: string): Partial<WhatIf> | null {
+  const scenario = app.bundle.scenarios.find((s) => s.file === file);
+  if (scenario?.kind === "future") return { future: scenario.name };
+  if (scenario?.kind === "counterfactual") return { noFentanyl: true };
+  if (scenario?.kind !== "lever") return null;
+  const [, lever, strength = "20"] = scenario.name.match(/^(.*?)(10|50)?$/)!;
+  const patch = { lever, strength: strength as WhatIf["strength"] };
+  return LEVERS.some((l) => l.name === lever) && app.runs.leverFile({ ...app.whatIf, ...patch }) === scenario.name ? patch : null;
+}
+
 // model.mdl stops before the diagrams, which are the same model drawn; each definition's first line is
-// marked with its variable. What-if lines are marked with the constant they set.
-function codeHtml(app: MapApp, path: string, text: string): string {
+// marked with its variable, and with what it is set to as of a what-if. What-if lines are marked with the
+// constant they set.
+function codeHtml(app: MapApp, path: string, text: string, settings: Map<string, Setting[]>): string {
   let lines = text.replace(/\r\n?/g, "\n").split("\n");
   const starts = new Map<number, string>();
   let note = "";
@@ -94,9 +155,27 @@ function codeHtml(app: MapApp, path: string, text: string): string {
   const rows = lines.map((line, i) => {
     const key = starts.get(i + 1) ?? (isWhatIf && line.includes("=") ? parseCellName(line.split("=")[0]).variable : null);
     const attrs = key ? ` data-hover="var:${escapeHtml(key)}" data-var="${escapeHtml(key)}"${isWhatIf ? ` data-open="source:model.mdl>var:${escapeHtml(key)}"` : ""}` : "";
-    return `<div class="ln${key ? " def" : ""}"${attrs}><i>${i + 1}</i><code>${escapeHtml(line) || " "}</code></div>`;
+    const set = key && starts.has(i + 1) ? settings.get(key) : undefined;
+    return `<div class="ln${key ? " def" : ""}${set ? (set[0].whatIf ? " replaced" : " fitted") : ""}"${attrs}><i>${i + 1}</i><code>${escapeHtml(line) || " "}</code>${set ? setHtml(set) : ""}</div>`;
   });
   return `<div class="code">${rows.join("")}${note}</div>`;
+}
+
+function setHtml(settings: Setting[]): string {
+  const value = (s: Setting) => `${s.target.includes("[") ? escapeHtml(s.target.slice(s.target.indexOf("["))) + " " : ""}= ${s.value}`;
+  const shown = settings.slice(0, SHOWN_VALUES).map(value).join(", ");
+  const more = settings.length > SHOWN_VALUES ? ` +${settings.length - SHOWN_VALUES} more` : "";
+  const file = settings[0].file;
+  return `<a class="set-to" data-open="source:${escapeHtml(file)}>var:${escapeHtml(parseCellName(settings[0].target).variable)}">${shown}${more} <small>${escapeHtml(file.split("/").pop()!)}</small></a>`;
+}
+
+// A replaced definition is struck out down to the line that closes it.
+function markReplaced(body: HTMLElement) {
+  const lines = [...body.querySelectorAll<HTMLElement>(".ln")];
+  lines.forEach((el, i) => {
+    if (!el.classList.contains("replaced")) return;
+    for (let j = i + 1; j < blockEnd(lines, i + 1); j++) lines[j].classList.add("replaced");
+  });
 }
 
 function lineOf(app: MapApp, path: string, key: string, lines: HTMLElement[]): number {
