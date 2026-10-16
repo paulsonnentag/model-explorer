@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SOURCE opioid model — canvas</title>
+<link rel="stylesheet" href="../03-stock-map/styles.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="canvas">
+<header id="top">
+  <div class="title">
+    <a class="back" href="../">← Experiments</a>
+    <b>Model graph</b>
+    <span>links unfold to the right; drag to pan, pinch to zoom</span>
+  </div>
+  <div id="running"></div>
+  <div id="controls"></div>
+</header>
+<main id="board">
+  <div id="world"><svg class="wires"></svg></div>
+  <nav id="palette"><button title="Show or hide the menu">Open…</button><div class="entries menu"></div></nav>
+  <div id="toolbar">
+    <button data-zoom="out" title="Zoom out">−</button>
+    <button data-zoom="real" title="Actual size">100%</button>
+    <button data-zoom="in" title="Zoom in">+</button>
+    <button data-zoom="fit" title="Fit everything">Fit</button>
+  </div>
+</main>
+<div id="loading">Compiling the model in your browser…</div>
+<script type="module" src="main.ts"></script>
+</body>
+</html>

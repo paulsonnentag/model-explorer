@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SOURCE opioid model — editor</title>
+<link rel="stylesheet" href="../03-stock-map/styles.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="editor">
+<header id="titlebar">
+  <span class="dots"><i></i><i></i><i></i></span>
+  <a class="back" href="../">← Experiments</a>
+  <span class="name">opioid-model — SOURCE model</span>
+</header>
+<main id="workbench">
+  <nav id="activity">
+    <a class="on" data-toggle-sidebar title="Explorer"><svg viewBox="0 0 24 24"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z M14 3v5h5"/></svg></a>
+    <a data-open="findings" title="Findings"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></svg></a>
+    <a data-open="loops" title="Feedback loops"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></a>
+    <a data-open="whatifs" title="What-ifs"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></a>
+  </nav>
+  <aside id="sidebar">
+    <h2>Explorer</h2>
+    <div id="explorer"></div>
+  </aside>
+  <div id="groups">
+    <div class="group" data-group="code"><div class="tabs"></div><div class="crumbs"></div><div class="panes"></div><div class="watermark"></div></div>
+    <div class="sash"></div>
+    <div class="group" data-group="model"><div class="tabs"></div><div class="crumbs"></div><div class="panes"></div><div class="watermark"></div></div>
+  </div>
+</main>
+<footer id="statusbar">
+  <span class="branch">⎇ master</span>
+  <div id="running"></div>
+  <div id="controls"></div>
+</footer>
+<div id="loading">Compiling the model in your browser…</div>
+<script type="module" src="main.ts"></script>
+</body>
+</html>
